@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computing Systems Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🖥️ Computing Systems Explorer</h1>
+        <p class="subtitle">Explore routers, switches, servers, CPU, RAM, storage, and operating systems interactively</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="network">🌐 Network Devices</button>
+        <button class="tab-button" data-tab="hardware">💻 Hardware</button>
+        <button class="tab-button" data-tab="dataflow">📡 Data Flow</button>
+        <button class="tab-button" data-tab="os">⚙️ OS Simulator</button>
+        <button class="tab-button" data-tab="progress">📈 Progress</button>
+      </div>
+
+      <!-- Network Devices Tab -->
+      <div class="tab-content active" id="network">
+        <div class="content-card">
+          <h2>🌐 Network Devices</h2>
+          <p class="description">Learn about routers, switches, and servers with interactive diagrams and explanations.</p>
+          
+          <div class="network-container">
+            <div class="device-selector">
+              <button class="device-btn active" data-device="router">Router</button>
+              <button class="device-btn" data-device="switch">Switch</button>
+              <button class="device-btn" data-device="server">Server</button>
+            </div>
+
+            <div class="device-content">
+              <div class="device-diagram" id="deviceDiagram">
+                <!-- Device diagram will appear here -->
+              </div>
+
+              <div class="device-info" id="deviceInfo">
+                <!-- Device information will appear here -->
+              </div>
+
+              <div class="device-interactive" id="deviceInteractive">
+                <!-- Interactive elements will appear here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hardware Tab -->
+      <div class="tab-content" id="hardware">
+        <div class="content-card">
+          <h2>💻 Computer Hardware</h2>
+          <p class="description">Explore CPU, RAM, and storage with interactive diagrams and real-time visualizations.</p>
+          
+          <div class="hardware-container">
+            <div class="hardware-selector">
+              <button class="hardware-btn active" data-hardware="cpu">CPU</button>
+              <button class="hardware-btn" data-hardware="ram">RAM</button>
+              <button class="hardware-btn" data-hardware="storage">Storage</button>
+              <button class="hardware-btn" data-hardware="overview">Overview</button>
+            </div>
+
+            <div class="hardware-visualization" id="hardwareVisualization">
+              <!-- Hardware visualization will appear here -->
+            </div>
+
+            <div class="hardware-controls">
+              <div class="control-group">
+                <label for="workloadSlider">Workload:</label>
+                <input type="range" id="workloadSlider" min="0" max="100" value="0">
+                <span id="workloadValue">0%</span>
+              </div>
+              <button class="btn-primary" id="runWorkloadBtn">Run Workload</button>
+              <button class="btn-secondary" id="resetHardwareBtn">Reset</button>
+            </div>
+
+            <div class="hardware-stats" id="hardwareStats">
+              <!-- Hardware statistics will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Flow Tab -->
+      <div class="tab-content" id="dataflow">
+        <div class="content-card">
+          <h2>📡 Data Flow Animations</h2>
+          <p class="description">Watch how data flows through computer systems with animated visualizations.</p>
+          
+          <div class="dataflow-container">
+            <div class="flow-selector">
+              <button class="flow-btn active" data-flow="network">Network Flow</button>
+              <button class="flow-btn" data-flow="memory">Memory Flow</button>
+              <button class="flow-btn" data-flow="storage">Storage Flow</button>
+              <button class="flow-btn" data-flow="cpu">CPU Pipeline</button>
+            </div>
+
+            <div class="flow-visualization" id="flowVisualization">
+              <!-- Flow visualization will appear here -->
+            </div>
+
+            <div class="flow-controls">
+              <button class="btn-primary" id="playFlowBtn">▶ Play</button>
+              <button class="btn-secondary" id="pauseFlowBtn">⏸ Pause</button>
+              <button class="btn-secondary" id="stepFlowBtn">Step</button>
+              <button class="btn-secondary" id="resetFlowBtn">Reset</button>
+              <div class="speed-control">
+                <label for="flowSpeed">Speed:</label>
+                <input type="range" id="flowSpeed" min="1" max="10" value="5">
+              </div>
+            </div>
+
+            <div class="flow-info" id="flowInfo">
+              <!-- Flow information will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OS Simulator Tab -->
+      <div class="tab-content" id="os">
+        <div class="content-card">
+          <h2>⚙️ Operating System Simulator</h2>
+          <p class="description">Simulate processes, scheduling, and memory management in an operating system.</p>
+          
+          <div class="os-container">
+            <div class="os-tabs">
+              <button class="os-tab-btn active" data-os-tab="processes">Processes</button>
+              <button class="os-tab-btn" data-os-tab="scheduling">Scheduling</button>
+              <button class="os-tab-btn" data-os-tab="memory">Memory</button>
+            </div>
+
+            <!-- Processes Sub-tab -->
+            <div class="os-tab-content active" id="processesTab">
+              <div class="process-controls">
+                <button class="btn-primary" id="createProcessBtn">Create Process</button>
+                <button class="btn-secondary" id="killProcessBtn">Kill Process</button>
+                <button class="btn-secondary" id="pauseProcessBtn">Pause</button>
+                <button class="btn-secondary" id="resumeProcessBtn">Resume</button>
+              </div>
+
+              <div class="process-list" id="processList">
+                <!-- Process list will appear here -->
+              </div>
+
+              <div class="process-details" id="processDetails">
+                <!-- Process details will appear here -->
+              </div>
+            </div>
+
+            <!-- Scheduling Sub-tab -->
+            <div class="os-tab-content" id="schedulingTab">
+              <div class="scheduler-controls">
+                <div class="control-group">
+                  <label for="schedulerType">Scheduler Type:</label>
+                  <select id="schedulerType" class="algorithm-select">
+                    <option value="fcfs">First-Come-First-Served (FCFS)</option>
+                    <option value="sjf">Shortest Job First (SJF)</option>
+                    <option value="rr">Round Robin</option>
+                    <option value="priority">Priority</option>
+                  </select>
+                </div>
+                <button class="btn-primary" id="startSchedulerBtn">Start Scheduler</button>
+                <button class="btn-secondary" id="stopSchedulerBtn">Stop</button>
+                <button class="btn-secondary" id="addJobBtn">Add Job</button>
+              </div>
+
+              <div class="scheduler-visualization" id="schedulerVisualization">
+                <!-- Scheduler visualization will appear here -->
+              </div>
+
+              <div class="scheduler-stats" id="schedulerStats">
+                <!-- Scheduler statistics will appear here -->
+              </div>
+            </div>
+
+            <!-- Memory Sub-tab -->
+            <div class="os-tab-content" id="memoryTab">
+              <div class="memory-controls">
+                <button class="btn-primary" id="allocateMemoryBtn">Allocate Memory</button>
+                <button class="btn-secondary" id="deallocateMemoryBtn">Deallocate</button>
+                <button class="btn-secondary" id="defragmentBtn">Defragment</button>
+              </div>
+
+              <div class="memory-visualization" id="memoryVisualization">
+                <!-- Memory visualization will appear here -->
+              </div>
+
+              <div class="memory-stats" id="memoryStats">
+                <!-- Memory statistics will appear here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div class="tab-content" id="progress">
+        <div class="content-card">
+          <h2>📈 Learning Progress</h2>
+          <p class="description">Track your progress and export reports.</p>
+          
+          <div class="progress-container">
+            <div class="progress-controls">
+              <button class="btn-primary" id="generateProgressReportBtn">Generate Report</button>
+              <button class="btn-secondary" id="exportProgressBtn">📸 Export as Image</button>
+              <button class="btn-secondary" id="clearProgressBtn">Clear Progress</button>
+            </div>
+
+            <div class="progress-stats" id="progressStats">
+              <!-- Progress statistics will appear here -->
+            </div>
+
+            <div class="progress-report" id="progressReport">
+              <!-- Progress report will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

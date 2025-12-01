@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming Basics Trainer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>Programming Basics Trainer</h1>
+        <p class="subtitle">Learn sequences, variables, operators, conditionals, and loops through interactive exercises</p>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button active" data-tab="sequence">📋 Sequence</button>
+      <button class="tab-button" data-tab="variables">🔢 Variables</button>
+      <button class="tab-button" data-tab="operators">⚙️ Operators</button>
+      <button class="tab-button" data-tab="loops">🔄 Loops</button>
+      <button class="tab-button" data-tab="challenges">🎯 Challenges</button>
+      <button class="tab-button" data-tab="progress">📊 Progress</button>
+    </div>
+
+    <main class="main-content">
+      <!-- Sequence Tab -->
+      <div class="tab-content active" id="sequence">
+        <div class="content-card">
+          <h2>📋 Sequence & Step Ordering</h2>
+          <p class="description">Drag and drop steps to put them in the correct order. Learn how programs execute step by step.</p>
+          
+          <div class="visualization-container">
+            <div class="sequence-demo">
+              <div class="sequence-controls">
+                <button class="btn-primary" id="newSequenceBtn">New Exercise</button>
+                <button class="btn-secondary" id="checkSequenceBtn">Check Answer</button>
+                <button class="btn-secondary" id="resetSequenceBtn">Reset</button>
+              </div>
+              
+              <div class="sequence-exercise">
+                <div class="exercise-description" id="sequenceDescription">
+                  <h3>Exercise</h3>
+                  <p id="sequenceTask">Reorder the steps to complete the task correctly.</p>
+                </div>
+                
+                <div class="sequence-areas">
+                  <div class="steps-area">
+                    <h4>Available Steps</h4>
+                    <div class="steps-list" id="availableSteps"></div>
+                  </div>
+                  
+                  <div class="order-area">
+                    <h4>Your Order (Drag steps here)</h4>
+                    <div class="ordered-steps" id="orderedSteps">
+                      <div class="drop-zone">Drop steps here in order</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="sequence-feedback" id="sequenceFeedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variables Tab -->
+      <div class="tab-content" id="variables">
+        <div class="content-card">
+          <h2>🔢 Variable Tracing</h2>
+          <p class="description">Trace how variables change as code executes. Follow the execution step by step and see variable values update.</p>
+          
+          <div class="visualization-container">
+            <div class="variables-demo">
+              <div class="variables-controls">
+                <button class="btn-primary" id="newVariableBtn">New Exercise</button>
+                <button class="btn-secondary" id="stepForwardBtn">Step Forward</button>
+                <button class="btn-secondary" id="stepBackBtn">Step Back</button>
+                <button class="btn-secondary" id="resetVariableBtn">Reset</button>
+              </div>
+              
+              <div class="variables-exercise">
+                <div class="code-display" id="codeDisplay">
+                  <div class="code-line" data-line="1">x = 5</div>
+                  <div class="code-line" data-line="2">y = 10</div>
+                  <div class="code-line" data-line="3">x = x + y</div>
+                  <div class="code-line" data-line="4">print(x)</div>
+                </div>
+                
+                <div class="variable-trace">
+                  <h4>Variable Values</h4>
+                  <div class="variables-table" id="variablesTable"></div>
+                </div>
+                
+                <div class="execution-trace">
+                  <h4>Execution Trace</h4>
+                  <div class="trace-steps" id="traceSteps"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operators Tab -->
+      <div class="tab-content" id="operators">
+        <div class="content-card">
+          <h2>⚙️ Logic Operators & Conditionals</h2>
+          <p class="description">Experiment with comparison operators (>, <, ==) and logical operators (AND, OR, NOT). See how they combine to create conditions.</p>
+          
+          <div class="visualization-container">
+            <div class="operators-demo">
+              <div class="operator-builder">
+                <h3>Build a Condition</h3>
+                <div class="conditions-container" id="conditionsContainer">
+                  <!-- Conditions will be added here dynamically -->
+                </div>
+                <div class="condition-actions">
+                  <button class="btn-secondary" id="addConditionBtn">+ Add Another Condition</button>
+                  <button class="btn-secondary" id="clearConditionsBtn">Clear All</button>
+                </div>
+                <div class="condition-display" id="conditionDisplay">
+                  <div class="condition-text" id="conditionText">5 > 3</div>
+                  <div class="condition-result">
+                    <span class="result-label">Result:</span>
+                    <span class="result-value" id="conditionResult">true</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="operator-examples">
+                <h3>Try These Examples</h3>
+                <div class="examples-grid" id="operatorExamples"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loops Tab -->
+      <div class="tab-content" id="loops">
+        <div class="content-card">
+          <h2>🔄 Count-Controlled Loops</h2>
+          <p class="description">Visualize how loops execute. See each iteration, how the counter changes, and what actions are taken in each cycle.</p>
+          
+          <div class="visualization-container">
+            <div class="loops-demo">
+              <div class="loop-controls">
+                <button class="btn-primary" id="newLoopBtn">New Exercise</button>
+                <button class="btn-primary" id="runLoopBtn">Run Loop</button>
+                <button class="btn-secondary" id="stepLoopBtn">Step Through</button>
+                <button class="btn-secondary" id="resetLoopBtn">Reset</button>
+              </div>
+              
+              <div class="loop-exercise">
+                <div class="loop-code" id="loopCode">
+                  <div class="code-block">
+                    <div class="code-line">for i in range(5):</div>
+                    <div class="code-line indent">print(i)</div>
+                    <div class="code-line indent">total = total + i</div>
+                  </div>
+                </div>
+                
+                <div class="loop-visualization">
+                  <div class="loop-timeline" id="loopTimeline">
+                    <div class="timeline-header">
+                      <div class="timeline-col">Iteration</div>
+                      <div class="timeline-col">Counter (i)</div>
+                      <div class="timeline-col">Action</div>
+                      <div class="timeline-col">Variables</div>
+                    </div>
+                    <div class="timeline-body" id="timelineBody"></div>
+                  </div>
+                  
+                  <div class="loop-output">
+                    <h4>Output</h4>
+                    <div class="output-console" id="outputConsole"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenges Tab -->
+      <div class="tab-content" id="challenges">
+        <div class="content-card">
+          <h2>🎯 Programming Challenges</h2>
+          <p class="description">Solve specific programming problems by writing code or arranging steps correctly.</p>
+          
+          <div class="visualization-container">
+            <div class="challenges-demo">
+              <div class="challenge-controls">
+                <select id="challengeDifficulty" class="difficulty-select">
+                  <option value="all">All Difficulties</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+                <button class="btn-primary" id="newChallengeBtn">New Challenge</button>
+                <button class="btn-secondary" id="tryAgainBtn" style="display: none;">🔄 Try Again</button>
+                <button class="btn-secondary" id="showHintBtn">💡 Hint</button>
+                <button class="btn-secondary" id="checkChallengeBtn">Check Solution</button>
+              </div>
+              
+              <div class="challenge-exercise" id="challengeExercise">
+                <div class="challenge-description" id="challengeDescription">
+                  <h3>Challenge</h3>
+                  <p id="challengeTask">Select a challenge to begin.</p>
+                  <div id="challengeHint" class="challenge-hint" style="display: none;"></div>
+                </div>
+                
+                <div id="challengeContent"></div>
+                
+                <div class="challenge-feedback" id="challengeFeedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div class="tab-content" id="progress">
+        <div class="content-card">
+          <h2>📊 Your Progress</h2>
+          <p class="description">Track your learning progress across all exercises and challenges.</p>
+          
+          <div class="visualization-container">
+            <div class="progress-demo">
+              <div class="progress-stats">
+                <div class="stat-card">
+                  <div class="stat-number" id="totalCompleted">0</div>
+                  <div class="stat-label">Exercises Completed</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" id="sequenceCompleted">0</div>
+                  <div class="stat-label">Sequences</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" id="variablesCompleted">0</div>
+                  <div class="stat-label">Variables Traced</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" id="loopsCompleted">0</div>
+                  <div class="stat-label">Loops Executed</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" id="challengesCompleted">0</div>
+                  <div class="stat-label">Challenges Solved</div>
+                </div>
+              </div>
+              
+              <div class="progress-breakdown">
+                <h3>By Difficulty</h3>
+                <div class="difficulty-stats">
+                  <div class="difficulty-item">
+                    <span class="difficulty-label">Beginner:</span>
+                    <span class="difficulty-count" id="beginnerCount">0</span>
+                  </div>
+                  <div class="difficulty-item">
+                    <span class="difficulty-label">Intermediate:</span>
+                    <span class="difficulty-count" id="intermediateCount">0</span>
+                  </div>
+                  <div class="difficulty-item">
+                    <span class="difficulty-label">Advanced:</span>
+                    <span class="difficulty-count" id="advancedCount">0</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="progress-actions">
+                <button class="btn-primary" id="generateReportBtn">📸 Download Report as Image</button>
+                <button class="btn-secondary" id="resetProgressBtn">Reset Progress</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

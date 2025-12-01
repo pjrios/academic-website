@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Programming Lab</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🐍 Python Programming Lab</h1>
+        <p class="subtitle">Learn Python interactively with visualizations, debugging puzzles, and guided projects</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="interpreter">💻 Interpreter</button>
+        <button class="tab-button" data-tab="visualizer">📊 Visualizer</button>
+        <button class="tab-button" data-tab="loops">🔄 Loops</button>
+        <button class="tab-button" data-tab="events">⚡ Events</button>
+        <button class="tab-button" data-tab="debugging">🐛 Debugging</button>
+        <button class="tab-button" data-tab="projects">📚 Projects</button>
+        <button class="tab-button" data-tab="progress">📈 Progress</button>
+      </div>
+
+      <!-- Interpreter Tab -->
+      <div class="tab-content active" id="interpreter">
+        <div class="content-card">
+          <h2>💻 Python Interpreter</h2>
+          <p class="description">Write and run Python code with visual output. Supports variables, functions, loops, and more.</p>
+          
+          <div class="interpreter-container">
+            <div class="interpreter-left-column">
+              <div class="code-section">
+                <div class="code-header">
+                  <h3>Python Code</h3>
+                  <div class="code-actions">
+                    <button class="btn-secondary" id="clearCodeBtn">Clear</button>
+                    <select id="loadExampleSelect" class="example-select">
+                      <option value="">Load Example...</option>
+                      <option value="basic">Basic Example</option>
+                      <option value="variables">Variables & Types</option>
+                      <option value="lists">Lists & Loops</option>
+                      <option value="functions">Functions</option>
+                      <option value="conditionals">Conditionals</option>
+                      <option value="dictionaries">Dictionaries</option>
+                      <option value="list-comprehension">List Comprehension</option>
+                      <option value="string-operations">String Operations</option>
+                      <option value="file-operations">File Operations</option>
+                      <option value="classes">Classes & Objects</option>
+                    </select>
+                    <button class="btn-secondary" id="saveCodeBtn">💾 Save</button>
+                  </div>
+                </div>
+                <textarea id="pythonCode" class="code-editor" placeholder="# Write your Python code here&#10;name = 'Python'&#10;print(f'Hello, {name}!')"># Write your Python code here
+name = 'Python'
+print(f'Hello, {name}!')</textarea>
+              </div>
+            </div>
+
+            <div class="interpreter-right-column">
+              <div class="controls-section">
+                <button class="btn-primary" id="runCodeBtn">▶ Run Code</button>
+                <button class="btn-secondary" id="stepCodeBtn">Step Through</button>
+                <button class="btn-secondary" id="resetCodeBtn">Reset</button>
+              </div>
+
+              <div class="output-section">
+                <div class="output-header">
+                  <h3>Output</h3>
+                  <button class="btn-secondary btn-sm" id="clearOutputBtn">Clear</button>
+                </div>
+                <div class="output-display" id="outputDisplay">
+                  <!-- Output will appear here -->
+                </div>
+              </div>
+
+              <div class="variables-section">
+                <div class="variables-header">
+                  <h3>Variables</h3>
+                </div>
+                <div class="variables-display" id="variablesDisplay">
+                  <!-- Variables will appear here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visualizer Tab -->
+      <div class="tab-content" id="visualizer">
+        <div class="content-card">
+          <h2>📊 Data Structure Visualizer</h2>
+          <p class="description">Visualize Python lists, strings, and dictionaries with interactive examples. See how operations work step-by-step.</p>
+          
+          <div class="visualizer-container">
+            <div class="visualizer-controls">
+              <div class="input-group">
+                <label for="visualizerType">Data Type:</label>
+                <select id="visualizerType" class="algorithm-select">
+                  <option value="list">📋 List</option>
+                  <option value="string">🔤 String</option>
+                  <option value="dict">📖 Dictionary</option>
+                </select>
+              </div>
+              <div class="input-group" style="flex: 1;">
+                <label for="visualizerInput">Input:</label>
+                <input type="text" id="visualizerInput" class="input-field" value="[1, 2, 3, 4, 5]" placeholder="Enter data structure...">
+              </div>
+              <button class="btn-primary" id="visualizeBtn">▶ Visualize</button>
+              <button class="btn-secondary" id="resetVisualizerBtn">Reset</button>
+            </div>
+
+            <div class="visualization-wrapper">
+              <div class="visualization-canvas" id="visualizationCanvas">
+                <p style="color: var(--text-muted); text-align: center; padding: 40px;">Select a data type and click "Visualize" to see the structure</p>
+              </div>
+
+              <div class="visualizer-right-panel">
+                <div class="visualizer-info" id="visualizerInfo">
+                  <!-- Info about the data structure will appear here -->
+                </div>
+
+                <div class="visualizer-operations">
+                  <h4>🔧 Try These Operations:</h4>
+                  <div class="operation-buttons" id="operationButtons">
+                    <!-- Operation buttons will be generated -->
+                  </div>
+                  <div class="operation-result" id="operationResult">
+                    <!-- Operation results will appear here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loops Tab -->
+      <div class="tab-content" id="loops">
+        <div class="content-card">
+          <h2>🔄 Loop Step-Through Animation</h2>
+          <p class="description">Watch loops execute step-by-step with visual animations.</p>
+          
+          <div class="loops-container">
+            <div class="loop-selector">
+              <label for="loopType">Loop Type:</label>
+              <select id="loopType" class="algorithm-select">
+                <option value="for-range">For Loop (range)</option>
+                <option value="for-list">For Loop (list)</option>
+                <option value="while">While Loop</option>
+                <option value="nested">Nested Loops</option>
+              </select>
+            </div>
+
+            <div class="loop-controls">
+              <button class="btn-primary" id="playLoopBtn">▶ Play</button>
+              <button class="btn-secondary" id="pauseLoopBtn">⏸ Pause</button>
+              <button class="btn-secondary" id="stepLoopBtn">Step</button>
+              <button class="btn-secondary" id="resetLoopBtn">Reset</button>
+              <div class="speed-control">
+                <label for="loopSpeed">Speed:</label>
+                <input type="range" id="loopSpeed" min="1" max="10" value="5">
+              </div>
+            </div>
+
+            <div class="loop-content-wrapper">
+              <div class="loop-code-section">
+                <div class="code-header">
+                  <h3>Loop Code</h3>
+                </div>
+                <textarea class="code-editor" id="loopCode" placeholder="Enter your loop code here...">
+                  <!-- Loop code will appear here -->
+                </textarea>
+              </div>
+
+              <div class="loop-right-panel">
+                <div class="loop-visualization" id="loopVisualization">
+                  <!-- Loop visualization will appear here -->
+                </div>
+
+                <div class="loop-output" id="loopOutput">
+                  <!-- Loop output will appear here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events Tab -->
+      <div class="tab-content" id="events">
+        <div class="content-card">
+          <h2>⚡ Event-Driven Flow Diagrams</h2>
+          <p class="description">Understand event-driven programming with interactive flow diagrams.</p>
+          
+          <div class="events-container">
+            <div class="event-controls-top">
+              <div class="event-selector">
+                <label for="eventType">Event Type:</label>
+                <select id="eventType" class="algorithm-select">
+                  <option value="button-click">Button Click</option>
+                  <option value="key-press">Key Press</option>
+                  <option value="timer">Timer Event</option>
+                  <option value="user-input">User Input</option>
+                </select>
+              </div>
+              <button class="btn-primary" id="triggerEventBtn">▶ Play / Trigger Event</button>
+            </div>
+
+            <div class="event-content-wrapper">
+              <div class="event-code">
+                <div class="code-header">
+                  <h3>Event Handler Code</h3>
+                </div>
+                <textarea class="code-editor" id="eventCode" placeholder="Enter event handler code here...">
+                  <!-- Event code will appear here -->
+                </textarea>
+              </div>
+
+              <div class="event-right-panel">
+                <div class="flow-diagram" id="flowDiagram">
+                  <!-- Flow diagram will appear here -->
+                </div>
+
+                <div class="event-output" id="eventOutput">
+                  <!-- Event output will appear here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Debugging Tab -->
+      <div class="tab-content" id="debugging">
+        <div class="content-card">
+          <h2>🐛 Debugging Puzzles</h2>
+          <p class="description">Fix broken Python code. Identify bugs and correct them.</p>
+          
+          <div class="debugging-container">
+            <div class="puzzle-selector">
+              <label for="puzzleSelect">Choose Puzzle:</label>
+              <select id="puzzleSelect" class="algorithm-select">
+                <option value="1">Puzzle 1: Syntax Error</option>
+                <option value="2">Puzzle 2: Logic Error</option>
+                <option value="3">Puzzle 3: Index Error</option>
+                <option value="4">Puzzle 4: Type Error</option>
+                <option value="5">Puzzle 5: Infinite Loop</option>
+              </select>
+            </div>
+
+            <div class="puzzle-info" id="puzzleInfo">
+              <!-- Puzzle description -->
+            </div>
+
+            <div class="puzzle-controls">
+              <button class="btn-primary" id="testPuzzleBtn">▶ Test Code</button>
+              <button class="btn-secondary" id="resetPuzzleBtn">Reset</button>
+              <button class="btn-secondary" id="showPuzzleSolutionBtn">Show Solution</button>
+            </div>
+
+            <div class="puzzle-content-wrapper">
+              <div class="puzzle-code-section">
+                <div class="code-header">
+                  <h3>Broken Code</h3>
+                </div>
+                <textarea id="puzzleCode" class="code-editor" placeholder="Fix the code here..."></textarea>
+              </div>
+
+              <div class="puzzle-results-panel">
+                <div class="puzzle-output-section">
+                  <h4>Output</h4>
+                  <div class="puzzle-output" id="puzzleOutput">
+                    <!-- Code execution output will appear here -->
+                  </div>
+                </div>
+                <div class="puzzle-feedback" id="puzzleFeedback">
+                  <h4>Feedback</h4>
+                  <!-- Feedback will appear here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects Tab -->
+      <div class="tab-content" id="projects">
+        <div class="content-card">
+          <h2>📚 Guided Python Projects</h2>
+          <p class="description">Complete guided projects to practice Python programming.</p>
+          
+          <div class="projects-container">
+            <div class="projects-sidebar">
+              <h3>Projects</h3>
+              <div class="projects-list" id="projectsList">
+                <!-- Projects will be listed here -->
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-header" id="projectHeader">
+                <h3>Select a project to begin</h3>
+              </div>
+              <div class="project-instructions" id="projectInstructions">
+                <!-- Project instructions -->
+              </div>
+              
+              <div class="project-code-wrapper">
+                <div class="project-editor">
+                  <div class="code-header">
+                    <h3>Your Code</h3>
+                  </div>
+                  <textarea id="projectCode" class="code-editor"></textarea>
+                </div>
+                
+                <div class="project-right-panel">
+                  <div class="project-controls">
+                    <button class="btn-primary" id="runProjectBtn">Run</button>
+                    <button class="btn-primary" id="checkProjectBtn">Check Solution</button>
+                    <button class="btn-secondary" id="saveProjectBtn">💾 Save Progress</button>
+                  </div>
+                  <div class="project-output-section">
+                    <h4>Output</h4>
+                    <div class="project-output" id="projectOutput">
+                      <!-- Project output -->
+                    </div>
+                  </div>
+                  <div class="project-feedback-section">
+                    <h4>Feedback</h4>
+                    <div class="project-feedback" id="projectFeedback">
+                      <!-- Project feedback -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div class="tab-content" id="progress">
+        <div class="content-card">
+          <h2>📈 Progress Report</h2>
+          <p class="description">View your learning progress and export reports.</p>
+          
+          <div class="progress-container">
+            <div class="progress-controls">
+              <button class="btn-primary" id="generateReportBtn">Generate Report</button>
+              <button class="btn-secondary" id="exportReportBtn">📸 Export as Image</button>
+              <button class="btn-secondary" id="clearProgressBtn">Clear Progress</button>
+            </div>
+
+            <div class="progress-stats" id="progressStats">
+              <!-- Progress statistics -->
+            </div>
+
+            <div class="progress-report" id="progressReport">
+              <!-- Progress report will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

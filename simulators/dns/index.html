@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DNS Simulator – Real DNS Lookups & Visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div>
+          <h1>DNS Simulator</h1>
+          <p class="subtitle">Real DNS lookups, delegation paths, and visualizations</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button tab-active" data-tab="lookup">1️⃣ Basic Lookup</button>
+      <button class="tab-button" data-tab="delegation">2️⃣ Delegation Path</button>
+      <button class="tab-button" data-tab="graph">3️⃣ Node Graph</button>
+    </div>
+
+    <!-- Tab 1: Basic Lookup -->
+    <section id="lookupTab" class="tab-content tab-active">
+      <div class="card">
+        <div class="card-header">
+          <h2>DNS Record Lookup</h2>
+          <p class="card-description">Query real DNS records for any domain</p>
+        </div>
+        
+        <div class="lookup-controls">
+          <div class="input-group">
+            <input type="text" id="lookupDomain" class="input-field" placeholder="example.com" />
+            <select id="lookupType" class="select-field">
+              <option value="A">A (IPv4)</option>
+              <option value="AAAA">AAAA (IPv6)</option>
+              <option value="MX">MX (Mail Exchange)</option>
+              <option value="NS">NS (Name Server)</option>
+              <option value="CNAME">CNAME (Canonical Name)</option>
+            </select>
+            <button id="lookupBtn" class="btn-primary">Lookup</button>
+          </div>
+        </div>
+
+        <div id="lookupResults" class="results-container">
+          <div class="empty-state">Enter a domain and click Lookup to see DNS records</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Delegation Path -->
+    <section id="delegationTab" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2>DNS Delegation Path</h2>
+          <p class="card-description">Watch how DNS resolves from root to authoritative servers</p>
+        </div>
+        
+        <div class="lookup-controls">
+          <div class="input-group">
+            <input type="text" id="delegationDomain" class="input-field" placeholder="example.com" />
+            <button id="delegationBtn" class="btn-primary">Trace Path</button>
+          </div>
+        </div>
+
+        <div id="delegationPath" class="delegation-container">
+          <div class="empty-state">Enter a domain to trace the DNS delegation path</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Node Graph -->
+    <section id="graphTab" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+            <div>
+              <h2>DNS Node Graph</h2>
+              <p class="card-description">Visualize DNS resolution as an interactive graph. Hover over legend items for explanations.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lookup-controls">
+          <div class="input-group">
+            <input type="text" id="graphDomain" class="input-field" placeholder="example.com" />
+            <button id="graphBtn" class="btn-primary">Build Graph</button>
+          </div>
+        </div>
+
+        <div id="stepControls" class="step-controls" style="display: none;">
+          <div class="step-info">
+            <span id="stepIndicator" class="step-indicator">Step 0 of 0</span>
+            <span id="stepDescription" class="step-description">Initializing...</span>
+          </div>
+          <div class="step-slider-container">
+            <button id="stepPrevBtn" class="step-btn" title="Previous step">◀</button>
+            <input type="range" id="stepSlider" class="step-slider" min="0" max="6" value="0" step="1" />
+            <button id="stepNextBtn" class="step-btn" title="Next step">▶</button>
+          </div>
+          <div class="step-play-controls">
+            <button id="stepPlayBtn" class="btn-primary btn-small">▶ Play</button>
+            <button id="stepResetBtn" class="btn-ghost btn-small">↺ Reset</button>
+          </div>
+        </div>
+
+        <div id="graphContainer" class="graph-container">
+          <svg id="dnsGraph" class="dns-graph"></svg>
+          <div class="empty-state graph-empty">Enter a domain to visualize the DNS resolution graph</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch-Decode-Execute Cycle Simulator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>⚙️ Fetch-Decode-Execute Cycle Simulator</h1>
+        <p class="subtitle">Explore how a CPU processes instructions through the FDE cycle with interactive visualizations</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="simulation">🎯 Simulation</button>
+        <button class="tab-button" data-tab="components">🧩 Components</button>
+        <button class="tab-button" data-tab="theory">📚 Theory</button>
+      </div>
+
+      <!-- Simulation Tab -->
+      <div class="tab-content active" id="simulation">
+        <div class="content-card">
+          <h2>🎯 FDE Cycle Simulation</h2>
+          <p class="description">Watch the CPU execute instructions step-by-step through the Fetch, Decode, and Execute phases.</p>
+          
+          <div class="simulation-container">
+            <!-- Main Content: CPU Diagram (includes Memory in architecture) -->
+            <div class="main-visualization">
+              <!-- CPU Diagram (includes Memory as part of architecture) -->
+              <div class="cpu-diagram-container">
+                <!-- Controls -->
+                <div class="simulation-controls">
+                  <div class="control-group">
+                    <button class="btn-primary" id="playBtn">▶ Play</button>
+                    <button class="btn-secondary" id="pauseBtn">⏸ Pause</button>
+                    <button class="btn-secondary" id="stepBtn">Step Forward</button>
+                    <button class="btn-secondary" id="resetBtn">Reset</button>
+                  </div>
+                  <div class="control-group">
+                    <label for="speedSlider">Speed:</label>
+                    <input type="range" id="speedSlider" min="1" max="10" value="5">
+                    <span id="speedValue">5</span>
+                  </div>
+                  <div class="control-group">
+                    <button class="btn-secondary" id="loadExampleBtn">Load Example Program</button>
+                  </div>
+                </div>
+                <div class="cpu-diagram" id="cpuDiagram">
+                  <!-- CPU components and Memory will be rendered here -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Current Cycle Info -->
+            <div class="cycle-info" id="cycleInfo">
+              <div class="info-card">
+                <h4>Current Cycle</h4>
+                <div id="currentCycle">Waiting...</div>
+              </div>
+              <div class="info-card">
+                <h4>Program Counter (PC)</h4>
+                <div id="programCounter">0x0000</div>
+              </div>
+              <div class="info-card">
+                <h4>Current Instruction</h4>
+                <div id="currentInstruction">-</div>
+              </div>
+              <div class="info-card">
+                <h4>Cycles Completed</h4>
+                <div id="cyclesCompleted">0</div>
+              </div>
+            </div>
+
+            <!-- Execution Trace -->
+            <div class="trace-section">
+              <h3>📋 Execution Trace</h3>
+              <div class="trace-output" id="traceOutput">
+                <div class="trace-item">Ready to execute instructions...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Components Tab -->
+      <div class="tab-content" id="components">
+        <div class="content-card">
+          <h2>🧩 CPU Components</h2>
+          <p class="description">Explore the key components of a CPU and understand their roles in the FDE cycle.</p>
+          
+          <div class="components-grid">
+            <div class="component-card">
+              <div class="component-icon">🧠</div>
+              <h3>Control Unit (CU)</h3>
+              <p>Coordinates all CPU operations, manages the FDE cycle, and controls data flow between components.</p>
+              <ul>
+                <li>Decodes instructions</li>
+                <li>Generates control signals</li>
+                <li>Manages timing</li>
+              </ul>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">⚡</div>
+              <h3>Arithmetic Logic Unit (ALU)</h3>
+              <p>Performs arithmetic and logical operations on data during the Execute phase.</p>
+              <ul>
+                <li>Addition, subtraction</li>
+                <li>Logical AND, OR, NOT</li>
+                <li>Comparisons</li>
+              </ul>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">📦</div>
+              <h3>Registers</h3>
+              <p>Fast storage locations within the CPU for temporary data and addresses.</p>
+              <ul>
+                <li>Program Counter (PC)</li>
+                <li>Instruction Register (IR)</li>
+                <li>Accumulator (ACC)</li>
+                <li>General Purpose Registers</li>
+              </ul>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">💾</div>
+              <h3>Memory</h3>
+              <p>Stores instructions and data that the CPU needs to process.</p>
+              <ul>
+                <li>Instruction storage</li>
+                <li>Data storage</li>
+                <li>Addressable locations</li>
+              </ul>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">🚌</div>
+              <h3>Bus System</h3>
+              <p>Connects CPU components, allowing data and addresses to be transferred.</p>
+              <ul>
+                <li>Data Bus</li>
+                <li>Address Bus</li>
+                <li>Control Bus</li>
+              </ul>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">⏱️</div>
+              <h3>Clock</h3>
+              <p>Synchronizes all CPU operations, providing timing for the FDE cycle.</p>
+              <ul>
+                <li>Clock cycles</li>
+                <li>Timing signals</li>
+                <li>Synchronization</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theory Tab -->
+      <div class="tab-content" id="theory">
+        <div class="content-card">
+          <h2>📚 FDE Cycle Theory</h2>
+          <p class="description">Learn the fundamental concepts behind the Fetch-Decode-Execute cycle.</p>
+          
+          <div class="theory-content">
+            <section class="theory-section">
+              <h3>What is the FDE Cycle?</h3>
+              <p>The Fetch-Decode-Execute cycle (also known as the instruction cycle) is the fundamental process by which a CPU processes instructions. It consists of three main phases that repeat continuously:</p>
+              <ol>
+                <li><strong>Fetch:</strong> The CPU retrieves the next instruction from memory</li>
+                <li><strong>Decode:</strong> The CPU interprets what the instruction means</li>
+                <li><strong>Execute:</strong> The CPU performs the operation specified by the instruction</li>
+              </ol>
+            </section>
+
+            <section class="theory-section">
+              <h3>Phase 1: Fetch</h3>
+              <div class="phase-detail">
+                <h4>Steps:</h4>
+                <ol>
+                  <li>The Program Counter (PC) contains the address of the next instruction</li>
+                  <li>The address is sent to memory via the Address Bus</li>
+                  <li>Memory retrieves the instruction at that address</li>
+                  <li>The instruction is sent back to the CPU via the Data Bus</li>
+                  <li>The instruction is stored in the Instruction Register (IR)</li>
+                  <li>The PC is incremented to point to the next instruction</li>
+                </ol>
+                <div class="example-box">
+                  <strong>Example:</strong> PC = 0x0000, Fetch instruction at address 0x0000 → Store in IR, PC becomes 0x0001
+                </div>
+              </div>
+            </section>
+
+            <section class="theory-section">
+              <h3>Phase 2: Decode</h3>
+              <div class="phase-detail">
+                <h4>Steps:</h4>
+                <ol>
+                  <li>The Control Unit examines the instruction in the IR</li>
+                  <li>The instruction is broken down into its components:
+                    <ul>
+                      <li><strong>Opcode:</strong> What operation to perform (e.g., ADD, LOAD, STORE)</li>
+                      <li><strong>Operands:</strong> What data to operate on (registers, memory addresses, values)</li>
+                    </ul>
+                  </li>
+                  <li>The Control Unit generates control signals based on the opcode</li>
+                  <li>These signals prepare the ALU and registers for execution</li>
+                </ol>
+                <div class="example-box">
+                  <strong>Example:</strong> Instruction "ADD R1, R2" is decoded as: Opcode = ADD, Operand1 = R1, Operand2 = R2
+                </div>
+              </div>
+            </section>
+
+            <section class="theory-section">
+              <h3>Phase 3: Execute</h3>
+              <div class="phase-detail">
+                <h4>Steps:</h4>
+                <ol>
+                  <li>Based on control signals, data is moved to appropriate locations</li>
+                  <li>If needed, the ALU performs calculations</li>
+                  <li>Results are stored in registers or memory</li>
+                  <li>Flags may be updated (zero flag, carry flag, etc.)</li>
+                  <li>The cycle is complete and ready to fetch the next instruction</li>
+                </ol>
+                <div class="example-box">
+                  <strong>Example:</strong> ADD R1, R2 → Read R1 and R2 values → ALU adds them → Store result back in R1
+                </div>
+              </div>
+            </section>
+
+            <section class="theory-section">
+              <h3>Cycle Timing</h3>
+              <p>Each phase of the FDE cycle takes one or more clock cycles. Modern CPUs use pipelining to process multiple instructions simultaneously, with different instructions in different phases at the same time.</p>
+              <div class="timing-diagram">
+                <div class="timing-example">
+                  <strong>Non-Pipelined:</strong> Fetch (1 cycle) → Decode (1 cycle) → Execute (1 cycle) = 3 cycles per instruction
+                </div>
+                <div class="timing-example">
+                  <strong>Pipelined:</strong> While Instruction 1 is in Execute, Instruction 2 is in Decode, and Instruction 3 is in Fetch = Multiple instructions processed simultaneously
+                </div>
+              </div>
+            </section>
+
+            <section class="theory-section">
+              <h3>Key Concepts</h3>
+              <ul class="concepts-list">
+                <li><strong>Program Counter (PC):</strong> Points to the next instruction to be fetched</li>
+                <li><strong>Instruction Register (IR):</strong> Holds the current instruction being processed</li>
+                <li><strong>Accumulator (ACC):</strong> Special register that stores results of ALU operations</li>
+                <li><strong>Memory Address Register (MAR):</strong> Holds the address of memory location being accessed</li>
+                <li><strong>Memory Data Register (MDR):</strong> Holds data being read from or written to memory</li>
+                <li><strong>Status Flags:</strong> Indicate results (zero, carry, overflow, negative)</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

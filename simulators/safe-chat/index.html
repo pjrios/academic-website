@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Safe Chat Simulator – Offline Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="safechat-app">
+    <header class="safechat-header">
+      <div>
+        <p class="eyebrow">Practice safe online communication</p>
+        <h1>Safe Chat Simulator</h1>
+        <p class="lede">
+          Choose responses in realistic chats, see the impact of each choice, and learn why some replies are safer than others.
+        </p>
+      </div>
+      <div class="badges">
+        <span class="badge" id="badgeSafety">Safety: 100</span>
+        <span class="badge" id="badgeTrust">Trust: 0</span>
+        <span class="badge" id="badgeStreak">Streak: 0</span>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button tab-active" id="mainTabSim">Chat simulator</button>
+      <div class="tab-right">
+        <button class="tab-button" id="mainTabSignals">Signal lab</button>
+        <button class="tab-button" id="mainTabExport">Export</button>
+      </div>
+    </div>
+
+    <section class="layout" id="simSection">
+      <aside class="scenario-panel">
+        <div class="panel-header">
+          <h2>Scenarios</h2>
+          <button class="ghost-btn" id="resetProgressBtn">Reset progress</button>
+        </div>
+        <div id="scenarioList" class="scenario-list"></div>
+      </aside>
+
+      <main class="chat-panel">
+        <div class="chat-header">
+          <div>
+            <h2 id="scenarioTitle">Pick a scenario</h2>
+            <p id="scenarioDesc" class="muted">Select a chat to begin.</p>
+            <div class="last-run" id="lastRunSummary">No previous run yet.</div>
+          </div>
+          <div class="mode-toggle" role="group" aria-label="Training or challenge mode">
+            <button class="toggle-btn toggle-active" id="modeTraining">Training</button>
+            <button class="toggle-btn" id="modeChallenge">Challenge</button>
+          </div>
+          <div class="meters">
+            <div class="meter">
+              <span>Safety</span>
+              <div class="meter-bar"><div id="meterSafety"></div></div>
+            </div>
+            <div class="meter">
+              <span>Trust risk</span>
+              <div class="meter-bar"><div id="meterRisk"></div></div>
+            </div>
+          </div>
+          <button class="ghost-btn" id="restartBtn" disabled>↺ Restart</button>
+        </div>
+
+        <div id="chatWindow" class="chat-window" aria-live="polite"></div>
+
+        <div id="choiceArea" class="choice-area hidden" aria-live="polite">
+          <p class="muted" id="promptText"></p>
+          <div id="choiceButtons" class="choices"></div>
+        </div>
+
+        <div class="helper-row">
+          <button class="ghost-btn" id="hintBtn" disabled>💡 Hint</button>
+          <div class="helper-text" id="helperText">Hints appear once a scenario starts.</div>
+        </div>
+      </main>
+
+      <aside class="tips-panel">
+        <div class="panel-header tab-header">
+          <div class="tab-buttons">
+            <button class="tab-button tab-active" id="asideTabWhy">Why choices matter</button>
+            <button class="tab-button" id="asideTabPrinciples">Principles</button>
+          </div>
+        </div>
+        <div id="asideWhy" class="tip-list">
+          <div id="tipList" class="tip-list"></div>
+        </div>
+        <div id="asidePrinciples" class="tip-list hidden">
+          <div id="principleList" class="tip-list"></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="signalsSection" class="hidden signal-lab">
+      <div class="panel-header">
+        <div>
+          <h2>Signal lab: spot the scams</h2>
+          <p class="muted">Click every scam signal in the sample email/chat. Use reveal to check your work.</p>
+        </div>
+        <div class="signal-actions">
+          <button class="ghost-btn" id="prevSignalBtn">← Prev</button>
+          <button class="ghost-btn" id="nextSignalBtn">Next →</button>
+          <button class="ghost-btn" id="checkSignalsBtn">Check</button>
+          <button class="ghost-btn" id="revealSignalsBtn">Reveal all</button>
+        </div>
+      </div>
+      <div class="signal-mode">
+        <span>Mode:</span>
+        <button class="ghost-btn toggle-btn toggle-active" id="signalTraining">Training</button>
+        <button class="ghost-btn toggle-btn" id="signalChallenge">Challenge</button>
+      </div>
+      <div class="signal-layout">
+        <div class="signal-main">
+          <div id="signalTitle" class="tip-title">Pick a signal card</div>
+          <div id="signalContainer" class="signal-card kid-card"></div>
+          <div id="signalStatus" class="muted">Signals found: 0/0</div>
+        </div>
+        <div class="signal-notes">
+          <div class="tip-card principle-card">
+            <div class="tip-title">Look for these clues</div>
+            <ul class="muted">
+              <li>“Act now!” or scary threats</li>
+              <li>Weird or shortened links</li>
+              <li>Asking for passwords, codes, money, gift cards</li>
+              <li>Typos, odd emails, fake names</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="exportSection" class="hidden signal-lab">
+      <div class="panel-header space-between">
+        <div>
+          <h2>Export runs</h2>
+          <p class="muted">Download a PNG report of recent runs.</p>
+        </div>
+        <button class="ghost-btn" id="exportRunsBtn">Export report (PNG)</button>
+      </div>
+      <div id="runsList" class="tip-list"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

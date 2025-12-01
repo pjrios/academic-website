@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Representation Lab</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🎨 Digital Representation Lab</h1>
+        <p class="subtitle">Explore pixels, color depth, audio waveforms, compression, and digital ethics</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="pixels">🖼️ Pixels & Color</button>
+        <button class="tab-button" data-tab="resolution">📐 Resolution</button>
+        <button class="tab-button" data-tab="waveform">🌊 Waveform</button>
+        <button class="tab-button" data-tab="sampling">🎵 Sampling</button>
+        <button class="tab-button" data-tab="compression">🗜️ Compression</button>
+        <button class="tab-button" data-tab="ethics">⚖️ Ethics</button>
+        <button class="tab-button" data-tab="progress">📊 Progress</button>
+      </div>
+
+      <!-- Pixels & Color Tab -->
+      <div class="tab-content active" id="pixels">
+        <div class="content-card">
+          <h2>🖼️ Pixel Grids & Color Depth</h2>
+          <p class="description">Explore how images are represented as pixels and how color depth affects image quality.</p>
+          
+          <div class="pixels-container">
+            <div class="pixels-controls">
+              <div class="control-group">
+                <label for="gridSize">Grid Size:</label>
+                <input type="range" id="gridSize" min="4" max="64" value="16" step="4">
+                <span id="gridSizeValue">16x16</span>
+              </div>
+              <div class="control-group">
+                <label for="colorDepth">Color Depth:</label>
+                <select id="colorDepth" class="algorithm-select">
+                  <option value="1">1-bit (2 colors)</option>
+                  <option value="4">4-bit (16 colors)</option>
+                  <option value="8">8-bit (256 colors)</option>
+                  <option value="24" selected>24-bit (16.7M colors)</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="pixelTool">Tool:</label>
+                <select id="pixelTool" class="algorithm-select">
+                  <option value="draw">Draw</option>
+                  <option value="fill">Fill</option>
+                  <option value="gradient">Gradient</option>
+                </select>
+              </div>
+              <button class="btn-primary" id="clearPixelsBtn">Clear</button>
+              <button class="btn-secondary" id="loadImageBtn">Load Image</button>
+              <button class="btn-secondary" id="savePixelArtBtn">💾 Save</button>
+            </div>
+            
+            <div class="pixels-display">
+              <div class="pixel-grid-container">
+                <canvas id="pixelCanvas"></canvas>
+              </div>
+              <div class="pixel-info">
+                <div class="info-item">
+                  <strong>Resolution:</strong> <span id="pixelResolution">16x16</span>
+                </div>
+                <div class="info-item">
+                  <strong>Color Depth:</strong> <span id="pixelColorDepth">24-bit</span>
+                </div>
+                <div class="info-item">
+                  <strong>File Size (approx):</strong> <span id="pixelFileSize">~1 KB</span>
+                </div>
+                <div class="color-picker-container">
+                  <label for="colorPicker">Color:</label>
+                  <input type="color" id="colorPicker" value="#3b82f6">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resolution Tab -->
+      <div class="tab-content" id="resolution">
+        <div class="content-card">
+          <h2>📐 Resolution & Quality Comparisons</h2>
+          <p class="description">Compare how different resolutions and quality settings affect image appearance and file size.</p>
+          
+          <div class="resolution-container">
+            <div class="resolution-controls">
+              <div class="control-group">
+                <label for="resImageUpload">Upload Image:</label>
+                <input type="file" id="resImageUpload" accept="image/*" style="display: none;">
+                <button class="btn-secondary" id="resImageUploadBtn">Choose Image</button>
+              </div>
+              <div class="control-group">
+                <label for="qualitySlider">Quality:</label>
+                <input type="range" id="qualitySlider" min="10" max="100" value="90" step="5">
+                <span id="qualityValue">90%</span>
+              </div>
+              <button class="btn-primary" id="compareResolutionsBtn">Compare Resolutions</button>
+              <button class="btn-secondary" id="saveComparisonBtn">💾 Save Comparison</button>
+            </div>
+            
+            <div class="resolution-comparison">
+              <div class="comparison-item">
+                <h3>Original</h3>
+                <div class="image-container">
+                  <img id="originalImage" alt="Original">
+                  <div class="image-stats" id="originalStats"></div>
+                </div>
+              </div>
+              <div class="comparison-item">
+                <h3>Low Res (50%)</h3>
+                <div class="image-container">
+                  <canvas id="lowResCanvas"></canvas>
+                  <div class="image-stats" id="lowResStats"></div>
+                </div>
+              </div>
+              <div class="comparison-item">
+                <h3>Medium Res (75%)</h3>
+                <div class="image-container">
+                  <canvas id="mediumResCanvas"></canvas>
+                  <div class="image-stats" id="mediumResStats"></div>
+                </div>
+              </div>
+              <div class="comparison-item">
+                <h3>High Res (100%)</h3>
+                <div class="image-container">
+                  <canvas id="highResCanvas"></canvas>
+                  <div class="image-stats" id="highResStats"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Waveform Tab -->
+      <div class="tab-content" id="waveform">
+        <div class="content-card">
+          <h2>🌊 Waveform Visualizer</h2>
+          <p class="description">Visualize audio waveforms and understand how sound is represented digitally.</p>
+          
+          <div class="waveform-container">
+            <div class="waveform-controls">
+              <div class="control-group">
+                <label for="audioUpload">Upload Audio:</label>
+                <input type="file" id="audioUpload" accept="audio/*" style="display: none;">
+                <button class="btn-secondary" id="audioUploadBtn">Choose Audio</button>
+              </div>
+              <button class="btn-primary" id="generateToneBtn">Generate Tone</button>
+              <button class="btn-secondary" id="playPauseBtn">▶️ Play</button>
+              <button class="btn-secondary" id="saveWaveformBtn">💾 Save</button>
+            </div>
+            
+            <div class="waveform-display">
+              <canvas id="waveformCanvas"></canvas>
+              <audio id="audioPlayer" controls style="width: 100%; margin-top: 20px;"></audio>
+              <div class="waveform-info">
+                <div class="info-item">
+                  <strong>Frequency:</strong> <span id="waveformFreq">440 Hz</span>
+                </div>
+                <div class="info-item">
+                  <strong>Amplitude:</strong> <span id="waveformAmp">1.0</span>
+                </div>
+                <div class="info-item">
+                  <strong>Sample Rate:</strong> <span id="waveformSampleRate">44100 Hz</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sampling Tab -->
+      <div class="tab-content" id="sampling">
+        <div class="content-card">
+          <h2>🎵 Sampling & Bit Depth</h2>
+          <p class="description">Explore how sampling rate and bit depth affect audio quality.</p>
+          
+          <div class="sampling-container">
+            <div class="sampling-controls">
+              <div class="control-group">
+                <label for="sampleRate">Sample Rate:</label>
+                <select id="sampleRate" class="algorithm-select">
+                  <option value="8000">8 kHz (Telephone)</option>
+                  <option value="11025">11.025 kHz (Low)</option>
+                  <option value="22050">22.05 kHz (Radio)</option>
+                  <option value="44100" selected>44.1 kHz (CD Quality)</option>
+                  <option value="48000">48 kHz (Professional)</option>
+                  <option value="96000">96 kHz (High-Res)</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="bitDepth">Bit Depth:</label>
+                <select id="bitDepth" class="algorithm-select">
+                  <option value="8">8-bit</option>
+                  <option value="16" selected>16-bit (CD Quality)</option>
+                  <option value="24">24-bit (Professional)</option>
+                  <option value="32">32-bit (High-Res)</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="toneFreq">Tone Frequency:</label>
+                <input type="range" id="toneFreq" min="100" max="2000" value="440" step="10">
+                <span id="toneFreqValue">440 Hz</span>
+              </div>
+              <button class="btn-primary" id="generateSampledToneBtn">Generate Tone</button>
+              <button class="btn-secondary" id="compareSamplingBtn">Compare</button>
+              <button class="btn-secondary" id="saveSamplingBtn">💾 Save</button>
+            </div>
+            
+            <div class="sampling-display">
+              <div class="sampling-visualization">
+                <canvas id="samplingCanvas"></canvas>
+              </div>
+              <div class="sampling-info">
+                <div class="info-item">
+                  <strong>Sample Rate:</strong> <span id="currentSampleRate">44100 Hz</span>
+                </div>
+                <div class="info-item">
+                  <strong>Bit Depth:</strong> <span id="currentBitDepth">16-bit</span>
+                </div>
+                <div class="info-item">
+                  <strong>Dynamic Range:</strong> <span id="dynamicRange">96 dB</span>
+                </div>
+                <div class="info-item">
+                  <strong>File Size (1 min):</strong> <span id="samplingFileSize">~5.3 MB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compression Tab -->
+      <div class="tab-content" id="compression">
+        <div class="content-card">
+          <h2>🗜️ Audio Compression Effects</h2>
+          <p class="description">Explore how different compression algorithms and bitrates affect audio quality.</p>
+          
+          <div class="compression-container">
+            <div class="compression-controls">
+              <div class="control-group">
+                <label for="compressionUpload">Upload Audio:</label>
+                <input type="file" id="compressionUpload" accept="audio/*" style="display: none;">
+                <button class="btn-secondary" id="compressionUploadBtn">Choose Audio</button>
+              </div>
+              <div class="control-group">
+                <label for="compressionType">Compression:</label>
+                <select id="compressionType" class="algorithm-select">
+                  <option value="none">None (Uncompressed)</option>
+                  <option value="mp3-128">MP3 @ 128 kbps</option>
+                  <option value="mp3-192">MP3 @ 192 kbps</option>
+                  <option value="mp3-320">MP3 @ 320 kbps</option>
+                  <option value="aac-128">AAC @ 128 kbps</option>
+                  <option value="ogg-128">OGG @ 128 kbps</option>
+                </select>
+              </div>
+              <button class="btn-primary" id="applyCompressionBtn">Apply Compression</button>
+              <button class="btn-secondary" id="saveCompressionBtn">💾 Save</button>
+            </div>
+            
+            <div class="compression-comparison">
+              <div class="compression-item">
+                <h3>Original</h3>
+                <div class="audio-container">
+                  <audio id="originalAudio" controls></audio>
+                  <div class="audio-stats" id="originalAudioStats"></div>
+                </div>
+              </div>
+              <div class="compression-item">
+                <h3>Compressed</h3>
+                <div class="audio-container">
+                  <audio id="compressedAudio" controls></audio>
+                  <div class="audio-stats" id="compressedAudioStats"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="compression-visualization">
+              <canvas id="compressionCanvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ethics Tab -->
+      <div class="tab-content" id="ethics">
+        <div class="content-card">
+          <h2>⚖️ Image Manipulation Ethics</h2>
+          <p class="description">Explore ethical scenarios and considerations in digital image manipulation.</p>
+          
+          <div class="ethics-container">
+            <div class="ethics-scenarios">
+              <h3>Ethical Scenarios</h3>
+              <div class="scenario-list" id="scenarioList">
+                <!-- Scenarios will be populated by JS -->
+              </div>
+            </div>
+            
+            <div class="ethics-tool">
+              <h3>Image Manipulation Tool</h3>
+              <div class="ethics-controls">
+                <div class="control-group">
+                  <label for="ethicsImageUpload">Upload Image:</label>
+                  <input type="file" id="ethicsImageUpload" accept="image/*" style="display: none;">
+                  <button class="btn-secondary" id="ethicsImageUploadBtn">Choose Image</button>
+                </div>
+                <div class="control-group">
+                  <label for="manipulationType">Manipulation:</label>
+                  <select id="manipulationType" class="algorithm-select">
+                    <option value="brightness">Brightness</option>
+                    <option value="contrast">Contrast</option>
+                    <option value="saturation">Saturation</option>
+                    <option value="blur">Blur</option>
+                    <option value="sharpen">Sharpen</option>
+                    <option value="remove">Remove Object</option>
+                  </select>
+                </div>
+                <div class="control-group">
+                  <label for="manipulationIntensity">Intensity:</label>
+                  <input type="range" id="manipulationIntensity" min="0" max="100" value="50">
+                  <span id="manipulationIntensityValue">50%</span>
+                </div>
+                <button class="btn-primary" id="applyManipulationBtn">Apply</button>
+                <button class="btn-secondary" id="resetManipulationBtn">Reset</button>
+                <button class="btn-secondary" id="saveEthicsBtn">💾 Save</button>
+              </div>
+              
+              <div class="ethics-comparison">
+                <div class="comparison-item">
+                  <h4>Original</h4>
+                  <canvas id="ethicsOriginalCanvas"></canvas>
+                </div>
+                <div class="comparison-item">
+                  <h4>Manipulated</h4>
+                  <canvas id="ethicsManipulatedCanvas"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div class="tab-content" id="progress">
+        <div class="content-card">
+          <h2>📊 Learning Progress</h2>
+          <p class="description">Track your exploration of digital representation concepts.</p>
+          
+          <div class="progress-container">
+            <div class="progress-controls">
+              <button class="btn-primary" id="generateProgressReportBtn">Generate Report</button>
+              <button class="btn-secondary" id="exportProgressBtn">📸 Export</button>
+              <button class="btn-secondary" id="clearProgressBtn">Clear Progress</button>
+            </div>
+
+            <div class="progress-stats" id="progressStats">
+              <!-- Progress statistics -->
+            </div>
+
+            <div class="progress-report" id="progressReport">
+              <!-- Progress report -->
+            </div>
+            
+            <div class="saved-examples" id="savedExamples">
+              <h3>Saved Examples</h3>
+              <div class="examples-list" id="examplesList">
+                <!-- Saved examples will appear here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

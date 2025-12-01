@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wireframe Builder – Drag & Drop Website Planning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div>
+          <h1>Wireframe Builder</h1>
+          <p class="subtitle">Plan your website layout with drag-and-drop components</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button tab-active" data-tab="builder">📐 Builder</button>
+      <button class="tab-button" data-tab="guide">📖 Guide</button>
+      <button class="tab-button" data-tab="export">💾 Export</button>
+    </div>
+
+    <!-- Tab 1: Builder -->
+    <section id="builderTab" class="tab-content tab-active">
+      <div class="builder-container">
+        <div class="components-panel">
+          <h3>Components</h3>
+          <p class="panel-description">Drag components onto the canvas</p>
+          <div class="components-list">
+            <div class="component-item" draggable="true" data-component="header">
+              <div class="component-icon">📋</div>
+              <span>Header</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="hero">
+              <div class="component-icon">🎯</div>
+              <span>Hero Section</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="section">
+              <div class="component-icon">📄</div>
+              <span>Content Section</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="image">
+              <div class="component-icon">🖼️</div>
+              <span>Image</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="text">
+              <div class="component-icon">📝</div>
+              <span>Text Block</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="button">
+              <div class="component-icon">🔘</div>
+              <span>Button</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="form">
+              <div class="component-icon">📋</div>
+              <span>Form</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="card">
+              <div class="component-icon">🃏</div>
+              <span>Card</span>
+            </div>
+            <div class="component-item" draggable="true" data-component="footer">
+              <div class="component-icon">⬇️</div>
+              <span>Footer</span>
+            </div>
+          </div>
+          <div class="panel-actions">
+            <button id="clearCanvas" class="btn-ghost">🗑️ Clear Canvas</button>
+            <button id="resetCanvas" class="btn-ghost">↻ Reset</button>
+          </div>
+        </div>
+
+        <div class="canvas-container">
+          <div class="canvas-header">
+            <h3>Canvas</h3>
+            <div class="canvas-controls">
+              <button id="gridToggle" class="btn-ghost btn-small">Grid: ON</button>
+              <button id="snapToggle" class="btn-ghost btn-small">Snap: ON</button>
+            </div>
+          </div>
+          <div id="wireframeCanvas" class="wireframe-canvas">
+            <div class="canvas-placeholder">
+              <p>Drag components from the left panel to start building</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="properties-panel">
+          <h3>Properties</h3>
+          <div id="propertiesContent" class="properties-content">
+            <p class="empty-state">Select a component to edit its properties</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Guide -->
+    <section id="guideTab" class="tab-content">
+      <div class="guide-container">
+        <div id="guideContent" class="guide-content"></div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Export -->
+    <section id="exportTab" class="tab-content">
+      <div class="export-container">
+        <div class="card">
+          <div class="card-header">
+            <h2>Export Your Wireframe</h2>
+            <p class="card-description">Download your wireframe as an image or HTML structure</p>
+          </div>
+          <div class="export-controls">
+            <div class="input-group">
+              <label for="wireframeTitle">Wireframe Title:</label>
+              <input type="text" id="wireframeTitle" class="input-field" placeholder="My Website Wireframe" value="My Website Wireframe" />
+            </div>
+            <div class="export-buttons">
+              <button id="exportImageBtn" class="btn-primary">📸 Export as Image</button>
+              <button id="exportHTMLBtn" class="btn-primary">📄 Export as HTML Structure</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

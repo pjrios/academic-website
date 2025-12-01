@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spreadsheet Simulator – Learn Formulas & Cell References</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- html2canvas for exporting report as image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div>
+          <h1>Spreadsheet Simulator</h1>
+          <p class="subtitle">Learn formulas, cell references, and spreadsheet basics</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button tab-active" data-tab="projects">🎯 Projects</button>
+      <button class="tab-button" data-tab="guide">📖 Guide</button>
+      <button class="tab-button" data-tab="examples">💡 Examples</button>
+    </div>
+
+    <!-- Tab 1: Projects -->
+    <section id="projectsTab" class="tab-content tab-active">
+      <div class="projects-container">
+        <div class="projects-sidebar">
+          <h3>Projects</h3>
+          <div class="project-stats-small">
+            <span id="completedCount">0</span> / <span id="totalCount">15</span> completed
+          </div>
+          <div id="projectsList" class="projects-list"></div>
+        </div>
+        <div class="project-content">
+          <div id="projectDisplay" class="project-display">
+            <div class="project-welcome">
+              <h2>Welcome to Spreadsheet Projects!</h2>
+              <p>Select a project from the left to get started. Each project teaches you new spreadsheet skills through real-world scenarios.</p>
+              <div class="project-stats">
+                <div class="stat-item">
+                  <span class="stat-value" id="completedCount2">0</span>
+                  <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value">15</span>
+                  <span class="stat-label">Total Projects</span>
+                </div>
+              </div>
+              <button id="generateReportBtn" class="btn-primary" style="margin-top: 20px; width: 100%;">
+                📊 Generate Progress Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Spreadsheet -->
+    <section id="spreadsheetTab" class="tab-content">
+      <div class="spreadsheet-layout">
+        <div id="spreadsheetSidebar" class="spreadsheet-sidebar">
+          <div id="spreadsheetProjectDisplay" class="spreadsheet-project-display"></div>
+        </div>
+        <div class="spreadsheet-container">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <div class="cell-info">
+                <span id="currentCell">A1</span>
+              </div>
+              <input type="text" id="formulaBar" class="formula-bar" placeholder="Enter value or formula (e.g., =A1+B1)" />
+            </div>
+            <div class="toolbar-right">
+              <button id="clearBtn" class="btn-ghost">🗑️ Clear</button>
+              <button id="resetBtn" class="btn-ghost">↻ Reset</button>
+            </div>
+          </div>
+          
+          <div class="spreadsheet-wrapper">
+            <div class="row-header-container">
+              <div class="corner-cell"></div>
+              <div class="row-headers"></div>
+            </div>
+            <div class="spreadsheet-content">
+              <div class="col-headers"></div>
+              <div id="spreadsheetGrid" class="spreadsheet-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Guide -->
+    <section id="guideTab" class="tab-content">
+      <div class="guide-container">
+        <div id="guideContent" class="guide-content"></div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Examples -->
+    <section id="examplesTab" class="tab-content">
+      <div class="examples-container">
+        <div id="examplesContent" class="examples-content"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

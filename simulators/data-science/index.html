@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Science Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>📊 Data Science Explorer</h1>
+        <p class="subtitle">Explore datasets, create visualizations, and follow the PPDAC workflow to analyze data</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="dataset">📁 Dataset</button>
+        <button class="tab-button" data-tab="visualize">📈 Visualize</button>
+        <button class="tab-button" data-tab="ppdac">🔬 PPDAC</button>
+        <button class="tab-button" data-tab="progress">📈 Progress</button>
+      </div>
+
+      <!-- Dataset Tab -->
+      <div class="tab-content active" id="dataset">
+        <div class="content-card">
+          <h2>📁 Dataset Manager</h2>
+          <p class="description">Load, create, or import datasets. View and filter your data.</p>
+          
+          <div class="dataset-container">
+            <div class="dataset-controls">
+              <div class="control-group">
+                <button class="btn-primary" id="loadSampleBtn">Load Sample Dataset</button>
+                <button class="btn-secondary" id="importCSVBtn">Import CSV</button>
+                <button class="btn-secondary" id="createDatasetBtn">Create New</button>
+                <button class="btn-secondary" id="saveDatasetBtn">💾 Save Dataset</button>
+                <button class="btn-secondary" id="loadDatasetBtn">📂 Load Dataset</button>
+              </div>
+              <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+            </div>
+
+            <div class="dataset-info" id="datasetInfo">
+              <!-- Dataset information will appear here -->
+            </div>
+
+            <div class="data-table-container">
+              <div class="table-header">
+                <h3>Data Table</h3>
+                <div class="table-controls">
+                  <input type="text" id="searchData" placeholder="Search..." class="input-field" style="width: 200px;">
+                  <button class="btn-secondary" id="clearFiltersBtn">Clear Filters</button>
+                </div>
+              </div>
+              <div class="data-table-wrapper">
+                <table class="data-table" id="dataTable">
+                  <!-- Data table will appear here -->
+                </table>
+              </div>
+            </div>
+
+            <div class="dataset-stats" id="datasetStats">
+              <!-- Dataset statistics will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visualize Tab -->
+      <div class="tab-content" id="visualize">
+        <div class="content-card">
+          <h2>📈 Data Visualization</h2>
+          <p class="description">Create charts and visualizations from your dataset.</p>
+          
+          <div class="visualize-container">
+            <div class="chart-controls">
+              <div class="control-group">
+                <label for="chartType">Chart Type:</label>
+                <select id="chartType" class="algorithm-select">
+                  <option value="bar">Bar Chart</option>
+                  <option value="line">Line Chart</option>
+                  <option value="pie">Pie Chart</option>
+                  <option value="scatter">Scatter Plot</option>
+                  <option value="histogram">Histogram</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="xAxis">X-Axis:</label>
+                <select id="xAxis" class="algorithm-select">
+                  <!-- Options will be populated from dataset -->
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="yAxis">Y-Axis:</label>
+                <select id="yAxis" class="algorithm-select">
+                  <!-- Options will be populated from dataset -->
+                </select>
+              </div>
+              <button class="btn-primary" id="generateChartBtn">Generate Chart</button>
+              <button class="btn-secondary" id="exportChartBtn">📸 Export Chart</button>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="chartCanvas"></canvas>
+            </div>
+
+            <div class="chart-info" id="chartInfo">
+              <!-- Chart information will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PPDAC Tab -->
+      <div class="tab-content" id="ppdac">
+        <div class="content-card">
+          <h2>🔬 PPDAC Workflow</h2>
+          <p class="description">Follow the Problem, Plan, Data, Analyze, Conclusion workflow to analyze your data scientifically.</p>
+          
+          <div class="ppdac-container">
+            <div class="ppdac-steps">
+              <button class="ppdac-step-btn active" data-step="problem">1. Problem</button>
+              <button class="ppdac-step-btn" data-step="plan">2. Plan</button>
+              <button class="ppdac-step-btn" data-step="data">3. Data</button>
+              <button class="ppdac-step-btn" data-step="analyze">4. Analyze</button>
+              <button class="ppdac-step-btn" data-step="conclusion">5. Conclusion</button>
+            </div>
+
+            <div class="ppdac-content">
+              <!-- Problem Step -->
+              <div class="ppdac-step-content active" id="problemStep">
+                <h3>Problem</h3>
+                <p>Define the question or problem you want to investigate.</p>
+                <textarea id="problemText" class="ppdac-textarea" placeholder="What question are you trying to answer? What problem are you investigating?"></textarea>
+                <div class="ppdac-examples">
+                  <h4>Example Questions:</h4>
+                  <ul>
+                    <li>Does temperature affect plant growth?</li>
+                    <li>What is the relationship between study time and test scores?</li>
+                    <li>Which product category sells best in different regions?</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Plan Step -->
+              <div class="ppdac-step-content" id="planStep">
+                <h3>Plan</h3>
+                <p>Outline your approach to collecting and analyzing data.</p>
+                <textarea id="planText" class="ppdac-textarea" placeholder="How will you collect data? What variables will you measure? What analysis methods will you use?"></textarea>
+                <div class="ppdac-examples">
+                  <h4>Planning Checklist:</h4>
+                  <ul>
+                    <li>Identify variables (independent and dependent)</li>
+                    <li>Determine data collection method</li>
+                    <li>Choose appropriate visualizations</li>
+                    <li>Plan statistical analysis</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Data Step -->
+              <div class="ppdac-step-content" id="dataStep">
+                <h3>Data</h3>
+                <p>Load and explore your dataset.</p>
+                <div class="data-step-content">
+                  <div class="data-summary" id="dataSummary">
+                    <!-- Data summary will appear here -->
+                  </div>
+                  <button class="btn-primary" id="goToDatasetBtn">Go to Dataset Tab</button>
+                </div>
+              </div>
+
+              <!-- Analyze Step -->
+              <div class="ppdac-step-content" id="analyzeStep">
+                <h3>Analyze</h3>
+                <p>Perform analysis and create visualizations.</p>
+                <div class="analyze-content">
+                  <div class="analysis-notes">
+                    <label>Analysis Notes:</label>
+                    <textarea id="analysisText" class="ppdac-textarea" placeholder="Record your findings, patterns, and insights from the data..."></textarea>
+                  </div>
+                  <div class="analysis-charts" id="analysisCharts">
+                    <!-- Charts can be embedded here -->
+                  </div>
+                  <button class="btn-primary" id="goToVisualizeBtn">Go to Visualization Tab</button>
+                </div>
+              </div>
+
+              <!-- Conclusion Step -->
+              <div class="ppdac-step-content" id="conclusionStep">
+                <h3>Conclusion</h3>
+                <p>Summarize your findings and answer the original question.</p>
+                <textarea id="conclusionText" class="ppdac-textarea" placeholder="What did you learn? What conclusions can you draw? How does this answer your original question?"></textarea>
+                <div class="conclusion-annotations">
+                  <h4>Annotations</h4>
+                  <div class="annotations-list" id="annotationsList">
+                    <!-- Annotations will appear here -->
+                  </div>
+                  <button class="btn-secondary" id="addAnnotationBtn">+ Add Annotation</button>
+                </div>
+                <div class="export-workflow">
+                  <button class="btn-primary" id="exportWorkflowBtn">📄 Export Full Report</button>
+                  <button class="btn-secondary" id="exportWorkflowImageBtn">📸 Export as Image</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div class="tab-content" id="progress">
+        <div class="content-card">
+          <h2>📈 Learning Progress</h2>
+          <p class="description">Track your data science exploration progress.</p>
+          
+          <div class="progress-container">
+            <div class="progress-controls">
+              <button class="btn-primary" id="generateProgressReportBtn">Generate Report</button>
+              <button class="btn-secondary" id="exportProgressBtn">📸 Export as Image</button>
+              <button class="btn-secondary" id="clearProgressBtn">Clear Progress</button>
+            </div>
+
+            <div class="progress-stats" id="progressStats">
+              <!-- Progress statistics -->
+            </div>
+
+            <div class="progress-report" id="progressReport">
+              <!-- Progress report -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

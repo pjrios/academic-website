@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Design Comparison – Good vs Bad Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div>
+          <h1>Design Comparison</h1>
+          <p class="subtitle">Learn design principles by comparing good vs bad examples</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button tab-active" data-tab="comparison">🔍 Comparison</button>
+      <button class="tab-button" data-tab="principles">📚 Principles</button>
+      <button class="tab-button" data-tab="quiz">🎯 Interactive Quiz</button>
+    </div>
+
+    <!-- Tab 1: Comparison View -->
+    <section id="comparisonTab" class="tab-content tab-active">
+      <div class="comparison-container">
+        <div class="comparison-header">
+          <h2>Side-by-Side Comparison</h2>
+          <div class="comparison-controls">
+            <select id="exampleSelect" class="example-select">
+              <option value="layout">Layout & Structure</option>
+              <option value="contrast">Color & Contrast</option>
+              <option value="spacing">Spacing & Typography</option>
+              <option value="accessibility">Accessibility</option>
+              <option value="navigation">Navigation</option>
+              <option value="forms">Forms & Inputs</option>
+            </select>
+            <button id="revealBtn" class="btn-primary">Reveal Issues</button>
+          </div>
+        </div>
+        
+        <div class="comparison-grid">
+          <div class="comparison-panel">
+            <div class="panel-header bad">
+              <h3>❌ Bad Design</h3>
+            </div>
+            <div id="badExample" class="example-content"></div>
+            <div id="badIssues" class="issues-panel" style="display: none;"></div>
+          </div>
+          
+          <div class="comparison-panel">
+            <div class="panel-header good">
+              <h3>✅ Good Design</h3>
+            </div>
+            <div id="goodExample" class="example-content"></div>
+            <div id="goodNotes" class="notes-panel" style="display: none;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Design Principles -->
+    <section id="principlesTab" class="tab-content">
+      <div class="principles-container">
+        <div id="principlesContent" class="principles-content"></div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Interactive Quiz -->
+    <section id="quizTab" class="tab-content">
+      <div class="quiz-container">
+        <div id="quizContent" class="quiz-content"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

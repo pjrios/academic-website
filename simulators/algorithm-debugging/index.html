@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Exploration Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🔍 Algorithm Exploration Lab</h1>
+        <p class="subtitle">Explore how algorithms work step-by-step, understand their logic, and compare different approaches</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="exploration">🔍 Exploration</button>
+        <button class="tab-button" data-tab="efficiency">⚡ Efficiency</button>
+        <button class="tab-button" data-tab="visualization">📊 Visualization</button>
+        <button class="tab-button" data-tab="code">💻 Code</button>
+      </div>
+
+      <!-- Exploration Tab -->
+      <div class="tab-content active" id="exploration">
+        <div class="content-card">
+          <h2>🔍 Algorithm Exploration</h2>
+          <p class="description">Explore how algorithms work step-by-step. Understand the logic, trace execution, and see how data changes.</p>
+          
+          <div class="exploration-container">
+            <div class="algorithm-selector-info">
+              <div class="algorithm-selector">
+                <h3>Algorithm:</h3>
+                <select id="algorithmSelect" class="algorithm-select">
+                  <option value="linear-search">Linear Search</option>
+                  <option value="binary-search">Binary Search</option>
+                  <option value="bubble-sort">Bubble Sort</option>
+                  <option value="selection-sort">Selection Sort</option>
+                  <option value="insertion-sort">Insertion Sort</option>
+                  <option value="factorial">Factorial</option>
+                  <option value="fibonacci">Fibonacci</option>
+                </select>
+              </div>
+              <div class="algorithm-info" id="algorithmInfo">
+                <!-- Algorithm description and instructions -->
+              </div>
+            </div>
+
+            <div class="controls-section">
+              <button class="btn-icon" id="reloadDataBtn" title="Reload Data">🔄</button>
+              <select id="targetSelect" class="target-select">
+                <option value="">Select Target</option>
+              </select>
+              <button class="btn-primary" id="runExplorationBtn">▶ Run Algorithm</button>
+              <button class="btn-secondary" id="stepExplorationBtn">Step Forward</button>
+              <button class="btn-secondary" id="resetExplorationBtn">Reset</button>
+              <button class="btn-secondary" id="autoStepExplorationBtn">Auto Step</button>
+            </div>
+
+            <div class="visualization-section" id="visualizationSection">
+              <h3>Visual Simulation</h3>
+              <p style="color: var(--text-muted); text-align: center; padding: 40px;">Click "Run Algorithm" or "Step Forward" to see the visualization</p>
+            </div>
+
+            <div class="top-row-section">
+              <div class="explanation-section" id="explanationSection">
+                <h3>Current Step Explanation</h3>
+                <div id="stepExplanation">
+                  <!-- Step-by-step explanation will appear here -->
+                </div>
+              </div>
+
+              <div class="results-section" id="resultsSection">
+                <h3>Results</h3>
+                <div id="resultsOutput">
+                  <!-- Algorithm results will appear here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Efficiency Tab -->
+      <div class="tab-content" id="efficiency">
+        <div class="content-card">
+          <h2>⚡ Algorithm Efficiency Comparison</h2>
+          <p class="description">Compare slow vs fast algorithms side-by-side. See the difference in operation counts and execution time.</p>
+          
+          <div class="efficiency-container">
+            <div class="comparison-selector">
+              <label for="comparisonSelect">Choose Comparison:</label>
+              <select id="comparisonSelect" class="algorithm-select">
+                <option value="linear-vs-binary">Linear Search vs Binary Search</option>
+                <option value="bubble-vs-quick">Bubble Sort vs Quick Sort</option>
+                <option value="iterative-vs-recursive">Iterative vs Recursive Fibonacci</option>
+                <option value="naive-vs-optimized">Naive vs Optimized Factorial</option>
+              </select>
+            </div>
+
+            <div class="input-controls">
+              <label for="inputSize">Input Size:</label>
+              <input type="range" id="inputSize" min="5" max="50" value="20" step="5">
+              <span id="inputSizeValue">20</span>
+              <button class="btn-primary" id="runComparisonBtn">Run Comparison</button>
+            </div>
+
+            <div class="comparison-grid">
+              <div class="algorithm-panel slow">
+                <div class="panel-header">
+                  <h3>🐌 Slow Algorithm</h3>
+                  <div class="complexity-badge">O(n²)</div>
+                </div>
+                <div class="code-preview" id="slowCode"></div>
+                <div class="stats-panel">
+                  <div class="stat-item">
+                    <span class="stat-label">Operations:</span>
+                    <span class="stat-value" id="slowOperations">0</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="slowTime">0ms</span>
+                  </div>
+                </div>
+                <div class="visualization-box" id="slowVisualization"></div>
+              </div>
+
+              <div class="algorithm-panel fast">
+                <div class="panel-header">
+                  <h3>⚡ Fast Algorithm</h3>
+                  <div class="complexity-badge">O(n log n)</div>
+                </div>
+                <div class="code-preview" id="fastCode"></div>
+                <div class="stats-panel">
+                  <div class="stat-item">
+                    <span class="stat-label">Operations:</span>
+                    <span class="stat-value" id="fastOperations">0</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="fastTime">0ms</span>
+                  </div>
+                </div>
+                <div class="visualization-box" id="fastVisualization"></div>
+              </div>
+            </div>
+
+            <div class="comparison-chart" id="comparisonChart">
+              <!-- Performance comparison chart -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Tab -->
+      <div class="tab-content" id="code">
+        <div class="content-card">
+          <h2>💻 Algorithm Code Reference</h2>
+          <p class="description">Browse and study the Python implementations of all algorithms. Each algorithm includes detailed comments explaining the logic.</p>
+          
+          <div class="code-execution-container">
+            <div class="code-algorithm-selector">
+              <label for="codeAlgorithmSelect">Choose Algorithm:</label>
+              <select id="codeAlgorithmSelect" class="algorithm-select">
+                <option value="linear-search">Linear Search</option>
+                <option value="binary-search">Binary Search</option>
+                <option value="bubble-sort">Bubble Sort</option>
+                <option value="selection-sort">Selection Sort</option>
+                <option value="insertion-sort">Insertion Sort</option>
+                <option value="factorial">Factorial</option>
+                <option value="fibonacci">Fibonacci</option>
+              </select>
+            </div>
+
+            <div class="code-input-section">
+              <h3>Input Data</h3>
+              <div class="input-controls">
+                <label for="codeInputData">Enter input (comma-separated for arrays, single number for math):</label>
+                <input type="text" id="codeInputData" class="input-field" placeholder="e.g., 1,2,3,4,5 or 5">
+                <button class="btn-secondary" id="codeGenerateInputBtn">Generate Random</button>
+                <button class="btn-secondary" id="codeLoadSampleBtn">Load Sample</button>
+              </div>
+              <div class="input-display" id="codeInputDisplay"></div>
+            </div>
+
+            <div class="code-container-wrapper">
+              <div class="code-section-wrapper">
+                <div class="code-controls-section">
+                  <button class="btn-primary" id="runCodeBtn">▶ Run Algorithm</button>
+                  <button class="btn-secondary" id="stepBtn">Step Forward</button>
+                  <button class="btn-secondary" id="resetExecutionBtn">Reset</button>
+                  <button class="btn-secondary" id="autoStepBtn">Auto Step</button>
+                </div>
+                <div class="code-section">
+                  <div class="code-header">
+                    <h3>Algorithm Code</h3>
+                    <button class="btn-secondary" id="codeResetCodeBtn">Reset</button>
+                  </div>
+                  <div class="code-editor" id="codeEditor">
+                    <!-- Code will be displayed here -->
+                  </div>
+                </div>
+              </div>
+              <div class="execution-section">
+                <div class="execution-header">
+                  <h3>Step-by-Step Execution</h3>
+                  <div class="operation-counter">
+                    <span>Step: <strong id="currentStep">0</strong> / <strong id="totalSteps">0</strong></span>
+                    <span style="margin-left: 20px;">Operations: <strong id="operationCount">0</strong></span>
+                  </div>
+                </div>
+                <div class="trace-output" id="traceOutput">
+                  <!-- Execution trace will appear here -->
+                </div>
+                <div class="code-results-section" id="codeResultsSection">
+                  <h3>Results</h3>
+                  <div id="codeResultsOutput">
+                    <!-- Algorithm results will appear here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visualization Tab -->
+      <div class="tab-content" id="visualization">
+        <div class="content-card">
+          <h2>📊 Algorithm Visualization</h2>
+          <p class="description">Watch algorithms execute step-by-step with visual representations of data structures and operations.</p>
+          
+          <div class="visualization-container">
+            <div class="viz-selector-row">
+              <div class="viz-selector">
+                <label for="vizAlgorithmSelect">Algorithm:</label>
+                <select id="vizAlgorithmSelect" class="algorithm-select">
+                  <option value="bubble-sort">Bubble Sort</option>
+                  <option value="selection-sort">Selection Sort</option>
+                  <option value="insertion-sort">Insertion Sort</option>
+                  <option value="linear-search">Linear Search</option>
+                  <option value="binary-search">Binary Search</option>
+                  <option value="factorial">Factorial</option>
+                  <option value="fibonacci">Fibonacci</option>
+                </select>
+              </div>
+
+              <div class="viz-view-selector">
+                <label>View Type:</label>
+                <div class="view-buttons">
+                  <button class="view-btn active" data-view="bar-chart" title="Bar Chart">📊 Bar Chart</button>
+                  <button class="view-btn" data-view="tree" title="Tree View">🌳 Tree</button>
+                  <button class="view-btn" data-view="path" title="Path View">🛤️ Path</button>
+                  <button class="view-btn" data-view="matrix" title="Comparison Matrix">⚡ Matrix</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="viz-input-section">
+              <h3>Input Data</h3>
+              <div class="viz-input-controls">
+                <div class="input-group">
+                  <label for="vizInputData">Enter data (comma-separated for arrays, single number for math):</label>
+                  <input type="text" id="vizInputData" class="input-field" placeholder="e.g., 5,2,8,1,9 or 1,2,3,4,5 | 3 or 5">
+                </div>
+                <button class="btn-secondary" id="generateDataBtn">Generate Random</button>
+                <button class="btn-secondary" id="loadVizSampleBtn">Load Sample</button>
+                <button class="btn-primary" id="startVizBtn">Start Visualization</button>
+              </div>
+              <div id="vizInputDisplay" class="input-display"></div>
+            </div>
+
+            <div class="viz-controls">
+              <button class="btn-primary" id="playVizBtn">▶ Play</button>
+              <button class="btn-secondary" id="pauseVizBtn">⏸ Pause</button>
+              <button class="btn-secondary" id="stepVizBtn">Step</button>
+              <button class="btn-secondary" id="resetVizBtn">Reset</button>
+              <div class="speed-control">
+                <label for="speedSlider">Speed:</label>
+                <input type="range" id="speedSlider" min="1" max="10" value="5">
+              </div>
+            </div>
+
+            <div class="viz-canvas" id="vizCanvas">
+              <!-- Algorithm visualization canvas - different views will render here -->
+              <p style="color: var(--text-muted); text-align: center; padding: 40px;">
+                Select an algorithm and click "Start Visualization" to begin
+              </p>
+            </div>
+            
+            <div class="viz-step-info" id="vizStepInfo">
+              <!-- Step information will appear here -->
+            </div>
+
+            <div class="viz-stats">
+              <div class="stat-card">
+                <div class="stat-label">Operations</div>
+                <div class="stat-number" id="vizOperations">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Comparisons</div>
+                <div class="stat-number" id="vizComparisons">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Swaps</div>
+                <div class="stat-number" id="vizSwaps">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Time Complexity</div>
+                <div class="stat-number" id="vizComplexity">O(n²)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

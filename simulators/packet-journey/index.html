@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Packet Journey Simulator – Offline with Saved Runs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+
+<body>
+  <div class="app" role="main">
+    <header>
+      <div class="title-block">
+        <h1>
+          Packet Journey Simulator
+          <span class="title-pill">Offline · IndexedDB fallback · Replayable</span>
+        </h1>
+        <p>
+          Watch packets travel from client to server hop by hop. Adjust network
+          conditions, then save, export, or replay your simulations.
+        </p>
+      </div>
+      <div class="legend" aria-label="Legend">
+        <div class="legend-item">
+          <span class="legend-dot dot-sent"></span> Created
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot dot-delivered"></span> Delivered
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot dot-lost"></span> Lost
+        </div>
+      </div>
+    </header>
+
+    <section class="controls" aria-label="Simulation controls">
+      <div class="tab-bar" role="tablist" aria-label="Controls and guide">
+        <div class="tab-buttons">
+          <button class="tab-button tab-active" id="tabControls" role="tab" aria-selected="true"
+            aria-controls="controlsTabPanel">
+            Simulator
+          </button>
+          <button class="tab-button" id="tabGuide" role="tab" aria-selected="false" aria-controls="guideTabPanel">
+            Guide
+          </button>
+          <button class="tab-button" id="tabTopology" role="tab" aria-selected="false" aria-controls="topologyTabPanel">
+            Topology
+          </button>
+          <button class="tab-button" id="tabRuns" role="tab" aria-selected="false" aria-controls="runsTabPanel">
+            Saved runs
+          </button>
+        </div>
+        <div class="run-state" aria-live="polite">
+          <span class="status-dot" id="statusDot"></span>
+          <span class="network-stage-label" id="stageLabel">
+            Ready · no packets yet
+          </span>
+          <button class="collapse-toggle" id="collapseToggle" aria-label="Toggle controls panel"
+            aria-expanded="false" title="Show controls">
+            <span class="toggle-icon">▲</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="tab-panels-container collapsed" id="tabPanelsContainer">
+        <div id="controlsTabPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabControls">
+          <div class="control-grid">
+            <div class="control-group">
+              <label class="control-label" for="packetCount">
+                Packets to send
+                <span class="value" id="packetCountValue">20</span>
+              </label>
+              <input type="number" id="packetCount" min="1" max="120" value="20" step="1"
+                aria-describedby="packetCountError"
+                data-tooltip="How many packets to launch. Higher counts make trends more obvious." />
+              <p class="control-error" id="packetCountError"></p>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="latencyRange">
+                Base latency per hop
+                <span class="value" id="latencyValue">200 ms</span>
+              </label>
+              <input type="range" id="latencyRange" min="30" max="800" value="200" aria-valuemin="30"
+                aria-valuemax="800"
+                data-tooltip="Average delay each hop adds. Higher latency shifts all packet arrival times later." />
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="jitterRange">
+                Jitter (random variation)
+                <span class="value" id="jitterValue">80 ms</span>
+              </label>
+              <input type="range" id="jitterRange" min="0" max="400" value="80" aria-valuemin="0" aria-valuemax="400"
+                data-tooltip="How uneven the delay is between packets. More jitter widens the latency spread." />
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="lossRange">
+                Loss per hop
+                <span class="value" id="lossValue">5 %</span>
+              </label>
+              <input type="range" id="lossRange" min="0" max="60" value="5" aria-valuemin="0" aria-valuemax="60"
+                data-tooltip="Chance a packet vanishes at each hop. Even small % accumulates over multiple hops." />
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="speedRange">
+                Playback speed
+                <span class="value" id="speedValue">1.0×</span>
+              </label>
+              <input type="range" id="speedRange" min="0.5" max="3" step="0.1" value="1"
+                data-tooltip="Speed up or slow down the animation without changing stats." />
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="patternSelect">
+                Traffic pattern
+              </label>
+              <select id="patternSelect"
+                data-tooltip="Steady = even spacing, Burst = groups at once, Random = varied timing.">
+                <option value="steady">Steady</option>
+                <option value="burst">Burst</option>
+                <option value="random">Random</option>
+              </select>
+            </div>
+
+            <div class="control-group preset-group">
+              <label class="control-label" for="presetSelect">
+                Scenario preset
+              </label>
+              <select id="presetSelect" data-tooltip="Quickly load settings for common situations.">
+                <option value="">-- Choose a preset --</option>
+                <option value="good">Good Wi‑Fi</option>
+                <option value="congested">Congested Wi‑Fi</option>
+                <option value="longhaul">Long-haul link</option>
+                <option value="lossy">Packet loss storm</option>
+              </select>
+              <button class="btn-secondary" id="applyPresetBtn">Apply preset</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div id="guideTabPanel" class="tab-panel hidden" role="tabpanel" aria-labelledby="tabGuide">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>What the terms mean</h3>
+              <ul>
+                <li><strong>Hop:</strong> one link between two nodes (client → router → server).</li>
+                <li><strong>Latency:</strong> the base delay each hop adds to a packet.</li>
+                <li><strong>Jitter:</strong> randomness on top of latency; causes spread in arrival times.</li>
+                <li><strong>Loss per hop:</strong> chance a packet disappears on that hop.</li>
+                <li><strong>Delivery rate:</strong> delivered ÷ created. Loss compounds across hops.</li>
+                <li><strong>Latency histogram:</strong> shows how spread out arrival times are.</li>
+                <li><strong>Per-hop loss chips:</strong> where drops happened most often.</li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <h3>How changes affect the sim</h3>
+              <ul>
+                <li>Higher latency → all packets arrive later; histogram shifts right.</li>
+                <li>Higher jitter → histogram widens; p95 pulls away from p50.</li>
+                <li>Higher loss → more red dots; per-hop chips count where drops occur.</li>
+                <li>More packets → smoother stats and clearer patterns.</li>
+                <li>Replay a run to see identical timing versus a new run's randomness.</li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <h3>Try these</h3>
+              <ul>
+                <li>Set loss to 0%, jitter to 0 → a tight, green delivery line.</li>
+                <li>Jitter 300ms, latency 80ms → wide histogram, p95 much higher than p50.</li>
+                <li>Loss 20%, 40 packets → watch per-hop loss chips spike and delivery rate drop.</li>
+                <li>Replay the same run to see deterministic positions vs a fresh run's randomness.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="runsTabPanel" class="tab-panel hidden" role="tabpanel" aria-labelledby="tabRuns">
+          <div class="stat-panel">
+            <h2>Saved runs (this browser)</h2>
+            <div id="historyRuns" class="history-list" aria-live="polite">
+              <p class="stat-hint">
+                No saved runs yet. Start a simulation to create one.
+              </p>
+            </div>
+            <div class="history-actions">
+              <button class="btn-secondary" id="exportLastBtn">
+                ⬇ Export last (JSON)
+              </button>
+              <button class="btn-secondary" id="exportAllBtn">
+                ⬇ Export all (JSON)
+              </button>
+              <button class="btn-secondary" id="clearRunsBtn">
+                ✕ Clear history
+              </button>
+            </div>
+            <p class="stat-hint" id="storageHint">
+              Runs are stored using IndexedDB; memory fallback if unavailable.
+            </p>
+          </div>
+        </div>
+
+        <div id="topologyTabPanel" class="tab-panel hidden" role="tabpanel" aria-labelledby="tabTopology">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>Choose a topology</h3>
+              <p class="muted">Select a path shape and number of hops to visualize.</p>
+              <div class="control-group">
+                <label class="control-label" for="topologySelect">Shape</label>
+                <select id="topologySelect">
+                  <option value="linear">Linear (client → routers → server)</option>
+                  <option value="star">Star (client fan-out to servers)</option>
+                  <option value="mesh">Mesh (multi-path)</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="hopCountInput">Hops</label>
+                <input type="number" id="hopCountInput" min="2" max="8" value="5"
+                  data-tooltip="Number of hops between client and server (2–8)." />
+                <p class="control-error" id="hopCountError"></p>
+              </div>
+              <div class="control-group linear-only" id="linearSourceGroup">
+                <label class="control-label" for="linearSourceSelect">Start node</label>
+                <select id="linearSourceSelect">
+                  <option value="0">Client (0)</option>
+                </select>
+              </div>
+              <div class="control-group linear-only" id="linearDestinationGroup">
+                <label class="control-label" for="linearDestinationSelect">Destination hop</label>
+                <select id="linearDestinationSelect">
+                  <option value="last">Last hop</option>
+                </select>
+              </div>
+              <div class="control-group star-only" id="starDestinationGroup">
+                <label class="control-label" for="starDestinationSelect">Star destination</label>
+                <select id="starDestinationSelect">
+                  <option value="1">Spoke 1 (server)</option>
+                </select>
+              </div>
+              <button class="btn-secondary" id="applyTopologyBtn">Apply topology</button>
+            </div>
+            <div class="guide-card">
+              <div class="split-panel">
+                <div class="split-half">
+                  <h3>Annotations</h3>
+                  <p class="muted">Toggle extra labels on nodes.</p>
+                  <div class="control-group">
+                    <label class="control-label" for="annotationSelect">Node labels</label>
+                    <select id="annotationSelect">
+                      <option value="none">None</option>
+                      <option value="isp">ISP/Backbone labels</option>
+                      <option value="router">Router numbering</option>
+                    </select>
+                  </div>
+                  <button class="btn-secondary" id="applyAnnotationsBtn">Apply labels</button>
+                </div>
+                <div class="split-half">
+                  <h3>Why this topology</h3>
+                  <div class="pros-cons">
+                    <div>
+                      <div class="stat-label">Advantages</div>
+                      <ul id="topologyPros"></ul>
+                    </div>
+                    <div>
+                      <div class="stat-label">Disadvantages</div>
+                      <ul id="topologyCons"></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="network-wrapper" aria-label="Network path">
+      <div class="network-header">
+        <span>Visual path (client → 5 hops → server)</span>
+        <div class="progress-track" aria-hidden="true">
+          <div id="runProgress" class="progress-bar"></div>
+        </div>
+      </div>
+      <div class="network-actions">
+        <button class="btn-primary" type="button" id="startBtnInline"
+          data-tooltip="Start a new run with current settings.">▶ Start</button>
+        <button class="btn-secondary" type="button" id="pauseBtnInline" disabled
+          data-tooltip="Pause or resume without resetting.">❚❚ Pause</button>
+        <button class="btn-secondary" type="button" id="resetBtnInline"
+          data-tooltip="Stop and clear the current run and stats.">⟲ Reset</button>
+      </div>
+      <div id="networkCanvas">
+        <div id="topologyGrid" aria-hidden="true"></div>
+        <svg id="topologyEdges" class="topology-edges" aria-hidden="true"></svg>
+        <div id="topologyNodes"></div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-panel">
+          <h2>Summary (this run)</h2>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">Packets created</div>
+              <div class="stat-value" id="statCreated">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Delivered</div>
+              <div class="stat-value" id="statDelivered">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Lost</div>
+              <div class="stat-value" id="statLost">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Delivery rate</div>
+              <div class="stat-value" id="statRate">0%</div>
+            </div>
+          </div>
+          <p class="stat-hint">
+            Each time you click "Start", a new run is stored locally.
+          </p>
+        </div>
+
+        <div class="stat-panel">
+          <h2>Timing & Reliability</h2>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">Avg. end-to-end latency</div>
+              <div class="stat-value" id="statAvgLatency">0 ms</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">p50 / p90 / p99</div>
+              <div class="stat-value" id="statPercentiles">–</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Jitter stdev</div>
+              <div class="stat-value" id="statJitterStd">–</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Simulated time span</div>
+              <div class="stat-value" id="statSpan">0 ms</div>
+            </div>
+          </div>
+          <div class="hop-losses">
+            <div class="stat-label">Per-hop loss</div>
+            <div id="hopLossList" class="hop-loss-list"></div>
+          </div>
+          <div class="histogram">
+            <div class="stat-label">Latency spread</div>
+            <div id="latencyBars" class="histogram-bars"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="log-panel">
+        <div class="log-header">
+          <span>Packet Story Timeline & Stats</span>
+          <p class="log-description">Every time you send a packet, we write a short story of its journey: which subnet it came from, which router handled it, and what happened along the way.</p>
+          <div class="log-actions">
+            <button class="btn-secondary" id="replayLogBtn" disabled>
+              ↺ Replay last run
+            </button>
+            <button class="btn-secondary" id="clearLogBtn">Clear</button>
+          </div>
+        </div>
+        <div id="log"></div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="script.js?v=2"></script>
+</body>
+
+</html>

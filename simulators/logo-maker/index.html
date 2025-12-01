@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Logo Maker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🎨 Simple Logo Maker</h1>
+        <p class="subtitle">Create simple logos with shapes, text, and colors. Export as PNG or SVG.</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="logo-maker-container">
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <div class="toolbar-section">
+            <h3>Tools</h3>
+            <div class="tool-buttons">
+              <button class="tool-btn active" data-tool="select" title="Select/Move">👆</button>
+              <button class="tool-btn" data-tool="rectangle" title="Rectangle">▭</button>
+              <button class="tool-btn" data-tool="circle" title="Circle">○</button>
+              <button class="tool-btn" data-tool="triangle" title="Triangle">△</button>
+              <button class="tool-btn" data-tool="line" title="Line">─</button>
+              <button class="tool-btn" data-tool="star" title="Star">★</button>
+              <button class="tool-btn" data-tool="text" title="Text">T</button>
+            </div>
+          </div>
+
+          <div class="toolbar-section">
+            <h3>Colors</h3>
+            <div class="color-picker-container">
+              <input type="color" id="colorPicker" value="#3b82f6">
+              <input type="text" id="colorHex" value="#3b82f6" placeholder="#000000">
+            </div>
+            <div class="color-palette">
+              <div class="palette-color" data-color="#3b82f6" style="background: #3b82f6;"></div>
+              <div class="palette-color" data-color="#ef4444" style="background: #ef4444;"></div>
+              <div class="palette-color" data-color="#22c55e" style="background: #22c55e;"></div>
+              <div class="palette-color" data-color="#fbbf24" style="background: #fbbf24;"></div>
+              <div class="palette-color" data-color="#a78bfa" style="background: #a78bfa;"></div>
+              <div class="palette-color" data-color="#fb7185" style="background: #fb7185;"></div>
+              <div class="palette-color" data-color="#000000" style="background: #000000;"></div>
+              <div class="palette-color" data-color="#ffffff" style="background: #ffffff; border: 1px solid #ccc;"></div>
+            </div>
+          </div>
+
+          <div class="toolbar-section">
+            <h3>Text</h3>
+            <input type="text" id="textInput" placeholder="Enter text" style="display: none;">
+            <div class="text-controls" id="textControls" style="display: none;">
+              <label>
+                Font Size
+                <input type="range" id="fontSize" min="12" max="120" value="48">
+                <span id="fontSizeValue">48</span>
+              </label>
+              <label>
+                Font Family
+                <select id="fontFamily">
+                  <option value="Arial">Arial</option>
+                  <option value="Helvetica">Helvetica</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Courier New">Courier New</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Verdana">Verdana</option>
+                  <option value="Impact">Impact</option>
+                  <option value="Comic Sans MS">Comic Sans MS</option>
+                </select>
+              </label>
+              <label>
+                Font Weight
+                <select id="fontWeight">
+                  <option value="normal">Normal</option>
+                  <option value="bold">Bold</option>
+                </select>
+              </label>
+              <label>
+                Font Style
+                <select id="fontStyle">
+                  <option value="normal">Normal</option>
+                  <option value="italic">Italic</option>
+                </select>
+              </label>
+              <label>
+                Text Align
+                <select id="textAlign">
+                  <option value="left">Left</option>
+                  <option value="center">Center</option>
+                  <option value="right">Right</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="toolbar-section">
+            <h3>Shape Options</h3>
+            <div class="shape-controls" id="shapeControls" style="display: none;">
+              <label>
+                Fill
+                <input type="checkbox" id="shapeFill" checked>
+              </label>
+              <label>
+                Stroke Width
+                <input type="range" id="strokeWidth" min="1" max="20" value="2">
+                <span id="strokeWidthValue">2</span>
+              </label>
+              <label>
+                Opacity
+                <input type="range" id="shapeOpacity" min="0" max="100" value="100">
+                <span id="opacityValue">100%</span>
+              </label>
+              <label>
+                Border Radius (Rectangles)
+                <input type="range" id="borderRadius" min="0" max="50" value="0">
+                <span id="borderRadiusValue">0</span>
+              </label>
+              <label>
+                Rotation
+                <input type="range" id="shapeRotation" min="0" max="360" value="0">
+                <span id="rotationValue">0°</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="toolbar-section" id="selectedShapeControls" style="display: none;">
+            <h3>Selected Shape</h3>
+            <div class="selected-controls">
+              <button class="btn-secondary" id="duplicateBtn">📋 Duplicate</button>
+              <button class="btn-secondary" id="deleteBtn">🗑️ Delete</button>
+              <button class="btn-secondary" id="bringToFrontBtn">⬆️ Bring to Front</button>
+              <button class="btn-secondary" id="sendToBackBtn">⬇️ Send to Back</button>
+            </div>
+          </div>
+
+          <div class="toolbar-section">
+            <h3>Canvas</h3>
+            <div class="canvas-controls">
+              <label>
+                Canvas Size
+                <select id="canvasSize">
+                  <option value="800x600">800 × 600 (Default)</option>
+                  <option value="400x400">400 × 400 (Square)</option>
+                  <option value="600x400">600 × 400 (Landscape)</option>
+                  <option value="400x600">400 × 600 (Portrait)</option>
+                  <option value="1000x500">1000 × 500 (Wide)</option>
+                  <option value="500x500">500 × 500 (Square)</option>
+                </select>
+              </label>
+              <label>
+                Background Color
+                <input type="color" id="canvasBgColor" value="#ffffff">
+              </label>
+            </div>
+          </div>
+
+          <div class="toolbar-section">
+            <h3>Actions</h3>
+            <div class="action-buttons">
+              <button class="btn-secondary" id="clearBtn">Clear Canvas</button>
+              <button class="btn-secondary" id="undoBtn">↶ Undo</button>
+              <button class="btn-secondary" id="redoBtn">↷ Redo</button>
+            </div>
+          </div>
+
+          <div class="toolbar-section">
+            <h3>Export</h3>
+            <div class="export-buttons">
+              <button class="btn-primary" id="exportPngBtn">📸 Export PNG</button>
+              <button class="btn-primary" id="exportSvgBtn">📄 Export SVG</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canvas Area -->
+        <div class="canvas-area">
+          <div class="canvas-container">
+            <canvas id="logoCanvas" width="800" height="600"></canvas>
+            <div class="canvas-overlay" id="canvasOverlay"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

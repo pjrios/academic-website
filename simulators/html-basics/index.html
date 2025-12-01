@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HTML Basics – Interactive Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- CodeMirror for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+  <!-- html2canvas for exporting page as image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div>
+          <h1>HTML Basics</h1>
+          <p class="subtitle">Learn HTML interactively with hands-on practice</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button tab-active" data-tab="lessons">📚 Lessons</button>
+      <button class="tab-button" data-tab="practice">✏️ Practice Builder</button>
+      <button class="tab-button" data-tab="export">💾 Export Site</button>
+    </div>
+
+    <!-- Tab 1: Lessons -->
+    <section id="lessonsTab" class="tab-content tab-active">
+      <div class="lessons-container">
+        <div class="lesson-sidebar">
+          <div class="sidebar-header">
+            <h3>Lessons</h3>
+            <div class="search-container">
+              <input type="text" id="lessonSearch" class="search-input" placeholder="🔍 Search lessons...">
+            </div>
+          </div>
+          <nav class="lesson-nav" id="lessonNav">
+            <button class="lesson-nav-item active" data-lesson="intro">Introduction</button>
+            <button class="lesson-nav-item" data-lesson="headings">Headings</button>
+            <button class="lesson-nav-item" data-lesson="layoutBasics">Layout Basics</button>
+            <button class="lesson-nav-item" data-lesson="cards">Cards & Components</button>
+            <button class="lesson-nav-item" data-lesson="paragraphs">Paragraphs</button>
+            <button class="lesson-nav-item" data-lesson="images">Images</button>
+            <button class="lesson-nav-item" data-lesson="links">Links</button>
+            <button class="lesson-nav-item" data-lesson="layoutMovies">Movies Section</button>
+            <button class="lesson-nav-item" data-lesson="layoutMusic">Music Section</button>
+            <button class="lesson-nav-item" data-lesson="layoutQuickFacts">Quick Facts</button>
+          </nav>
+          <div class="progress-section">
+            <h4>Website Progress</h4>
+            <div class="progress-checklist">
+              <label class="progress-item">
+                <input type="checkbox" data-section="structure" disabled>
+                <span>Basic Structure</span>
+              </label>
+              <label class="progress-item">
+                <input type="checkbox" data-section="hero" disabled>
+                <span>Hero Section</span>
+              </label>
+              <label class="progress-item">
+                <input type="checkbox" data-section="biography" disabled>
+                <span>Biography</span>
+              </label>
+              <label class="progress-item">
+                <input type="checkbox" data-section="navbar" disabled>
+                <span>Navbar</span>
+              </label>
+              <label class="progress-item">
+                <input type="checkbox" data-section="footer" disabled>
+                <span>Footer</span>
+              </label>
+              <label class="progress-item">
+                <input type="checkbox" data-section="movies" disabled>
+                <span>Movies Section</span>
+              </label>
+              <label class="progress-item">
+                <input type="checkbox" data-section="music" disabled>
+                <span>Music Section</span>
+              </label>
+              <label class="progress-item">
+                <input type="checkbox" data-section="quickfacts" disabled>
+                <span>Quick Facts</span>
+              </label>
+            </div>
+          </div>
+          <div class="keyboard-shortcuts">
+            <h4>Keyboard Shortcuts</h4>
+            <div class="shortcut-item">
+              <kbd>↑</kbd><kbd>↓</kbd> Navigate lessons
+            </div>
+            <div class="shortcut-item">
+              <kbd>Ctrl</kbd>+<kbd>F</kbd> Search
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-content">
+          <div id="lessonDisplay" class="lesson-display">
+            <div class="lesson-section">
+              <h2>Welcome to HTML Basics</h2>
+              <p>Select a lesson from the sidebar to get started!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Practice Builder -->
+    <section id="practiceTab" class="tab-content">
+      <div class="practice-container">
+        <div class="practice-editor">
+          <div class="editor-header">
+            <h2>HTML Editor</h2>
+            <button id="clearBtn" class="btn-ghost btn-small">Clear</button>
+          </div>
+          <textarea id="htmlEditor" class="html-editor" placeholder="<!DOCTYPE html>
+<html lang=&quot;en&quot;>
+<head>
+  <meta charset=&quot;UTF-8&quot;>
+  <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+  <title>My Page</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;>
+</head>
+<body>
+  <div class=&quot;container mt-5&quot;>
+    <h1 class=&quot;display-4&quot;>Hello World!</h1>
+    <p class=&quot;lead&quot;>Start building with Bootstrap 5 classes...</p>
+    <button class=&quot;btn btn-primary&quot;>Click Me</button>
+  </div>
+  <!-- Bootstrap 5 JS -->
+  <script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js&quot;></script>
+</body>
+</html>"></textarea>
+        </div>
+
+        <div class="practice-preview">
+          <div class="preview-header">
+            <h2>Live Preview</h2>
+            <div class="preview-controls">
+              <button id="toggleViewBtn" class="btn-ghost btn-small" title="Toggle full-page preview">🔍 Full Page</button>
+              <button id="refreshBtn" class="btn-primary btn-small">Refresh</button>
+              <div id="previewError" class="preview-error" style="display: none;"></div>
+            </div>
+          </div>
+          <!-- 
+            Note: Using both allow-same-origin and allow-scripts is intentional and safe here.
+            - allow-scripts: Required for Bootstrap JavaScript to work (accordions, navbar toggles, etc.)
+            - allow-same-origin: Required for html2canvas to access iframe content for image export
+            The content is user-generated HTML in a controlled environment, so this is acceptable.
+          -->
+          <iframe id="previewFrame" class="preview-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Export -->
+    <section id="exportTab" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2>Export Your Mini-Site</h2>
+          <p class="card-description">Download your HTML as a complete website file</p>
+        </div>
+        <div class="export-controls">
+          <div class="input-group">
+            <label for="siteTitle">Site Title:</label>
+            <input type="text" id="siteTitle" class="input-field" placeholder="My Awesome Site" value="My HTML Site" />
+          </div>
+          <div class="input-group">
+            <label for="exportHtml">HTML Content:</label>
+            <textarea id="exportHtml" class="html-editor" rows="15" placeholder="Paste your HTML here or use content from Practice Builder"></textarea>
+          </div>
+          <div class="export-buttons">
+            <button id="exportBtn" class="btn-primary">💾 Download HTML File</button>
+            <button id="exportImageBtn" class="btn-primary">📸 Download as Image</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

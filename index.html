@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Simulators Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e1a;
+            --bg-card: rgba(15, 23, 42, 0.8);
+            --border: rgba(71, 85, 105, 0.3);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+        --accent-green: #22c55e;
+        --accent-blue: #38bdf8;
+        --accent-purple: #a78bfa;
+        --accent-orange: #fb923c;
+        --accent-red: #ef4444;
+        --hover-glow: rgba(34, 197, 94, 0.15);
+        --grade-6: #38bdf8;
+        --grade-7: #22c55e;
+        --grade-8: #fb923c;
+        --grade-9: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(167, 139, 250, 0.06) 0%, transparent 50%);
+            animation: drift 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes drift {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(30px, -30px) rotate(5deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) rotate(-5deg);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 999px;
+            color: var(--accent-green);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Grade Filter Buttons */
+        .grade-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin: 2rem 0 1rem;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .filter-btn {
+            padding: 0.625rem 1.25rem;
+            background: rgba(71, 85, 105, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .filter-btn:hover {
+            background: rgba(71, 85, 105, 0.5);
+            border-color: var(--text-secondary);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            color: var(--text-primary);
+            border-color: currentColor;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .filter-btn[data-grade="all"].active {
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            border-color: var(--accent-green);
+        }
+
+        .filter-btn[data-grade="6"].active {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--grade-6);
+            color: var(--grade-6);
+        }
+
+        .filter-btn[data-grade="7"].active {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: var(--grade-7);
+            color: var(--grade-7);
+        }
+
+        .filter-btn[data-grade="8"].active {
+            background: rgba(251, 146, 60, 0.2);
+            border-color: var(--grade-8);
+            color: var(--grade-8);
+        }
+
+        .filter-btn[data-grade="9"].active {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--grade-9);
+            color: var(--grade-9);
+        }
+
+        /* Grade Badges on Cards */
+        .grade-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            margin-top: -0.5rem;
+        }
+
+        .grade-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.625rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .grade-badge.grade-6 {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--grade-6);
+        }
+
+        .grade-badge.grade-7 {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: var(--grade-7);
+        }
+
+        .grade-badge.grade-8 {
+            background: rgba(251, 146, 60, 0.15);
+            border: 1px solid rgba(251, 146, 60, 0.4);
+            color: var(--grade-8);
+        }
+
+        .grade-badge.grade-9 {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: var(--grade-9);
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+        .card {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .card.filtering-out {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--card-accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px var(--card-accent);
+        }
+
+        .card.network {
+            --card-accent: var(--accent-green);
+        }
+
+        .card.packet {
+            --card-accent: var(--accent-blue);
+        }
+
+        .card.chat {
+            --card-accent: var(--accent-purple);
+        }
+
+        .card.post {
+            --card-accent: var(--accent-orange);
+        }
+
+        .card.html {
+            --card-accent: var(--accent-green);
+        }
+
+        .card.design {
+            --card-accent: var(--accent-purple);
+        }
+
+        .card.wireframe {
+            --card-accent: var(--accent-blue);
+        }
+
+        .card.spreadsheet {
+            --card-accent: var(--accent-green);
+        }
+
+        .card.safety {
+            --card-accent: var(--accent-orange);
+        }
+
+        .card.algorithm {
+            --card-accent: var(--accent-purple);
+        }
+
+        .card.python {
+            --card-accent: var(--accent-green);
+        }
+
+        .card.computing {
+            --card-accent: var(--accent-blue);
+        }
+
+        .card.logic {
+            --card-accent: var(--accent-purple);
+        }
+
+        .card.music {
+            --card-accent: var(--accent-orange);
+        }
+
+        .card.data-science {
+            --card-accent: var(--accent-green);
+        }
+
+        .card.digital-representation {
+            --card-accent: var(--accent-purple);
+        }
+
+        .card.fde-cycle {
+            --card-accent: var(--accent-blue);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--card-accent), transparent);
+            border: 1px solid var(--card-accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--card-accent);
+            opacity: 0.1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.2;
+                transform: scale(1.05);
+            }
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            color: var(--card-accent);
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .launch-btn {
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            background: linear-gradient(135deg, var(--card-accent), transparent);
+            border: 1px solid var(--card-accent);
+            border-radius: 0.75rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .launch-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--card-accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .launch-btn:hover::before {
+            opacity: 0.2;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .launch-btn:active {
+            transform: translateY(0);
+        }
+
+        .launch-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            body {
+                padding: 1rem;
+            }
+
+            .grade-filters {
+                padding: 0.75rem;
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .grade-badges {
+                gap: 0.375rem;
+            }
+
+            .grade-badge {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Educational Simulators</h1>
+            <p class="subtitle">Interactive learning tools for networking, security, and communication concepts</p>
+            <div class="badge">20 Simulators Available</div>
+        </header>
+
+        <div class="grade-filters">
+            <button class="filter-btn active" data-grade="all">All Grades</button>
+            <button class="filter-btn" data-grade="6">🟦 Grade 6</button>
+            <button class="filter-btn" data-grade="7">🟩 Grade 7</button>
+            <button class="filter-btn" data-grade="8">🟧 Grade 8</button>
+            <button class="filter-btn" data-grade="9">🟥 Grade 9</button>
+        </div>
+
+        <div class="grid">
+            <div class="card packet" data-grades="6,7">
+                <div class="card-icon">📦</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">Packet Journey</h2>
+                <p class="card-description">
+                    Watch packets travel from client to server hop by hop with adjustable network conditions.
+                </p>
+                <ul class="card-features">
+                    <li>Network latency & jitter controls</li>
+                    <li>Packet loss simulation</li>
+                    <li>Save & replay runs</li>
+                </ul>
+                <a href="simulators/packet-journey/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card chat" data-grades="6">
+                <div class="card-icon">💬</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                </div>
+                <h2 class="card-title">Safe Chat Simulator</h2>
+                <p class="card-description">
+                    Practice safe online communication through realistic chat scenarios and learn to identify risks.
+                </p>
+                <ul class="card-features">
+                    <li>Realistic chat scenarios</li>
+                    <li>Safety feedback system</li>
+                    <li>Scam signal detection lab</li>
+                </ul>
+                <a href="simulators/safe-chat/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card post" data-grades="6,7">
+                <div class="card-icon">📮</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">Internet Post Office</h2>
+                <p class="card-description">
+                    Teach IP addressing and routing visually with neighborhoods, mailboxes, and moving packets.
+                </p>
+                <ul class="card-features">
+                    <li>Visual subnet representation</li>
+                    <li>Interactive routing table</li>
+                    <li>Packet journey tracking</li>
+                </ul>
+                <a href="simulators/internet-post-office/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card dns" data-grades="6,7">
+                <div class="card-icon">🌐</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">DNS Simulator</h2>
+                <p class="card-description">
+                    Explore DNS resolution with real lookups, delegation paths, and interactive visualizations.
+                </p>
+                <ul class="card-features">
+                    <li>Real DNS record lookups</li>
+                    <li>Delegation path animation</li>
+                    <li>Interactive node graph</li>
+                </ul>
+                <a href="simulators/dns/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card html" data-grades="6,8">
+                <div class="card-icon">📝</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-8">Grade 8</span>
+                </div>
+                <h2 class="card-title">HTML Basics</h2>
+                <p class="card-description">
+                    Learn HTML interactively with hands-on lessons, practice builder, and exportable mini-sites.
+                </p>
+                <ul class="card-features">
+                    <li>Interactive lessons for HTML elements</li>
+                    <li>Live code editor with preview</li>
+                    <li>Export your HTML as a website</li>
+                </ul>
+                <a href="simulators/html-basics/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card design" data-grades="6,7">
+                <div class="card-icon">🎨</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">Design Comparison</h2>
+                <p class="card-description">
+                    Learn design principles by comparing good vs bad examples. Identify layout, contrast, spacing, and accessibility issues.
+                </p>
+                <ul class="card-features">
+                    <li>Side-by-side good vs bad comparisons</li>
+                    <li>Interactive quiz to test your knowledge</li>
+                    <li>Design principles and best practices</li>
+                </ul>
+                <a href="simulators/design-comparison/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card wireframe" data-grades="6,8">
+                <div class="card-icon">📐</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-8">Grade 8</span>
+                </div>
+                <h2 class="card-title">Wireframe Builder</h2>
+                <p class="card-description">
+                    Plan your website layout with a drag-and-drop wireframing tool. Create simple layouts before coding.
+                </p>
+                <ul class="card-features">
+                    <li>Drag-and-drop components</li>
+                    <li>Customizable properties panel</li>
+                    <li>Export as image or HTML</li>
+                </ul>
+                <a href="simulators/wireframe-builder/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card spreadsheet" data-grades="6,7">
+                <div class="card-icon">📊</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">Spreadsheet Simulator</h2>
+                <p class="card-description">
+                    Learn spreadsheet basics with formulas, cell references, and functions. Perfect introduction to Excel and Google Sheets.
+                </p>
+                <ul class="card-features">
+                    <li>Basic formulas (SUM, +, -, *, /)</li>
+                    <li>Cell references (A1, B2, etc.)</li>
+                    <li>Interactive examples and guide</li>
+                </ul>
+                <a href="simulators/spreadsheet/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card safety" data-grades="6,9">
+                <div class="card-icon">🔒</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-6">Grade 6</span>
+                    <span class="grade-badge grade-9">Grade 9</span>
+                </div>
+                <h2 class="card-title">Digital Safety</h2>
+                <p class="card-description">
+                    Learn online security essentials: password protection, personal information safety, secure websites, and digital etiquette.
+                </p>
+                <ul class="card-features">
+                    <li>Password strength & best practices</li>
+                    <li>Personal information protection</li>
+                    <li>HTTPS & website security</li>
+                    <li>Digital etiquette & cyberbullying</li>
+                </ul>
+            <a href="simulators/digital-safety/index.html" class="launch-btn">
+                <span>Launch Simulator →</span>
+            </a>
+        </div>
+
+        <div class="card network-privacy" data-grades="6,7,9">
+            <div class="card-icon">🌐</div>
+            <div class="grade-badges">
+                <span class="grade-badge grade-6">Grade 6</span>
+                <span class="grade-badge grade-7">Grade 7</span>
+                <span class="grade-badge grade-9">Grade 9</span>
+            </div>
+            <h2 class="card-title">Network & Privacy Basics</h2>
+            <p class="card-description">
+                Learn how the internet works: bandwidth, latency, VPNs, cookies, tracking, and encryption with interactive visualizations.
+            </p>
+            <ul class="card-features">
+                <li>Bandwidth & latency demonstrations</li>
+                <li>VPN encryption visualization</li>
+                <li>Cookie and tracking demos</li>
+                <li>Encryption basics</li>
+            </ul>
+            <a href="simulators/network-privacy/index.html" class="launch-btn">
+                <span>Launch Simulator →</span>
+            </a>
+        </div>
+
+        <div class="card programming" data-grades="7,8">
+            <div class="card-icon">💻</div>
+            <div class="grade-badges">
+                <span class="grade-badge grade-7">Grade 7</span>
+                <span class="grade-badge grade-8">Grade 8</span>
+            </div>
+            <h2 class="card-title">Programming Basics Trainer</h2>
+            <p class="card-description">
+                Learn programming fundamentals: sequence ordering, variable tracing, logic operators, and loop visualization.
+            </p>
+            <ul class="card-features">
+                <li>Drag-and-drop sequence ordering</li>
+                <li>Step-by-step variable tracing</li>
+                <li>Interactive logic operators</li>
+                <li>Loop iteration visualizer</li>
+            </ul>
+            <a href="simulators/programming-basics/index.html" class="launch-btn">
+                <span>Launch Simulator →</span>
+            </a>
+        </div>
+
+            <div class="card logo" data-grades="7">
+                <div class="card-icon">🎨</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">Simple Logo Maker</h2>
+                <p class="card-description">
+                    Create simple logos with shapes, text, and colors. Export as PNG or SVG for your projects.
+                </p>
+                <ul class="card-features">
+                    <li>Shape tools (rectangle, circle, triangle, line)</li>
+                    <li>Text with custom fonts</li>
+                    <li>Color palette & picker</li>
+                    <li>Export as PNG or SVG</li>
+                </ul>
+                <a href="simulators/logo-maker/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card search" data-grades="7">
+                <div class="card-icon">🔍</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">Search & Credibility Lab</h2>
+                <p class="card-description">
+                    Learn effective searching, analyze search results, and evaluate source credibility and bias.
+                </p>
+                <ul class="card-features">
+                    <li>Search strategy micro-course</li>
+                    <li>Realistic search results simulator</li>
+                    <li>Interactive credibility evaluation game</li>
+                </ul>
+                <a href="simulators/search-credibility/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card algorithm" data-grades="7">
+                <div class="card-icon">🐛</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-7">Grade 7</span>
+                </div>
+                <h2 class="card-title">Algorithm Debugging & Efficiency Lab</h2>
+                <p class="card-description">
+                    Fix broken algorithms step-by-step and compare slow vs fast solutions with clear visualizations and operation counters.
+                </p>
+                <ul class="card-features">
+                    <li>Step-by-step algorithm debugging</li>
+                    <li>Slow vs fast algorithm comparison</li>
+                    <li>Interactive visualizations</li>
+                    <li>Operation counters & performance metrics</li>
+                </ul>
+                <a href="simulators/algorithm-debugging/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card python" data-grades="9">
+                <div class="card-icon">🐍</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-9">Grade 9</span>
+                </div>
+                <h2 class="card-title">Python Programming Lab</h2>
+                <p class="card-description">
+                    Learn Python interactively with a mini interpreter, visualizations, debugging puzzles, and guided projects.
+                </p>
+                <ul class="card-features">
+                    <li>Mini Python interpreter with visual output</li>
+                    <li>List & string visualizer</li>
+                    <li>Loop step-through animation</li>
+                    <li>Event-driven flow diagrams</li>
+                    <li>Debugging puzzles & guided projects</li>
+                </ul>
+                <a href="simulators/python-lab/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card computing" data-grades="8">
+                <div class="card-icon">🖥️</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-8">Grade 8</span>
+                </div>
+                <h2 class="card-title">Computing Systems Explorer</h2>
+                <p class="card-description">
+                    Explore routers, switches, servers, CPU, RAM, storage, and operating systems with interactive diagrams and simulations.
+                </p>
+                <ul class="card-features">
+                    <li>Network devices (router/switch/server)</li>
+                    <li>CPU/RAM/storage diagrams</li>
+                    <li>Data flow animations</li>
+                    <li>OS simulator (processes, scheduling, memory)</li>
+                </ul>
+                <a href="simulators/computing-systems/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card fde-cycle" data-grades="8,9">
+                <div class="card-icon">⚙️</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-8">Grade 8</span>
+                    <span class="grade-badge grade-9">Grade 9</span>
+                </div>
+                <h2 class="card-title">Fetch-Decode-Execute Cycle Simulator</h2>
+                <p class="card-description">
+                    Visualize how a CPU processes instructions through the FDE cycle. Watch instructions move through fetch, decode, and execute phases with detailed explanations.
+                </p>
+                <ul class="card-features">
+                    <li>Interactive FDE cycle visualization</li>
+                    <li>CPU components (CU, ALU, Registers)</li>
+                    <li>Step-by-step instruction execution</li>
+                    <li>Memory and register monitoring</li>
+                    <li>Execution trace and cycle information</li>
+                    <li>Multiple example programs</li>
+                </ul>
+                <a href="simulators/fde-cycle/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card logic" data-grades="8">
+                <div class="card-icon">🔌</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-8">Grade 8</span>
+                </div>
+                <h2 class="card-title">Logic & Digital Systems Playground</h2>
+                <p class="card-description">
+                    Explore logic gates, sensor logic, and binary systems with interactive tools and visualizations.
+                </p>
+                <ul class="card-features">
+                    <li>Interactive AND/OR/NOT gate editor</li>
+                    <li>Truth tables for all gates</li>
+                    <li>Sensor-logic simulator with IF/ELSE rules</li>
+                    <li>Binary ↔ decimal converter with explanations</li>
+                </ul>
+                <a href="simulators/logic-systems/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card music" data-grades="8,9">
+                <div class="card-icon">🎵</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-8">Grade 8</span>
+                    <span class="grade-badge grade-9">Grade 9</span>
+                </div>
+                <h2 class="card-title">Music & Rhythm Loop Composer</h2>
+                <p class="card-description">
+                    Create music loops with a simple sequencer. Place beats, adjust tempo, layer sounds, and export your creations.
+                </p>
+                <ul class="card-features">
+                    <li>Simple sequencer grid for placing beats</li>
+                    <li>Adjustable tempo (BPM)</li>
+                    <li>Multiple track layers</li>
+                    <li>Save and export loops</li>
+                </ul>
+                <a href="simulators/music-composer/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card data-science" data-grades="9">
+                <div class="card-icon">📊</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-9">Grade 9</span>
+                </div>
+                <h2 class="card-title">Data Science Explorer</h2>
+                <p class="card-description">
+                    Explore datasets, create visualizations, and follow the PPDAC workflow to analyze data scientifically.
+                </p>
+                <ul class="card-features">
+                    <li>Dataset loading and management</li>
+                    <li>Interactive charts and visualizations</li>
+                    <li>Data filtering and search</li>
+                    <li>Guided PPDAC workflow</li>
+                    <li>Export reports and conclusions</li>
+                </ul>
+                <a href="simulators/data-science/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+
+            <div class="card digital-representation" data-grades="9">
+                <div class="card-icon">🎨</div>
+                <div class="grade-badges">
+                    <span class="grade-badge grade-9">Grade 9</span>
+                </div>
+                <h2 class="card-title">Digital Representation Lab</h2>
+                <p class="card-description">
+                    Explore pixels, color depth, resolution, audio waveforms, sampling, compression, and image manipulation ethics.
+                </p>
+                <ul class="card-features">
+                    <li>Pixel grids & color depth simulator</li>
+                    <li>Resolution vs quality comparisons</li>
+                    <li>Audio waveform visualizer</li>
+                    <li>Sampling & bit depth adjustments</li>
+                    <li>Audio compression effects</li>
+                    <li>Image manipulation ethics scenarios</li>
+                </ul>
+                <a href="simulators/digital-representation-lab/index.html" class="launch-btn">
+                    <span>Launch Simulator →</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Educational Simulators • Modular & Lightweight • Built for Classroom Use</p>
+        </footer>
+    </div>
+
+    <script>
+        // Grade Filtering System
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card[data-grades]');
+        
+        // Initialize: Check URL params for filter
+        const urlParams = new URLSearchParams(window.location.search);
+        const gradeParam = urlParams.get('grade');
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const grade = btn.dataset.grade;
+                
+                // Update active state
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter cards
+                filterCards(grade);
+                
+                // Update URL without reload
+                if (grade === 'all') {
+                    window.history.pushState({}, '', window.location.pathname);
+                } else {
+                    window.history.pushState({}, '', `${window.location.pathname}?grade=${grade}`);
+                }
+            });
+        });
+        
+        function filterCards(selectedGrade) {
+            cards.forEach(card => {
+                const cardGrades = card.dataset.grades.split(',').map(g => g.trim());
+                
+                if (selectedGrade === 'all' || cardGrades.includes(selectedGrade)) {
+                    // Show card
+                    card.classList.remove('hidden', 'filtering-out');
+                    card.style.display = '';
+                    // Trigger animation
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    // Hide card with animation
+                    card.classList.add('filtering-out');
+                    setTimeout(() => {
+                        card.classList.add('hidden');
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+            
+            // Update count badge
+            const visibleCount = document.querySelectorAll('.card[data-grades]:not(.hidden)').length;
+            const badge = document.querySelector('.badge');
+            if (badge) {
+                badge.textContent = `${visibleCount} Simulator${visibleCount !== 1 ? 's' : ''} Available`;
+            }
+        }
+        
+        // Initialize filter from URL or default to 'all'
+        if (gradeParam && ['6', '7', '8', '9'].includes(gradeParam)) {
+            const btn = document.querySelector(`.filter-btn[data-grade="${gradeParam}"]`);
+            if (btn) {
+                btn.click();
+            }
+        } else {
+            // Default: show all
+            filterCards('all');
+        }
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gradeParam = urlParams.get('grade');
+            if (gradeParam && ['6', '7', '8', '9'].includes(gradeParam)) {
+                const btn = document.querySelector(`.filter-btn[data-grade="${gradeParam}"]`);
+                if (btn) {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterCards(gradeParam);
+                }
+            } else {
+                const allBtn = document.querySelector('.filter-btn[data-grade="all"]');
+                if (allBtn) {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    allBtn.classList.add('active');
+                    filterCards('all');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

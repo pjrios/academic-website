@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Internet Post Office – Packet Simulator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    <main>
+      <!-- LEFT SIDE: Network map + controls -->
+      <section class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h2>Internet Post Office PACKET SIMULATOR</h2>
+              <span class="badge">Source &amp; destination</span>
+            </div>
+            <p class="description">
+              Click a house to choose the <strong>sender</strong> and another
+              house to choose the <strong>receiver</strong>. Each neighborhood is
+              a subnet. The router in the middle will try to deliver the packet.
+            </p>
+          </div>
+
+          <div class="layout-grid" id="neighborhoodGrid">
+            <!-- Neighborhoods & houses are created by script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Configuration section -->
+      <section class="card">
+        <div class="card-inner">
+          <div class="form-section">
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Source IP</label>
+                <input id="fieldSourceIp" class="field-input" type="text"
+                  placeholder="Click a house or type: 192.168.1.10" />
+                <div class="field-hint" id="hintSource"></div>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Destination IP</label>
+                <input id="fieldDestIp" class="field-input" type="text" placeholder="Click a house or type: 10.0.0.5" />
+                <div class="field-hint" id="hintDest"></div>
+              </div>
+            </div>
+
+            <div class="form-row presets-row">
+              <div class="field-group">
+                <label class="field-label">Network preset</label>
+                <select id="selectPreset" class="field-select">
+                  <option value="calm">Calm (low loss, normal latency)</option>
+                  <option value="busy">Busy (medium loss, mixed latency)</option>
+                  <option value="stormy">Stormy (high loss, slow latency)</option>
+                </select>
+              </div>
+              <div class="field-group jitter-group">
+                <label class="field-label">Latency jitter</label>
+                <div class="jitter-pill" id="jitterPill">±120 ms wiggle</div>
+                <small class="jitter-note">Travel time varies a bit each send.</small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field-group field-message-group">
+                <label class="field-label">Message (optional)</label>
+                <input id="fieldMessage" class="field-message-input" type="text" placeholder="Hey! Are you online?" />
+              </div>
+            </div>
+
+            <div class="form-row sliders-row">
+              <div class="slider-group">
+                <div class="slider-label-row">
+                  <span>Latency</span>
+                  <span class="slider-value-pill" id="latencyLabel">Normal</span>
+                </div>
+                <input id="sliderLatency" type="range" min="0" max="2" value="1" />
+              </div>
+              <div class="slider-group">
+                <div class="slider-label-row">
+                  <span>Packet loss</span>
+                  <span class="slider-value-pill" id="lossLabel">Low</span>
+                </div>
+                <input id="sliderLoss" type="range" min="0" max="3" value="1" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Story, stats & help - moved below Neighborhood Map -->
+      <section class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <h2>Packet Story</h2>
+            <span class="badge">Timeline &amp; stats</span>
+          </div>
+          <p class="description">
+            Every time you send a packet, we write a short story of its journey:
+            which subnet it came from, which router handled it, and what
+            happened along the way.
+          </p>
+
+          <div class="stats-card">
+            <div class="stats-header">
+              <div class="stats-header-title">Session Stats</div>
+              <div class="stats-header-counts">
+                <div class="stats-bubble">
+                  Sent: <span class="value" id="statSent">0</span>
+                </div>
+                <div class="stats-bubble">
+                  Delivered: <span class="value" id="statDelivered">0</span>
+                </div>
+                <div class="stats-bubble">
+                  Lost: <span class="value" id="statLost">0</span>
+                </div>
+              </div>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-block">
+                <div class="stat-label">Success rate</div>
+                <div class="stat-value" id="statSuccessRate">–</div>
+                <div class="stat-chip" id="chipSuccessLabel">
+                  No packets yet
+                </div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-label">Avg. hops</div>
+                <div class="stat-value" id="statAvgHops">–</div>
+                <div class="stat-chip">Single-router model</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-label">Network mood</div>
+                <div class="stat-value" id="statNetworkMood">Calm</div>
+                <div class="stat-chip warning" id="chipNetworkWarning" style="display: none;">
+                  Too many lost packets
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline" id="timeline">
+            <div class="timeline-title">
+              No packets sent yet – launch the first envelope!
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="routesModal" aria-hidden="true">
+    <div class="modal-backdrop" id="routesModalClose"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Router Routing & Neighbor Tables</div>
+          <div class="modal-subtitle">Edit networks and next hops, then save.</div>
+        </div>
+        <button class="btn btn-ghost" id="routesModalSave">Save</button>
+      </div>
+      <div class="modal-body">
+        <div class="routes-table" id="routesTable"></div>
+        <button class="btn" id="btnAddRoute">
+          <span class="icon">＋</span>
+          Add route
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Neighborhood Routing Table Modal -->
+  <div class="modal" id="neighborhoodRoutingModal" aria-hidden="true">
+    <div class="modal-backdrop" id="neighborhoodRoutingModalClose"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="neighborhoodRoutingModalTitle">Local Routing Table</div>
+          <div class="modal-subtitle" id="neighborhoodRoutingModalSubtitle">Routes for this neighborhood</div>
+        </div>
+        <button class="btn btn-ghost" id="neighborhoodRoutingModalCloseBtn">Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="routing-table" id="neighborhoodRoutingTableContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

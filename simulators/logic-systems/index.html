@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logic & Digital Systems Playground</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🔌 Logic & Digital Systems Playground</h1>
+        <p class="subtitle">Explore logic gates, sensor logic, and binary systems with interactive tools</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="gates">⚡ Logic Gates</button>
+        <button class="tab-button" data-tab="sensors">🌡️ Sensors</button>
+        <button class="tab-button" data-tab="binary">🔢 Binary Converter</button>
+        <button class="tab-button" data-tab="progress">📈 Progress</button>
+      </div>
+
+      <!-- Logic Gates Tab -->
+      <div class="tab-content active" id="gates">
+        <div class="content-card">
+          <h2>⚡ Logic Gates Editor</h2>
+          <p class="description">Build logic circuits with AND, OR, NOT gates and see truth tables in real-time.</p>
+          
+          <div class="gates-container">
+            <div class="gates-toolbar">
+              <h3>Gate Library</h3>
+              <div class="gate-buttons">
+                <button class="gate-btn" data-gate="AND">AND</button>
+                <button class="gate-btn" data-gate="OR">OR</button>
+                <button class="gate-btn" data-gate="NOT">NOT</button>
+                <button class="gate-btn" data-gate="NAND">NAND</button>
+                <button class="gate-btn" data-gate="NOR">NOR</button>
+                <button class="gate-btn" data-gate="XOR">XOR</button>
+                <button class="gate-btn" data-gate="XNOR">XNOR</button>
+              </div>
+              <div class="toolbar-actions">
+                <button class="btn-secondary" id="clearCanvasBtn">Clear Canvas</button>
+                <button class="btn-secondary" id="saveCircuitBtn">💾 Save Circuit</button>
+                <button class="btn-secondary" id="loadCircuitBtn">📂 Load Circuit</button>
+              </div>
+            </div>
+
+            <div class="gates-canvas-container">
+              <div class="canvas-header">
+                <h3>Circuit Canvas</h3>
+                <div class="input-controls">
+                  <label>Input A: <input type="checkbox" id="inputA" checked></label>
+                  <label>Input B: <input type="checkbox" id="inputB"></label>
+                </div>
+              </div>
+              <div class="gates-canvas" id="gatesCanvas">
+                <!-- Gates will be placed here -->
+              </div>
+            </div>
+
+            <div class="truth-table-section">
+              <h3>Truth Table</h3>
+              <div class="truth-table-container" id="truthTableContainer">
+                <!-- Truth table will appear here -->
+              </div>
+            </div>
+
+            <div class="gate-info-section" id="gateInfoSection">
+              <!-- Gate information will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sensors Tab -->
+      <div class="tab-content" id="sensors">
+        <div class="content-card">
+          <h2>🌡️ Sensor-Logic Simulator</h2>
+          <p class="description">Create IF/ELSE rules using sensor inputs and see how they control outputs.</p>
+          
+          <div class="sensors-container">
+            <div class="sensors-setup">
+              <div class="sensor-inputs">
+                <h3>Sensor Inputs</h3>
+                <div class="sensor-list" id="sensorList">
+                  <!-- Sensors will appear here -->
+                </div>
+                <button class="btn-secondary" id="addSensorBtn">+ Add Sensor</button>
+              </div>
+
+              <div class="logic-rules">
+                <h3>Logic Rules (IF/ELSE)</h3>
+                <div class="rules-list" id="rulesList">
+                  <!-- Rules will appear here -->
+                </div>
+                <button class="btn-primary" id="addRuleBtn">+ Add Rule</button>
+              </div>
+            </div>
+
+            <div class="sensor-outputs">
+              <h3>Outputs</h3>
+              <div class="output-list" id="outputList">
+                <!-- Outputs will appear here -->
+              </div>
+            </div>
+
+            <div class="sensor-simulator">
+              <h3>Simulator</h3>
+              <div class="simulator-controls">
+                <button class="btn-primary" id="runSimulationBtn">▶ Run Simulation</button>
+                <button class="btn-secondary" id="stepSimulationBtn">Step</button>
+                <button class="btn-secondary" id="resetSimulationBtn">Reset</button>
+              </div>
+              <div class="simulation-output" id="simulationOutput">
+                <!-- Simulation results will appear here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Binary Converter Tab -->
+      <div class="tab-content" id="binary">
+        <div class="content-card">
+          <h2>🔢 Binary ↔ Decimal Converter</h2>
+          <p class="description">Convert between binary and decimal numbers with step-by-step explanations.</p>
+          
+          <div class="binary-container">
+            <div class="converter-section">
+              <div class="converter-input">
+                <h3>Decimal to Binary</h3>
+                <div class="input-group">
+                  <label for="decimalInput">Decimal Number:</label>
+                  <input type="number" id="decimalInput" class="input-field" placeholder="Enter decimal number" min="0">
+                  <button class="btn-primary" id="convertToBinaryBtn">Convert</button>
+                </div>
+                <div class="conversion-result" id="decimalToBinaryResult">
+                  <!-- Conversion result will appear here -->
+                </div>
+              </div>
+
+              <div class="converter-input">
+                <h3>Binary to Decimal</h3>
+                <div class="input-group">
+                  <label for="binaryInput">Binary Number:</label>
+                  <input type="text" id="binaryInput" class="input-field" placeholder="Enter binary number (e.g., 1010)" pattern="[01]+">
+                  <button class="btn-primary" id="convertToDecimalBtn">Convert</button>
+                </div>
+                <div class="conversion-result" id="binaryToDecimalResult">
+                  <!-- Conversion result will appear here -->
+                </div>
+              </div>
+            </div>
+
+            <div class="explanation-section">
+              <h3>How It Works</h3>
+              <div class="explanation-content" id="explanationContent">
+                <!-- Step-by-step explanation will appear here -->
+              </div>
+            </div>
+
+            <div class="binary-practice">
+              <h3>Practice Exercises</h3>
+              <div class="practice-exercises" id="practiceExercises">
+                <!-- Practice exercises will appear here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div class="tab-content" id="progress">
+        <div class="content-card">
+          <h2>📈 Learning Progress</h2>
+          <p class="description">Track your progress and export reports.</p>
+          
+          <div class="progress-container">
+            <div class="progress-controls">
+              <button class="btn-primary" id="generateProgressReportBtn">Generate Report</button>
+              <button class="btn-secondary" id="exportProgressBtn">📸 Export as Image</button>
+              <button class="btn-secondary" id="clearProgressBtn">Clear Progress</button>
+            </div>
+
+            <div class="progress-stats" id="progressStats">
+              <!-- Progress statistics will appear here -->
+            </div>
+
+            <div class="progress-report" id="progressReport">
+              <!-- Progress report will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

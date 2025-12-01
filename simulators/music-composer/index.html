@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music & Rhythm Loop Composer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🎵 Music & Rhythm Loop Composer</h1>
+        <p class="subtitle">Create music loops with a simple sequencer. Place beats, adjust tempo, layer sounds, and export your creations.</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="sequencer">🎹 Sequencer</button>
+        <button class="tab-button" data-tab="library">📚 Library</button>
+        <button class="tab-button" data-tab="progress">📈 Progress</button>
+      </div>
+
+      <!-- Sequencer Tab -->
+      <div class="tab-content active" id="sequencer">
+        <div class="content-card">
+          <h2>🎹 Music Sequencer</h2>
+          <p class="description">Create rhythm loops by placing beats on the grid. Add multiple layers and adjust tempo.</p>
+          
+          <div class="sequencer-container">
+            <div class="sequencer-controls">
+              <div class="control-group">
+                <label for="tempoSlider">Tempo (BPM):</label>
+                <input type="range" id="tempoSlider" min="60" max="180" value="120" step="5">
+                <span id="tempoValue">120</span>
+              </div>
+              <div class="control-group">
+                <label for="beatsPerBar">Beats per Bar:</label>
+                <select id="beatsPerBar" class="algorithm-select">
+                  <option value="4">4 beats</option>
+                  <option value="8">8 beats</option>
+                  <option value="16">16 beats</option>
+                </select>
+              </div>
+              <button class="btn-primary" id="playBtn">▶ Play</button>
+              <button class="btn-secondary" id="stopBtn">⏹ Stop</button>
+              <button class="btn-secondary" id="clearBtn">Clear</button>
+              <button class="btn-secondary" id="saveLoopBtn">💾 Save Loop</button>
+              <button class="btn-secondary" id="loadLoopBtn">📂 Load Loop</button>
+            </div>
+
+            <div class="tracks-container" id="tracksContainer">
+              <!-- Tracks will be generated here -->
+            </div>
+
+            <div class="track-controls">
+              <button class="btn-primary" id="addTrackBtn">+ Add Track</button>
+              <button class="btn-secondary" id="removeTrackBtn">- Remove Track</button>
+            </div>
+
+            <div class="playback-info" id="playbackInfo">
+              <!-- Playback information -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Library Tab -->
+      <div class="tab-content" id="library">
+        <div class="content-card">
+          <h2>📚 Saved Loops Library</h2>
+          <p class="description">View and manage your saved music loops.</p>
+          
+          <div class="library-container">
+            <div class="library-controls">
+              <button class="btn-primary" id="refreshLibraryBtn">Refresh</button>
+              <button class="btn-secondary" id="exportAllBtn">Export All</button>
+            </div>
+
+            <div class="loops-grid" id="loopsGrid">
+              <!-- Saved loops will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div class="tab-content" id="progress">
+        <div class="content-card">
+          <h2>📈 Learning Progress</h2>
+          <p class="description">Track your music creation progress.</p>
+          
+          <div class="progress-container">
+            <div class="progress-controls">
+              <button class="btn-primary" id="generateProgressReportBtn">Generate Report</button>
+              <button class="btn-secondary" id="clearProgressBtn">Clear Progress</button>
+            </div>
+
+            <div class="progress-stats" id="progressStats">
+              <!-- Progress statistics -->
+            </div>
+
+            <div class="progress-report" id="progressReport">
+              <!-- Progress report -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

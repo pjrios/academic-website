@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network & Privacy Basics</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>Network & Privacy Basics</h1>
+        <p class="subtitle">Learn how the internet works and how to protect your privacy</p>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <button class="tab-button active" data-tab="bandwidth">🌊 Bandwidth</button>
+      <button class="tab-button" data-tab="latency">⚡ Latency</button>
+      <button class="tab-button" data-tab="vpn">🔒 VPN</button>
+      <button class="tab-button" data-tab="cookies">🍪 Cookies</button>
+      <button class="tab-button" data-tab="tracking">👁️ Tracking</button>
+      <button class="tab-button" data-tab="encryption">🔐 Encryption</button>
+      <button class="tab-button" id="reportTabBtn" data-tab="report">📊 Report</button>
+    </div>
+
+    <main class="main-content">
+      <!-- Bandwidth Tab -->
+      <div class="tab-content active" id="bandwidth">
+        <div class="content-card">
+          <h2>🌊 Bandwidth</h2>
+          <p class="description">Bandwidth is the maximum amount of data that can be transferred over a network connection in a given time. Think of it like the width of a pipe - wider pipes can carry more water at once.</p>
+          
+          <div class="visualization-container">
+            <div class="bandwidth-demo">
+              <div class="bandwidth-controls">
+                <label>
+                  <span>Bandwidth:</span>
+                  <select id="bandwidthSelect">
+                    <option value="1">1 Mbps (Slow)</option>
+                    <option value="5">5 Mbps (Basic)</option>
+                    <option value="25" selected>25 Mbps (Standard)</option>
+                    <option value="100">100 Mbps (Fast)</option>
+                    <option value="1000">1000 Mbps (Very Fast)</option>
+                  </select>
+                </label>
+                <button class="btn-primary" id="startBandwidthDemo">Start Demo</button>
+              </div>
+              
+              <div class="bandwidth-pipe">
+                <div class="pipe-label">Data Flow Visualization</div>
+                <div class="pipe-container">
+                  <div class="pipe-visual" id="bandwidthPipe">
+                    <div id="dataPackets"></div>
+                  </div>
+                  <div class="pipe-width-indicator">
+                    <span>Pipe Width = Bandwidth</span>
+                  </div>
+                </div>
+                <div class="download-scenario">
+                  <div class="scenario-label">Downloading: 100 MB File</div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar" id="downloadProgress">
+                      <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                  </div>
+                  <div class="eta-text" id="etaText">Calculating...</div>
+                </div>
+                <div class="pipe-stats">
+                  <div class="stat">
+                    <span class="stat-label">Speed:</span>
+                    <span class="stat-value" id="bandwidthSpeed">0 Mbps</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Data Transferred:</span>
+                    <span class="stat-value" id="bandwidthData">0 MB</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="bandwidthTime">0s</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Remaining:</span>
+                    <span class="stat-value" id="bandwidthRemaining">100 MB</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bandwidth-comparison">
+                <h3>Real-World Examples</h3>
+                <div class="comparison-grid">
+                  <div class="comparison-item">
+                    <strong>1 Mbps</strong>
+                    <p>Basic email, text messages</p>
+                  </div>
+                  <div class="comparison-item">
+                    <strong>5 Mbps</strong>
+                    <p>SD video streaming, web browsing</p>
+                  </div>
+                  <div class="comparison-item">
+                    <strong>25 Mbps</strong>
+                    <p>HD video streaming, video calls</p>
+                  </div>
+                  <div class="comparison-item">
+                    <strong>100 Mbps</strong>
+                    <p>4K streaming, online gaming</p>
+                  </div>
+                  <div class="comparison-item">
+                    <strong>1000 Mbps</strong>
+                    <p>Multiple 4K streams, large downloads</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Latency Tab -->
+      <div class="tab-content" id="latency">
+        <div class="content-card">
+          <h2>⚡ Latency</h2>
+          <p class="description">Latency (or ping) is the time it takes for data to travel from your device to a server and back. Lower latency means faster response times, which is crucial for gaming and video calls.</p>
+          
+          <div class="visualization-container">
+            <div class="latency-demo">
+              <div class="latency-controls">
+                <label>
+                  <span>Distance to Server:</span>
+                  <select id="latencySelect">
+                    <option value="10">10 km (Local)</option>
+                    <option value="100" selected>100 km (Regional)</option>
+                    <option value="1000">1,000 km (National)</option>
+                    <option value="5000">5,000 km (International)</option>
+                    <option value="10000">10,000 km (Global)</option>
+                  </select>
+                </label>
+                <button class="btn-primary" id="startLatencyDemo">Send Packet</button>
+              </div>
+              
+              <div class="latency-visual">
+                <div class="device-box" id="yourDevice">
+                  <div class="device-icon">💻</div>
+                  <div class="device-label">Your Device</div>
+                </div>
+                
+                <div class="latency-path" id="latencyPath">
+                  <div class="packet" id="latencyPacket">📦</div>
+                  <div class="path-line"></div>
+                </div>
+                
+                <div class="server-box" id="server">
+                  <div class="server-icon">🖥️</div>
+                  <div class="server-label">Server</div>
+                </div>
+              </div>
+              
+              <div class="latency-stats">
+                <div class="stat-card">
+                  <div class="stat-icon">⏱️</div>
+                  <div class="stat-info">
+                    <div class="stat-label">Latency</div>
+                    <div class="stat-value" id="latencyValue">0 ms</div>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon">📏</div>
+                  <div class="stat-info">
+                    <div class="stat-label">Distance</div>
+                    <div class="stat-value" id="distanceValue">0 km</div>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon">⚡</div>
+                  <div class="stat-info">
+                    <div class="stat-label">Speed of Light</div>
+                    <div class="stat-value">~200,000 km/s</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="latency-explanation">
+                <h3>Why Latency Matters</h3>
+                <ul>
+                  <li><strong>Gaming:</strong> Low latency (under 50ms) is essential for real-time games</li>
+                  <li><strong>Video Calls:</strong> High latency causes delays and awkward pauses</li>
+                  <li><strong>Web Browsing:</strong> Lower latency means pages load faster</li>
+                  <li><strong>Distance:</strong> Physical distance affects latency - servers closer to you = lower latency</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VPN Tab -->
+      <div class="tab-content" id="vpn">
+        <div class="content-card">
+          <h2>🔒 VPN (Virtual Private Network)</h2>
+          <p class="description">A VPN creates an encrypted tunnel between your device and a VPN server, hiding your IP address and encrypting your data. It's like sending mail through a private, secure courier instead of regular mail.</p>
+          
+          <div class="visualization-container">
+            <div class="vpn-demo">
+              <div class="vpn-controls">
+                <button class="btn-primary" id="toggleVPN">Connect to VPN</button>
+                <div class="vpn-status" id="vpnStatus">
+                  <span class="status-indicator disconnected"></span>
+                  <span>Disconnected</span>
+                </div>
+              </div>
+              
+              <div class="vpn-visual">
+                <div class="vpn-device">
+                  <div class="device-icon">💻</div>
+                  <div class="device-label">Your Device</div>
+                  <div class="ip-address" id="deviceIP">
+                    <span class="ip-label">Your IP:</span>
+                    <span class="ip-value" id="yourRealIP">192.168.1.45</span>
+                  </div>
+                </div>
+                
+                <div class="vpn-path" id="vpnPath">
+                  <div class="path-normal" id="normalPath">
+                    <div class="path-label">Normal Connection</div>
+                    <div class="path-line-normal"></div>
+                    <div class="data-flow" id="normalData">📦</div>
+                  </div>
+                  <div class="path-vpn" id="vpnPathVisual" style="display: none;">
+                    <div class="path-label">VPN Tunnel (Encrypted)</div>
+                    <div class="vpn-path-segment path-to-server">
+                      <div class="path-line-vpn"></div>
+                      <div class="data-flow encrypted" id="vpnDataToServer">🔒📦</div>
+                    </div>
+                    <div class="vpn-server">🛡️ VPN Server</div>
+                    <div class="vpn-path-segment path-to-website">
+                      <div class="path-line-vpn"></div>
+                      <div class="data-flow encrypted" id="vpnDataToWebsite">🔒📦</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="vpn-destination">
+                  <div class="server-icon">🌐</div>
+                  <div class="server-label">Website</div>
+                  <div class="ip-address" id="websiteIP">
+                    <span class="ip-label">Sees IP:</span>
+                    <span class="ip-value" id="visibleIP">192.168.1.45</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="vpn-benefits">
+                <h3>What VPNs Do</h3>
+                <div class="benefits-grid">
+                  <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <strong>Encrypts Data</strong>
+                    <p>Your data is encrypted, so even if intercepted, it can't be read</p>
+                  </div>
+                  <div class="benefit-card">
+                    <div class="benefit-icon">🌍</div>
+                    <strong>Hides IP Address</strong>
+                    <p>Websites see the VPN server's IP, not yours</p>
+                  </div>
+                  <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <strong>Protects on Public WiFi</strong>
+                    <p>Prevents hackers on public networks from seeing your data</p>
+                  </div>
+                  <div class="benefit-card">
+                    <div class="benefit-icon">🚫</div>
+                    <strong>Bypasses Restrictions</strong>
+                    <p>Can access content blocked in your region</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookies Tab -->
+      <div class="tab-content" id="cookies">
+        <div class="content-card">
+          <h2>🍪 Cookies</h2>
+          <p class="description">Cookies are small text files stored on your device by websites. They remember your preferences, login status, and track your activity. Some cookies are helpful, others are used for tracking.</p>
+          
+          <div class="visualization-container">
+            <div class="cookies-demo">
+              <div class="cookies-controls">
+                <button class="btn-primary" id="visitWebsite">Visit Website</button>
+                <button class="btn-secondary" id="clearCookies">Clear Cookies</button>
+              </div>
+              
+              <div class="cookies-visual">
+                <div class="website-box">
+                  <div class="website-header">🌐 Example Website</div>
+                  <div class="website-content">
+                    <p>Welcome! This site uses cookies.</p>
+                    <div class="cookie-actions">
+                      <button class="btn-small" id="acceptCookies">Accept All</button>
+                      <button class="btn-small" id="rejectCookies">Reject</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="cookie-jar" id="cookieJar">
+                  <div class="jar-label">Your Cookie Jar</div>
+                  <div class="cookies-list" id="cookiesList">
+                    <div class="empty-state">No cookies stored</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="cookie-types">
+                <h3>Types of Cookies</h3>
+                <div class="cookie-type-grid">
+                  <div class="cookie-type-card good">
+                    <div class="cookie-icon">✅</div>
+                    <strong>Essential Cookies</strong>
+                    <p>Necessary for website to function (login, shopping cart)</p>
+                  </div>
+                  <div class="cookie-type-card good">
+                    <div class="cookie-icon">⚙️</div>
+                    <strong>Preference Cookies</strong>
+                    <p>Remember your settings (language, theme)</p>
+                  </div>
+                  <div class="cookie-type-card warning">
+                    <div class="cookie-icon">📊</div>
+                    <strong>Analytics Cookies</strong>
+                    <p>Track how you use the site (helpful for site owners)</p>
+                  </div>
+                  <div class="cookie-type-card bad">
+                    <div class="cookie-icon">👁️</div>
+                    <strong>Tracking Cookies</strong>
+                    <p>Follow you across websites to show targeted ads</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tracking Tab -->
+      <div class="tab-content" id="tracking">
+        <div class="content-card">
+          <h2>👁️ Online Tracking</h2>
+          <p class="description">Websites and advertisers use various methods to track your online activity across different sites. This data is used to build a profile of you and show targeted advertisements.</p>
+          
+          <div class="visualization-container">
+            <div class="tracking-demo">
+              <div class="tracking-controls">
+                <button class="btn-primary" id="startTrackingDemo">Browse Websites</button>
+                <button class="btn-secondary" id="clearTracking">Clear Tracking Data</button>
+              </div>
+              
+              <div class="tracking-visual">
+                <div class="browser-window">
+                  <div class="browser-header">
+                    <div class="browser-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <div class="browser-url" id="currentUrl">about:blank</div>
+                  </div>
+                  <div class="browser-content" id="browserContent">
+                    <div class="website-placeholder">Click "Browse Websites" to start</div>
+                  </div>
+                </div>
+                
+                <div class="tracker-panel" id="trackerPanel">
+                  <div class="panel-header">👁️ Trackers Watching You</div>
+                  <div class="trackers-list" id="trackersList">
+                    <div class="empty-state">No trackers detected yet</div>
+                  </div>
+                  <div class="profile-section" id="profileSection" style="display: none;">
+                    <div class="profile-header">Your Profile (Built by Trackers)</div>
+                    <div class="profile-data" id="profileData"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tracking-methods">
+                <h3>How You're Tracked</h3>
+                <div class="methods-grid">
+                  <div class="method-card">
+                    <div class="method-icon">🍪</div>
+                    <strong>Cookies</strong>
+                    <p>Stored on your device, track your visits</p>
+                  </div>
+                  <div class="method-card">
+                    <div class="method-icon">👆</div>
+                    <strong>Fingerprinting</strong>
+                    <p>Your browser's unique characteristics</p>
+                  </div>
+                  <div class="method-card">
+                    <div class="method-icon">🔗</div>
+                    <strong>Third-Party Trackers</strong>
+                    <p>Ads and social buttons on websites</p>
+                  </div>
+                  <div class="method-card">
+                    <div class="method-icon">📍</div>
+                    <strong>Location Data</strong>
+                    <p>GPS, IP address, WiFi networks</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Encryption Tab -->
+      <div class="tab-content" id="encryption">
+        <div class="content-card">
+          <h2>🔐 Encryption</h2>
+          <p class="description">Encryption scrambles your data so only authorized parties can read it. It's like sending a message in a locked box - only someone with the key can open it.</p>
+          
+          <div class="visualization-container">
+            <div class="encryption-demo">
+              <div class="encryption-controls">
+                <div class="encryption-mode-tabs">
+                  <button class="mode-tab active" data-mode="encrypt">🔒 Encrypt</button>
+                  <button class="mode-tab" data-mode="decrypt">🔓 Decrypt</button>
+                </div>
+                
+                <div class="encrypt-section" id="encryptSection">
+                  <label>
+                    <span>Enter a message to encrypt:</span>
+                    <input type="text" id="encryptMessage" placeholder="Type your secret message..." />
+                  </label>
+                  <button class="btn-primary" id="encryptBtn">🔒 Encrypt</button>
+                </div>
+                
+                <div class="decrypt-section" id="decryptSection" style="display: none;">
+                  <label>
+                    <span>Encrypted Message:</span>
+                    <input type="text" id="decryptMessage" placeholder="Paste encrypted message here..." />
+                  </label>
+                  <label>
+                    <span>Encryption Key:</span>
+                    <input type="text" id="decryptKey" placeholder="Enter the key (e.g., ABC123)" />
+                  </label>
+                  <button class="btn-primary" id="decryptBtn">🔓 Decrypt</button>
+                  <p class="decrypt-hint">💡 Tip: Share the encrypted message and key with a friend to test decryption!</p>
+                </div>
+              </div>
+              
+              <div class="encryption-visual">
+                <div class="message-box original">
+                  <div class="box-label">Original Message</div>
+                  <div class="message-content" id="originalMessage">Your message will appear here</div>
+                </div>
+                
+                <div class="encryption-process">
+                  <div class="process-icon">🔑</div>
+                  <div class="process-label">Encryption Key</div>
+                  <div class="key-display" id="encryptionKey">Key: ABC123</div>
+                </div>
+                
+                <div class="message-box encrypted">
+                  <div class="box-label">Encrypted Message</div>
+                  <div class="message-content encrypted-text" id="encryptedMessage">Encrypted text will appear here</div>
+                </div>
+              </div>
+              
+              <div class="encryption-types">
+                <h3>Types of Encryption</h3>
+                <div class="types-grid">
+                  <div class="type-card">
+                    <div class="type-icon">🔒</div>
+                    <strong>HTTPS</strong>
+                    <p>Encrypts data between your browser and websites</p>
+                    <div class="type-example">Used for: Login, payments, personal info</div>
+                  </div>
+                  <div class="type-card">
+                    <div class="type-icon">💬</div>
+                    <strong>End-to-End Encryption</strong>
+                    <p>Only sender and receiver can read messages</p>
+                    <div class="type-example">Used for: WhatsApp, Signal, iMessage</div>
+                  </div>
+                  <div class="type-card">
+                    <div class="type-icon">💾</div>
+                    <strong>File Encryption</strong>
+                    <p>Encrypts files on your device</p>
+                    <div class="type-example">Used for: Password managers, secure storage</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="encryption-explanation">
+                <h3>How Encryption Works</h3>
+                <ol>
+                  <li><strong>Plain Text:</strong> Your original message (readable)</li>
+                  <li><strong>Encryption Key:</strong> A secret code used to scramble the message</li>
+                  <li><strong>Cipher Text:</strong> The scrambled, unreadable message</li>
+                  <li><strong>Decryption:</strong> Using the key to convert cipher text back to plain text</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Report Tab -->
+      <div class="tab-content" id="report">
+        <div class="content-card">
+          <h2>📊 Activity Report</h2>
+          <p class="description">View and export a report of all your activities and interactions with the Network & Privacy Basics simulator.</p>
+          
+          <div class="report-controls">
+            <button class="btn-primary" id="generateReportBtn">📊 Generate Report</button>
+            <button class="btn-secondary" id="clearHistoryBtn">🗑️ Clear History</button>
+            <button class="btn-secondary" id="exportReportBtn" style="display: none;">📥 Download as Image</button>
+          </div>
+          
+          <div id="reportContent" style="display: none;"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

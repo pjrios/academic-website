@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search & Credibility Intelligence Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <h1>🔍 Search & Credibility Intelligence Lab</h1>
+        <p class="subtitle">Learn to search effectively, analyze results, and evaluate source credibility and bias</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="main-tabs">
+        <button class="tab-button active" data-tab="strategy">📚 Search Strategy</button>
+        <button class="tab-button" data-tab="simulator">🔎 Search Simulator</button>
+        <button class="tab-button" data-tab="credibility">🎯 Credibility Game</button>
+      </div>
+
+      <!-- Search Strategy Tab -->
+      <div class="tab-content active" id="strategy">
+        <div class="content-card">
+          <h2>📚 Search Strategy Course</h2>
+          <p class="description">Master effective search techniques and learn how to find reliable information online.</p>
+          
+          <div class="strategy-container">
+            <div class="strategy-sidebar">
+              <nav class="strategy-nav">
+                <button class="strategy-nav-item active" data-lesson="intro">Introduction</button>
+                <button class="strategy-nav-item" data-lesson="keywords">Keywords & Phrases</button>
+                <button class="strategy-nav-item" data-lesson="operators">Search Operators</button>
+                <button class="strategy-nav-item" data-lesson="filters">Filters & Advanced</button>
+                <button class="strategy-nav-item" data-lesson="evaluation">Result Evaluation</button>
+                <button class="strategy-nav-item" data-lesson="practice">Practice Exercise</button>
+              </nav>
+            </div>
+
+            <div class="strategy-content">
+              <div class="lesson-display" id="lessonDisplay">
+                <!-- Lesson content will be loaded here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Simulator Tab -->
+      <div class="tab-content" id="simulator">
+        <div class="content-card">
+          <h2>🔎 Search Results Simulator</h2>
+          <p class="description">Practice analyzing search results and learn to identify reliable sources.</p>
+          
+          <div class="simulator-container">
+            <div class="search-bar-container">
+              <div class="search-bar">
+                <input type="text" id="searchQuery" placeholder="Enter your search query..." value="climate change effects">
+                <button class="btn-primary" id="searchBtn">🔍 Search</button>
+              </div>
+              <div class="search-suggestions">
+                <span class="suggestions-label">Try these queries:</span>
+                <div class="suggestion-tags" id="suggestionTags">
+                  <!-- Suggestions will be added here -->
+                </div>
+              </div>
+              <div class="search-tips">
+                <span class="tip-label">💡 Tip:</span>
+                <span id="searchTip">Try using specific keywords and search operators for better results</span>
+              </div>
+            </div>
+
+            <div class="results-container">
+              <div class="results-header">
+                <div class="results-stats">
+                  <span id="resultsCount">About 0 results</span>
+                  <span class="results-time">(0.00 seconds)</span>
+                </div>
+                <div class="results-filters">
+                  <button class="filter-btn" id="filterAll">All</button>
+                  <button class="filter-btn" id="filterNews">News</button>
+                  <button class="filter-btn" id="filterAcademic">Academic</button>
+                  <button class="filter-btn" id="filterGovernment">Government</button>
+                  <button class="filter-btn" id="filterBlog">Blog</button>
+                </div>
+              </div>
+
+              <div class="results-list" id="resultsList">
+                <!-- Search results will appear here -->
+              </div>
+
+              <div class="search-questions" id="searchQuestions" style="display: none;">
+                <h3>📝 Questions About These Results</h3>
+                <div id="questionsContent">
+                  <!-- Questions will appear here -->
+                </div>
+                <div class="questions-feedback" id="questionsFeedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credibility Game Tab -->
+      <div class="tab-content" id="credibility">
+        <div class="content-card">
+          <h2>🎯 Credibility Evaluation Game</h2>
+          <p class="description">Test your skills by evaluating sources for credibility, bias, and reliability.</p>
+          
+          <div class="game-container">
+            <div class="game-header">
+              <div class="game-stats">
+                <div class="stat-item">
+                  <span class="stat-label">Score:</span>
+                  <span class="stat-value" id="gameScore">0</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Round:</span>
+                  <span class="stat-value" id="gameRound">1/10</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Streak:</span>
+                  <span class="stat-value" id="gameStreak">0</span>
+                </div>
+              </div>
+              <button class="btn-secondary" id="newGameBtn">New Game</button>
+            </div>
+
+            <div class="game-content" id="gameContent">
+              <div class="source-card" id="sourceCard">
+                <!-- Source evaluation card will appear here -->
+              </div>
+
+              <div class="evaluation-panel" id="evaluationPanel">
+                <!-- Evaluation questions will appear here -->
+              </div>
+
+              <div class="game-feedback" id="gameFeedback"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

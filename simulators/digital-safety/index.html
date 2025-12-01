@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Digital Safety – Learn Online Security & Etiquette</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- html2canvas for exporting report as image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div>
+          <h1>Digital Safety</h1>
+          <p class="subtitle">Learn passwords, personal info protection, secure websites, and digital etiquette</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-tabs">
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <button class="tab-button tab-active" data-tab="passwords">🔑 Passwords</button>
+        <button class="tab-button" data-tab="personal">👤 Personal Info</button>
+        <button class="tab-button" data-tab="websites">🌐 Secure Websites</button>
+        <button class="tab-button" data-tab="etiquette">💬 Digital Etiquette</button>
+        <button id="progressMenuBtn" class="tab-button" style="margin-left: auto;">
+          ⚙️ Progress
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress Menu Modal -->
+    <div id="progressMenuModal" class="progress-menu-modal" style="display: none;">
+      <div class="progress-menu-content">
+        <div class="progress-menu-header">
+          <h3>Progress & Export</h3>
+          <button class="progress-menu-close" id="closeProgressMenu">×</button>
+        </div>
+        <div class="progress-menu-body">
+          <button id="generateReportBtn" class="btn btn-primary" style="width: 100%; margin-bottom: 12px;">
+            📊 Generate Progress Report
+          </button>
+          <button id="exportProgressBtn" class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;">
+            📤 Export Progress (JSON)
+          </button>
+          <button id="importProgressBtn" class="btn btn-secondary" style="width: 100%;">
+            📥 Import Progress (JSON)
+          </button>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Passwords Tab -->
+    <section id="passwordsTab" class="tab-content tab-active">
+      <div class="lesson-container">
+        <div class="lesson-sidebar">
+          <h3>Password Security</h3>
+          <nav class="lesson-nav">
+            <button class="lesson-nav-item active" data-lesson="password-intro">Introduction</button>
+            <button class="lesson-nav-item" data-lesson="password-strength">Password Strength</button>
+            <button class="lesson-nav-item" data-lesson="password-practices">Best Practices</button>
+            <button class="lesson-nav-item" data-lesson="password-checker">Password Checker</button>
+            <button class="lesson-nav-item" data-lesson="password-quiz">Quiz</button>
+          </nav>
+        </div>
+        <div class="lesson-content">
+          <div id="passwordContent" class="lesson-display"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Personal Info Tab -->
+    <section id="personalTab" class="tab-content">
+      <div class="lesson-container">
+        <div class="lesson-sidebar">
+          <h3>Personal Information</h3>
+          <nav class="lesson-nav">
+            <button class="lesson-nav-item active" data-lesson="personal-intro">Introduction</button>
+            <button class="lesson-nav-item" data-lesson="personal-safe">Safe to Share</button>
+            <button class="lesson-nav-item" data-lesson="personal-private">Keep Private</button>
+            <button class="lesson-nav-item" data-lesson="personal-scenarios">Scenarios</button>
+            <button class="lesson-nav-item" data-lesson="personal-quiz">Quiz</button>
+          </nav>
+        </div>
+        <div class="lesson-content">
+          <div id="personalContent" class="lesson-display"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secure Websites Tab -->
+    <section id="websitesTab" class="tab-content">
+      <div class="lesson-container">
+        <div class="lesson-sidebar">
+          <h3>Secure Websites</h3>
+          <nav class="lesson-nav">
+            <button class="lesson-nav-item active" data-lesson="websites-intro">Introduction</button>
+            <button class="lesson-nav-item" data-lesson="websites-https">HTTPS & SSL</button>
+            <button class="lesson-nav-item" data-lesson="websites-signs">Warning Signs</button>
+            <button class="lesson-nav-item" data-lesson="websites-checker">Website Checker</button>
+            <button class="lesson-nav-item" data-lesson="websites-quiz">Quiz</button>
+          </nav>
+        </div>
+        <div class="lesson-content">
+          <div id="websitesContent" class="lesson-display"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Digital Etiquette Tab -->
+    <section id="etiquetteTab" class="tab-content">
+      <div class="lesson-container">
+        <div class="lesson-sidebar">
+          <h3>Digital Etiquette</h3>
+          <nav class="lesson-nav">
+            <button class="lesson-nav-item active" data-lesson="etiquette-intro">Introduction</button>
+            <button class="lesson-nav-item" data-lesson="etiquette-communication">Communication</button>
+            <button class="lesson-nav-item" data-lesson="etiquette-privacy">Respecting Privacy</button>
+            <button class="lesson-nav-item" data-lesson="etiquette-cyberbullying">Cyberbullying</button>
+            <button class="lesson-nav-item" data-lesson="etiquette-quiz">Quiz</button>
+          </nav>
+        </div>
+        <div class="lesson-content">
+          <div id="etiquetteContent" class="lesson-display"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
