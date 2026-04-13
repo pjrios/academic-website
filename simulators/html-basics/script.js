@@ -88,7 +88,7 @@ const lessons = {
       <p>HTML (HyperText Markup Language) is the standard language for creating web pages. It uses tags to structure content and tell browsers how to display it.</p>
       
       <h2>What is Bootstrap 5?</h2>
-      <p>Bootstrap 5 is a popular CSS framework that provides pre-built styles and components. Instead of writing custom CSS, you can use Bootstrap classes to quickly create beautiful, responsive websites.</p>
+      <p>Bootstrap 5 is a CSS framework with ready-made classes and components. It helps you style pages faster and build layouts that adapt well to phones, tablets, and desktops.</p>
       
       <h2>🎯 Your Project: Build Your Personal Website</h2>
       <p>As you go through these lessons, you'll build a complete website about yourself! Each lesson will add a new piece to your site.</p>
@@ -108,7 +108,7 @@ const lessons = {
       <p><strong>All sections will be responsive</strong> - they'll look great on phones, tablets, and desktops!</p>
       
       <h3>📋 Step 1: Set Up Your Basic Structure</h3>
-      <p><strong>What to do:</strong> Copy this code into your Practice Builder. This is the foundation of your website!</p>
+      <p><strong>What to do:</strong> Copy this code into your Practice Builder. This is your starter HTML page.</p>
       <div class="code-block">
         <code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -118,15 +118,13 @@ const lessons = {
   &lt;title&gt;My Personal Website&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;div class="container"&gt;
-    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
-    &lt;p&gt;This is where your content will go!&lt;/p&gt;
-  &lt;/div&gt;
+  &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+  &lt;p&gt;This is where your content will go!&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Change the <code>&lt;title&gt;</code> to your name or site title!</p>
-      <p><strong>Why:</strong> Every HTML page needs this structure. Right now this is a plain HTML page. In the next section, you'll turn on Bootstrap so classes like <code>container</code> start working.</p>
+      <p><strong>What to modify:</strong> Change the <code>&lt;title&gt;</code>, heading, and paragraph so they match your own site.</p>
+      <p><strong>Why:</strong> Every HTML page needs this structure. At this stage, you are just making a plain HTML page with no Bootstrap styling yet.</p>
       
       <h3>📋 Step 2: Add Bootstrap 5 CDN Links</h3>
       <p><strong>What to do:</strong> Keep the code from Step 1 exactly as it is, and add these two Bootstrap lines to that same file.</p>
@@ -138,21 +136,21 @@ const lessons = {
 &lt;!-- Add this right before &lt;/body&gt; --&gt;
 &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code>
       </div>
-      <p><strong>How it works:</strong> The first line loads Bootstrap's styles, and the second line loads Bootstrap's JavaScript for interactive components like accordions and navbar toggles.</p>
+      <p><strong>How it works:</strong> The first line loads Bootstrap's styles. The second line loads Bootstrap's JavaScript for interactive components like accordions and navbar toggles.</p>
       <div class="alert alert-warning mt-3">
         <strong>⚠️ Important:</strong> Without these Bootstrap links, Bootstrap classes won't work! Always include both the CSS and JS links in your HTML.
       </div>
       
       <div class="alert alert-info mt-3">
-        <strong>💡 Tip:</strong> You are adding to your starter file, not replacing it. Think of these CDN links as the step that turns Bootstrap on for your page.
+        <strong>💡 Tip:</strong> You are adding to your starter file, not replacing it. These two CDN lines are what turn Bootstrap on for your page.
       </div>
       
       <h3>Key Concepts</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>HTML Tags:</strong> Structure your content with tags like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code></li>
-        <li><strong>Bootstrap Classes:</strong> Add styling with classes like <code>container</code>, <code>btn</code>, <code>card</code></li>
-        <li><strong>Responsive Design:</strong> Bootstrap makes your site work on all screen sizes automatically</li>
-        <li><strong>Components:</strong> Use pre-built components like buttons, cards, and navigation bars</li>
+        <li><strong>&lt;head&gt;:</strong> Holds information about the page, like the title and links to stylesheets</li>
+        <li><strong>&lt;body&gt;:</strong> Holds the content visitors actually see on the page</li>
+        <li><strong>CDN link:</strong> Loads a library from the internet instead of storing it in your project files</li>
+        <li><strong>Bootstrap classes:</strong> Ready-made classes like <code>container</code>, <code>btn</code>, and <code>card</code> that work after Bootstrap is loaded</li>
       </ul>
       
       <div class="common-mistakes">
@@ -161,7 +159,7 @@ const lessons = {
           <li><strong>Forgetting to close tags:</strong> Every opening tag needs a closing tag (e.g., <code>&lt;div&gt;</code> needs <code>&lt;/div&gt;</code>)</li>
           <li><strong>Missing Bootstrap links:</strong> Without Bootstrap CDN links, Bootstrap classes won't work</li>
           <li><strong>Wrong tag order:</strong> Make sure <code>&lt;head&gt;</code> comes before <code>&lt;body&gt;</code></li>
-          <li><strong>Forgetting quotes:</strong> Attribute values need quotes: <code>class="container"</code> not <code>class=container</code></li>
+          <li><strong>Forgetting quotes:</strong> Attribute values need quotes, like <code>rel="stylesheet"</code> or <code>src="..."</code></li>
         </ul>
       </div>
       
