@@ -128,28 +128,15 @@ const lessons = {
       <p><strong>What to modify:</strong> Change the <code>&lt;title&gt;</code> to your name or site title!</p>
       <p><strong>Why:</strong> Every HTML page needs this structure. Right now this is a plain HTML page. In the next section, you'll turn on Bootstrap so classes like <code>container</code> start working.</p>
       
-      <h2>🎯 Add to Your Page: Bootstrap 5 CDN Links</h2>
-      <p><strong>What to do:</strong> Keep the HTML structure from Step 1, and add just two Bootstrap lines to it.</p>
+      <h3>📋 Step 2: Add Bootstrap 5 CDN Links</h3>
+      <p><strong>What to do:</strong> Keep the code from Step 1 exactly as it is, and add these two Bootstrap lines to that same file.</p>
       <p><strong>Where to add them:</strong> Put the CSS <code>&lt;link&gt;</code> inside <code>&lt;head&gt;</code>, and put the JavaScript <code>&lt;script&gt;</code> right before the closing <code>&lt;/body&gt;</code> tag.</p>
       <div class="code-block">
-        <code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;My Personal Website&lt;/title&gt;
-  &lt;!-- Bootstrap 5 CSS --&gt;
-  &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="container"&gt;
-    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
-    &lt;p&gt;This is where your content will go!&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;!-- Bootstrap 5 JS --&gt;
-  &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code>
+        <code>&lt;!-- Add this inside &lt;head&gt;, before &lt;/head&gt; --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+
+&lt;!-- Add this right before &lt;/body&gt; --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code>
       </div>
       <p><strong>How it works:</strong> The first line loads Bootstrap's styles, and the second line loads Bootstrap's JavaScript for interactive components like accordions and navbar toggles.</p>
       <div class="alert alert-warning mt-3">
