@@ -144,12 +144,25 @@ const lessons = {
       <div class="alert alert-info mt-3">
         <strong>💡 Tip:</strong> You are adding to your starter file, not replacing it. These two CDN lines are what turn Bootstrap on for your page.
       </div>
+
+      <h3>📋 Step 3: Put Your Content in a Container</h3>
+      <p><strong>What to do:</strong> Now that Bootstrap is loaded, wrap the content inside your <code>&lt;body&gt;</code> in a <code>container</code>.</p>
+      <div class="code-block">
+        <code>&lt;body&gt;
+  &lt;div class="container"&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p&gt;This is where your content will go!&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code>
+      </div>
+      <p><strong>Why:</strong> The <code>container</code> class centers your content and adds spacing on the left and right. You will keep building inside this container in the next lesson.</p>
       
       <h3>Key Concepts</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
         <li><strong>&lt;head&gt;:</strong> Holds information about the page, like the title and links to stylesheets</li>
         <li><strong>&lt;body&gt;:</strong> Holds the content visitors actually see on the page</li>
         <li><strong>CDN link:</strong> Loads a library from the internet instead of storing it in your project files</li>
+        <li><strong>container:</strong> A Bootstrap class that keeps page content centered and readable</li>
         <li><strong>Bootstrap classes:</strong> Ready-made classes like <code>container</code>, <code>btn</code>, and <code>card</code> that work after Bootstrap is loaded</li>
       </ul>
       
@@ -158,6 +171,7 @@ const lessons = {
         <ul>
           <li><strong>Forgetting to close tags:</strong> Every opening tag needs a closing tag (e.g., <code>&lt;div&gt;</code> needs <code>&lt;/div&gt;</code>)</li>
           <li><strong>Missing Bootstrap links:</strong> Without Bootstrap CDN links, Bootstrap classes won't work</li>
+          <li><strong>Putting content outside the container:</strong> If you want Bootstrap's centered layout, make sure your visible content stays inside <code>&lt;div class="container"&gt;</code></li>
           <li><strong>Wrong tag order:</strong> Make sure <code>&lt;head&gt;</code> comes before <code>&lt;body&gt;</code></li>
           <li><strong>Forgetting quotes:</strong> Attribute values need quotes, like <code>rel="stylesheet"</code> or <code>src="..."</code></li>
         </ul>
@@ -175,6 +189,7 @@ const lessons = {
       <p>Headings create hierarchy in your content. HTML provides six levels, from <code>&lt;h1&gt;</code> (most important) to <code>&lt;h6&gt;</code> (least important).</p>
       
       <h2>Bootstrap Display Headings</h2>
+      <p>In the Introduction lesson, you added the Bootstrap CDN links. That means you can now use Bootstrap classes like <code>display-3</code>, <code>lead</code>, and <code>text-center</code>.</p>
       <p>Bootstrap adds special display classes for larger, more prominent headings:</p>
       
       <h3>Basic Headings</h3>
@@ -197,7 +212,7 @@ const lessons = {
       <h3>Example</h3>
       <div class="example-preview">
         <h1 class="display-1">Display 1</h1>
-        <h1 class="display-4">Display 4</h1>
+        <h2 class="display-4">Display 4</h2>
         <h2>Regular H2</h2>
         <h3>Regular H3</h3>
         <p class="lead">Use <code>lead</code> class for standout paragraphs</p>
@@ -211,20 +226,36 @@ const lessons = {
       </div>
       
       <h2>🎯 Add to Your Website: Hero Section</h2>
-      <p><strong>What to do:</strong> Replace the content inside your <code>&lt;div class="container"&gt;</code> with this hero section:</p>
+      <p><strong>Starting point:</strong> At the end of the Introduction lesson, your <code>&lt;body&gt;</code> had a <code>container</code> with a simple heading and paragraph inside it.</p>
+      <p><strong>What to do:</strong> Keep the <code>container</code>, and replace the simple heading and paragraph inside it with this hero section:</p>
       <div class="code-block">
-        <code>&lt;div class="bg-primary text-white text-center py-5"&gt;
-  &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
-  &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
+        <code>&lt;div class="container"&gt;
+  &lt;div class="bg-primary text-white text-center py-5"&gt;
+    &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Change the heading and description to something personal about you!</p>
-      <p><strong>Why:</strong> The hero section is the first thing visitors see. <code>display-3</code> makes a large heading, <code>lead</code> makes the paragraph stand out, and <code>bg-primary</code> adds a colored background.</p>
+      <p><strong>How your body should look now:</strong></p>
+      <div class="code-block">
+        <code>&lt;body&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="bg-primary text-white text-center py-5"&gt;
+      &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
+      &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- More sections will go here in later lessons --&gt;
+&lt;/body&gt;</code>
+      </div>
+      <p><strong>What to modify:</strong> Change the heading and description so they introduce you and your website.</p>
+      <p><strong>Why:</strong> The hero section is the first thing visitors see. <code>container</code> keeps the content centered, <code>display-3</code> makes a large heading, <code>lead</code> makes the paragraph stand out, and <code>bg-primary</code> adds a colored background.</p>
       
       <h3>📚 New Concepts Explained</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
         <li><strong>display-3:</strong> Bootstrap's large display heading (smaller than display-1, larger than regular h1). Options: <code>display-1</code> (largest) through <code>display-6</code> (smallest)</li>
         <li><strong>lead:</strong> Makes paragraph text larger and more prominent - perfect for introductory text</li>
+        <li><strong>container:</strong> Centers your content and adds space on the left and right edges</li>
         <li><strong>bg-primary:</strong> Bootstrap's primary color background (usually blue). Other options: <code>bg-success</code> (green), <code>bg-danger</code> (red), <code>bg-warning</code> (yellow), <code>bg-info</code> (light blue), <code>bg-dark</code> (dark), <code>bg-light</code> (light gray)</li>
         <li><strong>text-white:</strong> White text color (for contrast on dark backgrounds). Other options: <code>text-primary</code>, <code>text-success</code>, <code>text-muted</code> (gray), <code>text-dark</code></li>
         <li><strong>text-center:</strong> Centers text horizontally. Other options: <code>text-start</code> (left), <code>text-end</code> (right)</li>
@@ -234,7 +265,8 @@ const lessons = {
       <div class="common-mistakes">
         <h4>⚠️ Common Mistakes to Avoid</h4>
         <ul>
-          <li><strong>Using multiple h1 tags:</strong> Use only one <code>&lt;h1&gt;</code> per page for SEO</li>
+          <li><strong>Using multiple h1 tags on your page:</strong> Your final page should usually have only one main <code>&lt;h1&gt;</code></li>
+          <li><strong>Forgetting the Bootstrap links from the Introduction lesson:</strong> Without them, classes like <code>display-3</code> and <code>bg-primary</code> will not work</li>
           <li><strong>Forgetting text-white on colored backgrounds:</strong> Dark text on dark backgrounds is hard to read</li>
           <li><strong>Mixing display classes:</strong> Use <code>display-*</code> on <code>&lt;h1&gt;</code> tags, not on paragraphs</li>
         </ul>
