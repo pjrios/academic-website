@@ -126,10 +126,11 @@ const lessons = {
 &lt;/html&gt;</code>
       </div>
       <p><strong>What to modify:</strong> Change the <code>&lt;title&gt;</code> to your name or site title!</p>
-      <p><strong>Why:</strong> Every HTML page needs this structure. The <code>container</code> class is a Bootstrap class that centers your content and adds padding.</p>
+      <p><strong>Why:</strong> Every HTML page needs this structure. Right now this is a plain HTML page. In the next section, you'll turn on Bootstrap so classes like <code>container</code> start working.</p>
       
-      <h3>📋 Step 2: Add Bootstrap 5 CDN Links</h3>
-      <p><strong>What to do:</strong> Add these Bootstrap CDN links inside your <code>&lt;head&gt;</code> tag (before the closing <code>&lt;/head&gt;</code>) and before the closing <code>&lt;/body&gt;</code> tag:</p>
+      <h2>🎯 Add to Your Page: Bootstrap 5 CDN Links</h2>
+      <p><strong>What to do:</strong> Keep the HTML structure from Step 1, and add just two Bootstrap lines to it.</p>
+      <p><strong>Where to add them:</strong> Put the CSS <code>&lt;link&gt;</code> inside <code>&lt;head&gt;</code>, and put the JavaScript <code>&lt;script&gt;</code> right before the closing <code>&lt;/body&gt;</code> tag.</p>
       <div class="code-block">
         <code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -150,14 +151,13 @@ const lessons = {
 &lt;/body&gt;
 &lt;/html&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Make sure both links are added correctly! The CSS link goes in <code>&lt;head&gt;</code>, and the JS link goes before <code>&lt;/body&gt;</code>.</p>
-      <p><strong>Why:</strong> Bootstrap is a library that needs to be loaded before you can use its classes. The CSS link loads Bootstrap's styles, and the JS link loads Bootstrap's JavaScript (needed for interactive components like accordions and navbar toggles).</p>
+      <p><strong>How it works:</strong> The first line loads Bootstrap's styles, and the second line loads Bootstrap's JavaScript for interactive components like accordions and navbar toggles.</p>
       <div class="alert alert-warning mt-3">
         <strong>⚠️ Important:</strong> Without these Bootstrap links, Bootstrap classes won't work! Always include both the CSS and JS links in your HTML.
       </div>
       
       <div class="alert alert-info mt-3">
-        <strong>💡 Important:</strong> To use Bootstrap 5, you need to add the Bootstrap CDN links to your HTML. This is an important skill to learn! We'll show you how in the next step.
+        <strong>💡 Tip:</strong> You are adding to your starter file, not replacing it. Think of these CDN links as the step that turns Bootstrap on for your page.
       </div>
       
       <h3>Key Concepts</h3>
@@ -748,8 +748,8 @@ const lessons = {
       
       <h3>Example</h3>
       <div class="example-preview">
-        <img src="https://via.placeholder.com/300x200/38bdf8/ffffff?text=Responsive+Image" alt="Sample image" class="img-fluid rounded mb-3">
-        <img src="https://via.placeholder.com/150x150/22c55e/ffffff?text=Circle" alt="Circular" class="img-fluid rounded-circle" style="max-width: 150px;">
+        <img src="assets/cat-example-main.jpg" alt="Orange cat lounging on a blanket" class="img-fluid rounded mb-3">
+        <img src="assets/cat-example-main.jpg" alt="Circular crop of an orange cat" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
       </div>
       
       <h2>🎯 Add to Your Website: Logo in Navbar</h2>
