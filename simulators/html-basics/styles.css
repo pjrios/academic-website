@@ -339,17 +339,25 @@ kbd {
   border-radius: 8px;
   padding: 16px;
   margin: 16px 0;
-  overflow-x: auto;
+  overflow: hidden;
   position: relative;
 }
 
 .code-block code {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--text);
   display: block;
-  white-space: pre;
+  max-width: 100%;
+  padding-right: 104px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Syntax highlighting */
