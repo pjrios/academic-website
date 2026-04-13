@@ -11,6 +11,22 @@ const getSimulatorName = () => {
 
 const SIMULATOR_NAME = getSimulatorName();
 const TAB_STORAGE_KEY = `tabState_${SIMULATOR_NAME}`;
+const LESSON_STORAGE_KEY = `lessonState_${SIMULATOR_NAME}`;
+
+function activateTab(tabId) {
+  const tabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+  const tabContent = document.getElementById(`${tabId}Tab`);
+
+  if (!tabButton || !tabContent) {
+    return false;
+  }
+
+  tabButtons.forEach(btn => btn.classList.remove('tab-active'));
+  tabContents.forEach(content => content.classList.remove('tab-active'));
+  tabButton.classList.add('tab-active');
+  tabContent.classList.add('tab-active');
+  return true;
+}
 
 // Save tab state to localStorage
 function saveTabState(tabId) {
@@ -25,17 +41,8 @@ function saveTabState(tabId) {
 function restoreTabState() {
   try {
     const savedTab = localStorage.getItem(TAB_STORAGE_KEY);
-    if (savedTab) {
-      const tabButton = document.querySelector(`.tab-button[data-tab="${savedTab}"]`);
-      const tabContent = document.getElementById(`${savedTab}Tab`);
-      
-      if (tabButton && tabContent) {
-        tabButtons.forEach(btn => btn.classList.remove('tab-active'));
-        tabContents.forEach(content => content.classList.remove('tab-active'));
-        tabButton.classList.add('tab-active');
-        tabContent.classList.add('tab-active');
-        return savedTab;
-      }
+    if (savedTab && activateTab(savedTab)) {
+      return savedTab;
     }
   } catch (e) {
     console.warn('Failed to restore tab state:', e);
@@ -43,35 +50,34 @@ function restoreTabState() {
   return null;
 }
 
+function saveLessonState(lessonId) {
+  try {
+    localStorage.setItem(LESSON_STORAGE_KEY, lessonId);
+  } catch (e) {
+    console.warn('Failed to save lesson state:', e);
+  }
+}
+
+function getSavedLessonState() {
+  try {
+    return localStorage.getItem(LESSON_STORAGE_KEY);
+  } catch (e) {
+    console.warn('Failed to restore lesson state:', e);
+    return null;
+  }
+}
+
 tabButtons.forEach(button => {
   button.addEventListener('click', () => {
     const targetTab = button.getAttribute('data-tab');
-    
-    // Update buttons
-    tabButtons.forEach(btn => btn.classList.remove('tab-active'));
-    button.classList.add('tab-active');
-    
-    // Update content
-    tabContents.forEach(content => {
-      content.classList.remove('tab-active');
-      if (content.id === `${targetTab}Tab`) {
-        content.classList.add('tab-active');
-      }
-    });
-    
-    // Save tab state
-    saveTabState(targetTab);
+
+    if (activateTab(targetTab)) {
+      saveTabState(targetTab);
+    }
   });
 });
 
-// Restore tab state on page load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    restoreTabState();
-  });
-} else {
-  restoreTabState();
-}
+restoreTabState();
 
 // Lesson content
 const lessons = {
@@ -605,7 +611,7 @@ const lessons = {
       </div>
       
       <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> You now have a hero section and biography! Your navbar "About" link should work. Test it by clicking the link in your navbar.
+        <strong>✅ Progress Checkpoint:</strong> You now have a hero section and biography. When you add the navbar in the next lesson, the "About" link can point to this section using <code>href="#about"</code>.
       </div>
       
       <h3>🎯 Try It Yourself</h3>
@@ -616,7 +622,7 @@ const lessons = {
       </ul>
       
       <div class="alert alert-success mt-3">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll add a music/podcast section with interactive accordions!
+        <strong>📖 What's Next:</strong> In the next lesson, you'll add images and build a navbar that sits above the rest of your page.
       </div>
     `
   },
@@ -785,7 +791,7 @@ const lessons = {
       </div>
       <p><strong>What to modify:</strong> Change "YOUR NAME" to your actual name (this is your logo/brand). You can also replace it with an image logo if you have one!</p>
       <p><strong>Why:</strong> The navbar provides navigation. <code>navbar-expand-lg</code> makes it collapse on mobile. <code>ms-auto</code> pushes links to the right. The links will work once we add those sections later!</p>
-      <p><strong>Note:</strong> The "About" link points to your biography section (we'll add an id there later). The "Movies" and "Music" links will work once we add those sections in the Layout lesson.</p>
+      <p><strong>Note:</strong> The "About" link points to the biography section you added in the previous lesson. The "Movies" and "Music" links will work once you add those sections in later lessons.</p>
       
       <h3>📚 Understanding Navbar Structure</h3>
       <p>The navbar has several key parts:</p>
@@ -1046,85 +1052,8 @@ const lessons = {
         <li>Add more list items to the <code>list-group</code> (e.g., "Release Year", "Director")</li>
       </ul>
       
-      <hr class="my-4" style="border-color: var(--border);">
-      
-      <h2>🎯 Add to Your Website: Music/Podcast Section</h2>
-      <p><strong>📍 Placement:</strong> Add this section after the movies section (after the closing <code>&lt;/div&gt;</code> of the movies container). <strong>Customize with your favorite music or podcast!</strong></p>
-      <div class="code-block">
-        <code>&lt;!-- Music section: light background, 2-column layout --&gt;
-&lt;div class="container bg-light py-5 my-5" id="music"&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- Left column: 4/12 width (33%) with centered image --&gt;
-    &lt;div class="col-lg-4 text-center mb-4"&gt;
-      &lt;img src="https://via.placeholder.com/300x300/22c55e/ffffff?text=Album+Art" class="img-fluid rounded-circle mb-3" alt="Album art"&gt;
-      &lt;h3&gt;Artist/Podcast Name&lt;/h3&gt;
-      &lt;p class="text-muted"&gt;Genre or Category&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;!-- Right column: 8/12 width (67%) with accordion --&gt;
-    &lt;div class="col-lg-8"&gt;
-      &lt;h2&gt;My Favorite Music/Podcast&lt;/h2&gt;
-      &lt;p class="lead"&gt;
-        Write about your favorite artist, band, or podcast here. 
-        What makes them special? When did you discover them?
-      &lt;/p&gt;
-      &lt;!-- Bootstrap accordion component --&gt;
-      &lt;div class="accordion" id="musicAccordion"&gt;
-        &lt;div class="accordion-item"&gt;
-          &lt;h2 class="accordion-header"&gt;
-            &lt;button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"&gt;
-              Favorite Songs/Episodes
-            &lt;/button&gt;
-          &lt;/h2&gt;
-          &lt;div id="collapseOne" class="accordion-collapse collapse show"&gt;
-            &lt;div class="accordion-body"&gt;
-              &lt;ul class="list-group"&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 1 - Why you like it&lt;/li&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 2 - Why you like it&lt;/li&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 3 - Why you like it&lt;/li&gt;
-              &lt;/ul&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="accordion-item"&gt;
-          &lt;h2 class="accordion-header"&gt;
-            &lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"&gt;
-              What I Love About It
-            &lt;/button&gt;
-          &lt;/h2&gt;
-          &lt;div id="collapseTwo" class="accordion-collapse collapse"&gt;
-            &lt;div class="accordion-body"&gt;
-              Write more details about what draws you to this music or podcast. 
-              The lyrics? The production? The hosts? The topics?
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Replace with your favorite artist/podcast, add real album art URL, list your favorite songs/episodes!</p>
-      <p><strong>Why:</strong> Accordions let you organize lots of information. <code>bg-light</code> adds a subtle background. <code>rounded-circle</code> makes the image circular. <code>id="music"</code> lets the navbar "Music" link jump here.</p>
-      
-      <h3>📚 New Component: Accordion</h3>
-      <p>Accordions are collapsible content panels. They use Bootstrap's JavaScript to expand/collapse. Key parts:</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>accordion:</strong> Container for all accordion items</li>
-        <li><strong>accordion-item:</strong> Each collapsible section</li>
-        <li><strong>accordion-button:</strong> The clickable header</li>
-        <li><strong>data-bs-toggle="collapse":</strong> Bootstrap JavaScript attribute</li>
-        <li><strong>collapse show:</strong> Makes first item expanded by default</li>
-      </ul>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Add a third accordion item by copying an <code>accordion-item</code> block</li>
-        <li>Change the background from <code>bg-light</code> to <code>bg-primary text-white</code> for a different look</li>
-        <li>Try changing <code>col-lg-4</code> and <code>col-lg-8</code> to <code>col-md-6</code> for equal columns</li>
-      </ul>
-      
       <div class="alert alert-success mt-4">
-        <strong>📖 What's Next:</strong> In the final lesson, you'll add a quick facts section to showcase more about yourself!
+        <strong>📖 What's Next:</strong> In the next lesson, you'll build a music or podcast section with interactive accordions.
       </div>
     `
   },
@@ -1649,84 +1578,144 @@ function loadProgress() {
   });
 }
 
-// Search functionality
+// Lesson navigation
 const lessonSearch = document.getElementById('lessonSearch');
+const lessonDisplay = document.getElementById('lessonDisplay');
+const lessonNavItems = Array.from(document.querySelectorAll('.lesson-nav-item'));
+let activeLessonId = null;
+
+function getVisibleLessonItems() {
+  return lessonNavItems.filter(item => !item.classList.contains('hidden'));
+}
+
+function isLessonsTabActive() {
+  return document.getElementById('lessonsTab')?.classList.contains('tab-active');
+}
+
+function isEditableTarget(target) {
+  if (!target) {
+    return false;
+  }
+
+  const tagName = target.tagName;
+  return target.isContentEditable ||
+    tagName === 'INPUT' ||
+    tagName === 'TEXTAREA' ||
+    tagName === 'SELECT' ||
+    Boolean(target.closest('.CodeMirror'));
+}
+
+function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
+  const lesson = lessons[lessonId];
+  const targetItem = lessonNavItems.find(item => item.getAttribute('data-lesson') === lessonId);
+
+  if (!lesson || !targetItem || !lessonDisplay) {
+    return false;
+  }
+
+  lessonNavItems.forEach(item => item.classList.remove('active'));
+  targetItem.classList.add('active');
+  activeLessonId = lessonId;
+
+  if (persist) {
+    saveLessonState(lessonId);
+  }
+
+  updateProgress(lessonId);
+
+  lessonDisplay.innerHTML = `
+    <div class="lesson-section">
+      ${lesson.content}
+    </div>
+  `;
+
+  if (focusNav) {
+    targetItem.focus();
+  }
+
+  setTimeout(() => {
+    addCopyButtons();
+    addSyntaxHighlighting();
+  }, 10);
+
+  return true;
+}
+
+function restoreLessonState() {
+  const savedLessonId = getSavedLessonState();
+  if (savedLessonId && renderLesson(savedLessonId, { persist: false })) {
+    return savedLessonId;
+  }
+
+  const defaultLessonId = lessonNavItems[0]?.getAttribute('data-lesson');
+  if (defaultLessonId) {
+    renderLesson(defaultLessonId, { persist: false });
+    return defaultLessonId;
+  }
+
+  return null;
+}
+
 if (lessonSearch) {
   lessonSearch.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    const navItems = document.querySelectorAll('.lesson-nav-item');
-    
-    navItems.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      if (text.includes(query)) {
-        item.classList.remove('hidden');
-      } else {
-        item.classList.add('hidden');
-      }
+    const query = e.target.value.trim().toLowerCase();
+
+    lessonNavItems.forEach(item => {
+      const matchesQuery = item.textContent.toLowerCase().includes(query);
+      item.classList.toggle('hidden', !matchesQuery);
+      item.setAttribute('aria-hidden', String(!matchesQuery));
     });
   });
 }
 
-// Keyboard shortcuts
-let currentLessonIndex = 0;
-const lessonNavItems = document.querySelectorAll('.lesson-nav-item');
-document.addEventListener('keydown', (e) => {
-  // Only handle shortcuts when not typing in input/textarea
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-    if (e.ctrlKey && e.key === 'f') {
-      e.preventDefault();
-      lessonSearch?.focus();
-    }
-    return;
-  }
-  
-  const visibleLessons = Array.from(lessonNavItems).filter(item => !item.classList.contains('hidden'));
-  
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    currentLessonIndex = Math.min(currentLessonIndex + 1, visibleLessons.length - 1);
-    visibleLessons[currentLessonIndex]?.click();
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    currentLessonIndex = Math.max(currentLessonIndex - 1, 0);
-    visibleLessons[currentLessonIndex]?.click();
-  }
-});
-
-// Lesson navigation
-const lessonDisplay = document.getElementById('lessonDisplay');
-
-lessonNavItems.forEach((item, index) => {
+lessonNavItems.forEach(item => {
   item.addEventListener('click', () => {
-    const lessonId = item.getAttribute('data-lesson');
-    
-    // Update active state
-    lessonNavItems.forEach(nav => nav.classList.remove('active'));
-    item.classList.add('active');
-    currentLessonIndex = index;
-    
-    // Update progress
-    updateProgress(lessonId);
-    
-    // Display lesson
-    if (lessons[lessonId]) {
-      lessonDisplay.innerHTML = `
-        <div class="lesson-section">
-          ${lessons[lessonId].content}
-        </div>
-      `;
-      
-      // Add copy buttons and syntax highlighting after content is loaded
-      setTimeout(() => {
-        addCopyButtons();
-        addSyntaxHighlighting();
-      }, 10);
-    }
+    renderLesson(item.getAttribute('data-lesson'));
   });
 });
 
-// Load progress on page load
+document.addEventListener('keydown', (e) => {
+  const isSearchShortcut = (e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === 'f';
+
+  if (isSearchShortcut && isLessonsTabActive()) {
+    e.preventDefault();
+    lessonSearch?.focus();
+    lessonSearch?.select();
+    return;
+  }
+
+  if (!isLessonsTabActive() || isEditableTarget(e.target) || e.ctrlKey || e.metaKey || e.altKey) {
+    return;
+  }
+
+  const visibleLessons = getVisibleLessonItems();
+  if (!visibleLessons.length) {
+    return;
+  }
+
+  const activeVisibleIndex = visibleLessons.findIndex(item => item.getAttribute('data-lesson') === activeLessonId);
+  let targetItem = null;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    targetItem = activeVisibleIndex === -1
+      ? visibleLessons[0]
+      : visibleLessons[Math.min(activeVisibleIndex + 1, visibleLessons.length - 1)];
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    targetItem = activeVisibleIndex === -1
+      ? visibleLessons[visibleLessons.length - 1]
+      : visibleLessons[Math.max(activeVisibleIndex - 1, 0)];
+  }
+
+  if (targetItem) {
+    renderLesson(targetItem.getAttribute('data-lesson'), { focusNav: true });
+  }
+});
+
+// Load progress and current lesson on page load
 loadProgress();
+restoreLessonState();
 
 // IndexedDB setup for saving practice builder progress
 const DB_NAME = 'htmlBasicsDB';
@@ -1988,6 +1977,66 @@ const defaultContent = `<!DOCTYPE html>
 </body>
 </html>`;
 
+let notificationStack = null;
+
+function getNotificationStack() {
+  if (!notificationStack) {
+    notificationStack = document.createElement('div');
+    notificationStack.className = 'app-notification-stack';
+    notificationStack.setAttribute('aria-live', 'polite');
+    document.body.appendChild(notificationStack);
+  }
+
+  return notificationStack;
+}
+
+function showNotification(title, message, variant = 'info', duration = 3200) {
+  const stack = getNotificationStack();
+  const notification = document.createElement('div');
+  const body = document.createElement('div');
+  const titleEl = document.createElement('p');
+  const messageEl = document.createElement('p');
+  const closeButton = document.createElement('button');
+
+  notification.className = `app-notification app-notification--${variant}`;
+  notification.setAttribute('role', 'status');
+
+  body.className = 'app-notification__body';
+  titleEl.className = 'app-notification__title';
+  titleEl.textContent = title;
+  messageEl.className = 'app-notification__message';
+  messageEl.textContent = message;
+
+  closeButton.className = 'app-notification__close';
+  closeButton.type = 'button';
+  closeButton.setAttribute('aria-label', 'Dismiss notification');
+  closeButton.textContent = '×';
+
+  body.append(titleEl, messageEl);
+  notification.append(body, closeButton);
+  stack.appendChild(notification);
+
+  let dismissed = false;
+  let timeoutId = null;
+
+  const dismissNotification = () => {
+    if (dismissed) {
+      return;
+    }
+
+    dismissed = true;
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+
+    notification.classList.add('app-notification--exiting');
+    window.setTimeout(() => notification.remove(), 180);
+  };
+
+  closeButton.addEventListener('click', dismissNotification);
+  timeoutId = window.setTimeout(dismissNotification, duration);
+}
+
 clearBtn.addEventListener('click', () => {
   if (confirm('Clear all content?')) {
     htmlEditor.setValue(defaultContent);
@@ -2002,19 +2051,7 @@ async function loadSavedContent() {
   if (saved) {
     htmlEditor.setValue(saved);
     updatePreview();
-    // Show a subtle notification
-    const notification = document.createElement('div');
-    notification.className = 'alert alert-info alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
-    notification.style.zIndex = '9999';
-    notification.style.maxWidth = '400px';
-    notification.innerHTML = `
-      <strong>Restored!</strong> Your previous work has been loaded.
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    `;
-    document.body.appendChild(notification);
-    setTimeout(() => {
-      notification.remove();
-    }, 3000);
+    showNotification('Restored!', 'Your previous work has been loaded.');
   } else {
     htmlEditor.setValue(defaultContent);
   }
@@ -2030,29 +2067,17 @@ const exportImageBtn = document.getElementById('exportImageBtn');
 const siteTitleInput = document.getElementById('siteTitle');
 const exportHtml = document.getElementById('exportHtml');
 
-// Copy from practice builder to export
-const practiceTab = document.getElementById('practiceTab');
-const exportTab = document.getElementById('exportTab');
-
 // Auto-sync Practice Builder to Export tab
 const exportTabButton = document.querySelector('[data-tab="export"]');
 if (exportTabButton) {
   exportTabButton.addEventListener('click', () => {
     if (htmlEditor.getValue().trim()) {
       exportHtml.value = htmlEditor.getValue();
-      // Show notification
-      const notification = document.createElement('div');
-      notification.className = 'alert alert-info alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
-      notification.style.zIndex = '9999';
-      notification.style.maxWidth = '400px';
-      notification.innerHTML = `
-        <strong>Content synced!</strong> Your Practice Builder content has been copied to the export field.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      `;
-      document.body.appendChild(notification);
-      setTimeout(() => {
-        notification.remove();
-      }, 3000);
+      showNotification(
+        'Content synced!',
+        'Your Practice Builder content has been copied to the export field.',
+        'success'
+      );
     }
   });
 }
@@ -2223,5 +2248,3 @@ if (exportImageBtn) {
     }
   });
 }
-
-
