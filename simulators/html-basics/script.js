@@ -297,6 +297,7 @@ const lessons = {
     title: 'Layout Basics: Bootstrap Grid System',
     content: `
       <h2>Understanding Bootstrap's Grid System</h2>
+      <p>Right now your page has a hero section inside a <code>container</code>. In this lesson, you'll learn how to place content side by side underneath that hero section.</p>
       <p>Bootstrap's grid system is the foundation of responsive layouts. It uses a 12-column system that automatically adapts to different screen sizes.</p>
       
       <h3>Basic Grid Structure</h3>
@@ -381,43 +382,48 @@ const lessons = {
       </ul>
       <p>Numbers range from 0-5 (0 = none, 5 = largest)</p>
       
-      <h2>🎯 Add to Your Website: Practice Grid Layout</h2>
-      <p><strong>📍 Placement:</strong> Add this practice section after your hero section to experiment with grids:</p>
+      <h2>🎯 Add to Your Website: Interests Row</h2>
+      <p><strong>Starting point:</strong> Your page already has a hero section from the Headings lesson.</p>
+      <p><strong>📍 Placement:</strong> Add this new section right after your hero section, but still inside the main page flow:</p>
       <div class="code-block">
-        <code>&lt;!-- Practice grid section --&gt;
+        <code>&lt;!-- Interests section under the hero --&gt;
 &lt;div class="container mt-5"&gt;
-  &lt;h2 class="text-center mb-4"&gt;Grid Practice&lt;/h2&gt;
+  &lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-md-4"&gt;
       &lt;div style="background: #e3f2fd; padding: 20px; border-radius: 8px;"&gt;
-        &lt;h4&gt;Column 1&lt;/h4&gt;
-        &lt;p&gt;This is 4/12 width (33%)&lt;/p&gt;
+        &lt;h4&gt;What I Study&lt;/h4&gt;
+        &lt;p&gt;Write one or two sentences about what you study or what you enjoy learning.&lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="col-md-4"&gt;
       &lt;div style="background: #f3e5f5; padding: 20px; border-radius: 8px;"&gt;
-        &lt;h4&gt;Column 2&lt;/h4&gt;
-        &lt;p&gt;This is 4/12 width (33%)&lt;/p&gt;
+        &lt;h4&gt;My Hobbies&lt;/h4&gt;
+        &lt;p&gt;Share a hobby, activity, or interest that is important to you.&lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="col-md-4"&gt;
       &lt;div style="background: #e8f5e9; padding: 20px; border-radius: 8px;"&gt;
-        &lt;h4&gt;Column 3&lt;/h4&gt;
-        &lt;p&gt;This is 4/12 width (33%)&lt;/p&gt;
+        &lt;h4&gt;My Goals&lt;/h4&gt;
+        &lt;p&gt;Add something you hope to do, make, or achieve in the future.&lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Try changing <code>col-md-4</code> to <code>col-md-6</code> to see 2 columns instead of 3. Or try <code>col-md-3</code> for 4 columns!</p>
-      <p><strong>Why:</strong> This helps you understand how the grid works. You can remove this practice section later once you're comfortable with grids.</p>
+      <p><strong>What to modify:</strong> Replace the sample titles and text with your own information.</p>
+      <p><strong>Why:</strong> This gives you a real section for your website while teaching the grid. Later lessons will use the same <code>row</code> and <code>col-*</code> ideas for biography cards, movies, and more.</p>
+
+      <div class="alert alert-info mt-4">
+        <strong>✅ Progress Checkpoint:</strong> Your page should now have a hero section at the top and a three-column section underneath it. On smaller screens, those columns should stack automatically.
+      </div>
       
       <h3>🎯 Try It Yourself</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Create a 2-column layout: change all <code>col-md-4</code> to <code>col-md-6</code></li>
-        <li>Create a 4-column layout: change all <code>col-md-4</code> to <code>col-md-3</code></li>
-        <li>Try an uneven layout: <code>col-md-8</code> and <code>col-md-4</code> (wide + narrow)</li>
-        <li>Center a column: use <code>col-md-6 mx-auto</code> for a centered half-width column</li>
+        <li>Create a 2-column version by changing all <code>col-md-4</code> to <code>col-md-6</code></li>
+        <li>Create a 4-column version by changing all <code>col-md-4</code> to <code>col-md-3</code></li>
+        <li>Try an uneven layout with <code>col-md-8</code> and <code>col-md-4</code></li>
+        <li>Change the text and colors so the section feels more personal</li>
       </ul>
       
       <div class="alert alert-success mt-4">
@@ -429,6 +435,7 @@ const lessons = {
     title: 'Cards & Components',
     content: `
       <h2>Bootstrap Cards</h2>
+      <p>In the last lesson, you used the grid to place content in columns. In this lesson, you'll make those columns look cleaner and more organized by turning them into cards.</p>
       <p>Cards are flexible containers for displaying content. They're one of Bootstrap's most useful components!</p>
       
       <h3>Basic Card Structure</h3>
@@ -505,49 +512,61 @@ const lessons = {
 &lt;/blockquote&gt;</code>
       </div>
       
-      <h2>🎯 Add to Your Website: Practice Cards</h2>
-      <p><strong>📍 Placement:</strong> Add this practice section after your grid practice (or replace the grid practice with this):</p>
+      <h2>🎯 Upgrade Your Website: Turn Your Interests Row into Cards</h2>
+      <p><strong>Starting point:</strong> Your page already has the three-column interests row from the Layout Basics lesson.</p>
+      <p><strong>What to do:</strong> Keep the same three-column grid, but replace the plain colored boxes inside each column with Bootstrap cards:</p>
       <div class="code-block">
-        <code>&lt;!-- Practice cards section --&gt;
+        <code>&lt;!-- Interests section upgraded with Bootstrap cards --&gt;
 &lt;div class="container mt-5"&gt;
-  &lt;h2 class="text-center mb-4"&gt;Card Practice&lt;/h2&gt;
+  &lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-md-4 mb-4"&gt;
-      &lt;div class="card"&gt;
+      &lt;div class="card h-100 border-primary"&gt;
         &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;Card 1&lt;/h5&gt;
-          &lt;p class="card-text"&gt;This is a basic card with some content.&lt;/p&gt;
+          &lt;h5 class="card-title"&gt;What I Study&lt;/h5&gt;
+          &lt;p class="card-text"&gt;Write one or two sentences about what you study or what you enjoy learning.&lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="col-md-4 mb-4"&gt;
-      &lt;div class="card border-primary"&gt;
+      &lt;div class="card h-100 border-success"&gt;
         &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;Card 2&lt;/h5&gt;
-          &lt;p class="card-text"&gt;This card has a colored border.&lt;/p&gt;
+          &lt;h5 class="card-title"&gt;My Hobbies&lt;/h5&gt;
+          &lt;p class="card-text"&gt;Share a hobby, activity, or interest that is important to you.&lt;/p&gt;
+          &lt;ul class="list-group list-group-flush"&gt;
+            &lt;li class="list-group-item"&gt;Hobby 1&lt;/li&gt;
+            &lt;li class="list-group-item"&gt;Hobby 2&lt;/li&gt;
+          &lt;/ul&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="col-md-4 mb-4"&gt;
-      &lt;div class="card bg-light"&gt;
+      &lt;div class="card h-100 bg-light"&gt;
         &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;Card 3&lt;/h5&gt;
-          &lt;p class="card-text"&gt;This card has a light background.&lt;/p&gt;
+          &lt;h5 class="card-title"&gt;My Goals&lt;/h5&gt;
+          &lt;p class="card-text"&gt;Add something you hope to do, make, or achieve in the future.&lt;/p&gt;
+          &lt;blockquote class="blockquote mb-0"&gt;
+            &lt;p class="mb-0"&gt;"A short quote or motto that inspires me."&lt;/p&gt;
+          &lt;/blockquote&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Experiment with different card styles. Try adding <code>border-success</code>, <code>bg-primary text-white</code>, or add images with <code>card-img-top</code>!</p>
-      <p><strong>Why:</strong> Cards are versatile containers. Understanding them will help you build beautiful layouts. You can remove this practice section later.</p>
+      <p><strong>What to modify:</strong> Replace the sample titles, text, hobbies, and quote with your own information.</p>
+      <p><strong>Why:</strong> This keeps the same layout from the previous lesson, but makes each column feel more polished. It also prepares you for the biography section in the next lesson, which uses a larger card.</p>
+
+      <div class="alert alert-info mt-4">
+        <strong>✅ Progress Checkpoint:</strong> Your interests section should still have three columns, but now each column should look like a card. On medium and large screens, the cards should line up nicely and stay the same height.
+      </div>
       
       <h3>🎯 Try It Yourself</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Add an image to a card using <code>card-img-top</code></li>
-        <li>Try different border colors: <code>border-success</code>, <code>border-warning</code>, <code>border-info</code></li>
-        <li>Add a list group inside a card using <code>list-group list-group-flush</code></li>
-        <li>Create a card with a quote using <code>blockquote</code></li>
+        <li>Add an image to one card using <code>card-img-top</code></li>
+        <li>Try different border colors like <code>border-warning</code> or <code>border-info</code></li>
+        <li>Change one card to <code>bg-primary text-white</code> and see how the look changes</li>
+        <li>Add or remove list items to make the hobbies card fit you better</li>
       </ul>
       
       <div class="alert alert-success mt-4">
@@ -559,6 +578,7 @@ const lessons = {
     title: 'Paragraphs & Text with Bootstrap',
     content: `
       <h2>Paragraphs in HTML</h2>
+      <p>You already have a hero section and a cards section on your page. In this lesson, you'll use paragraphs and text formatting to add a longer "About Me" section underneath them.</p>
       <p>The <code>&lt;p&gt;</code> tag creates paragraphs. Bootstrap adds helpful text utilities and classes.</p>
       
       <h3>Basic Paragraph</h3>
@@ -585,8 +605,9 @@ const lessons = {
       </div>
       
       <h2>🎯 Add to Your Website: Biography Section</h2>
-      <p><strong>📍 Placement:</strong> Add this biography section after your hero section (after the closing <code>&lt;/div&gt;</code> of the hero):</p>
-      <p><strong>💡 Remember:</strong> You've already learned about grids and cards in previous lessons. Now you'll combine them to create a beautiful biography section!</p>
+      <p><strong>Starting point:</strong> Your page already has a hero section followed by the interests cards section.</p>
+      <p><strong>📍 Placement:</strong> Add this biography section after the interests cards section so your page keeps growing from top to bottom:</p>
+      <p><strong>💡 Remember:</strong> You've already learned about grids and cards in previous lessons. Now you'll use those skills again, but with more focus on writing and text formatting.</p>
       
       <div class="code-block">
         <code>&lt;!-- Biography section container with top margin --&gt;
@@ -614,8 +635,8 @@ const lessons = {
   &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Replace the placeholder text with your actual biography! Write about yourself, your background, interests, and goals.</p>
-      <p><strong>Why:</strong> Cards create nice visual containers. <code>col-md-8 mx-auto</code> makes it centered (8/12 width) and responsive. <code>mt-5</code> adds top margin for spacing. <code>id="about"</code> lets the navbar "About" link jump to this section.</p>
+      <p><strong>What to modify:</strong> Replace the placeholder text with your actual biography. Write about your background, interests, goals, or anything that helps someone get to know you better.</p>
+      <p><strong>Why:</strong> This section gives your website a stronger personal voice. <code>col-md-8 mx-auto</code> keeps the text centered and readable, <code>mt-5</code> adds spacing above the section, and <code>id="about"</code> prepares this section for the navbar link you'll add later.</p>
       
       <h3>HTML Text Formatting</h3>
       <div class="code-block">
@@ -628,7 +649,7 @@ const lessons = {
       </div>
       
       <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> You now have a hero section and biography. When you add the navbar in the next lesson, the "About" link can point to this section using <code>href="#about"</code>.
+        <strong>✅ Progress Checkpoint:</strong> Your page should now have three main parts in order: hero section, interests cards, and biography. Later, the navbar "About" link can point to this section using <code>href="#about"</code>.
       </div>
       
       <h3>🎯 Try It Yourself</h3>
@@ -636,10 +657,104 @@ const lessons = {
         <li>Change the card background color by adding <code>bg-light</code> or <code>bg-primary</code> to the <code>card</code> div</li>
         <li>Try changing <code>col-md-8</code> to <code>col-md-10</code> to make the biography wider</li>
         <li>Add a profile image inside your card using <code>&lt;img src="..." class="img-fluid rounded mb-3"&gt;</code></li>
+        <li>Use <code>&lt;strong&gt;</code> or <code>&lt;em&gt;</code> inside one paragraph to emphasize an important detail</li>
       </ul>
       
       <div class="alert alert-success mt-3">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll add images and build a navbar that sits above the rest of your page.
+        <strong>📖 What's Next:</strong> In the next lesson, you'll add a navbar at the top of your page so visitors can move around your site.
+      </div>
+    `
+  },
+  navbar: {
+    title: 'Navbar with Bootstrap',
+    content: `
+      <h2>Adding Navigation to Your Page</h2>
+      <p>Your page already has a hero section, interests cards, and a biography section. In this lesson, you'll add a navigation bar at the very top so visitors can move around your site more easily.</p>
+
+      <h3>What a Navbar Does</h3>
+      <p>A navbar is a navigation bar. It usually sits at the top of the page and contains your site name plus links to important sections.</p>
+
+      <h3>Basic Navbar Structure</h3>
+      <div class="code-block">
+        <code>&lt;nav class="navbar"&gt;
+  &lt;a class="navbar-brand" href="#"&gt;My Site&lt;/a&gt;
+  &lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;
+&lt;/nav&gt;</code>
+      </div>
+
+      <h2>🎯 Add to Your Website: Navbar</h2>
+      <div class="alert alert-warning">
+        <strong>⚠️ Important Placement:</strong> The navbar should go at the very top of your <code>&lt;body&gt;</code>, before your hero section and everything else on the page.
+      </div>
+      <p><strong>Starting point:</strong> Your page already has several sections in the body, but no navigation yet.</p>
+      <p><strong>What to do:</strong> Add this navbar code at the very beginning of your <code>&lt;body&gt;</code> tag:</p>
+      <div class="code-block">
+        <code>&lt;!-- Bootstrap navbar: dark theme, expands on large screens --&gt;
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;
+      &lt;strong&gt;YOUR NAME&lt;/strong&gt;
+    &lt;/a&gt;
+    &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+      &lt;ul class="navbar-nav ms-auto"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#movies"&gt;Movies&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#music"&gt;Music&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code>
+      </div>
+      <p><strong>What to modify:</strong> Change "YOUR NAME" to your actual name. Keep the links as they are for now.</p>
+      <p><strong>Why:</strong> The navbar gives visitors a clear starting point and helps them move around your page. <code>navbar-expand-lg</code> makes it collapse on smaller screens, and <code>ms-auto</code> pushes the links to the right.</p>
+      <p><strong>Note:</strong> The "About" link already points to the biography section you built in the previous lesson. The "Movies" and "Music" links will start working once you add those sections later.</p>
+
+      <h3>📚 Understanding Navbar Structure</h3>
+      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
+        <li><strong>navbar:</strong> Main container for the navigation bar</li>
+        <li><strong>navbar-expand-lg:</strong> Shows the full menu on large screens and collapses it on smaller ones</li>
+        <li><strong>navbar-brand:</strong> Your site name or logo area</li>
+        <li><strong>navbar-toggler:</strong> The mobile menu button</li>
+        <li><strong>collapse navbar-collapse:</strong> The part of the navbar that opens and closes on smaller screens</li>
+        <li><strong>nav-link:</strong> A clickable navigation link</li>
+        <li><strong>ms-auto:</strong> Pushes the links to the right side of the navbar</li>
+      </ul>
+
+      <div class="common-mistakes">
+        <h4>⚠️ Common Mistakes to Avoid</h4>
+        <ul>
+          <li><strong>Navbar in the wrong place:</strong> Put it at the top of <code>&lt;body&gt;</code>, before the hero section</li>
+          <li><strong>Navbar not collapsing on mobile:</strong> Check that the Bootstrap JS link from the Introduction lesson is still in your page</li>
+          <li><strong>Toggle button not working:</strong> Make sure <code>data-bs-target="#navbarNav"</code> matches <code>id="navbarNav"</code></li>
+          <li><strong>About link not working:</strong> Make sure your biography section still has <code>id="about"</code></li>
+        </ul>
+      </div>
+
+      <div class="alert alert-info mt-4">
+        <strong>✅ Progress Checkpoint:</strong> Your page should now start with a navbar, followed by the hero section, interests cards, and biography. The "About" link should jump to your biography section.
+      </div>
+
+      <h3>🎯 Try It Yourself</h3>
+      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
+        <li>Change the navbar color from <code>bg-dark</code> to <code>bg-primary</code> or <code>bg-success</code></li>
+        <li>Add one more navigation link, like <code>Contact</code> or <code>Portfolio</code></li>
+        <li>Remove <code>ms-auto</code> and see how the link alignment changes</li>
+      </ul>
+
+      <div class="alert alert-success mt-3">
+        <strong>📖 What's Next:</strong> In the next lesson, you'll learn how to use real images in your page and add one to the content you've already built.
       </div>
     `
   },
@@ -741,6 +856,7 @@ const lessons = {
     title: 'Images with Bootstrap',
     content: `
       <h2>Adding Images</h2>
+      <p>Your page already has a navbar, hero section, interests cards, and a biography section. In this lesson, you'll learn how images work in HTML and then add one to the page content you already built.</p>
       <p>The <code>&lt;img&gt;</code> tag embeds images. Bootstrap provides classes for responsive images and styling.</p>
       
       <h3>Basic Image</h3>
@@ -769,64 +885,29 @@ const lessons = {
         <img src="assets/cat-example-main.jpg" alt="Circular crop of an orange cat" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
       </div>
       
-      <h2>🎯 Add to Your Website: Logo in Navbar</h2>
-      <div class="alert alert-warning">
-        <strong>⚠️ Important Placement:</strong> The navbar MUST be placed at the very top of your <code>&lt;body&gt;</code> tag, BEFORE your hero section. If you already have a hero section, you'll need to move this navbar code above it!
-      </div>
-      <p><strong>What to do:</strong> Add this navbar code at the very beginning of your <code>&lt;body&gt;</code> tag (before everything else, including the hero section):</p>
+      <h2>🎯 Add to Your Website: Profile Image in the Biography Section</h2>
+      <p><strong>Starting point:</strong> Your page already has a biography section with text inside a card.</p>
+      <p><strong>What to do:</strong> Add an image near the top of that biography card, before the <code>About Me</code> heading:</p>
       <div class="code-block">
-        <code>&lt;!-- Bootstrap navbar: dark theme, expands on large screens --&gt;
-&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
-  &lt;div class="container"&gt;
-    &lt;!-- Brand/logo area --&gt;
-    &lt;a class="navbar-brand" href="#"&gt;
-      &lt;strong&gt;YOUR NAME&lt;/strong&gt;
-    &lt;/a&gt;
-    &lt;!-- Mobile menu toggle button --&gt;
-    &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
-      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
-    &lt;/button&gt;
-    &lt;!-- Collapsible menu content --&gt;
-    &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
-      &lt;ul class="navbar-nav ms-auto"&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
-        &lt;/li&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;
-        &lt;/li&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link" href="#movies"&gt;Movies&lt;/a&gt;
-        &lt;/li&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link" href="#music"&gt;Music&lt;/a&gt;
-        &lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/div&gt;
+        <code>&lt;div class="card"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;img src="assets/cat-example-main.jpg" alt="A profile photo or image that represents me" class="img-fluid rounded mb-3"&gt;
+    &lt;h2 class="card-title"&gt;About Me&lt;/h2&gt;
+    &lt;p class="card-text"&gt;Write your biography here...&lt;/p&gt;
   &lt;/div&gt;
-&lt;/nav&gt;</code>
+&lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Change "YOUR NAME" to your actual name (this is your logo/brand). You can also replace it with an image logo if you have one!</p>
-      <p><strong>Why:</strong> The navbar provides navigation. <code>navbar-expand-lg</code> makes it collapse on mobile. <code>ms-auto</code> pushes links to the right. The links will work once we add those sections later!</p>
-      <p><strong>Note:</strong> The "About" link points to the biography section you added in the previous lesson. The "Movies" and "Music" links will work once you add those sections in later lessons.</p>
-      
-      <h3>📚 Understanding Navbar Structure</h3>
-      <p>The navbar has several key parts:</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>navbar:</strong> Main container for the navigation bar</li>
-        <li><strong>navbar-expand-lg:</strong> Navbar expands (shows full menu) on large screens, collapses on smaller screens</li>
-        <li><strong>navbar-dark bg-dark:</strong> Dark theme (text is light, background is dark). Alternatives: <code>navbar-light bg-light</code> for light theme</li>
-        <li><strong>navbar-brand:</strong> Your logo/brand name area (usually on the left)</li>
-        <li><strong>navbar-toggler:</strong> The hamburger menu button (shows on mobile)</li>
-        <li><strong>collapse navbar-collapse:</strong> The collapsible menu content (hides on mobile, shows when toggled)</li>
-        <li><strong>navbar-nav:</strong> Container for navigation links</li>
-        <li><strong>nav-item:</strong> Each individual navigation link container</li>
-        <li><strong>nav-link:</strong> The actual clickable link</li>
-        <li><strong>ms-auto:</strong> Margin-start auto - pushes links to the right side</li>
-        <li><strong>active:</strong> Highlights the current page/section</li>
-        <li><strong>data-bs-toggle="collapse":</strong> Bootstrap JavaScript attribute for toggling the mobile menu</li>
-        <li><strong>data-bs-target="#navbarNav":</strong> Points to the element to collapse/expand (must match the <code>id</code> of the collapsible div)</li>
-      </ul>
+      <p><strong>What to modify:</strong> Replace the sample image path with your own image if you want, and update the <code>alt</code> text so it describes the image clearly.</p>
+      <p><strong>Why:</strong> Images make your page feel more personal. <code>img-fluid</code> keeps the image responsive, <code>rounded</code> softens the corners, and <code>mb-3</code> adds spacing below the image.</p>
+
+      <h3>Optional: Use an Image in the Navbar Brand Area</h3>
+      <p>If you want your navbar brand area to use an image instead of your name, you can replace the text inside <code>navbar-brand</code> with an image like this:</p>
+      <div class="code-block">
+        <code>&lt;a class="navbar-brand" href="#"&gt;
+  &lt;img src="assets/cat-example-main.jpg" alt="My site logo" height="40" class="rounded-circle"&gt;
+&lt;/a&gt;</code>
+      </div>
+      <p>This is optional, but it shows how image skills can connect to the navbar you built in the previous lesson.</p>
       
       <h3>Image Attributes</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
@@ -834,35 +915,34 @@ const lessons = {
         <li><strong>alt:</strong> Alternative text for accessibility (required)</li>
         <li><strong>class="img-fluid":</strong> Makes image responsive</li>
         <li><strong>class="rounded":</strong> Adds rounded corners</li>
+        <li><strong>class="rounded-circle":</strong> Makes the image circular</li>
       </ul>
       
       <h3>Best Practices</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
         <li>Always use <code>img-fluid</code> for responsive images</li>
         <li>Always include the <code>alt</code> attribute</li>
-        <li>Use Bootstrap classes instead of inline styles when possible</li>
+        <li>Use images that match the mood and purpose of your page</li>
       </ul>
       
       <div class="common-mistakes">
         <h4>⚠️ Common Mistakes to Avoid</h4>
         <ul>
-          <li><strong>Navbar not showing:</strong> Make sure it's placed BEFORE the hero section in your HTML - at the very top of <code>&lt;body&gt;</code></li>
-          <li><strong>Navbar not collapsing on mobile:</strong> Check that Bootstrap JS is loaded. The <code>data-bs-toggle</code> and <code>data-bs-target</code> attributes need Bootstrap JS to work</li>
-          <li><strong>Links not working:</strong> The "Movies" and "Music" links will work once you add those sections with matching <code>id</code> attributes (e.g., <code>id="movies"</code>)</li>
-          <li><strong>Toggle button not working:</strong> Make sure <code>data-bs-target="#navbarNav"</code> matches the <code>id="navbarNav"</code> on the collapsible div</li>
-          <li><strong>Links on wrong side:</strong> Use <code>ms-auto</code> to push links right, or remove it to keep them left</li>
+          <li><strong>Image not displaying:</strong> Make sure the file path in <code>src</code> is correct and always include an <code>alt</code> description</li>
+          <li><strong>Image too large:</strong> Use <code>img-fluid</code> so the image scales to fit its container</li>
+          <li><strong>No spacing around the image:</strong> Add a class like <code>mb-3</code> so the text does not touch the image</li>
         </ul>
       </div>
       
       <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> You now have a navbar! Make sure it appears at the top of your page. The "About" link should jump to your biography section.
+        <strong>✅ Progress Checkpoint:</strong> Your page should now have a visible image inside the biography card. The image should resize nicely and sit above your "About Me" text.
       </div>
       
       <h3>🎯 Try It Yourself</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Change the navbar color from <code>bg-dark</code> to <code>bg-primary</code> or <code>bg-success</code></li>
-        <li>Add an image logo by replacing the text with <code>&lt;img src="logo.png" alt="Logo" height="30"&gt;</code></li>
-        <li>Add more navigation links (e.g., "Contact", "Portfolio") - just copy a <code>&lt;li class="nav-item"&gt;</code> block</li>
+        <li>Try <code>rounded-circle</code> instead of <code>rounded</code> to see how the biography image changes</li>
+        <li>Add a second image somewhere else on the page, like inside one of the interests cards</li>
+        <li>Swap the biography image for one of your own and update the <code>alt</code> text</li>
       </ul>
       
       <div class="alert alert-success mt-3">
@@ -874,6 +954,7 @@ const lessons = {
     title: 'Links & Buttons with Bootstrap',
     content: `
       <h2>Creating Links</h2>
+      <p>Your page already has a navbar, hero section, interests cards, biography, and at least one image. In this lesson, you'll use links and button-styled links to finish the main page structure with a footer.</p>
       <p>The <code>&lt;a&gt;</code> (anchor) tag creates hyperlinks. Bootstrap provides button classes that work with links.</p>
       
       <h3>Basic Link</h3>
@@ -905,7 +986,8 @@ const lessons = {
       </div>
       
       <h2>🎯 Add to Your Website: Footer with Social Links</h2>
-      <p><strong>📍 Placement:</strong> Add this footer at the very end of your page (before the closing <code>&lt;/body&gt;</code> tag):</p>
+      <p><strong>Starting point:</strong> Your page already has the main content sections. Now you are adding the final structural piece at the bottom.</p>
+      <p><strong>📍 Placement:</strong> Add this footer at the very end of your page, before the closing <code>&lt;/body&gt;</code> tag:</p>
       <div class="code-block">
         <code>&lt;footer class="bg-dark text-white py-4 mt-5"&gt;
   &lt;div class="container"&gt;
@@ -926,7 +1008,7 @@ const lessons = {
   &lt;/div&gt;
 &lt;/footer&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Add your name, update the email and social media links (or remove buttons you don't use), change the copyright year!</p>
+      <p><strong>What to modify:</strong> Add your name, update the email and social media links, and change the copyright year.</p>
       <p><strong>Why:</strong> The footer provides contact info and gives your site a professional finish. <code>text-md-end</code> aligns content right on larger screens. <code>target="_blank"</code> opens links in new tabs.</p>
       
       <h3>Link Attributes</h3>
@@ -982,7 +1064,7 @@ const lessons = {
       </div>
       
       <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> You now have a complete page structure: navbar, hero, biography, and footer! Test all your links. Update the social media links with your real profiles (or remove buttons you don't use).
+        <strong>✅ Progress Checkpoint:</strong> Your page should now include the full main structure: navbar, hero, interests cards, biography, image, and footer. Test the footer links and make sure your contact details are correct.
       </div>
       
       <h3>🎯 Try It Yourself</h3>
@@ -1166,7 +1248,8 @@ const lessons = {
         <li>✅ Learned grid basics (Layout Basics lesson)</li>
         <li>✅ Learned cards and components (Cards lesson)</li>
         <li>✅ Added biography section with <code>id="about"</code> (Paragraphs lesson)</li>
-        <li>✅ Added navbar at the top with working links (Images lesson)</li>
+        <li>✅ Added navbar at the top with working links (Navbar lesson)</li>
+        <li>✅ Added at least one image to your page (Images lesson)</li>
         <li>✅ Added footer with social links (Links lesson)</li>
         <li>✅ Added movies section with <code>id="movies"</code> (Movies lesson)</li>
         <li>✅ Added music/podcast section with <code>id="music"</code> (Music lesson)</li>
@@ -1566,7 +1649,7 @@ const progressSections = {
   structure: ['intro'],
   hero: ['headings'],
   biography: ['paragraphs'],
-  navbar: ['images'],
+  navbar: ['navbar'],
   footer: ['links'],
   movies: ['layoutMovies'],
   music: ['layoutMusic'],
