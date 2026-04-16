@@ -86,13 +86,13 @@ const lessons = {
     content: `
       <h2>What is HTML?</h2>
       <p>HTML (HyperText Markup Language) is the standard language for creating web pages. It uses tags to structure content and tell browsers how to display it.</p>
-      
+
       <h2>What is Bootstrap 5?</h2>
       <p>Bootstrap 5 is a CSS framework with ready-made classes and components. It helps you style pages faster and build layouts that adapt well to phones, tablets, and desktops.</p>
-      
+
       <h2>🎯 Your Project: Build Your Personal Website</h2>
       <p>As you go through these lessons, you'll build a complete website about yourself! Each lesson will add a new piece to your site.</p>
-      
+
       <h3>📋 What You'll Build</h3>
       <p>By the end of these lessons, you'll have a complete personal website with:</p>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
@@ -106,7 +106,7 @@ const lessons = {
         <li>✅ Beautiful Bootstrap styling throughout</li>
       </ul>
       <p><strong>All sections will be responsive</strong> - they'll look great on phones, tablets, and desktops!</p>
-      
+
       <h3>📋 Step 1: Set Up Your Basic Structure</h3>
       <p><strong>What to do:</strong> Copy this code into your Practice Builder. This is your starter HTML page.</p>
       <div class="code-block">
@@ -125,7 +125,7 @@ const lessons = {
       </div>
       <p><strong>What to modify:</strong> Change the <code>&lt;title&gt;</code>, heading, and paragraph so they match your own site.</p>
       <p><strong>Why:</strong> Every HTML page needs this structure. At this stage, you are just making a plain HTML page with no Bootstrap styling yet.</p>
-      
+
       <h3>📋 Step 2: Add Bootstrap 5 CDN Links</h3>
       <p><strong>What to do:</strong> Keep the code from Step 1 exactly as it is, and add these two Bootstrap lines to that same file.</p>
       <p><strong>Where to add them:</strong> Put the CSS <code>&lt;link&gt;</code> inside <code>&lt;head&gt;</code>, and put the JavaScript <code>&lt;script&gt;</code> right before the closing <code>&lt;/body&gt;</code> tag.</p>
@@ -140,7 +140,7 @@ const lessons = {
       <div class="alert alert-warning mt-3">
         <strong>⚠️ Important:</strong> Without these Bootstrap links, Bootstrap classes won't work! Always include both the CSS and JS links in your HTML.
       </div>
-      
+
       <div class="alert alert-info mt-3">
         <strong>💡 Tip:</strong> You are adding to your starter file, not replacing it. These two CDN lines are what turn Bootstrap on for your page.
       </div>
@@ -773,14 +773,15 @@ const lessons = {
       </ul>
       
       <h2>🎯 Add to Your Website: Music/Podcast Section</h2>
-      <p><strong>📍 Placement:</strong> Add this section after the movies section (after the closing <code>&lt;/div&gt;</code> of the movies container). <strong>Customize with your favorite music or podcast!</strong></p>
+      <p><strong>Starting point:</strong> Your page already has a navbar, hero section, interests cards, biography, image, footer, and a Movies section.</p>
+      <p><strong>📍 Placement:</strong> Add this section after the Movies section, but before your footer so it becomes part of the main page content. <strong>Customize it with your favorite music or podcast.</strong></p>
       <div class="code-block">
         <code>&lt;!-- Music section: light background, 2-column layout --&gt;
 &lt;div class="container bg-light py-5 my-5" id="music"&gt;
   &lt;div class="row"&gt;
     &lt;!-- Left column: 4/12 width (33%) with centered image --&gt;
     &lt;div class="col-lg-4 text-center mb-4"&gt;
-      &lt;img src="https://via.placeholder.com/300x300/22c55e/ffffff?text=Album+Art" class="img-fluid rounded-circle mb-3" alt="Album art"&gt;
+      &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover"&gt;
       &lt;h3&gt;Artist/Podcast Name&lt;/h3&gt;
       &lt;p class="text-muted"&gt;Genre or Category&lt;/p&gt;
     &lt;/div&gt;
@@ -827,8 +828,8 @@ const lessons = {
   &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Replace with your favorite artist/podcast, add real album art URL, list your favorite songs/episodes!</p>
-      <p><strong>Why:</strong> Accordions let you organize lots of information. <code>bg-light</code> adds a subtle background. <code>rounded-circle</code> makes the image circular. <code>id="music"</code> lets the navbar "Music" link jump here.</p>
+      <p><strong>What to modify:</strong> Replace the sample text with your favorite artist, band, or podcast. You can keep the sample image for now or replace it with your own file later, and update the list with real songs or episodes.</p>
+      <p><strong>Why:</strong> This section introduces a new interactive Bootstrap component while still building your same page. <code>bg-light</code> helps it stand out from the sections around it, <code>rounded-circle</code> makes the image circular, and <code>id="music"</code> lets the navbar "Music" link jump here.</p>
       
       <h3>📚 New Component: Accordion</h3>
       <p>Accordions are collapsible content panels. They use Bootstrap's JavaScript to expand/collapse. Key parts:</p>
@@ -846,6 +847,10 @@ const lessons = {
         <li>Change the background from <code>bg-light</code> to <code>bg-primary text-white</code> for a different look</li>
         <li>Try changing <code>col-lg-4</code> and <code>col-lg-8</code> to <code>col-md-6</code> for equal columns</li>
       </ul>
+
+      <div class="alert alert-info mt-4">
+        <strong>✅ Progress Checkpoint:</strong> Your page should now include a Music section before the footer, and the "Music" link in the navbar should jump to it.
+      </div>
       
       <div class="alert alert-success mt-4">
         <strong>📖 What's Next:</strong> In the final lesson, you'll add a quick facts section to showcase more about yourself!
@@ -885,9 +890,9 @@ const lessons = {
         <img src="assets/cat-example-main.jpg" alt="Circular crop of an orange cat" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
       </div>
       
-      <h2>🎯 Add to Your Website: Profile Image in the Biography Section</h2>
+      <h2>🎯 Add to Your Website: Images for the Biography and Navbar</h2>
       <p><strong>Starting point:</strong> Your page already has a biography section with text inside a card.</p>
-      <p><strong>What to do:</strong> Add an image near the top of that biography card, before the <code>About Me</code> heading:</p>
+      <p><strong>What to do:</strong> Add an image near the top of your biography card, before the <code>About Me</code> heading:</p>
       <div class="code-block">
         <code>&lt;div class="card"&gt;
   &lt;div class="card-body"&gt;
@@ -897,17 +902,21 @@ const lessons = {
   &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Replace the sample image path with your own image if you want, and update the <code>alt</code> text so it describes the image clearly.</p>
+      <p><strong>What to modify:</strong> Replace the sample image path with your own image if you want, or use the live avatar builder below to create a character-style profile image. Update the <code>alt</code> text so it describes the image clearly.</p>
       <p><strong>Why:</strong> Images make your page feel more personal. <code>img-fluid</code> keeps the image responsive, <code>rounded</code> softens the corners, and <code>mb-3</code> adds spacing below the image.</p>
 
-      <h3>Optional: Use an Image in the Navbar Brand Area</h3>
-      <p>If you want your navbar brand area to use an image instead of your name, you can replace the text inside <code>navbar-brand</code> with an image like this:</p>
+      <h3>Required: Add an Image in the Navbar Brand Area</h3>
+      <p>Your navbar brand area should also use an image. Replace the text inside <code>navbar-brand</code> with an image like this:</p>
       <div class="code-block">
         <code>&lt;a class="navbar-brand" href="#"&gt;
   &lt;img src="assets/cat-example-main.jpg" alt="My site logo" height="40" class="rounded-circle"&gt;
 &lt;/a&gt;</code>
       </div>
-      <p>This is optional, but it shows how image skills can connect to the navbar you built in the previous lesson.</p>
+      <p>This connects the image lesson to the navbar you built earlier and gives the site a clear visual brand.</p>
+
+      <h3>Live Avatar Builder</h3>
+      <p>Use this live builder to create a simple character image you can use for both the biography section and the navbar brand area.</p>
+      <div id="avatarBuilderMount"></div>
       
       <h3>Image Attributes</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
@@ -935,13 +944,13 @@ const lessons = {
       </div>
       
       <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now have a visible image inside the biography card. The image should resize nicely and sit above your "About Me" text.
+        <strong>✅ Progress Checkpoint:</strong> Your page should now have a visible image inside the biography card and an image in the navbar brand area. Both images should display correctly and resize cleanly.
       </div>
       
       <h3>🎯 Try It Yourself</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
         <li>Try <code>rounded-circle</code> instead of <code>rounded</code> to see how the biography image changes</li>
-        <li>Add a second image somewhere else on the page, like inside one of the interests cards</li>
+        <li>Add another image somewhere else on the page, like inside one of the interests cards</li>
         <li>Swap the biography image for one of your own and update the <code>alt</code> text</li>
       </ul>
       
@@ -954,7 +963,7 @@ const lessons = {
     title: 'Links & Buttons with Bootstrap',
     content: `
       <h2>Creating Links</h2>
-      <p>Your page already has a navbar, hero section, interests cards, biography, and at least one image. In this lesson, you'll use links and button-styled links to finish the main page structure with a footer.</p>
+      <p>Your page already has a navbar, hero section, interests cards, biography, a biography image, and a navbar brand image. In this lesson, you'll use links and button-styled links to finish the main page structure with a footer.</p>
       <p>The <code>&lt;a&gt;</code> (anchor) tag creates hyperlinks. Bootstrap provides button classes that work with links.</p>
       
       <h3>Basic Link</h3>
@@ -1083,7 +1092,8 @@ const lessons = {
     title: 'Advanced Layout: Movies Section',
     content: `
       <h2>Building Complex Layouts</h2>
-      <p>Now that you understand grids and cards, let's build a more complex section combining multiple components!</p>
+      <p>Your page already has the main site structure in place. In this lesson, you'll add a new content section that uses cards, images, list groups, and quotes together.</p>
+      <p>Now that you understand grids and cards, let's build a more complex section combining multiple components.</p>
       
       <h3>What You'll Learn</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
@@ -1094,14 +1104,15 @@ const lessons = {
       </ul>
       
       <h2>🎯 Add to Your Website: Movies Section</h2>
-      <p><strong>📍 Placement:</strong> Add this movies section after your biography section (after the closing <code>&lt;/div&gt;</code> of the biography container). <strong>Replace with your favorite movie series!</strong></p>
+      <p><strong>Starting point:</strong> Your page already has a navbar, hero section, interests cards, biography, image, and footer.</p>
+      <p><strong>📍 Placement:</strong> Add this movies section after your biography section and before the footer. <strong>Replace it with your favorite movie series.</strong></p>
       <div class="code-block">
         <code>&lt;div class="container my-5" id="movies"&gt;
   &lt;h2 class="text-center mb-4"&gt;My Favorite Movie Series&lt;/h2&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-md-6 mb-4"&gt;
       &lt;div class="card h-100"&gt;
-        &lt;img src="https://via.placeholder.com/400x300/38bdf8/ffffff?text=Movie+Poster" class="card-img-top" alt="Movie poster"&gt;
+        &lt;img src="assets/cat-example-main.jpg" class="card-img-top" alt="Movie poster or image related to the movie series"&gt;
         &lt;div class="card-body"&gt;
           &lt;h5 class="card-title"&gt;Movie Series Name&lt;/h5&gt;
           &lt;p class="card-text"&gt;
@@ -1134,7 +1145,7 @@ const lessons = {
   &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Change the movie name, add your own image URL, write your thoughts, and add a real quote!</p>
+      <p><strong>What to modify:</strong> Change the movie name, replace the sample image if you want, write your own thoughts, and add a real quote.</p>
       <p><strong>Why:</strong> Using <code>col-md-6</code> creates two equal columns (50% each). <code>h-100</code> makes cards the same height. <code>list-group</code> creates clean lists. <code>id="movies"</code> lets the navbar "Movies" link jump to this section.</p>
       
       <h3>📚 New Components Used</h3>
@@ -1144,6 +1155,10 @@ const lessons = {
         <li><strong>card-img-top:</strong> Places image at top of card.</li>
       </ul>
       
+      <div class="alert alert-info mt-4">
+        <strong>✅ Progress Checkpoint:</strong> Your page should now have a Movies section before the footer, and the "Movies" link in the navbar should jump to it.
+      </div>
+
       <h3>🎯 Try It Yourself</h3>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
         <li>Add a third card by changing <code>col-md-6</code> to <code>col-md-4</code> (creates 3 equal columns)</li>
@@ -1160,6 +1175,7 @@ const lessons = {
     title: 'Advanced Layout: Quick Facts',
     content: `
       <h2>Multi-Column Card Layouts</h2>
+      <p>By this point, your page already has several sections and a footer. This final lesson adds one more compact section of personal details before the footer.</p>
       <p>Sometimes you want to display multiple items in a row. Using <code>col-md-3</code> creates 4 equal columns (3+3+3+3=12).</p>
       
       <h3>Key Concepts</h3>
@@ -1171,7 +1187,8 @@ const lessons = {
       </ul>
       
       <h2>🎯 Add to Your Website: Quick Facts Section</h2>
-      <p><strong>📍 Placement:</strong> Add this section before your footer (before the <code>&lt;footer&gt;</code> tag) to showcase more about yourself!</p>
+      <p><strong>Starting point:</strong> Your page already has the Movies and Music sections, plus a footer at the bottom.</p>
+      <p><strong>📍 Placement:</strong> Add this section before your footer (before the <code>&lt;footer&gt;</code> tag) to showcase more about yourself.</p>
       <div class="code-block">
         <code>&lt;!-- Quick facts: 4-column grid layout --&gt;
 &lt;div class="container my-5"&gt;
@@ -1237,7 +1254,7 @@ const lessons = {
       </ul>
       
       <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> You've now added all major sections! Test your navbar links - "Movies" and "Music" should now jump to their sections. Make sure all your content is personalized!
+        <strong>✅ Progress Checkpoint:</strong> You have now added all major sections. Test your navbar links so "About," "Movies," and "Music" jump to the right places, and make sure your footer still appears last.
       </div>
       
       <h2>✅ Final Checklist</h2>
@@ -1249,7 +1266,7 @@ const lessons = {
         <li>✅ Learned cards and components (Cards lesson)</li>
         <li>✅ Added biography section with <code>id="about"</code> (Paragraphs lesson)</li>
         <li>✅ Added navbar at the top with working links (Navbar lesson)</li>
-        <li>✅ Added at least one image to your page (Images lesson)</li>
+        <li>✅ Added images to the biography section and navbar brand area (Images lesson)</li>
         <li>✅ Added footer with social links (Links lesson)</li>
         <li>✅ Added movies section with <code>id="movies"</code> (Movies lesson)</li>
         <li>✅ Added music/podcast section with <code>id="music"</code> (Music lesson)</li>
@@ -1293,18 +1310,17 @@ const lessons = {
     title: 'Guided Project: Build Your Personal Website',
     content: `
       <h2>🎯 Project Overview</h2>
-      <p>In this guided project, you'll build a complete multi-page website about yourself! We'll create:</p>
+      <p>In this guided project, you'll put all of the lessons together into one polished personal website. This walkthrough follows the same order as the course, so each step builds on the last one.</p>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>✅ A homepage with your biography</li>
-        <li>✅ A page about your favorite movie series</li>
-        <li>✅ A page about music or podcasts you like</li>
-        <li>✅ A professional navbar with logo</li>
-        <li>✅ A footer with social links</li>
-        <li>✅ Beautiful Bootstrap styling throughout</li>
+        <li>✅ A homepage with a hero section and biography</li>
+        <li>✅ An interests section using the Bootstrap grid and cards</li>
+        <li>✅ A navbar with working page links</li>
+        <li>✅ A profile image, movies section, music section, and quick facts</li>
+        <li>✅ A footer with contact links</li>
       </ul>
       
       <h2>📋 Step 1: Set Up the Basic Structure</h2>
-      <p><strong>What to do:</strong> Copy this starter code into your Practice Builder. This is your homepage (index.html).</p>
+      <p><strong>What to do:</strong> Start with the plain HTML structure from the Introduction lesson. This gives you a clean homepage file before Bootstrap is added.</p>
       <div class="code-block">
         <code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -1314,17 +1330,134 @@ const lessons = {
   &lt;title&gt;My Personal Website&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
+  &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+  &lt;p&gt;This is where your content will go!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+      </div>
+      <p><strong>Why:</strong> Every HTML page needs this structure. At this stage, you are only making sure the page is valid HTML.</p>
+
+      <h2>📋 Step 2: Add the Bootstrap CDN Links</h2>
+      <p><strong>What to do:</strong> Keep the HTML from Step 1 and add these two Bootstrap CDN lines in the correct places.</p>
+      <div class="code-block">
+        <code>&lt;!-- Put this inside &lt;head&gt;, before &lt;/head&gt; --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+
+&lt;!-- Put this right before &lt;/body&gt; --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code>
+      </div>
+      <p><strong>Why:</strong> Bootstrap classes only work after Bootstrap is loaded. The CSS link goes in <code>&lt;head&gt;</code>, and the JavaScript bundle goes before <code>&lt;/body&gt;</code>.</p>
+
+      <h2>📋 Step 3: Add Your First Container</h2>
+      <p><strong>What to do:</strong> Now that Bootstrap is loaded, wrap your starter content in a <code>container</code>.</p>
+      <div class="code-block">
+        <code>&lt;body&gt;
   &lt;div class="container"&gt;
     &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
     &lt;p&gt;This is where your content will go!&lt;/p&gt;
   &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code>
+&lt;/body&gt;</code>
       </div>
-      <p><strong>Why:</strong> Every HTML page needs this basic structure. The <code>container</code> class centers your content and adds padding.</p>
+      <p><strong>Why:</strong> <code>container</code> is one of the most common Bootstrap classes. It centers your content and adds spacing on the left and right.</p>
+
+      <h2>📋 Step 4: Create the Hero Section</h2>
+      <p><strong>What to do:</strong> Replace the simple heading and paragraph inside your container with a hero section that introduces your website.</p>
+      <div class="code-block">
+        <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"&gt;
+  &lt;div class="container"&gt;
+    &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+      </div>
+      <p><strong>What to modify:</strong> Change the heading and supporting text so it sounds like your own site.</p>
+      <p><strong>Why:</strong> This combines headings and Bootstrap text classes to create a strong first section.</p>
+
+      <h2>📋 Step 5: Add an Interests Grid</h2>
+      <p><strong>What to do:</strong> Add a three-column section under the hero to practice the Bootstrap grid.</p>
+      <div class="code-block">
+        <code>&lt;div class="container"&gt;
+  &lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-4 mb-4"&gt;
+      &lt;h3&gt;Hobby 1&lt;/h3&gt;
+      &lt;p&gt;A short description of something you enjoy.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4 mb-4"&gt;
+      &lt;h3&gt;Hobby 2&lt;/h3&gt;
+      &lt;p&gt;Another short description about your interests.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4 mb-4"&gt;
+      &lt;h3&gt;Hobby 3&lt;/h3&gt;
+      &lt;p&gt;A third topic that helps people get to know you.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+      </div>
+      <p><strong>Why:</strong> The grid helps you place content side by side on larger screens while still stacking on smaller screens.</p>
+
+      <h2>📋 Step 6: Turn the Grid into Cards</h2>
+      <p><strong>What to do:</strong> Upgrade each interests column into a Bootstrap card so the section looks more polished.</p>
+      <div class="code-block">
+        <code>&lt;div class="container"&gt;
+  &lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-4 mb-4"&gt;
+      &lt;div class="card h-100"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h3 class="card-title"&gt;Hobby 1&lt;/h3&gt;
+          &lt;p class="card-text"&gt;A short description of something you enjoy.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4 mb-4"&gt;
+      &lt;div class="card h-100"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h3 class="card-title"&gt;Hobby 2&lt;/h3&gt;
+          &lt;p class="card-text"&gt;Another short description about your interests.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4 mb-4"&gt;
+      &lt;div class="card h-100"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h3 class="card-title"&gt;Hobby 3&lt;/h3&gt;
+          &lt;p class="card-text"&gt;A third topic that helps people get to know you.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+      </div>
+      <p><strong>Why:</strong> Cards give each column a clear visual container and make the section easier to scan.</p>
       
-      <h2>📋 Step 2: Add the Navbar</h2>
-      <p><strong>What to do:</strong> Replace the content inside <code>&lt;body&gt;</code> with this navbar code. <strong>Modify the links and your name!</strong></p>
+      <h2>📋 Step 7: Add Your Biography Section</h2>
+      <p><strong>What to do:</strong> Add a centered biography card after the interests cards. Give it <code>id="about"</code> so the navbar can link to it later.</p>
+      <div class="code-block">
+        <code>&lt;div class="container my-5" id="about"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-8 mx-auto"&gt;
+      &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h2 class="card-title"&gt;About Me&lt;/h2&gt;
+          &lt;p class="card-text"&gt;
+            Write a short biography about yourself here. Include where you are from,
+            what you study, and some of your interests.
+          &lt;/p&gt;
+          &lt;p class="card-text"&gt;
+            Add a second paragraph with more details, goals, or anything
+            else you want visitors to know.
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+      </div>
+      <p><strong>Why:</strong> This gives the site a personal voice and creates a target for the future About link.</p>
+
+      <h2>📋 Step 8: Add the Navbar</h2>
+      <p><strong>What to do:</strong> Add this navbar at the very top of <code>&lt;body&gt;</code>, before your hero section.</p>
       <div class="code-block">
         <code>&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
   &lt;div class="container"&gt;
@@ -1337,7 +1470,7 @@ const lessons = {
     &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
       &lt;ul class="navbar-nav ms-auto"&gt;
         &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
+          &lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;
         &lt;/li&gt;
         &lt;li class="nav-item"&gt;
           &lt;a class="nav-link" href="#movies"&gt;Movies&lt;/a&gt;
@@ -1350,149 +1483,25 @@ const lessons = {
   &lt;/div&gt;
 &lt;/nav&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Change "YOUR NAME" to your actual name. This creates a logo/brand area.</p>
-      <p><strong>Why:</strong> The navbar provides navigation. <code>navbar-expand-lg</code> makes it collapse on mobile. <code>ms-auto</code> pushes links to the right.</p>
+      <p><strong>Why:</strong> The navbar organizes the page and helps visitors jump to the most important sections.</p>
       
-      <h2>📋 Step 3: Create the Hero Section</h2>
-      <p><strong>What to do:</strong> Add this hero section right after the closing <code>&lt;/nav&gt;</code> tag.</p>
+      <h2>📋 Step 9: Add Images to the Biography and Navbar</h2>
+      <p><strong>What to do:</strong> Place an image at the top of your biography card, before the <code>About Me</code> heading, and use an image inside the navbar brand area too.</p>
       <div class="code-block">
-        <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"&gt;
-  &lt;div class="container"&gt;
-    &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
-    &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
+        <code>&lt;div class="card-body"&gt;
+  &lt;img src="assets/cat-example-main.jpg" alt="A profile photo or image that represents me" class="img-fluid rounded mb-3"&gt;
+  &lt;h2 class="card-title"&gt;About Me&lt;/h2&gt;
+  &lt;p class="card-text"&gt;Write your biography here...&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;a class="navbar-brand" href="#"&gt;
+  &lt;img src="assets/cat-example-main.jpg" alt="My site logo" height="40" class="rounded-circle"&gt;
+&lt;/a&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Change the heading and description to something personal!</p>
-      <p><strong>Why:</strong> The hero section is the first thing visitors see. <code>display-3</code> makes a large heading, <code>lead</code> makes the paragraph stand out.</p>
+      <p><strong>Why:</strong> Images make the page feel more personal, and they also give the navbar a clear visual brand. <code>img-fluid</code> keeps the biography image responsive, while <code>rounded-circle</code> creates a clean logo style in the navbar.</p>
       
-      <h2>📋 Step 4: Add Your Biography Section</h2>
-      <p><strong>What to do:</strong> Add this biography section after the hero section. <strong>Fill in your own information!</strong></p>
-      <div class="code-block">
-        <code>&lt;div class="container"&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-md-8 mx-auto"&gt;
-      &lt;div class="card mb-4"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h2 class="card-title"&gt;About Me&lt;/h2&gt;
-          &lt;p class="card-text"&gt;
-            Write a short biography about yourself here. 
-            Include where you're from, what you study, your hobbies, 
-            and what makes you unique!
-          &lt;/p&gt;
-          &lt;p class="card-text"&gt;
-            Add another paragraph with more details about your interests, 
-            goals, or anything else you'd like to share.
-          &lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Replace the placeholder text with your actual biography!</p>
-      <p><strong>Why:</strong> Cards create nice visual containers. <code>col-md-8 mx-auto</code> makes it centered and responsive.</p>
-      
-      <h2>📋 Step 5: Add the Movies Section</h2>
-      <p><strong>What to do:</strong> Add this section after your biography. <strong>Replace with your favorite movie series!</strong></p>
-      <div class="code-block">
-        <code>&lt;div class="container" id="movies"&gt;
-  &lt;h2 class="text-center mb-4"&gt;My Favorite Movie Series&lt;/h2&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-md-6 mb-4"&gt;
-      &lt;div class="card h-100"&gt;
-        &lt;img src="https://via.placeholder.com/400x300/38bdf8/ffffff?text=Movie+Poster" class="card-img-top" alt="Movie poster"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;Movie Series Name&lt;/h5&gt;
-          &lt;p class="card-text"&gt;
-            Write why you love this movie series. What makes it special? 
-            Which is your favorite film in the series?
-          &lt;/p&gt;
-          &lt;ul class="list-group list-group-flush"&gt;
-            &lt;li class="list-group-item"&gt;&lt;strong&gt;Genre:&lt;/strong&gt; Action, Adventure&lt;/li&gt;
-            &lt;li class="list-group-item"&lt;&lt;strong&gt;My Rating:&lt;/strong&gt; ⭐⭐⭐⭐⭐&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-4"&gt;
-      &lt;div class="card h-100"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;Why I Love It&lt;/h5&gt;
-          &lt;p class="card-text"&gt;
-            Add more details about what draws you to this series. 
-            Favorite characters? Memorable scenes? 
-            What themes resonate with you?
-          &lt;/p&gt;
-          &lt;blockquote class="blockquote"&gt;
-            &lt;p class="mb-0"&gt;"Add a favorite quote from the movie here!"&lt;/p&gt;
-            &lt;footer class="blockquote-footer"&gt;Character Name&lt;/footer&gt;
-          &lt;/blockquote&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Change the movie name, add your own image URL, write your thoughts, and add a real quote!</p>
-      <p><strong>Why:</strong> Using <code>col-md-6</code> creates two equal columns. <code>h-100</code> makes cards the same height. <code>list-group</code> creates clean lists.</p>
-      
-      <h2>📋 Step 6: Add the Music/Podcast Section</h2>
-      <p><strong>What to do:</strong> Add this section after the movies section. <strong>Customize with your favorite music or podcast!</strong></p>
-      <div class="code-block">
-        <code>&lt;div class="container bg-light py-5 my-5" id="music"&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-lg-4 text-center mb-4"&gt;
-      &lt;img src="https://via.placeholder.com/300x300/22c55e/ffffff?text=Album+Art" class="img-fluid rounded-circle mb-3" alt="Album art"&gt;
-      &lt;h3&gt;Artist/Podcast Name&lt;/h3&gt;
-      &lt;p class="text-muted"&gt;Genre or Category&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class="col-lg-8"&gt;
-      &lt;h2&gt;My Favorite Music/Podcast&lt;/h2&gt;
-      &lt;p class="lead"&gt;
-        Write about your favorite artist, band, or podcast here. 
-        What makes them special? When did you discover them?
-      &lt;/p&gt;
-      &lt;div class="accordion" id="musicAccordion"&gt;
-        &lt;div class="accordion-item"&gt;
-          &lt;h2 class="accordion-header"&gt;
-            &lt;button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"&gt;
-              Favorite Songs/Episodes
-            &lt;/button&gt;
-          &lt;/h2&gt;
-          &lt;div id="collapseOne" class="accordion-collapse collapse show"&gt;
-            &lt;div class="accordion-body"&gt;
-              &lt;ul class="list-group"&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 1 - Why you like it&lt;/li&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 2 - Why you like it&lt;/li&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 3 - Why you like it&lt;/li&gt;
-              &lt;/ul&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="accordion-item"&gt;
-          &lt;h2 class="accordion-header"&gt;
-            &lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"&gt;
-              What I Love About It
-            &lt;/button&gt;
-          &lt;/h2&gt;
-          &lt;div id="collapseTwo" class="accordion-collapse collapse"&gt;
-            &lt;div class="accordion-body"&gt;
-              Write more details about what draws you to this music or podcast. 
-              The lyrics? The production? The hosts? The topics?
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Replace with your favorite artist/podcast, add real album art URL, list your favorite songs/episodes!</p>
-      <p><strong>Why:</strong> Accordions let you organize lots of information. <code>bg-light</code> adds a subtle background. <code>rounded-circle</code> makes the image circular.</p>
-      
-      <h2>📋 Step 7: Add the Footer</h2>
-      <p><strong>What to do:</strong> Add this footer at the very end, before the closing <code>&lt;/body&gt;</code> tag.</p>
+      <h2>📋 Step 10: Add the Footer</h2>
+      <p><strong>What to do:</strong> Add this footer at the very end of the page, before the closing <code>&lt;/body&gt;</code> tag.</p>
       <div class="code-block">
         <code>&lt;footer class="bg-dark text-white py-4 mt-5"&gt;
   &lt;div class="container"&gt;
@@ -1513,11 +1522,90 @@ const lessons = {
   &lt;/div&gt;
 &lt;/footer&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Add your name, update social links (or remove buttons you don't use), change the copyright year!</p>
-      <p><strong>Why:</strong> The footer provides contact info and gives your site a professional finish. <code>text-md-end</code> aligns content right on larger screens.</p>
+      <p><strong>Why:</strong> The footer finishes the site with contact information and should stay as the last section on the page.</p>
       
-      <h2>📋 Step 8: Add Some Final Touches</h2>
-      <p><strong>What to do:</strong> Add this "Quick Facts" section before the footer to showcase more about yourself!</p>
+      <h2>📋 Step 11: Add the Movies Section</h2>
+      <p><strong>What to do:</strong> Add this section before the footer and connect it to the navbar using <code>id="movies"</code>.</p>
+      <div class="code-block">
+        <code>&lt;div class="container my-5" id="movies"&gt;
+  &lt;h2 class="text-center mb-4"&gt;My Favorite Movie Series&lt;/h2&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6 mb-4"&gt;
+      &lt;div class="card h-100"&gt;
+        &lt;img src="assets/cat-example-main.jpg" class="card-img-top" alt="Movie poster or cover image"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h5 class="card-title"&gt;Movie Series Name&lt;/h5&gt;
+          &lt;p class="card-text"&gt;
+            Write why you love this movie series. Which film is your favorite?
+          &lt;/p&gt;
+          &lt;ul class="list-group list-group-flush"&gt;
+            &lt;li class="list-group-item"&gt;&lt;strong&gt;Genre:&lt;/strong&gt; Action, Adventure&lt;/li&gt;
+            &lt;li class="list-group-item"&gt;&lt;strong&gt;My Rating:&lt;/strong&gt; 5/5&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-6 mb-4"&gt;
+      &lt;div class="card h-100"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h5 class="card-title"&gt;Why I Love It&lt;/h5&gt;
+          &lt;p class="card-text"&gt;
+            Add more details about what draws you to this series, including favorite
+            characters, scenes, or themes.
+          &lt;/p&gt;
+          &lt;blockquote class="blockquote"&gt;
+            &lt;p class="mb-0"&gt;"Add a favorite quote from the movie here!"&lt;/p&gt;
+            &lt;footer class="blockquote-footer"&gt;Character Name&lt;/footer&gt;
+          &lt;/blockquote&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+      </div>
+      <p><strong>Why:</strong> This section uses cards, lists, and blockquotes together while giving the Movies navbar link a real destination.</p>
+      
+      <h2>📋 Step 12: Add the Music Section</h2>
+      <p><strong>What to do:</strong> Add this section after Movies and before the footer, then connect it with <code>id="music"</code>.</p>
+      <div class="code-block">
+        <code>&lt;div class="container bg-light py-5 my-5" id="music"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-lg-4 text-center mb-4"&gt;
+      &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover"&gt;
+      &lt;h3&gt;Artist/Podcast Name&lt;/h3&gt;
+      &lt;p class="text-muted"&gt;Genre or Category&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-lg-8"&gt;
+      &lt;h2&gt;My Favorite Music/Podcast&lt;/h2&gt;
+      &lt;p class="lead"&gt;
+        Write about your favorite artist, band, or podcast here.
+      &lt;/p&gt;
+      &lt;div class="accordion" id="musicAccordion"&gt;
+        &lt;div class="accordion-item"&gt;
+          &lt;h2 class="accordion-header"&gt;
+            &lt;button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"&gt;
+              Favorite Songs/Episodes
+            &lt;/button&gt;
+          &lt;/h2&gt;
+          &lt;div id="collapseOne" class="accordion-collapse collapse show"&gt;
+            &lt;div class="accordion-body"&gt;
+              &lt;ul class="list-group"&gt;
+                &lt;li class="list-group-item"&gt;Song/Episode 1 - Why you like it&lt;/li&gt;
+                &lt;li class="list-group-item"&gt;Song/Episode 2 - Why you like it&lt;/li&gt;
+                &lt;li class="list-group-item"&gt;Song/Episode 3 - Why you like it&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+      </div>
+      <p><strong>Why:</strong> This section introduces accordions and gives the Music navbar link a working target.</p>
+      
+      <h2>📋 Step 13: Add Quick Facts Before the Footer</h2>
+      <p><strong>What to do:</strong> Add this quick facts section before the footer to showcase more about yourself.</p>
       <div class="code-block">
         <code>&lt;div class="container my-5"&gt;
   &lt;h2 class="text-center mb-4"&gt;Quick Facts About Me&lt;/h2&gt;
@@ -1561,17 +1649,21 @@ const lessons = {
   &lt;/div&gt;
 &lt;/div&gt;</code>
       </div>
-      <p><strong>What to modify:</strong> Fill in your education, goals, skills, and a fun fact about yourself!</p>
-      <p><strong>Why:</strong> This creates visual interest with colored borders. <code>col-md-3</code> makes 4 equal columns on medium+ screens.</p>
+      <p><strong>What to modify:</strong> Fill in your education, goals, skills, and a fun fact about yourself.</p>
+      <p><strong>Why:</strong> This is a final layout practice that adds a clean four-column section without changing the rest of the page structure.</p>
       
       <h2>✅ Final Checklist</h2>
       <p>Before you export, make sure you've:</p>
       <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
         <li>✅ Replaced "YOUR NAME" with your actual name</li>
+        <li>✅ Added the Bootstrap CDN links in the correct places</li>
+        <li>✅ Built a hero section, interests cards, and biography</li>
+        <li>✅ Added a navbar with working About, Movies, and Music links</li>
+        <li>✅ Added an image to your biography section and the navbar brand area</li>
         <li>✅ Written your biography</li>
         <li>✅ Added information about your favorite movie series</li>
         <li>✅ Added information about your favorite music/podcast</li>
-        <li>✅ Updated all placeholder images (or kept placeholders)</li>
+        <li>✅ Replaced any sample text or sample images you no longer want</li>
         <li>✅ Added your social links in the footer</li>
         <li>✅ Filled in the Quick Facts section</li>
         <li>✅ Checked that everything looks good in the preview!</li>
@@ -1642,6 +1734,274 @@ function addSyntaxHighlighting() {
     // Set the highlighted HTML
     code.innerHTML = html;
   });
+}
+
+const avatarBuilderOptions = {
+  top: [
+    'shortFlat',
+    'shortRound',
+    'shortCurly',
+    'longButNotTooLong',
+    'miaWallace',
+    'curly',
+    'bob',
+    'bun',
+    'fro',
+    'bigHair',
+    'theCaesar',
+    'hat'
+  ],
+  eyes: ['default', 'happy', 'hearts', 'side', 'squint', 'surprised', 'wink'],
+  mouth: ['default', 'smile', 'twinkle', 'tongue', 'serious', 'sad'],
+  eyebrows: ['default', 'defaultNatural', 'raisedExcited', 'raisedExcitedNatural', 'sadConcerned', 'upDown'],
+  accessories: ['', 'round', 'prescription01', 'prescription02', 'sunglasses', 'wayfarers', 'eyepatch'],
+  facialHair: ['', 'beardLight', 'beardMedium', 'beardMajestic', 'moustacheFancy', 'moustacheMagnum'],
+  clothing: ['hoodie', 'graphicShirt', 'shirtCrewNeck', 'shirtVNeck', 'shirtScoopNeck', 'overall', 'blazerAndShirt', 'blazerAndSweater']
+};
+
+const defaultAvatarBuilderState = {
+  seed: 'student-avatar',
+  top: 'shortFlat',
+  eyes: 'happy',
+  mouth: 'smile',
+  eyebrows: 'defaultNatural',
+  accessories: '',
+  facialHair: '',
+  clothing: 'hoodie',
+  hairColor: '#6a4c2a',
+  skinColor: '#f2d3b1',
+  clothingColor: '#5bc0eb',
+  backgroundColor: '#dcefff'
+};
+
+function formatAvatarOptionLabel(value) {
+  if (!value) {
+    return 'None';
+  }
+
+  return value
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/\d+/g, match => ` ${match}`)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/^./, char => char.toUpperCase());
+}
+
+function buildAvatarUrl(state) {
+  const url = new URL('https://api.dicebear.com/9.x/avataaars/svg');
+  const params = url.searchParams;
+
+  params.set('seed', state.seed.trim() || defaultAvatarBuilderState.seed);
+  params.set('top', state.top);
+  params.set('eyes', state.eyes);
+  params.set('mouth', state.mouth);
+  params.set('eyebrows', state.eyebrows);
+  params.set('clothing', state.clothing);
+  params.set('hairColor', state.hairColor.replace('#', ''));
+  params.set('skinColor', state.skinColor.replace('#', ''));
+  params.set('clothingColor', state.clothingColor.replace('#', ''));
+  params.set('backgroundColor', state.backgroundColor.replace('#', ''));
+
+  if (state.accessories) {
+    params.set('accessories', state.accessories);
+  }
+
+  if (state.facialHair) {
+    params.set('facialHair', state.facialHair);
+  }
+
+  return url.toString();
+}
+
+function updateAvatarBuilderPreview(mount) {
+  const controls = Array.from(mount.querySelectorAll('[data-avatar-control]'));
+  const state = controls.reduce((accumulator, control) => {
+    accumulator[control.name] = control.value;
+    return accumulator;
+  }, {});
+
+  const avatarUrl = buildAvatarUrl(state);
+  const previewLarge = mount.querySelector('[data-avatar-preview="bio"]');
+  const previewSmall = mount.querySelector('[data-avatar-preview="nav"]');
+  const urlOutput = mount.querySelector('[data-avatar-output="url"]');
+  const bioSnippet = mount.querySelector('[data-avatar-output="bioSnippet"]');
+  const navSnippet = mount.querySelector('[data-avatar-output="navSnippet"]');
+
+  if (previewLarge) {
+    previewLarge.src = avatarUrl;
+  }
+
+  if (previewSmall) {
+    previewSmall.src = avatarUrl;
+  }
+
+  if (urlOutput) {
+    urlOutput.value = avatarUrl;
+  }
+
+  if (bioSnippet) {
+    bioSnippet.textContent = `<img src="${avatarUrl}" alt="A profile image that represents me" class="img-fluid rounded mb-3">`;
+  }
+
+  if (navSnippet) {
+    navSnippet.textContent = `<a class="navbar-brand" href="#">
+  <img src="${avatarUrl}" alt="My site logo" height="40" class="rounded-circle">
+</a>`;
+  }
+}
+
+async function copyAvatarBuilderOutput(text, title, message) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showNotification(title, message, 'success');
+  } catch (error) {
+    showNotification('Copy failed', 'Your browser blocked clipboard access. Try copying manually instead.', 'warning');
+  }
+}
+
+async function downloadAvatarSvg(url, filename) {
+  try {
+    const response = await fetch(url);
+    const svgText = await response.text();
+    const blob = new Blob([svgText], { type: 'image/svg+xml' });
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.href = downloadUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(downloadUrl);
+    showNotification('Avatar downloaded', 'Your SVG avatar is ready to save or reuse in your page.', 'success');
+  } catch (error) {
+    showNotification('Download failed', 'The avatar could not be downloaded right now. Please try again.', 'warning');
+  }
+}
+
+function initializeAvatarBuilder() {
+  const mount = document.getElementById('avatarBuilderMount');
+
+  if (!mount) {
+    return;
+  }
+
+  const selectMarkup = Object.entries(avatarBuilderOptions).map(([name, values]) => `
+    <label class="avatar-builder__field">
+      <span>${formatAvatarOptionLabel(name)}</span>
+      <select class="input-field" name="${name}" data-avatar-control>
+        ${values.map(value => `
+          <option value="${value}"${defaultAvatarBuilderState[name] === value ? ' selected' : ''}>${formatAvatarOptionLabel(value)}</option>
+        `).join('')}
+      </select>
+    </label>
+  `).join('');
+
+  mount.innerHTML = `
+    <div class="avatar-builder">
+      <div class="avatar-builder__preview-panel">
+        <div class="avatar-builder__preview-card">
+          <p class="avatar-builder__preview-label">Biography Preview</p>
+          <div class="avatar-builder__bio-preview">
+            <img data-avatar-preview="bio" alt="Live avatar preview for biography card">
+            <div>
+              <h4>About Me</h4>
+              <p>This avatar can sit above the student's biography text.</p>
+            </div>
+          </div>
+        </div>
+        <div class="avatar-builder__preview-card">
+          <p class="avatar-builder__preview-label">Navbar Preview</p>
+          <div class="avatar-builder__nav-preview">
+            <img data-avatar-preview="nav" alt="Live avatar preview for navbar">
+            <span>Student Site</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="avatar-builder__controls-panel">
+        <div class="avatar-builder__controls-grid">
+          <label class="avatar-builder__field avatar-builder__field--wide">
+            <span>Seed</span>
+            <input class="input-field" type="text" name="seed" value="${defaultAvatarBuilderState.seed}" data-avatar-control>
+          </label>
+          ${selectMarkup}
+          <label class="avatar-builder__field">
+            <span>Hair Color</span>
+            <input class="input-field avatar-builder__color" type="color" name="hairColor" value="${defaultAvatarBuilderState.hairColor}" data-avatar-control>
+          </label>
+          <label class="avatar-builder__field">
+            <span>Skin Color</span>
+            <input class="input-field avatar-builder__color" type="color" name="skinColor" value="${defaultAvatarBuilderState.skinColor}" data-avatar-control>
+          </label>
+          <label class="avatar-builder__field">
+            <span>Clothing Color</span>
+            <input class="input-field avatar-builder__color" type="color" name="clothingColor" value="${defaultAvatarBuilderState.clothingColor}" data-avatar-control>
+          </label>
+          <label class="avatar-builder__field">
+            <span>Background Color</span>
+            <input class="input-field avatar-builder__color" type="color" name="backgroundColor" value="${defaultAvatarBuilderState.backgroundColor}" data-avatar-control>
+          </label>
+        </div>
+
+        <div class="avatar-builder__actions">
+          <button type="button" class="btn-primary btn-small" data-avatar-action="copy-url">Copy Avatar URL</button>
+          <button type="button" class="btn-ghost btn-small" data-avatar-action="copy-bio">Copy Biography Snippet</button>
+          <button type="button" class="btn-ghost btn-small" data-avatar-action="copy-nav">Copy Navbar Snippet</button>
+          <button type="button" class="btn-ghost btn-small" data-avatar-action="download-svg">Download SVG</button>
+        </div>
+
+        <label class="avatar-builder__field avatar-builder__field--wide">
+          <span>Live Avatar URL</span>
+          <input class="input-field avatar-builder__url-output" type="text" readonly data-avatar-output="url">
+        </label>
+      </div>
+
+      <div class="avatar-builder__snippet-grid">
+        <div>
+          <h4>Biography Snippet</h4>
+          <div class="code-block">
+            <code data-avatar-output="bioSnippet"></code>
+          </div>
+        </div>
+        <div>
+          <h4>Navbar Snippet</h4>
+          <div class="code-block">
+            <code data-avatar-output="navSnippet"></code>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  mount.querySelectorAll('[data-avatar-control]').forEach(control => {
+    control.addEventListener('input', () => updateAvatarBuilderPreview(mount));
+    control.addEventListener('change', () => updateAvatarBuilderPreview(mount));
+  });
+
+  mount.addEventListener('click', async (event) => {
+    const action = event.target.closest('[data-avatar-action]')?.getAttribute('data-avatar-action');
+    if (!action) {
+      return;
+    }
+
+    const url = mount.querySelector('[data-avatar-output="url"]')?.value || '';
+    const bioSnippet = mount.querySelector('[data-avatar-output="bioSnippet"]')?.textContent || '';
+    const navSnippet = mount.querySelector('[data-avatar-output="navSnippet"]')?.textContent || '';
+    const seed = mount.querySelector('[name="seed"]')?.value.trim() || defaultAvatarBuilderState.seed;
+
+    if (action === 'copy-url') {
+      await copyAvatarBuilderOutput(url, 'Avatar URL copied', 'Paste it into an image src attribute anywhere in your project.');
+    } else if (action === 'copy-bio') {
+      await copyAvatarBuilderOutput(bioSnippet, 'Biography snippet copied', 'Paste it into your biography card above the About Me heading.');
+    } else if (action === 'copy-nav') {
+      await copyAvatarBuilderOutput(navSnippet, 'Navbar snippet copied', 'Paste it inside your navbar-brand link to use the avatar as your site logo.');
+    } else if (action === 'download-svg') {
+      await downloadAvatarSvg(url, `${seed.replace(/\s+/g, '-').toLowerCase() || 'student-avatar'}.svg`);
+    }
+  });
+
+  updateAvatarBuilderPreview(mount);
 }
 
 // Progress tracking
@@ -1734,6 +2094,9 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
   }
 
   setTimeout(() => {
+    if (lessonId === 'images') {
+      initializeAvatarBuilder();
+    }
     addCopyButtons();
     addSyntaxHighlighting();
   }, 10);

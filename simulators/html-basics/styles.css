@@ -570,6 +570,137 @@ kbd {
   border-radius: 4px;
 }
 
+.avatar-builder {
+  display: grid;
+  gap: 20px;
+  margin: 20px 0 28px;
+}
+
+.avatar-builder__preview-panel,
+.avatar-builder__controls-panel,
+.avatar-builder__snippet-grid > div {
+  background: rgba(15, 23, 42, 0.58);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.avatar-builder__preview-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+  gap: 18px;
+}
+
+.avatar-builder__preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.avatar-builder__preview-label,
+.avatar-builder__snippet-grid h4 {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.avatar-builder__bio-preview {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.96));
+  color: #1e293b;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.avatar-builder__bio-preview img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #dbeafe;
+}
+
+.avatar-builder__bio-preview h4,
+.avatar-builder__bio-preview p {
+  margin: 0 0 8px;
+}
+
+.avatar-builder__bio-preview p {
+  color: #475569;
+}
+
+.avatar-builder__nav-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(90deg, #0f172a, #1e293b);
+  border-radius: 12px;
+  padding: 16px;
+  color: #f8fafc;
+  min-height: 72px;
+}
+
+.avatar-builder__nav-preview img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 999px;
+  background: #dbeafe;
+}
+
+.avatar-builder__controls-grid,
+.avatar-builder__snippet-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.avatar-builder__controls-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.avatar-builder__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.avatar-builder__field span {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.avatar-builder__field--wide {
+  grid-column: 1 / -1;
+}
+
+.avatar-builder__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.avatar-builder__url-output {
+  font-size: 0.85rem;
+}
+
+.avatar-builder__color {
+  min-height: 48px;
+  padding: 6px;
+}
+
+.avatar-builder__snippet-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.avatar-builder__snippet-grid .code-block {
+  margin-bottom: 0;
+}
+
 /* Practice Builder Tab */
 .practice-container {
   display: grid;
@@ -820,6 +951,11 @@ kbd {
 @media (max-width: 1024px) {
   .lessons-container {
     grid-template-columns: 200px 1fr;
+  }
+
+  .avatar-builder__preview-panel,
+  .avatar-builder__snippet-grid {
+    grid-template-columns: 1fr;
   }
 
   .practice-container {
