@@ -408,7 +408,7 @@ const lessons = {
         </div>
       </section>
 
-      <div class="lesson-arrow" aria-hidden="true">↓</div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
         <div class="step-label">Step 2</div>
@@ -429,7 +429,7 @@ const lessons = {
         </div>
       </section>
 
-      <div class="lesson-arrow" aria-hidden="true">↓</div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
         <div class="step-label">Step 3</div>
@@ -498,7 +498,7 @@ const lessons = {
         </div>
       </section>
 
-      <div class="lesson-arrow" aria-hidden="true">↓</div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
         <div class="step-label">Step 2</div>
@@ -517,7 +517,7 @@ const lessons = {
         <p><strong>Personalize it:</strong> You may change the words between <code>&lt;h2&gt;</code> and <code>&lt;/h2&gt;</code>.</p>
       </section>
 
-      <div class="lesson-arrow" aria-hidden="true">↓</div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
         <div class="step-label">Step 3</div>
@@ -535,7 +535,7 @@ const lessons = {
         </div>
       </section>
 
-      <div class="lesson-arrow" aria-hidden="true">↓</div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
         <div class="step-label">Step 4</div>
@@ -586,7 +586,7 @@ const lessons = {
         <p><strong>Personalize it:</strong> You can change the <code>&lt;h4&gt;</code> words and paragraph words.</p>
       </section>
 
-      <div class="lesson-arrow" aria-hidden="true">↓</div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
         <div class="step-label">Step 5</div>
