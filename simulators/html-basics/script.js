@@ -794,6 +794,12 @@ const lessons = {
         <div class="step-check">
           <strong>Check it:</strong> Click <strong>Refresh</strong>. The first card should have a blue border, the second a green border, and the third a light background.
         </div>
+        <div class="next-lesson-note">
+          <strong>Want more colors?</strong> Try other Bootstrap border or background classes after this works:
+          <a href="https://getbootstrap.com/docs/5.3/utilities/borders/#color" target="_blank" rel="noopener">border colors</a>
+          and
+          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background colors</a>.
+        </div>
       </section>
 
       <div class="mini-checklist">
