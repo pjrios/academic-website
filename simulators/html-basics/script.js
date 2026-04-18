@@ -635,6 +635,9 @@ const lessons = {
         <div><strong>card-title</strong><span>Styles a card heading.</span></div>
         <div><strong>card-text</strong><span>Styles a card paragraph.</span></div>
         <div><strong>mb-4</strong><span>Adds space below each column.</span></div>
+        <div><strong>border-primary</strong><span>Adds a blue border.</span></div>
+        <div><strong>border-success</strong><span>Adds a green border.</span></div>
+        <div><strong>bg-light</strong><span>Adds a light background.</span></div>
       </div>
 
       <section class="student-step">
@@ -746,6 +749,53 @@ const lessons = {
         <p><strong>Personalize it:</strong> You can change the card titles and paragraph words. The checks should stay green.</p>
       </section>
 
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 5</div>
+        <h3>Make the Cards Look Different</h3>
+        <p class="step-action"><strong>Do this in three small parts.</strong> Change only the card opening tags.</p>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5A</div>
+            <div class="step-status step-status--pending" data-card-status="style-one" aria-label="First card style not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the first card opening tag:</strong> <code>&lt;div class="card h-100"&gt;</code></p>
+          <p><strong>Change it to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="card h-100 border-primary"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5B</div>
+            <div class="step-status step-status--pending" data-card-status="style-two" aria-label="Second card style not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the second card opening tag:</strong> <code>&lt;div class="card h-100"&gt;</code></p>
+          <p><strong>Change it to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="card h-100 border-success"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5C</div>
+            <div class="step-status step-status--pending" data-card-status="style-three" aria-label="Third card style not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the third card opening tag:</strong> <code>&lt;div class="card h-100"&gt;</code></p>
+          <p><strong>Change it to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="card h-100 bg-light"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. The first card should have a blue border, the second a green border, and the third a light background.
+        </div>
+      </section>
+
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
@@ -754,6 +804,7 @@ const lessons = {
           <li>Each card has a <code>card-body</code>.</li>
           <li>Each card heading uses <code>card-title</code>.</li>
           <li>Each card paragraph uses <code>card-text</code>.</li>
+          <li>Your cards use <code>border-primary</code>, <code>border-success</code>, and <code>bg-light</code>.</li>
           <li>You can change the visible text without breaking the checks.</li>
         </ul>
       </div>
@@ -2901,6 +2952,9 @@ function getCardsLessonStatus(html) {
 
   const columnsWithSpacing = columnMatches.filter(match => tagHasClasses(match[0], ['col-md-4', 'mb-4']));
   const equalHeightCards = cardMatches.filter(match => tagHasClasses(match[0], ['card', 'h-100']));
+  const hasPrimaryBorder = equalHeightCards.some(match => tagHasClass(match[0], 'border-primary'));
+  const hasSuccessBorder = equalHeightCards.some(match => tagHasClass(match[0], 'border-success'));
+  const hasLightBackground = equalHeightCards.some(match => tagHasClass(match[0], 'bg-light'));
   const firstCardIndex = equalHeightCards[0]?.index ?? -1;
   const closesAfterFirstCard = firstCardIndex !== -1
     ? closeMatches.filter(match => match.index > firstCardIndex)
@@ -2913,7 +2967,10 @@ function getCardsLessonStatus(html) {
     bodyCount: bodyMatches.length,
     bodyCloseFound: closesAfterFirstCard.length >= 10,
     titleCount: titleMatches.length,
-    textCount: textMatches.length
+    textCount: textMatches.length,
+    hasPrimaryBorder,
+    hasSuccessBorder,
+    hasLightBackground
   };
 }
 
@@ -3131,6 +3188,9 @@ function updateCardsLessonStatus(status = null) {
   const bodyClosesState = currentStatus.bodyCloseFound ? 'success' : currentStatus.bodyCount > 0 ? 'error' : 'pending';
   const titlesState = currentStatus.titleCount >= 3 ? 'success' : currentStatus.titleCount > 0 ? 'error' : 'pending';
   const textsState = currentStatus.textCount >= 3 ? 'success' : currentStatus.textCount > 0 ? 'error' : 'pending';
+  const primaryState = currentStatus.hasPrimaryBorder ? 'success' : currentStatus.cardCount >= 3 ? 'error' : 'pending';
+  const successState = currentStatus.hasSuccessBorder ? 'success' : currentStatus.cardCount >= 3 ? 'error' : 'pending';
+  const lightState = currentStatus.hasLightBackground ? 'success' : currentStatus.cardCount >= 3 ? 'error' : 'pending';
 
   setStepStatus(
     document.querySelector('[data-card-status="columns"]'),
@@ -3200,6 +3260,36 @@ function updateCardsLessonStatus(status = null) {
       : textsState === 'error'
         ? 'Add card-text to all three paragraphs'
         : 'Card text not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="style-one"]'),
+    primaryState,
+    primaryState === 'success'
+      ? 'Blue border style is added'
+      : primaryState === 'error'
+        ? 'Add border-primary to one card'
+        : 'First card style not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="style-two"]'),
+    successState,
+    successState === 'success'
+      ? 'Green border style is added'
+      : successState === 'error'
+        ? 'Add border-success to one card'
+        : 'Second card style not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="style-three"]'),
+    lightState,
+    lightState === 'success'
+      ? 'Light background style is added'
+      : lightState === 'error'
+        ? 'Add bg-light to one card'
+        : 'Third card style not done yet'
   );
 }
 
