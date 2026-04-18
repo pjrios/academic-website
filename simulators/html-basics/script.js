@@ -1311,102 +1311,120 @@ const lessons = {
   images: {
     title: 'Images with Bootstrap',
     content: `
-      <h2>Adding Images</h2>
-      <p>Your page already has a navbar, hero section, interests cards, and a biography section. In this lesson, you'll learn how images work in HTML and then add one to the page content you already built.</p>
-      <p>The <code>&lt;img&gt;</code> tag embeds images. Bootstrap provides classes for responsive images and styling.</p>
-      
-      <h3>Basic Image</h3>
-      <div class="code-block">
-        <code>&lt;img src="image.jpg" alt="Description" class="img-fluid"&gt;</code>
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>&lt;img&gt;</strong><span>Adds an image to the page.</span></div>
+        <div><strong>src</strong><span>The image file path or image URL.</span></div>
+        <div><strong>alt</strong><span>Words that describe the image.</span></div>
+        <div><strong>img-fluid</strong><span>Makes the image fit its container.</span></div>
+        <div><strong>rounded</strong><span>Adds rounded corners.</span></div>
+        <div><strong>rounded-circle</strong><span>Makes a small logo image circular.</span></div>
       </div>
-      
-      <h3>Bootstrap Image Classes</h3>
-      <div class="code-block">
-        <code>&lt;!-- Responsive image (scales with container) --&gt;
-&lt;img src="image.jpg" alt="..." class="img-fluid"&gt;
 
-&lt;!-- Rounded corners --&gt;
-&lt;img src="image.jpg" alt="..." class="img-fluid rounded"&gt;
-
-&lt;!-- Circular image --&gt;
-&lt;img src="image.jpg" alt="..." class="img-fluid rounded-circle"&gt;
-
-&lt;!-- Thumbnail --&gt;
-&lt;img src="image.jpg" alt="..." class="img-thumbnail"&gt;</code>
-      </div>
-      
-      <h3>Example</h3>
-      <div class="example-preview">
-        <img src="assets/cat-example-main.jpg" alt="Orange cat lounging on a blanket" class="img-fluid rounded mb-3">
-        <img src="assets/cat-example-main.jpg" alt="Circular crop of an orange cat" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
-      </div>
-      
-      <h2>🎯 Add to Your Website: Images for the Biography and Navbar</h2>
-      <p><strong>Starting point:</strong> Your page already has a biography section with text inside a card.</p>
-      <p><strong>What to do:</strong> Add an image near the top of your biography card, before the <code>About Me</code> heading:</p>
-      <div class="code-block">
-        <code>&lt;div class="card"&gt;
-  &lt;div class="card-body"&gt;
-    &lt;img src="assets/cat-example-main.jpg" alt="A profile photo or image that represents me" class="img-fluid rounded mb-3"&gt;
-    &lt;h2 class="card-title"&gt;About Me&lt;/h2&gt;
-    &lt;p class="card-text"&gt;Write your biography here...&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Replace the sample image path with your own image if you want, or use the live avatar builder below to create a character-style profile image. Update the <code>alt</code> text so it describes the image clearly.</p>
-      <p><strong>Why:</strong> Images make your page feel more personal. <code>img-fluid</code> keeps the image responsive, <code>rounded</code> softens the corners, and <code>mb-3</code> adds spacing below the image.</p>
-
-      <h3>Required: Add an Image in the Navbar Brand Area</h3>
-      <p>Your navbar brand area should also use an image. Replace the text inside <code>navbar-brand</code> with an image like this:</p>
-      <div class="code-block">
-        <code>&lt;a class="navbar-brand" href="#"&gt;
-  &lt;img src="assets/cat-example-main.jpg" alt="My site logo" height="40" class="rounded-circle"&gt;
-&lt;/a&gt;</code>
-      </div>
-      <p>This connects the image lesson to the navbar you built earlier and gives the site a clear visual brand.</p>
-
-      <h3>Live Avatar Builder</h3>
-      <p>Use this live builder to create a simple character image you can use for both the biography section and the navbar brand area.</p>
+      <section class="student-step">
+        <div class="step-label">Optional Tool</div>
+        <h3>Make an Avatar Image</h3>
+        <p>Use this builder if you want a simple character image. You can also use the sample cat image in the steps below.</p>
+        <p><strong>Sample image path:</strong> <code>assets/cat-example-main.jpg</code></p>
+        <p><strong>Avatar builder:</strong> Use <strong>Copy Biography Snippet</strong> or <strong>Copy Navbar Snippet</strong> if you want the builder to create the image code for you.</p>
+      </section>
       <div id="avatarBuilderMount"></div>
-      
-      <h3>Image Attributes</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>src:</strong> The path to the image file (required)</li>
-        <li><strong>alt:</strong> Alternative text for accessibility (required)</li>
-        <li><strong>class="img-fluid":</strong> Makes image responsive</li>
-        <li><strong>class="rounded":</strong> Adds rounded corners</li>
-        <li><strong>class="rounded-circle":</strong> Makes the image circular</li>
-      </ul>
-      
-      <h3>Best Practices</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Always use <code>img-fluid</code> for responsive images</li>
-        <li>Always include the <code>alt</code> attribute</li>
-        <li>Use images that match the mood and purpose of your page</li>
-      </ul>
-      
-      <div class="common-mistakes">
-        <h4>⚠️ Common Mistakes to Avoid</h4>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Add an Image to the Biography Card</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-image-status="bio-image" aria-label="Biography image not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line inside your biography card:</strong> <code>&lt;div class="card-body"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;img src="assets/cat-example-main.jpg" alt="A profile image that represents me" class="img-fluid rounded mb-3"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. The image should appear above your biography heading.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Check the Image Description</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-image-status="bio-alt" aria-label="Biography image description not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your biography image line:</strong> it starts with <code>&lt;img</code>.</p>
+          <p><strong>Make sure it has an <code>alt</code> description:</strong></p>
+          <div class="code-block">
+            <code>alt="A profile image that represents me"</code>
+          </div>
+        </div>
+        <p><strong>Personalize it:</strong> You can change the words inside <code>alt=""</code> to describe your image.</p>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Keep the Biography Image Responsive</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-image-status="bio-style" aria-label="Biography image style not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your biography image line.</strong></p>
+          <p><strong>Make sure the class includes:</strong></p>
+          <div class="code-block">
+            <code>img-fluid rounded mb-3</code>
+          </div>
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want a different shape?</strong> You can try <code>rounded-circle</code> or <code>img-thumbnail</code> after this works.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Add an Image to the Navbar Brand</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
+            <div class="step-status step-status--pending" data-image-status="nav-image" aria-label="Navbar image not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your navbar brand line:</strong> it starts with <code>&lt;a class="navbar-brand"</code>.</p>
+          <p><strong>Replace the brand text with this image:</strong></p>
+          <div class="code-block">
+            <code>&lt;img src="assets/cat-example-main.jpg" alt="My site logo" height="40" class="rounded-circle"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. The navbar should show a small circular image.
+        </div>
+      </section>
+
+      <div class="mini-checklist">
+        <h3>Before You Continue</h3>
         <ul>
-          <li><strong>Image not displaying:</strong> Make sure the file path in <code>src</code> is correct and always include an <code>alt</code> description</li>
-          <li><strong>Image too large:</strong> Use <code>img-fluid</code> so the image scales to fit its container</li>
-          <li><strong>No spacing around the image:</strong> Add a class like <code>mb-3</code> so the text does not touch the image</li>
+          <li>Your biography card has an <code>&lt;img&gt;</code> above the biography heading.</li>
+          <li>The biography image has <code>src</code>, <code>alt</code>, and <code>img-fluid</code>.</li>
+          <li>The biography image has spacing such as <code>mb-3</code>.</li>
+          <li>Your navbar brand has a small image.</li>
+          <li>You can change the image path and alt text without breaking the checks.</li>
         </ul>
       </div>
-      
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now have a visible image inside the biography card and an image in the navbar brand area. Both images should display correctly and resize cleanly.
-      </div>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Try <code>rounded-circle</code> instead of <code>rounded</code> to see how the biography image changes</li>
-        <li>Add another image somewhere else on the page, like inside one of the interests cards</li>
-        <li>Swap the biography image for one of your own and update the <code>alt</code> text</li>
-      </ul>
-      
-      <div class="alert alert-success mt-3">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll learn about links and buttons, and add a footer with social media links to complete your page structure!
+
+      <div class="next-lesson-note">
+        <strong>What's Next:</strong> In the next lesson, you will add footer links and button-style links.
       </div>
     `
   },
@@ -2446,7 +2464,7 @@ function initializeAvatarBuilder() {
     } else if (action === 'copy-bio') {
       await copyAvatarBuilderOutput(bioSnippet, 'Biography snippet copied', 'Paste it into your biography card above the About Me heading.');
     } else if (action === 'copy-nav') {
-      await copyAvatarBuilderOutput(navSnippet, 'Navbar snippet copied', 'Paste it inside your navbar-brand link to use the avatar as your site logo.');
+      await copyAvatarBuilderOutput(navSnippet, 'Navbar snippet copied', 'Replace your navbar-brand line with this snippet to use the avatar as your site logo.');
     } else if (action === 'download-svg') {
       await downloadAvatarSvg(url, `${seed.replace(/\s+/g, '-').toLowerCase() || 'student-avatar'}.svg`);
     }
@@ -2609,6 +2627,7 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     updateCardsLessonStatus();
     updateParagraphsLessonStatus();
     updateNavbarLessonStatus();
+    updateImagesLessonStatus();
   }, 10);
 
   return true;
@@ -3318,6 +3337,44 @@ function getNavbarLessonStatus(html) {
   };
 }
 
+function getImageLessonStatus(html) {
+  const aboutSectionMatch = /<div\b[^>]*(?:class=["'][^"']*\bcontainer\b[^"']*["'][^>]*id=["']about["']|id=["']about["'][^>]*class=["'][^"']*\bcontainer\b[^"']*["'])[^>]*>/i.exec(html);
+  const cardBodyMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcard-body\b[^"']*["'][^>]*>/gi));
+  const titleMatches = Array.from(html.matchAll(/<h2\b[^>]*class=["'][^"']*\bcard-title\b[^"']*["'][^>]*>[\s\S]*?<\/h2>/gi));
+  const imageMatches = Array.from(html.matchAll(/<img\b[^>]*>/gi));
+  const brandMatches = Array.from(html.matchAll(/<a\b[^>]*class=["'][^"']*\bnavbar-brand\b[^"']*["'][^>]*>[\s\S]*?<\/a>/gi));
+
+  const aboutIndex = aboutSectionMatch?.index ?? -1;
+  const bodyAfterAbout = aboutIndex !== -1
+    ? cardBodyMatches.find(match => match.index > aboutIndex)
+    : cardBodyMatches[0];
+  const bodyIndex = bodyAfterAbout?.index ?? -1;
+  const titleAfterBody = bodyIndex !== -1
+    ? titleMatches.find(match => match.index > bodyIndex)
+    : titleMatches[0];
+  const titleIndex = titleAfterBody?.index ?? -1;
+  const bioImage = bodyIndex !== -1
+    ? imageMatches.find(match => match.index > bodyIndex && (titleIndex === -1 || match.index < titleIndex))
+    : imageMatches.find(match => tagHasClass(match[0], 'img-fluid'));
+  const brandWithImage = brandMatches.find(match => /<img\b/i.test(match[0]));
+  const hasAlt = bioImage ? /\balt\s*=\s*["'][^"']+["']/i.test(bioImage[0]) : false;
+  const hasResponsiveStyle = bioImage
+    ? tagHasClass(bioImage[0], 'img-fluid') && (tagHasClass(bioImage[0], 'rounded') || tagHasClass(bioImage[0], 'rounded-circle') || tagHasClass(bioImage[0], 'img-thumbnail'))
+    : false;
+  const hasSpacing = bioImage ? tagHasClassPattern(bioImage[0], /^m[btsexy]?-[0-5]$/) : false;
+
+  return {
+    bioImageFound: imageMatches.some(match => tagHasClass(match[0], 'img-fluid')),
+    bioImageCorrect: Boolean(bioImage && bodyAfterAbout),
+    bioAltFound: imageMatches.some(match => /\balt\s*=\s*["'][^"']+["']/i.test(match[0])),
+    bioAltCorrect: Boolean(bioImage && hasAlt),
+    bioStyleFound: imageMatches.some(match => tagHasClass(match[0], 'img-fluid') || tagHasClass(match[0], 'rounded') || tagHasClass(match[0], 'rounded-circle') || tagHasClass(match[0], 'img-thumbnail')),
+    bioStyleCorrect: Boolean(bioImage && hasResponsiveStyle && hasSpacing),
+    navImageFound: Boolean(brandWithImage || imageMatches.some(match => tagHasClass(match[0], 'rounded-circle'))),
+    navImageCorrect: Boolean(brandWithImage && /<img\b[^>]*\balt\s*=\s*["'][^"']+["'][^>]*>/i.test(brandWithImage[0]))
+  };
+}
+
 function updateContainerLessonStatus(status = null) {
   const currentStatus = status || getContainerSetupStatus(htmlEditor?.getValue?.() || '');
   const openState = currentStatus.openCorrect ? 'success' : currentStatus.openFound ? 'error' : 'pending';
@@ -3759,6 +3816,54 @@ function updateNavbarLessonStatus(status = null) {
   );
 }
 
+function updateImagesLessonStatus(status = null) {
+  const currentStatus = status || getImageLessonStatus(htmlEditor?.getValue?.() || '');
+  const bioImageState = currentStatus.bioImageCorrect ? 'success' : currentStatus.bioImageFound ? 'error' : 'pending';
+  const bioAltState = currentStatus.bioAltCorrect ? 'success' : currentStatus.bioAltFound ? 'error' : 'pending';
+  const bioStyleState = currentStatus.bioStyleCorrect ? 'success' : currentStatus.bioStyleFound ? 'error' : 'pending';
+  const navImageState = currentStatus.navImageCorrect ? 'success' : currentStatus.navImageFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-image-status="bio-image"]'),
+    bioImageState,
+    bioImageState === 'success'
+      ? 'Biography image is above the biography heading'
+      : bioImageState === 'error'
+        ? 'Biography image was added, but it should go inside the biography card body above the heading'
+        : 'Biography image not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-image-status="bio-alt"]'),
+    bioAltState,
+    bioAltState === 'success'
+      ? 'Biography image has alt text'
+      : bioAltState === 'error'
+        ? 'Alt text was added, but it should be on the biography image'
+        : 'Biography image description not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-image-status="bio-style"]'),
+    bioStyleState,
+    bioStyleState === 'success'
+      ? 'Biography image has responsive styling and spacing'
+      : bioStyleState === 'error'
+        ? 'Add img-fluid, a rounded style, and spacing like mb-3 to the biography image'
+        : 'Biography image style not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-image-status="nav-image"]'),
+    navImageState,
+    navImageState === 'success'
+      ? 'Navbar brand has an image with alt text'
+      : navImageState === 'error'
+        ? 'Navbar image should go inside the navbar-brand link and include alt text'
+        : 'Navbar image not done yet'
+  );
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, '&amp;')
@@ -3781,6 +3886,7 @@ function updatePreview() {
     updateCardsLessonStatus(getCardsLessonStatus(''));
     updateParagraphsLessonStatus(getParagraphsLessonStatus(''));
     updateNavbarLessonStatus(getNavbarLessonStatus(''));
+    updateImagesLessonStatus(getImageLessonStatus(''));
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--setup';
     errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
@@ -3797,6 +3903,7 @@ function updatePreview() {
     updateCardsLessonStatus();
     updateParagraphsLessonStatus();
     updateNavbarLessonStatus();
+    updateImagesLessonStatus();
 
     if (errors.length > 0) {
       errorDiv.style.display = 'block';
