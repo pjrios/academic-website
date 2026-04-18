@@ -363,7 +363,7 @@ const lessons = {
     title: 'Headings with Bootstrap',
     content: `
       <h2>Words You Need for This Lesson</h2>
-      <div class="vocab-grid">
+      <div class="concept-strip">
         <div><strong>&lt;h1&gt;</strong><span>The main page heading.</span></div>
         <div><strong>class</strong><span>Adds Bootstrap styles to an HTML tag.</span></div>
         <div><strong>display-3</strong><span>Makes the main heading bigger.</span></div>
