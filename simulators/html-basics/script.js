@@ -627,143 +627,139 @@ const lessons = {
   cards: {
     title: 'Cards & Components',
     content: `
-      <h2>Bootstrap Cards</h2>
-      <p>In the last lesson, you used the grid to place content in columns. In this lesson, you'll make those columns look cleaner and more organized by turning them into cards.</p>
-      <p>Cards are flexible containers for displaying content. They're one of Bootstrap's most useful components!</p>
-      
-      <h3>Basic Card Structure</h3>
-      <div class="code-block">
-        <code>&lt;div class="card"&gt;
-  &lt;div class="card-body"&gt;
-    &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
-    &lt;p class="card-text"&gt;Card content goes here.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>card</strong><span>The outside box for one item.</span></div>
+        <div><strong>h-100</strong><span>Makes cards the same height.</span></div>
+        <div><strong>card-body</strong><span>Adds padding inside the card.</span></div>
+        <div><strong>card-title</strong><span>Styles a card heading.</span></div>
+        <div><strong>card-text</strong><span>Styles a card paragraph.</span></div>
+        <div><strong>mb-4</strong><span>Adds space below each column.</span></div>
       </div>
-      
-      <h3>Card Components</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>card:</strong> The main container</li>
-        <li><strong>card-body:</strong> Adds padding inside the card</li>
-        <li><strong>card-title:</strong> Styles headings inside cards</li>
-        <li><strong>card-text:</strong> Styles paragraphs inside cards</li>
-        <li><strong>card-img-top:</strong> Places image at the top of the card</li>
-        <li><strong>card-header:</strong> Optional header section</li>
-        <li><strong>card-footer:</strong> Optional footer section</li>
-      </ul>
-      
-      <h3>Card with Image</h3>
-      <div class="code-block">
-        <code>&lt;div class="card"&gt;
-  &lt;img src="image.jpg" class="card-img-top" alt="..."&gt;
-  &lt;div class="card-body"&gt;
-    &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
-    &lt;p class="card-text"&gt;Card content.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      
-      <h3>Card Styling Options</h3>
-      <div class="code-block">
-        <code>&lt;!-- Colored borders --&gt;
-&lt;div class="card border-primary"&gt;...&lt;/div&gt;
-&lt;div class="card border-success"&gt;...&lt;/div&gt;
 
-&lt;!-- Background colors --&gt;
-&lt;div class="card bg-primary text-white"&gt;...&lt;/div&gt;
-&lt;div class="card bg-light"&gt;...&lt;/div&gt;
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Add Space Under Each Column</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-card-status="columns" aria-label="Column spacing not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find each column opening tag:</strong> <code>&lt;div class="col-md-4"&gt;</code></p>
+          <p><strong>Change each one to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-4 mb-4"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> You should have three columns with <code>col-md-4 mb-4</code>.
+        </div>
+      </section>
 
-&lt;!-- Equal height cards in a row --&gt;
-&lt;div class="card h-100"&gt;...&lt;/div&gt;</code>
-      </div>
-      
-      <h2>Other Useful Components</h2>
-      
-      <h3>List Groups</h3>
-      <p>Styled lists for displaying items:</p>
-      <div class="code-block">
-        <code>&lt;ul class="list-group"&gt;
-  &lt;li class="list-group-item"&gt;First item&lt;/li&gt;
-  &lt;li class="list-group-item"&gt;Second item&lt;/li&gt;
-  &lt;li class="list-group-item"&gt;Third item&lt;/li&gt;
-&lt;/ul&gt;
+      <div class="step-arrow" aria-hidden="true">↓</div>
 
-&lt;!-- List group inside card (no borders) --&gt;
-&lt;ul class="list-group list-group-flush"&gt;
-  &lt;li class="list-group-item"&gt;Item without border&lt;/li&gt;
-&lt;/ul&gt;</code>
-      </div>
-      
-      <h3>Blockquotes</h3>
-      <p>For displaying quotes or testimonials:</p>
-      <div class="code-block">
-        <code>&lt;blockquote class="blockquote"&gt;
-  &lt;p class="mb-0"&gt;"This is a quote."&lt;/p&gt;
-  &lt;footer class="blockquote-footer"&gt;
-    Author Name
-  &lt;/footer&gt;
-&lt;/blockquote&gt;</code>
-      </div>
-      
-      <h2>🎯 Upgrade Your Website: Turn Your Interests Row into Cards</h2>
-      <p><strong>Starting point:</strong> Your page already has the three-column interests row from the Layout Basics lesson.</p>
-      <p><strong>What to do:</strong> Keep the same three-column grid, but replace the plain colored boxes inside each column with Bootstrap cards:</p>
-      <div class="code-block">
-        <code>&lt;!-- Interests section upgraded with Bootstrap cards --&gt;
-&lt;div class="container mt-5"&gt;
-  &lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-md-4 mb-4"&gt;
-      &lt;div class="card h-100 border-primary"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;What I Study&lt;/h5&gt;
-          &lt;p class="card-text"&gt;Write one or two sentences about what you study or what you enjoy learning.&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-4 mb-4"&gt;
-      &lt;div class="card h-100 border-success"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;My Hobbies&lt;/h5&gt;
-          &lt;p class="card-text"&gt;Share a hobby, activity, or interest that is important to you.&lt;/p&gt;
-          &lt;ul class="list-group list-group-flush"&gt;
-            &lt;li class="list-group-item"&gt;Hobby 1&lt;/li&gt;
-            &lt;li class="list-group-item"&gt;Hobby 2&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-4 mb-4"&gt;
-      &lt;div class="card h-100 bg-light"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;My Goals&lt;/h5&gt;
-          &lt;p class="card-text"&gt;Add something you hope to do, make, or achieve in the future.&lt;/p&gt;
-          &lt;blockquote class="blockquote mb-0"&gt;
-            &lt;p class="mb-0"&gt;"A short quote or motto that inspires me."&lt;/p&gt;
-          &lt;/blockquote&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Replace the sample titles, text, hobbies, and quote with your own information.</p>
-      <p><strong>Why:</strong> This keeps the same layout from the previous lesson, but makes each column feel more polished. It also prepares you for the biography section in the next lesson, which uses a larger card.</p>
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add a Card Box Inside Each Column</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2A</div>
+            <div class="step-status step-status--pending" data-card-status="cards" aria-label="Card boxes not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Inside each column, paste this line above the <code>&lt;h4&gt;</code>:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="card h-100"&gt;</code>
+          </div>
+        </div>
 
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your interests section should still have three columns, but now each column should look like a card. On medium and large screens, the cards should line up nicely and stay the same height.
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2B</div>
+            <div class="step-status step-status--pending" data-card-status="card-closes" aria-label="Card closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Inside each column, paste this line below the paragraph:</strong></p>
+          <div class="code-block">
+            <code>&lt;/div&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add the Card Body</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3A</div>
+            <div class="step-status step-status--pending" data-card-status="bodies" aria-label="Card bodies not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Inside each card, paste this line above the <code>&lt;h4&gt;</code>:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="card-body"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3B</div>
+            <div class="step-status step-status--pending" data-card-status="body-closes" aria-label="Card body closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Inside each card, paste this line below the paragraph and above the card closing line:</strong></p>
+          <div class="code-block">
+            <code>&lt;/div&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Style the Text Inside the Cards</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4A</div>
+            <div class="step-status step-status--pending" data-card-status="titles" aria-label="Card titles not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find each <code>&lt;h4&gt;</code> opening tag.</strong></p>
+          <p><strong>Change each opening tag to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;h4 class="card-title"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4B</div>
+            <div class="step-status step-status--pending" data-card-status="texts" aria-label="Card text not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find each <code>&lt;p&gt;</code> opening tag inside your columns.</strong></p>
+          <p><strong>Change each opening tag to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;p class="card-text"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your three columns should now look like cards.
+        </div>
+        <p><strong>Personalize it:</strong> You can change the card titles and paragraph words. The checks should stay green.</p>
+      </section>
+
+      <div class="mini-checklist">
+        <h3>Before You Continue</h3>
+        <ul>
+          <li>Your three columns use <code>col-md-4 mb-4</code>.</li>
+          <li>Each column has a <code>card h-100</code>.</li>
+          <li>Each card has a <code>card-body</code>.</li>
+          <li>Each card heading uses <code>card-title</code>.</li>
+          <li>Each card paragraph uses <code>card-text</code>.</li>
+          <li>You can change the visible text without breaking the checks.</li>
+        </ul>
       </div>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Add an image to one card using <code>card-img-top</code></li>
-        <li>Try different border colors like <code>border-warning</code> or <code>border-info</code></li>
-        <li>Change one card to <code>bg-primary text-white</code> and see how the look changes</li>
-        <li>Add or remove list items to make the hobbies card fit you better</li>
-      </ul>
-      
-      <div class="alert alert-success mt-4">
-        <strong>📖 What's Next:</strong> Now that you understand grids and cards, you'll use them together in the next lesson to create your biography section!
+
+      <div class="next-lesson-note">
+        <strong>What's Next:</strong> In the next lesson, you will add a longer biography section.
       </div>
     `
   },
@@ -2297,6 +2293,7 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     updateContainerLessonStatus();
     updateHeadingLessonStatus();
     updateLayoutBasicsStatus();
+    updateCardsLessonStatus();
   }, 10);
 
   return true;
@@ -2820,6 +2817,32 @@ function getLayoutBasicsStatus(html) {
   };
 }
 
+function getCardsLessonStatus(html) {
+  const columnMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-4\b[^"']*["'][^>]*>/gi));
+  const cardMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcard\b[^"']*["'][^>]*>/gi));
+  const bodyMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcard-body\b[^"']*["'][^>]*>/gi));
+  const titleMatches = Array.from(html.matchAll(/<h[1-6]\b[^>]*class=["'][^"']*\bcard-title\b[^"']*["'][^>]*>[\s\S]*?<\/h[1-6]>/gi));
+  const textMatches = Array.from(html.matchAll(/<p\b[^>]*class=["'][^"']*\bcard-text\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi));
+  const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
+
+  const columnsWithSpacing = columnMatches.filter(match => tagHasClasses(match[0], ['col-md-4', 'mb-4']));
+  const equalHeightCards = cardMatches.filter(match => tagHasClasses(match[0], ['card', 'h-100']));
+  const firstCardIndex = equalHeightCards[0]?.index ?? -1;
+  const closesAfterFirstCard = firstCardIndex !== -1
+    ? closeMatches.filter(match => match.index > firstCardIndex)
+    : [];
+
+  return {
+    columnCount: columnsWithSpacing.length,
+    cardCount: equalHeightCards.length,
+    cardCloseFound: closesAfterFirstCard.length >= 7,
+    bodyCount: bodyMatches.length,
+    bodyCloseFound: closesAfterFirstCard.length >= 10,
+    titleCount: titleMatches.length,
+    textCount: textMatches.length
+  };
+}
+
 function updateContainerLessonStatus(status = null) {
   const currentStatus = status || getContainerSetupStatus(htmlEditor?.getValue?.() || '');
   const openState = currentStatus.openCorrect ? 'success' : currentStatus.openFound ? 'error' : 'pending';
@@ -2963,6 +2986,87 @@ function updateLayoutBasicsStatus(status = null) {
   );
 }
 
+function updateCardsLessonStatus(status = null) {
+  const currentStatus = status || getCardsLessonStatus(htmlEditor?.getValue?.() || '');
+  const columnsState = currentStatus.columnCount >= 3 ? 'success' : currentStatus.columnCount > 0 ? 'error' : 'pending';
+  const cardsState = currentStatus.cardCount >= 3 ? 'success' : currentStatus.cardCount > 0 ? 'error' : 'pending';
+  const cardClosesState = currentStatus.cardCloseFound ? 'success' : currentStatus.cardCount > 0 ? 'error' : 'pending';
+  const bodiesState = currentStatus.bodyCount >= 3 ? 'success' : currentStatus.bodyCount > 0 ? 'error' : 'pending';
+  const bodyClosesState = currentStatus.bodyCloseFound ? 'success' : currentStatus.bodyCount > 0 ? 'error' : 'pending';
+  const titlesState = currentStatus.titleCount >= 3 ? 'success' : currentStatus.titleCount > 0 ? 'error' : 'pending';
+  const textsState = currentStatus.textCount >= 3 ? 'success' : currentStatus.textCount > 0 ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-card-status="columns"]'),
+    columnsState,
+    columnsState === 'success'
+      ? 'All three columns have mb-4'
+      : columnsState === 'error'
+        ? 'Add mb-4 to all three columns'
+        : 'Column spacing not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="cards"]'),
+    cardsState,
+    cardsState === 'success'
+      ? 'All three card boxes are added'
+      : cardsState === 'error'
+        ? 'Add a card h-100 box inside each column'
+        : 'Card boxes not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="card-closes"]'),
+    cardClosesState,
+    cardClosesState === 'success'
+      ? 'Card closing tags are present'
+      : cardClosesState === 'error'
+        ? 'Check the card closing tags'
+        : 'Card closing tags not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="bodies"]'),
+    bodiesState,
+    bodiesState === 'success'
+      ? 'All three card bodies are added'
+      : bodiesState === 'error'
+        ? 'Add card-body inside each card'
+        : 'Card bodies not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="body-closes"]'),
+    bodyClosesState,
+    bodyClosesState === 'success'
+      ? 'Card body closing tags are present'
+      : bodyClosesState === 'error'
+        ? 'Check the card-body closing tags'
+        : 'Card body closing tags not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="titles"]'),
+    titlesState,
+    titlesState === 'success'
+      ? 'All three card titles are styled'
+      : titlesState === 'error'
+        ? 'Add card-title to all three headings'
+        : 'Card titles not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-card-status="texts"]'),
+    textsState,
+    textsState === 'success'
+      ? 'All three card paragraphs are styled'
+      : textsState === 'error'
+        ? 'Add card-text to all three paragraphs'
+        : 'Card text not done yet'
+  );
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, '&amp;')
@@ -2982,6 +3086,7 @@ function updatePreview() {
     updateContainerLessonStatus(getContainerSetupStatus(''));
     updateHeadingLessonStatus(getHeadingLessonStatus(''));
     updateLayoutBasicsStatus(getLayoutBasicsStatus(''));
+    updateCardsLessonStatus(getCardsLessonStatus(''));
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--setup';
     errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
@@ -2995,6 +3100,7 @@ function updatePreview() {
     updateContainerLessonStatus();
     updateHeadingLessonStatus();
     updateLayoutBasicsStatus();
+    updateCardsLessonStatus();
 
     if (errors.length > 0) {
       errorDiv.style.display = 'block';
