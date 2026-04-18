@@ -1057,93 +1057,155 @@ const lessons = {
   navbar: {
     title: 'Navbar with Bootstrap',
     content: `
-      <h2>Adding Navigation to Your Page</h2>
-      <p>Your page already has a hero section, interests cards, and a biography section. In this lesson, you'll add a navigation bar at the very top so visitors can move around your site more easily.</p>
-
-      <h3>What a Navbar Does</h3>
-      <p>A navbar is a navigation bar. It usually sits at the top of the page and contains your site name plus links to important sections.</p>
-
-      <h3>Basic Navbar Structure</h3>
-      <div class="code-block">
-        <code>&lt;nav class="navbar"&gt;
-  &lt;a class="navbar-brand" href="#"&gt;My Site&lt;/a&gt;
-  &lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;
-&lt;/nav&gt;</code>
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>navbar</strong><span>The menu at the top of the page.</span></div>
+        <div><strong>navbar-brand</strong><span>Your site name or logo.</span></div>
+        <div><strong>navbar-toggler</strong><span>The mobile menu button.</span></div>
+        <div><strong>collapse</strong><span>The menu area that opens and closes.</span></div>
+        <div><strong>nav-link</strong><span>A clickable menu link.</span></div>
+        <div><strong>ms-auto</strong><span>Moves the links to the right.</span></div>
       </div>
 
-      <h2>🎯 Add to Your Website: Navbar</h2>
-      <div class="alert alert-warning">
-        <strong>⚠️ Important Placement:</strong> The navbar should go at the very top of your <code>&lt;body&gt;</code>, before your hero section and everything else on the page.
-      </div>
-      <p><strong>Starting point:</strong> Your page already has several sections in the body, but no navigation yet.</p>
-      <p><strong>What to do:</strong> Add this navbar code at the very beginning of your <code>&lt;body&gt;</code> tag:</p>
-      <div class="code-block">
-        <code>&lt;!-- Bootstrap navbar: dark theme, expands on large screens --&gt;
-&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Start the Navbar</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-navbar-status="start" aria-label="Navbar start not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;body&gt;</code></p>
+          <p><strong>Paste this right below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
   &lt;div class="container"&gt;
-    &lt;a class="navbar-brand" href="#"&gt;
-      &lt;strong&gt;YOUR NAME&lt;/strong&gt;
-    &lt;/a&gt;
-    &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
-      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
-    &lt;/button&gt;
-    &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
-      &lt;ul class="navbar-nav ms-auto"&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
-        &lt;/li&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;
-        &lt;/li&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link" href="#movies"&gt;Movies&lt;/a&gt;
-        &lt;/li&gt;
-        &lt;li class="nav-item"&gt;
-          &lt;a class="nav-link" href="#music"&gt;Music&lt;/a&gt;
-        &lt;/li&gt;
-      &lt;/ul&gt;
+  </code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> The navbar should be at the top of <code>&lt;body&gt;</code>, before the hero.
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want another color?</strong> After this works, you can change <code>bg-dark</code> to another
+          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background color</a>.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add Your Site Name</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-navbar-status="brand" aria-label="Navbar brand not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="container"&gt;</code> inside the navbar.</p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;a class="navbar-brand" href="#"&gt;YOUR NAME&lt;/a&gt;</code>
+          </div>
+        </div>
+        <p><strong>Personalize it:</strong> Change <code>YOUR NAME</code> to your name or site name.</p>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add the Mobile Menu Button</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-navbar-status="toggler" aria-label="Navbar mobile button not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your site name line:</strong> it starts with <code>&lt;a class="navbar-brand"</code>.</p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+  &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+&lt;/button&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Start the Link Area</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
+            <div class="step-status step-status--pending" data-navbar-status="collapse" aria-label="Navbar link area not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the mobile button closing line:</strong> <code>&lt;/button&gt;</code></p>
+          <p><strong>Paste these lines below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+  &lt;ul class="navbar-nav ms-auto"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 5</div>
+        <h3>Add the Links</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5</div>
+            <div class="step-status step-status--pending" data-navbar-status="links" aria-label="Navbar links not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;ul class="navbar-nav ms-auto"&gt;</code></p>
+          <p><strong>Paste these links below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;li class="nav-item"&gt;&lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+&lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+&lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#movies"&gt;Movies&lt;/a&gt;&lt;/li&gt;
+&lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#music"&gt;Music&lt;/a&gt;&lt;/li&gt;</code>
+          </div>
+        </div>
+        <p><strong>Note:</strong> The About link works now. Movies and Music will work after those sections are added.</p>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 6</div>
+        <h3>Close the Navbar</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">6</div>
+            <div class="step-status step-status--pending" data-navbar-status="close" aria-label="Navbar closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the last link line:</strong> it says <code>Music&lt;/a&gt;&lt;/li&gt;</code>.</p>
+          <p><strong>Paste these closing tags below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;/ul&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/nav&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Change "YOUR NAME" to your actual name. Keep the links as they are for now.</p>
-      <p><strong>Why:</strong> The navbar gives visitors a clear starting point and helps them move around your page. <code>navbar-expand-lg</code> makes it collapse on smaller screens, and <code>ms-auto</code> pushes the links to the right.</p>
-      <p><strong>Note:</strong> The "About" link already points to the biography section you built in the previous lesson. The "Movies" and "Music" links will start working once you add those sections later.</p>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your page should start with a navbar.
+        </div>
+      </section>
 
-      <h3>📚 Understanding Navbar Structure</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>navbar:</strong> Main container for the navigation bar</li>
-        <li><strong>navbar-expand-lg:</strong> Shows the full menu on large screens and collapses it on smaller ones</li>
-        <li><strong>navbar-brand:</strong> Your site name or logo area</li>
-        <li><strong>navbar-toggler:</strong> The mobile menu button</li>
-        <li><strong>collapse navbar-collapse:</strong> The part of the navbar that opens and closes on smaller screens</li>
-        <li><strong>nav-link:</strong> A clickable navigation link</li>
-        <li><strong>ms-auto:</strong> Pushes the links to the right side of the navbar</li>
-      </ul>
-
-      <div class="common-mistakes">
-        <h4>⚠️ Common Mistakes to Avoid</h4>
+      <div class="mini-checklist">
+        <h3>Before You Continue</h3>
         <ul>
-          <li><strong>Navbar in the wrong place:</strong> Put it at the top of <code>&lt;body&gt;</code>, before the hero section</li>
-          <li><strong>Navbar not collapsing on mobile:</strong> Check that the Bootstrap JS link from the Introduction lesson is still in your page</li>
-          <li><strong>Toggle button not working:</strong> Make sure <code>data-bs-target="#navbarNav"</code> matches <code>id="navbarNav"</code></li>
-          <li><strong>About link not working:</strong> Make sure your biography section still has <code>id="about"</code></li>
+          <li>The navbar is right below <code>&lt;body&gt;</code>.</li>
+          <li>Your navbar has a <code>navbar-brand</code>.</li>
+          <li>The mobile button uses <code>data-bs-target="#navbarNav"</code>.</li>
+          <li>The link area uses <code>id="navbarNav"</code>.</li>
+          <li>You have links for Home, About, Movies, and Music.</li>
+          <li>You can change the visible link words without breaking the checks.</li>
         </ul>
-      </div>
-
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now start with a navbar, followed by the hero section, interests cards, and biography. The "About" link should jump to your biography section.
-      </div>
-
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Change the navbar color from <code>bg-dark</code> to <code>bg-primary</code> or <code>bg-success</code></li>
-        <li>Add one more navigation link, like <code>Contact</code> or <code>Portfolio</code></li>
-        <li>Remove <code>ms-auto</code> and see how the link alignment changes</li>
-      </ul>
-
-      <div class="alert alert-success mt-3">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll learn how to use real images in your page and add one to the content you've already built.
       </div>
     `
   },
@@ -2546,6 +2608,7 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     updateLayoutBasicsStatus();
     updateCardsLessonStatus();
     updateParagraphsLessonStatus();
+    updateNavbarLessonStatus();
   }, 10);
 
   return true;
@@ -3210,6 +3273,51 @@ function getParagraphsLessonStatus(html) {
   };
 }
 
+function getNavbarLessonStatus(html) {
+  const bodyOpenMatch = /<body\b[^>]*>/i.exec(html);
+  const bodyOpenEnd = bodyOpenMatch ? bodyOpenMatch.index + bodyOpenMatch[0].length : -1;
+  const navMatches = Array.from(html.matchAll(/<nav\b[^>]*class=["'][^"']*\bnavbar\b[^"']*["'][^>]*>/gi));
+  const heroMatch = /<div\b[^>]*class=["'][^"']*\bbg-[^"']*["'][^>]*>[\s\S]*?<h1\b/i.exec(html);
+  const brandMatches = Array.from(html.matchAll(/<a\b[^>]*class=["'][^"']*\bnavbar-brand\b[^"']*["'][^>]*>[\s\S]*?<\/a>/gi));
+  const togglerMatches = Array.from(html.matchAll(/<button\b[^>]*class=["'][^"']*\bnavbar-toggler\b[^"']*["'][^>]*>[\s\S]*?<\/button>/gi));
+  const collapseMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcollapse\b[^"']*\bnavbar-collapse\b[^"']*["'][^>]*id=["']navbarNav["'][^>]*>|<div\b[^>]*id=["']navbarNav["'][^>]*class=["'][^"']*\bcollapse\b[^"']*\bnavbar-collapse\b[^"']*["'][^>]*>/gi));
+  const listMatches = Array.from(html.matchAll(/<ul\b[^>]*class=["'][^"']*\bnavbar-nav\b[^"']*["'][^>]*>/gi));
+  const navCloseMatches = Array.from(html.matchAll(/<\/nav>/gi));
+  const linkMatches = Array.from(html.matchAll(/<a\b[^>]*class=["'][^"']*\bnav-link\b[^"']*["'][^>]*href=["']([^"']*)["'][^>]*>[\s\S]*?<\/a>/gi));
+
+  const nav = navMatches[0];
+  const navIndex = nav?.index ?? -1;
+  const heroIndex = heroMatch?.index ?? -1;
+  const brand = brandMatches.find(match => navIndex !== -1 && match.index > navIndex) || brandMatches[0];
+  const brandIndex = brand?.index ?? -1;
+  const toggler = togglerMatches.find(match => brandIndex !== -1 && match.index > brandIndex) || togglerMatches[0];
+  const togglerIndex = toggler?.index ?? -1;
+  const collapse = collapseMatches.find(match => togglerIndex !== -1 && match.index > togglerIndex) || collapseMatches[0];
+  const collapseIndex = collapse?.index ?? -1;
+  const list = listMatches.find(match => collapseIndex !== -1 && match.index > collapseIndex) || listMatches[0];
+  const listIndex = list?.index ?? -1;
+  const navClose = navCloseMatches.find(match => listIndex !== -1 && match.index > listIndex);
+  const linkHrefs = linkMatches
+    .filter(match => listIndex === -1 || match.index > listIndex)
+    .map(match => match[1]);
+  const hasRequiredLinks = ['#', '#about', '#movies', '#music'].every(href => linkHrefs.includes(href));
+
+  return {
+    startFound: navMatches.length > 0,
+    startCorrect: Boolean(nav && bodyOpenEnd !== -1 && navIndex >= bodyOpenEnd && (heroIndex === -1 || navIndex < heroIndex)),
+    brandFound: brandMatches.length > 0,
+    brandCorrect: Boolean(nav && brand && brandIndex > navIndex),
+    togglerFound: togglerMatches.length > 0,
+    togglerCorrect: Boolean(brand && toggler && togglerIndex > brandIndex && /data-bs-target\s*=\s*["']#navbarNav["']/i.test(toggler[0])),
+    collapseFound: collapseMatches.length > 0,
+    collapseCorrect: Boolean(toggler && collapse && collapseIndex > togglerIndex),
+    linksFound: linkMatches.length > 0,
+    linksCorrect: Boolean(list && hasRequiredLinks),
+    closeFound: navCloseMatches.length > 0,
+    closeCorrect: Boolean(nav && navClose && hasRequiredLinks)
+  };
+}
+
 function updateContainerLessonStatus(status = null) {
   const currentStatus = status || getContainerSetupStatus(htmlEditor?.getValue?.() || '');
   const openState = currentStatus.openCorrect ? 'success' : currentStatus.openFound ? 'error' : 'pending';
@@ -3581,6 +3689,76 @@ function updateParagraphsLessonStatus(status = null) {
   );
 }
 
+function updateNavbarLessonStatus(status = null) {
+  const currentStatus = status || getNavbarLessonStatus(htmlEditor?.getValue?.() || '');
+  const startState = currentStatus.startCorrect ? 'success' : currentStatus.startFound ? 'error' : 'pending';
+  const brandState = currentStatus.brandCorrect ? 'success' : currentStatus.brandFound ? 'error' : 'pending';
+  const togglerState = currentStatus.togglerCorrect ? 'success' : currentStatus.togglerFound ? 'error' : 'pending';
+  const collapseState = currentStatus.collapseCorrect ? 'success' : currentStatus.collapseFound ? 'error' : 'pending';
+  const linksState = currentStatus.linksCorrect ? 'success' : currentStatus.linksFound ? 'error' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-navbar-status="start"]'),
+    startState,
+    startState === 'success'
+      ? 'Navbar starts at the top of the body'
+      : startState === 'error'
+        ? 'Navbar was added, but it should go right below body before the hero'
+        : 'Navbar start not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-navbar-status="brand"]'),
+    brandState,
+    brandState === 'success'
+      ? 'Navbar brand is inside the navbar'
+      : brandState === 'error'
+        ? 'Navbar brand was added, but it should go inside the navbar container'
+        : 'Navbar brand not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-navbar-status="toggler"]'),
+    togglerState,
+    togglerState === 'success'
+      ? 'Mobile menu button is connected to navbarNav'
+      : togglerState === 'error'
+        ? 'Mobile button should be below the brand and use data-bs-target="#navbarNav"'
+        : 'Navbar mobile button not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-navbar-status="collapse"]'),
+    collapseState,
+    collapseState === 'success'
+      ? 'Navbar link area is below the mobile button'
+      : collapseState === 'error'
+        ? 'Link area should be below the mobile button and use id="navbarNav"'
+        : 'Navbar link area not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-navbar-status="links"]'),
+    linksState,
+    linksState === 'success'
+      ? 'Navbar links are added'
+      : linksState === 'error'
+        ? 'Add Home, About, Movies, and Music links inside the navbar list'
+        : 'Navbar links not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-navbar-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Navbar closing tags are present'
+      : closeState === 'error'
+        ? 'Check the navbar closing tags'
+        : 'Navbar closing tags not done yet'
+  );
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, '&amp;')
@@ -3602,6 +3780,7 @@ function updatePreview() {
     updateLayoutBasicsStatus(getLayoutBasicsStatus(''));
     updateCardsLessonStatus(getCardsLessonStatus(''));
     updateParagraphsLessonStatus(getParagraphsLessonStatus(''));
+    updateNavbarLessonStatus(getNavbarLessonStatus(''));
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--setup';
     errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
@@ -3617,6 +3796,7 @@ function updatePreview() {
     updateLayoutBasicsStatus();
     updateCardsLessonStatus();
     updateParagraphsLessonStatus();
+    updateNavbarLessonStatus();
 
     if (errors.length > 0) {
       errorDiv.style.display = 'block';
