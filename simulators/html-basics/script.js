@@ -469,138 +469,158 @@ const lessons = {
   layoutBasics: {
     title: 'Layout Basics: Bootstrap Grid System',
     content: `
-      <h2>Understanding Bootstrap's Grid System</h2>
-      <p>Right now your page has a hero section inside a <code>container</code>. In this lesson, you'll learn how to place content side by side underneath that hero section.</p>
-      <p>Bootstrap's grid system is the foundation of responsive layouts. It uses a 12-column system that automatically adapts to different screen sizes.</p>
-      
-      <h3>Basic Grid Structure</h3>
-      <p>Every grid layout needs three parts:</p>
-      <ol style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>container:</strong> Wraps everything, centers content, adds padding</li>
-        <li><strong>row:</strong> Creates a horizontal group for columns</li>
-        <li><strong>col-*:</strong> Defines column width (must add up to 12)</li>
-      </ol>
-      
-      <div class="code-block">
-        <code>&lt;!-- Basic grid structure: container wraps everything, row groups columns, col creates equal-width columns --&gt;
-&lt;div class="container"&gt;
-  &lt;!-- Row creates a horizontal group for columns --&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- Each col creates an equal-width column (auto-layout) --&gt;
-    &lt;div class="col"&gt;Column 1&lt;/div&gt;
-    &lt;div class="col"&gt;Column 2&lt;/div&gt;
-    &lt;div class="col"&gt;Column 3&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>container</strong><span>Centers a section on the page.</span></div>
+        <div><strong>row</strong><span>Holds columns side by side.</span></div>
+        <div><strong>col-md-4</strong><span>Makes three equal columns on medium screens and larger.</span></div>
+        <div><strong>mt-5</strong><span>Adds space above a section.</span></div>
+        <div><strong>mb-4</strong><span>Adds space below a heading.</span></div>
+        <div><strong>text-center</strong><span>Centers text.</span></div>
       </div>
-      
-      <h3>Column Sizes</h3>
-      <p>You can specify exact column widths. The numbers add up to 12:</p>
-      <div class="code-block">
-        <code>&lt;div class="container"&gt;
-  &lt;!-- First row: 3 equal columns (4+4+4=12) --&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- col-md-4 means 4/12 width (33%) on medium+ screens, stacks on small screens --&gt;
-    &lt;div class="col-md-4"&gt;Column 1&lt;/div&gt;
-    &lt;div class="col-md-4"&gt;Column 2&lt;/div&gt;
-    &lt;div class="col-md-4"&gt;Column 3&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;!-- Second row: 2 equal columns (6+6=12, 50% each) --&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- col-md-6 means 6/12 width (50%) on medium+ screens --&gt;
-    &lt;div class="col-md-6"&gt;Left Column&lt;/div&gt;
-    &lt;div class="col-md-6"&gt;Right Column&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;!-- Third row: wide main content + narrow sidebar (8+4=12) --&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- col-md-8 means 8/12 width (67%) - main content area --&gt;
-    &lt;div class="col-md-8"&gt;Main Content&lt;/div&gt;
-    &lt;!-- col-md-4 means 4/12 width (33%) - sidebar --&gt;
-    &lt;div class="col-md-4"&gt;Sidebar&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      
-      <h3>Responsive Breakpoints</h3>
-      <p>Bootstrap uses breakpoints to make layouts responsive:</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>col-sm-*:</strong> Small devices (≥576px) - phones in landscape</li>
-        <li><strong>col-md-*:</strong> Medium devices (≥768px) - tablets</li>
-        <li><strong>col-lg-*:</strong> Large devices (≥992px) - desktops</li>
-        <li><strong>col-xl-*:</strong> Extra large devices (≥1200px) - large desktops</li>
-      </ul>
-      <p><strong>Example:</strong> <code>col-md-6</code> means "6 columns on medium screens and up". On smaller screens, columns stack vertically.</p>
-      
-      <h3>Centering Columns</h3>
-      <p>Use <code>mx-auto</code> to center a column horizontally:</p>
-      <div class="code-block">
-        <code>&lt;div class="container"&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- Centered column: col-md-8 (8/12 width = 67%) + mx-auto (margin auto = centers horizontally) --&gt;
-    &lt;div class="col-md-8 mx-auto"&gt;
-      Centered content
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      
-      <h3>Spacing Utilities</h3>
-      <p>Bootstrap provides spacing classes for margins and padding:</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>mt-5:</strong> Margin-top (5 = large spacing)</li>
-        <li><strong>mb-3:</strong> Margin-bottom (3 = medium spacing)</li>
-        <li><strong>my-5:</strong> Margin top and bottom</li>
-        <li><strong>py-4:</strong> Padding top and bottom</li>
-        <li><strong>px-2:</strong> Padding left and right</li>
-      </ul>
-      <p>Numbers range from 0-5 (0 = none, 5 = largest)</p>
-      
-      <h2>🎯 Add to Your Website: Interests Row</h2>
-      <p><strong>Starting point:</strong> Your page already has a hero section from the Headings lesson.</p>
-      <p><strong>📍 Placement:</strong> Add this new section right after your hero section, but still inside the main page flow:</p>
-      <div class="code-block">
-        <code>&lt;!-- Interests section under the hero --&gt;
-&lt;div class="container mt-5"&gt;
-  &lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-md-4"&gt;
-      &lt;div style="background: #e3f2fd; padding: 20px; border-radius: 8px;"&gt;
-        &lt;h4&gt;What I Study&lt;/h4&gt;
-        &lt;p&gt;Write one or two sentences about what you study or what you enjoy learning.&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-4"&gt;
-      &lt;div style="background: #f3e5f5; padding: 20px; border-radius: 8px;"&gt;
-        &lt;h4&gt;My Hobbies&lt;/h4&gt;
-        &lt;p&gt;Share a hobby, activity, or interest that is important to you.&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-4"&gt;
-      &lt;div style="background: #e8f5e9; padding: 20px; border-radius: 8px;"&gt;
-        &lt;h4&gt;My Goals&lt;/h4&gt;
-        &lt;p&gt;Add something you hope to do, make, or achieve in the future.&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Replace the sample titles and text with your own information.</p>
-      <p><strong>Why:</strong> This gives you a real section for your website while teaching the grid. Later lessons will use the same <code>row</code> and <code>col-*</code> ideas for biography cards, movies, and more.</p>
 
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now have a hero section at the top and a three-column section underneath it. On smaller screens, those columns should stack automatically.
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Start a New Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-layout-status="section" aria-label="Interests section not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line near the bottom:</strong> <code>&lt;/body&gt;</code></p>
+          <p><strong>Paste this line above it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="container mt-5"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> This starts a new centered section below your hero.
+        </div>
+      </section>
+
+      <div class="lesson-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add the Section Heading</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-layout-status="heading" aria-label="Interests heading not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="container mt-5"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;</code>
+          </div>
+        </div>
+        <p><strong>Personalize it:</strong> You may change the words between <code>&lt;h2&gt;</code> and <code>&lt;/h2&gt;</code>.</p>
+      </section>
+
+      <div class="lesson-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add a Row</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-layout-status="row" aria-label="Grid row not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your new <code>&lt;h2&gt;</code> line.</strong></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="row"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="lesson-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Add Three Columns</h3>
+        <p class="step-action"><strong>Do this in three small parts.</strong> Paste each column inside <code>&lt;div class="row"&gt;</code>.</p>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4A</div>
+            <div class="step-status step-status--pending" data-layout-status="column-one" aria-label="First column not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Paste this below the row line:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-4"&gt;
+  &lt;h4&gt;What I Study&lt;/h4&gt;
+  &lt;p&gt;Write one sentence about what you enjoy learning.&lt;/p&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4B</div>
+            <div class="step-status step-status--pending" data-layout-status="column-two" aria-label="Second column not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Paste this below the first column:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-4"&gt;
+  &lt;h4&gt;My Hobbies&lt;/h4&gt;
+  &lt;p&gt;Write one sentence about an activity you like.&lt;/p&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4C</div>
+            <div class="step-status step-status--pending" data-layout-status="column-three" aria-label="Third column not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Paste this below the second column:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-4"&gt;
+  &lt;h4&gt;My Goals&lt;/h4&gt;
+  &lt;p&gt;Write one sentence about something you want to do.&lt;/p&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        <p><strong>Personalize it:</strong> You can change the <code>&lt;h4&gt;</code> words and paragraph words.</p>
+      </section>
+
+      <div class="lesson-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 5</div>
+        <h3>Close the Row and Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5</div>
+            <div class="step-status step-status--pending" data-layout-status="close" aria-label="Grid closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the end of your third column.</strong></p>
+          <p><strong>Paste these two lines below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;/div&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. You should see a section with three columns under your hero.
+        </div>
+      </section>
+
+      <div class="mini-checklist">
+        <h3>Before You Continue</h3>
+        <ul>
+          <li>Your new section starts with <code>&lt;div class="container mt-5"&gt;</code>.</li>
+          <li>Your section heading uses <code>text-center</code> and <code>mb-4</code>.</li>
+          <li>Your row uses <code>class="row"</code>.</li>
+          <li>You have three <code>col-md-4</code> columns.</li>
+          <li>You can change the visible text without breaking the checks.</li>
+        </ul>
       </div>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Create a 2-column version by changing all <code>col-md-4</code> to <code>col-md-6</code></li>
-        <li>Create a 4-column version by changing all <code>col-md-4</code> to <code>col-md-3</code></li>
-        <li>Try an uneven layout with <code>col-md-8</code> and <code>col-md-4</code></li>
-        <li>Change the text and colors so the section feels more personal</li>
-      </ul>
-      
-      <div class="alert alert-success mt-4">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll learn about Bootstrap cards and other components. Cards are perfect containers for content!
+
+      <div class="next-lesson-note">
+        <strong>What's Next:</strong> In the next lesson, you will turn these columns into Bootstrap cards.
       </div>
     `
   },
@@ -2276,6 +2296,7 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     updateBootstrapLessonStatus();
     updateContainerLessonStatus();
     updateHeadingLessonStatus();
+    updateLayoutBasicsStatus();
   }, 10);
 
   return true;
@@ -2759,6 +2780,44 @@ function getHeadingLessonStatus(html) {
   };
 }
 
+function getLayoutBasicsStatus(html) {
+  const sectionMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
+    .filter(match => tagHasClasses(match[0], ['container', 'mt-5']));
+  const headingMatches = Array.from(html.matchAll(/<h2\b[^>]*>[\s\S]*?<\/h2>/gi));
+  const rowMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\brow\b[^"']*["'][^>]*>/gi));
+  const columnMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-4\b[^"']*["'][^>]*>/gi));
+  const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
+
+  const section = sectionMatches[0];
+  const sectionIndex = section?.index ?? -1;
+  const headingAfterSection = sectionIndex !== -1
+    ? headingMatches.find(match => match.index > sectionIndex)
+    : headingMatches.find(match => tagHasClasses(match[0], ['text-center', 'mb-4']));
+  const headingIndex = headingAfterSection?.index ?? -1;
+  const rowAfterHeading = headingIndex !== -1
+    ? rowMatches.find(match => match.index > headingIndex)
+    : rowMatches[0];
+  const rowIndex = rowAfterHeading?.index ?? -1;
+  const columnsAfterRow = rowIndex !== -1
+    ? columnMatches.filter(match => match.index > rowIndex)
+    : columnMatches;
+  const closesAfterRow = rowIndex !== -1
+    ? closeMatches.filter(match => match.index > rowIndex)
+    : [];
+
+  return {
+    sectionFound: sectionMatches.length > 0,
+    sectionCorrect: Boolean(section),
+    headingFound: headingMatches.some(match => tagHasClasses(match[0], ['text-center', 'mb-4'])),
+    headingCorrect: Boolean(headingAfterSection && tagHasClasses(headingAfterSection[0], ['text-center', 'mb-4'])),
+    rowFound: rowMatches.length > 0,
+    rowCorrect: Boolean(rowAfterHeading),
+    columnCount: columnsAfterRow.length,
+    closeFound: closesAfterRow.length > 3,
+    closeCorrect: Boolean(rowAfterHeading && columnsAfterRow.length >= 3 && closesAfterRow.length >= 5)
+  };
+}
+
 function updateContainerLessonStatus(status = null) {
   const currentStatus = status || getContainerSetupStatus(htmlEditor?.getValue?.() || '');
   const openState = currentStatus.openCorrect ? 'success' : currentStatus.openFound ? 'error' : 'pending';
@@ -2833,6 +2892,75 @@ function updateHeadingLessonStatus(status = null) {
   );
 }
 
+function updateLayoutBasicsStatus(status = null) {
+  const currentStatus = status || getLayoutBasicsStatus(htmlEditor?.getValue?.() || '');
+  const sectionState = currentStatus.sectionCorrect ? 'success' : currentStatus.sectionFound ? 'error' : 'pending';
+  const headingState = currentStatus.headingCorrect ? 'success' : currentStatus.headingFound ? 'error' : 'pending';
+  const rowState = currentStatus.rowCorrect ? 'success' : currentStatus.rowFound ? 'error' : 'pending';
+  const firstColumnState = currentStatus.columnCount >= 1 ? 'success' : 'pending';
+  const secondColumnState = currentStatus.columnCount >= 2 ? 'success' : 'pending';
+  const thirdColumnState = currentStatus.columnCount >= 3 ? 'success' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-layout-status="section"]'),
+    sectionState,
+    sectionState === 'success'
+      ? 'Interests section starts with container mt-5'
+      : sectionState === 'error'
+        ? 'Interests section was started, but the class should include container and mt-5'
+        : 'Interests section not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-layout-status="heading"]'),
+    headingState,
+    headingState === 'success'
+      ? 'Interests heading is in the new section'
+      : headingState === 'error'
+        ? 'Heading was added, but it should go below the new section line'
+        : 'Interests heading not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-layout-status="row"]'),
+    rowState,
+    rowState === 'success'
+      ? 'Grid row is below the section heading'
+      : rowState === 'error'
+        ? 'Grid row was added, but it should go below the section heading'
+        : 'Grid row not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-layout-status="column-one"]'),
+    firstColumnState,
+    firstColumnState === 'success' ? 'First column added' : 'First column not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-layout-status="column-two"]'),
+    secondColumnState,
+    secondColumnState === 'success' ? 'Second column added' : 'Second column not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-layout-status="column-three"]'),
+    thirdColumnState,
+    thirdColumnState === 'success' ? 'Third column added' : 'Third column not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-layout-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Row and section closing tags are present'
+      : closeState === 'error'
+        ? 'Closing tags are missing or in the wrong place'
+        : 'Grid closing tags not done yet'
+  );
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, '&amp;')
@@ -2851,6 +2979,7 @@ function updatePreview() {
     updateBootstrapLessonStatus(getBootstrapSetupStatus(''));
     updateContainerLessonStatus(getContainerSetupStatus(''));
     updateHeadingLessonStatus(getHeadingLessonStatus(''));
+    updateLayoutBasicsStatus(getLayoutBasicsStatus(''));
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--setup';
     errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
@@ -2863,6 +2992,7 @@ function updatePreview() {
     updateBootstrapLessonStatus(bootstrapStatus);
     updateContainerLessonStatus();
     updateHeadingLessonStatus();
+    updateLayoutBasicsStatus();
 
     if (errors.length > 0) {
       errorDiv.style.display = 'block';
