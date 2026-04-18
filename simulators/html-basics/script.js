@@ -2454,6 +2454,56 @@ function isEditableTarget(target) {
     Boolean(target.closest('.CodeMirror'));
 }
 
+function getLessonTitle(lessonId) {
+  return lessons[lessonId]?.title ||
+    lessonNavItems.find(item => item.getAttribute('data-lesson') === lessonId)?.textContent.trim() ||
+    'Next lesson';
+}
+
+function getNextLessonId(lessonId) {
+  const currentIndex = lessonNavItems.findIndex(item => item.getAttribute('data-lesson') === lessonId);
+  const nextItem = currentIndex !== -1 ? lessonNavItems[currentIndex + 1] : null;
+  return nextItem?.getAttribute('data-lesson') || null;
+}
+
+function getLessonFooter(lessonId) {
+  const nextLessonId = getNextLessonId(lessonId);
+
+  if (!nextLessonId) {
+    return `
+      <div class="lesson-next">
+        <div>
+          <strong>All done</strong>
+          <span>You reached the end of the lessons.</span>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="lesson-next">
+      <div>
+        <strong>Next section</strong>
+        <span>${getLessonTitle(nextLessonId)}</span>
+      </div>
+      <button class="lesson-next-button" type="button" data-next-lesson="${nextLessonId}">
+        Next
+      </button>
+    </div>
+  `;
+}
+
+function scrollLessonToTop() {
+  const lessonContent = document.querySelector('.lesson-content');
+  const navHeight = document.querySelector('.main-tabs')?.offsetHeight || 0;
+  const navOffset = 24;
+  const targetY = lessonContent
+    ? Math.max(0, lessonContent.getBoundingClientRect().top + window.scrollY - navHeight - navOffset)
+    : 0;
+
+  window.scrollTo({ top: targetY, behavior: 'smooth' });
+}
+
 function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
   const lesson = lessons[lessonId];
   const targetItem = lessonNavItems.find(item => item.getAttribute('data-lesson') === lessonId);
@@ -2475,6 +2525,7 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
   lessonDisplay.innerHTML = `
     <div class="lesson-section">
       ${lesson.content}
+      ${getLessonFooter(lessonId)}
     </div>
   `;
 
@@ -2531,6 +2582,18 @@ lessonNavItems.forEach(item => {
   item.addEventListener('click', () => {
     renderLesson(item.getAttribute('data-lesson'));
   });
+});
+
+lessonDisplay?.addEventListener('click', (e) => {
+  const nextButton = e.target.closest('[data-next-lesson]');
+  if (!nextButton) {
+    return;
+  }
+
+  const nextLessonId = nextButton.getAttribute('data-next-lesson');
+  if (renderLesson(nextLessonId)) {
+    scrollLessonToTop();
+  }
 });
 
 document.addEventListener('keydown', (e) => {
