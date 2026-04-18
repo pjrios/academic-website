@@ -319,7 +319,7 @@ const lessons = {
               <div class="micro-step-label">3A</div>
               <div class="step-status step-status--pending" data-container-status="open" aria-label="Container opening tag not done yet" title="Not done yet">✓</div>
             </div>
-            <p><strong>Find this line:</strong> <code>&lt;h1&gt;Welcome to My Website&lt;/h1&gt;</code></p>
+            <p><strong>Find your heading line:</strong> it starts with <code>&lt;h1</code> and ends with <code>&lt;/h1&gt;</code>.</p>
             <p><strong>Paste this line above it:</strong></p>
             <div class="code-block">
               <code>&lt;div class="container"&gt;</code>
@@ -331,7 +331,7 @@ const lessons = {
               <div class="micro-step-label">3B</div>
               <div class="step-status step-status--pending" data-container-status="close" aria-label="Container closing tag not done yet" title="Not done yet">✓</div>
             </div>
-            <p><strong>Find this line:</strong> <code>&lt;p&gt;This is where your content will go!&lt;/p&gt;</code></p>
+            <p><strong>Find your paragraph line:</strong> it starts with <code>&lt;p</code> and ends with <code>&lt;/p&gt;</code>.</p>
             <p><strong>Paste this line below it:</strong></p>
             <div class="code-block">
               <code>&lt;/div&gt;</code>
@@ -2677,13 +2677,20 @@ function updateBootstrapLessonStatus(status = null) {
 }
 
 function getContainerSetupStatus(html) {
-  const headingMatch = /<h1\b[^>]*>\s*Welcome to My Website\s*<\/h1>/i.exec(html);
-  const paragraphMatch = /<p\b[^>]*>\s*This is where your content will go!\s*<\/p>/i.exec(html);
+  const headingMatch = /<h1\b[^>]*>[\s\S]*?<\/h1>/i.exec(html);
+  const paragraphMatch = /<p\b[^>]*>[\s\S]*?<\/p>/i.exec(html);
   const openMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
 
   const headingIndex = headingMatch?.index ?? -1;
-  const paragraphEndIndex = paragraphMatch ? paragraphMatch.index + paragraphMatch[0].length : -1;
+  const paragraphAfterHeading = headingIndex !== -1
+    ? Array.from(html.slice(headingIndex).matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi))[0]
+    : null;
+  const paragraphEndIndex = paragraphAfterHeading
+    ? headingIndex + paragraphAfterHeading.index + paragraphAfterHeading[0].length
+    : paragraphMatch
+      ? paragraphMatch.index + paragraphMatch[0].length
+      : -1;
   const openBeforeHeading = headingIndex !== -1
     ? openMatches.find(match => match.index < headingIndex)
     : null;
