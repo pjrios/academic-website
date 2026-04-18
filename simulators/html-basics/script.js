@@ -425,10 +425,14 @@ const lessons = {
             <div class="micro-step-label">2</div>
             <div class="step-status step-status--pending" data-heading-status="height" aria-label="Hero height not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-</code>.</p>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"&gt;</code>.</p>
           <p><strong>Add this before the closing <code>&gt;</code>:</strong></p>
           <div class="code-block">
             <code>style="min-height: 300px;"</code>
+          </div>
+          <p><strong>It should look like this:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="bg-primary text-white text-center py-5 mb-5" style="min-height: 300px;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
@@ -449,10 +453,14 @@ const lessons = {
             <div class="micro-step-label">3</div>
             <div class="step-status step-status--pending" data-heading-status="center" aria-label="Hero content centering not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-</code>.</p>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"</code>.</p>
           <p><strong>Add these classes inside the quotes:</strong></p>
           <div class="code-block">
             <code>d-flex align-items-center justify-content-center flex-column</code>
+          </div>
+          <p><strong>It should look like this:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="bg-primary text-white text-center py-5 mb-5 d-flex align-items-center justify-content-center flex-column" style="min-height: 300px;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
