@@ -487,14 +487,14 @@ const lessons = {
             <div class="micro-step-label">1</div>
             <div class="step-status step-status--pending" data-layout-status="section" aria-label="Interests section not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find this line near the bottom:</strong> <code>&lt;/body&gt;</code></p>
-          <p><strong>Paste this line above it:</strong></p>
+          <p><strong>Find the Bootstrap script line near the bottom:</strong> it starts with <code>&lt;script</code>.</p>
+          <p><strong>Paste this line above the script:</strong></p>
           <div class="code-block">
             <code>&lt;div class="container mt-5"&gt;</code>
           </div>
         </div>
         <div class="step-check">
-          <strong>Check it:</strong> This starts a new centered section below your hero.
+          <strong>Check it:</strong> This starts a new centered section below your hero, before the Bootstrap script.
         </div>
       </section>
 
@@ -1189,7 +1189,7 @@ const lessons = {
       
       <h2>🎯 Add to Your Website: Footer with Social Links</h2>
       <p><strong>Starting point:</strong> Your page already has the main content sections. Now you are adding the final structural piece at the bottom.</p>
-      <p><strong>📍 Placement:</strong> Add this footer at the very end of your page, before the closing <code>&lt;/body&gt;</code> tag:</p>
+      <p><strong>📍 Placement:</strong> Add this footer near the bottom of your page, above the Bootstrap <code>&lt;script&gt;</code> line:</p>
       <div class="code-block">
         <code>&lt;footer class="bg-dark text-white py-4 mt-5"&gt;
   &lt;div class="container"&gt;
@@ -1567,7 +1567,7 @@ const lessons = {
       <p><strong>Why:</strong> This combines headings and Bootstrap text classes to create a strong first section.</p>
 
       <h2>📋 Step 5: Add an Interests Grid</h2>
-      <p><strong>What to do:</strong> Add a three-column section under the hero to practice the Bootstrap grid.</p>
+      <p><strong>What to do:</strong> Add a three-column section under the hero, above the Bootstrap <code>&lt;script&gt;</code> line.</p>
       <div class="code-block">
         <code>&lt;div class="container"&gt;
   &lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;
@@ -1694,7 +1694,7 @@ const lessons = {
       <p><strong>Why:</strong> Images make the page feel more personal, and they also give the navbar a clear visual brand. <code>img-fluid</code> keeps the biography image responsive, while <code>rounded-circle</code> creates a clean logo style in the navbar.</p>
       
       <h2>📋 Step 10: Add the Footer</h2>
-      <p><strong>What to do:</strong> Add this footer at the very end of the page, before the closing <code>&lt;/body&gt;</code> tag.</p>
+      <p><strong>What to do:</strong> Add this footer near the bottom of the page, above the Bootstrap <code>&lt;script&gt;</code> line.</p>
       <div class="code-block">
         <code>&lt;footer class="bg-dark text-white py-4 mt-5"&gt;
   &lt;div class="container"&gt;
@@ -2788,8 +2788,10 @@ function getLayoutBasicsStatus(html) {
   const columnMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-4\b[^"']*["'][^>]*>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
 
+  const bootstrapScriptIndex = findBootstrapJsScript(html);
   const section = sectionMatches[0];
   const sectionIndex = section?.index ?? -1;
+  const sectionBeforeScript = sectionIndex !== -1 && (bootstrapScriptIndex === -1 || sectionIndex < bootstrapScriptIndex);
   const headingAfterSection = sectionIndex !== -1
     ? headingMatches.find(match => match.index > sectionIndex)
     : headingMatches.find(match => tagHasClasses(match[0], ['text-center', 'mb-4']));
@@ -2807,14 +2809,14 @@ function getLayoutBasicsStatus(html) {
 
   return {
     sectionFound: sectionMatches.length > 0,
-    sectionCorrect: Boolean(section),
+    sectionCorrect: Boolean(section && sectionBeforeScript),
     headingFound: headingMatches.some(match => tagHasClasses(match[0], ['text-center', 'mb-4'])),
-    headingCorrect: Boolean(headingAfterSection && tagHasClasses(headingAfterSection[0], ['text-center', 'mb-4'])),
+    headingCorrect: Boolean(sectionBeforeScript && headingAfterSection && tagHasClasses(headingAfterSection[0], ['text-center', 'mb-4'])),
     rowFound: rowMatches.length > 0,
-    rowCorrect: Boolean(rowAfterHeading),
+    rowCorrect: Boolean(sectionBeforeScript && rowAfterHeading),
     columnCount: columnsAfterRow.length,
     closeFound: closesAfterRow.length > 3,
-    closeCorrect: Boolean(rowAfterHeading && columnsAfterRow.length >= 3 && closesAfterRow.length >= 5)
+    closeCorrect: Boolean(sectionBeforeScript && rowAfterHeading && columnsAfterRow.length >= 3 && closesAfterRow.length >= 5)
   };
 }
 
@@ -2908,7 +2910,7 @@ function updateLayoutBasicsStatus(status = null) {
     sectionState === 'success'
       ? 'Interests section starts with container mt-5'
       : sectionState === 'error'
-        ? 'Interests section was started, but the class should include container and mt-5'
+        ? 'Interests section was started, but it should go above the Bootstrap script'
         : 'Interests section not done yet'
   );
 
