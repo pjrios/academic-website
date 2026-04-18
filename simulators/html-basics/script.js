@@ -410,11 +410,8 @@ const lessons = {
           <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading area should have a colored background.
         </div>
         <div class="next-lesson-note">
-          <strong>Want another color or height?</strong> After this works, you can try another
+          <strong>Want another color?</strong> After this works, you can try another
           <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background color</a>.
-          To make the hero box taller, add <code>style="min-height: 300px;"</code> inside the hero opening tag. Try <code>200px</code>, <code>300px</code>, or <code>400px</code>.
-          To center the hero content inside that taller box, add <code>d-flex align-items-center justify-content-center flex-column</code>.
-          <a href="https://getbootstrap.com/docs/5.3/utilities/flex/" target="_blank" rel="noopener">Flex centering</a>.
         </div>
       </section>
 
@@ -422,10 +419,60 @@ const lessons = {
 
       <section class="student-step">
         <div class="step-label">Step 2</div>
-        <h3>Make the Heading Bigger</h3>
+        <h3>Set the Hero Height</h3>
         <div class="micro-step">
           <div class="micro-step-header">
             <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-heading-status="height" aria-label="Hero height not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-</code>.</p>
+          <p><strong>Add this before the closing <code>&gt;</code>:</strong></p>
+          <div class="code-block">
+            <code>style="min-height: 300px;"</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your hero box should be taller.
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want another height?</strong> Try <code>200px</code>, <code>300px</code>, or <code>400px</code> after this works.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Center the Hero Content</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-heading-status="center" aria-label="Hero content centering not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-</code>.</p>
+          <p><strong>Add these classes inside the quotes:</strong></p>
+          <div class="code-block">
+            <code>d-flex align-items-center justify-content-center flex-column</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading and paragraph should sit in the center of the hero box.
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want to know more?</strong>
+          <a href="https://getbootstrap.com/docs/5.3/utilities/flex/" target="_blank" rel="noopener">Flex centering</a>
+          is what keeps the content centered inside a taller box.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Make the Heading Bigger</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
             <div class="step-status step-status--pending" data-heading-status="display" aria-label="Display heading not done yet" title="Not done yet">✓</div>
           </div>
           <p><strong>Find your heading opening tag:</strong> it starts with <code>&lt;h1</code>.</p>
@@ -445,11 +492,11 @@ const lessons = {
       <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
-        <div class="step-label">Step 3</div>
+        <div class="step-label">Step 5</div>
         <h3>Make the Paragraph Stand Out</h3>
         <div class="micro-step">
           <div class="micro-step-header">
-            <div class="micro-step-label">3</div>
+            <div class="micro-step-label">5</div>
             <div class="step-status step-status--pending" data-heading-status="lead" aria-label="Lead paragraph not done yet" title="Not done yet">✓</div>
           </div>
           <p><strong>Find your paragraph opening tag:</strong> it starts with <code>&lt;p</code>.</p>
@@ -467,9 +514,9 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, and center alignment.</li>
-          <li>You may use <code>style="min-height: 300px;"</code> to change the hero box height.</li>
-          <li>You may use <code>d-flex align-items-center justify-content-center flex-column</code> to center the content inside the hero box.</li>
+          <li>Your hero box has a <code>bg-*</code> color class and a <code>text-*</code> color class.</li>
+          <li>Your hero box uses <code>style="min-height: 300px;"</code>.</li>
+          <li>Your hero box uses <code>d-flex align-items-center justify-content-center flex-column</code>.</li>
           <li>Your main heading uses a <code>display-*</code> class.</li>
           <li>Your paragraph uses <code>class="lead"</code>.</li>
           <li>You can change the visible text without breaking the checks.</li>
@@ -2899,14 +2946,24 @@ function tagHasCardVisualStyle(tag) {
   return tagHasClass(tag, 'border') || tagHasAnyClassPrefix(tag, ['border-', 'bg-']);
 }
 
-function tagCentersHeroContent(tag) {
-  return tagHasClass(tag, 'text-center') || tagHasClasses(tag, ['d-flex', 'align-items-center', 'justify-content-center', 'flex-column']);
+function tagHasTextColorClass(tag) {
+  return tagHasClassPattern(tag, /^text-(primary|secondary|success|danger|warning|info|light|dark|white|body|muted|black|black-50|white-50)$/);
+}
+
+function tagHasStyleProperty(tag, propertyName) {
+  const styleMatch = /\bstyle\s*=\s*["']([^"']*)["']/i.exec(tag);
+  const propertyPattern = new RegExp(`(^|;)\\s*${propertyName}\\s*:`, 'i');
+  return Boolean(styleMatch && propertyPattern.test(styleMatch[1]));
+}
+
+function tagHasHeroFlexCentering(tag) {
+  return tagHasClasses(tag, ['d-flex', 'align-items-center', 'justify-content-center', 'flex-column']);
 }
 
 function getHeadingLessonStatus(html) {
   const containerMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
   const heroOpenMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
-    .filter(match => tagHasClass(match[0], 'text-white') && tagCentersHeroContent(match[0]) && tagHasClassPrefix(match[0], 'bg-'));
+    .filter(match => tagHasClassPrefix(match[0], 'bg-') && tagHasTextColorClass(match[0]));
   const headingMatches = Array.from(html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi));
   const paragraphMatches = Array.from(html.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
@@ -2938,6 +2995,10 @@ function getHeadingLessonStatus(html) {
     heroOpenCorrect: Boolean(heroOpen && containerBeforeHero),
     heroCloseFound: closesAfterParagraph.length > 1,
     heroCloseCorrect: Boolean(heroOpen && closesAfterParagraph.length > 1),
+    heightFound: Array.from(html.matchAll(/<div\b[^>]*style=["'][^"']*min-height\s*:[^"']*["'][^>]*>/gi)).length > 0,
+    heightCorrect: Boolean(heroOpen && tagHasStyleProperty(heroOpen[0], 'min-height')),
+    centerFound: Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*d-flex[^"']*["'][^>]*>/gi)).some(match => tagHasHeroFlexCentering(match[0])),
+    centerCorrect: Boolean(heroOpen && tagHasHeroFlexCentering(heroOpen[0])),
     displayFound: headingMatches.some(match => tagHasClassPattern(match[0], /^display-[1-6]$/)),
     displayCorrect: Boolean(displayHeading),
     leadFound: paragraphMatches.some(match => tagHasClass(match[0], 'lead')),
@@ -3108,6 +3169,8 @@ function updateHeadingLessonStatus(status = null) {
   const currentStatus = status || getHeadingLessonStatus(htmlEditor?.getValue?.() || '');
   const heroOpenState = currentStatus.heroOpenCorrect ? 'success' : currentStatus.heroOpenFound ? 'error' : 'pending';
   const heroCloseState = currentStatus.heroCloseCorrect ? 'success' : currentStatus.heroCloseFound ? 'error' : 'pending';
+  const heightState = currentStatus.heightCorrect ? 'success' : currentStatus.heightFound ? 'error' : 'pending';
+  const centerState = currentStatus.centerCorrect ? 'success' : currentStatus.centerFound ? 'error' : 'pending';
   const displayState = currentStatus.displayCorrect ? 'success' : currentStatus.displayFound ? 'error' : 'pending';
   const leadState = currentStatus.leadCorrect ? 'success' : currentStatus.leadFound ? 'error' : 'pending';
 
@@ -3129,6 +3192,26 @@ function updateHeadingLessonStatus(status = null) {
       : heroCloseState === 'error'
         ? 'Hero box closing tag is missing or in the wrong place'
         : 'Hero box closing tag not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-heading-status="height"]'),
+    heightState,
+    heightState === 'success'
+      ? 'Hero height is set on the hero opening tag'
+      : heightState === 'error'
+        ? 'min-height was added, but it should be on the hero opening tag'
+        : 'Hero height not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-heading-status="center"]'),
+    centerState,
+    centerState === 'success'
+      ? 'Hero content centering classes are on the hero opening tag'
+      : centerState === 'error'
+        ? 'Flex centering classes were added, but they should be on the hero opening tag'
+        : 'Hero content centering not done yet'
   );
 
   setStepStatus(
