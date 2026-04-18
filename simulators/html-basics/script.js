@@ -766,91 +766,164 @@ const lessons = {
   paragraphs: {
     title: 'Paragraphs & Text with Bootstrap',
     content: `
-      <h2>Paragraphs in HTML</h2>
-      <p>You already have a hero section and a cards section on your page. In this lesson, you'll use paragraphs and text formatting to add a longer "About Me" section underneath them.</p>
-      <p>The <code>&lt;p&gt;</code> tag creates paragraphs. Bootstrap adds helpful text utilities and classes.</p>
-      
-      <h3>Basic Paragraph</h3>
-      <div class="code-block">
-        <code>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;
-&lt;p class="lead"&gt;This is a lead paragraph - larger and more prominent.&lt;/p&gt;</code>
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>paragraph</strong><span>A block of writing inside <code>&lt;p&gt;</code>.</span></div>
+        <div><strong>id="about"</strong><span>Lets the navbar link jump to this section later.</span></div>
+        <div><strong>col-md-8</strong><span>Makes a readable middle column.</span></div>
+        <div><strong>mx-auto</strong><span>Centers the column.</span></div>
+        <div><strong>card-title</strong><span>Styles the biography heading.</span></div>
+        <div><strong>card-text</strong><span>Styles each biography paragraph.</span></div>
       </div>
-      
-      <h3>Example</h3>
-      <div class="example-preview">
-        <p class="lead">This is a lead paragraph - perfect for introductions!</p>
-        <p>This is a regular paragraph. It can contain multiple sentences and will automatically wrap.</p>
-        <p class="text-muted">This paragraph uses Bootstrap's muted text color.</p>
-      </div>
-      
-      <h3>Bootstrap Text Utilities</h3>
-      <div class="code-block">
-        <code>&lt;p class="text-center"&gt;Centered text&lt;/p&gt;
-&lt;p class="text-end"&gt;Right-aligned text&lt;/p&gt;
-&lt;p class="text-primary"&gt;Primary color text&lt;/p&gt;
-&lt;p class="text-success"&gt;Success color text&lt;/p&gt;
-&lt;p class="fw-bold"&gt;Bold text&lt;/p&gt;
-&lt;p class="fst-italic"&gt;Italic text&lt;/p&gt;</code>
-      </div>
-      
-      <h2>🎯 Add to Your Website: Biography Section</h2>
-      <p><strong>Starting point:</strong> Your page already has a hero section followed by the interests cards section.</p>
-      <p><strong>📍 Placement:</strong> Add this biography section after the interests cards section so your page keeps growing from top to bottom:</p>
-      <p><strong>💡 Remember:</strong> You've already learned about grids and cards in previous lessons. Now you'll use those skills again, but with more focus on writing and text formatting.</p>
-      
-      <div class="code-block">
-        <code>&lt;!-- Biography section container with top margin --&gt;
-&lt;div class="container mt-5" id="about"&gt;
-  &lt;!-- Bootstrap grid row --&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- Centered column: 8/12 width on medium+ screens --&gt;
-    &lt;div class="col-md-8 mx-auto"&gt;
-      &lt;!-- Bootstrap card component --&gt;
-      &lt;div class="card"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h2 class="card-title"&gt;About Me&lt;/h2&gt;
-          &lt;p class="card-text"&gt;
-            Write a short biography about yourself here. 
-            Include where you're from, what you study, your hobbies, 
-            and what makes you unique!
-          &lt;/p&gt;
-          &lt;p class="card-text"&gt;
-            Add another paragraph with more details about your interests, 
-            goals, or anything else you'd like to share.
-          &lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Start the Biography Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-paragraph-status="section" aria-label="Biography section not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the Bootstrap script line near the bottom:</strong> it starts with <code>&lt;script</code>.</p>
+          <p><strong>Paste this line above the script:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="container mt-5" id="about"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> This starts your biography section before the Bootstrap script.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add a Centered Column</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2A</div>
+            <div class="step-status step-status--pending" data-paragraph-status="row" aria-label="Biography row not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="container mt-5" id="about"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="row"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2B</div>
+            <div class="step-status step-status--pending" data-paragraph-status="column" aria-label="Centered biography column not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="row"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-8 mx-auto"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add the Biography Card</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3A</div>
+            <div class="step-status step-status--pending" data-paragraph-status="card" aria-label="Biography card not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="col-md-8 mx-auto"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="card"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3B</div>
+            <div class="step-status step-status--pending" data-paragraph-status="body" aria-label="Biography card body not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="card"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="card-body"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Add Your Biography Text</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4A</div>
+            <div class="step-status step-status--pending" data-paragraph-status="title" aria-label="Biography title not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Inside <code>&lt;div class="card-body"&gt;</code>, paste this line:</strong></p>
+          <div class="code-block">
+            <code>&lt;h2 class="card-title"&gt;About Me&lt;/h2&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4B</div>
+            <div class="step-status step-status--pending" data-paragraph-status="paragraphs" aria-label="Biography paragraphs not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Below the heading, paste these paragraphs:</strong></p>
+          <div class="code-block">
+            <code>&lt;p class="card-text"&gt;Write a short biography about yourself.&lt;/p&gt;
+&lt;p class="card-text"&gt;Add more details about your interests or goals.&lt;/p&gt;</code>
+          </div>
+        </div>
+        <p><strong>Personalize it:</strong> Change the words inside the heading and paragraphs. The checks should stay green.</p>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 5</div>
+        <h3>Close the Biography Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5</div>
+            <div class="step-status step-status--pending" data-paragraph-status="close" aria-label="Biography closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the end of your second biography paragraph.</strong></p>
+          <p><strong>Paste these five lines below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. You should see an About Me card under your interests cards.
+        </div>
+      </section>
+
+      <div class="mini-checklist">
+        <h3>Before You Continue</h3>
+        <ul>
+          <li>Your biography section starts with <code>container mt-5</code> and <code>id="about"</code>.</li>
+          <li>Your row has a centered <code>col-md-8 mx-auto</code> column.</li>
+          <li>Your biography uses a <code>card</code> and <code>card-body</code>.</li>
+          <li>Your heading uses <code>card-title</code>.</li>
+          <li>You have at least two <code>card-text</code> paragraphs.</li>
+          <li>You can change the visible text without breaking the checks.</li>
+        </ul>
       </div>
-      <p><strong>What to modify:</strong> Replace the placeholder text with your actual biography. Write about your background, interests, goals, or anything that helps someone get to know you better.</p>
-      <p><strong>Why:</strong> This section gives your website a stronger personal voice. <code>col-md-8 mx-auto</code> keeps the text centered and readable, <code>mt-5</code> adds spacing above the section, and <code>id="about"</code> prepares this section for the navbar link you'll add later.</p>
-      
-      <h3>HTML Text Formatting</h3>
-      <div class="code-block">
-        <code>&lt;p&gt;
-  &lt;strong&gt;This is bold text&lt;/strong&gt;&lt;br&gt;
-  &lt;em&gt;This is italic text&lt;/em&gt;&lt;br&gt;
-  &lt;mark&gt;This is highlighted text&lt;/mark&gt;&lt;br&gt;
-          &lt;small&gt;This is small text&lt;/small&gt;
-&lt;/p&gt;</code>
-      </div>
-      
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now have three main parts in order: hero section, interests cards, and biography. Later, the navbar "About" link can point to this section using <code>href="#about"</code>.
-      </div>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Change the card background color by adding <code>bg-light</code> or <code>bg-primary</code> to the <code>card</code> div</li>
-        <li>Try changing <code>col-md-8</code> to <code>col-md-10</code> to make the biography wider</li>
-        <li>Add a profile image inside your card using <code>&lt;img src="..." class="img-fluid rounded mb-3"&gt;</code></li>
-        <li>Use <code>&lt;strong&gt;</code> or <code>&lt;em&gt;</code> inside one paragraph to emphasize an important detail</li>
-      </ul>
-      
-      <div class="alert alert-success mt-3">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll add a navbar at the top of your page so visitors can move around your site.
+
+      <div class="next-lesson-note">
+        <strong>What's Next:</strong> In the next lesson, you will add a navbar at the top of your page.
       </div>
     `
   },
@@ -2294,6 +2367,7 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     updateHeadingLessonStatus();
     updateLayoutBasicsStatus();
     updateCardsLessonStatus();
+    updateParagraphsLessonStatus();
   }, 10);
 
   return true;
@@ -2843,6 +2917,68 @@ function getCardsLessonStatus(html) {
   };
 }
 
+function getParagraphsLessonStatus(html) {
+  const sectionMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*id=["']about["'][^>]*>|<div\b[^>]*id=["']about["'][^>]*class=["'][^"']*["'][^>]*>/gi))
+    .filter(match => tagHasClasses(match[0], ['container', 'mt-5']));
+  const rowMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\brow\b[^"']*["'][^>]*>/gi));
+  const columnMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
+    .filter(match => tagHasClasses(match[0], ['col-md-8', 'mx-auto']));
+  const cardMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcard\b[^"']*["'][^>]*>/gi));
+  const bodyMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcard-body\b[^"']*["'][^>]*>/gi));
+  const titleMatches = Array.from(html.matchAll(/<h2\b[^>]*class=["'][^"']*\bcard-title\b[^"']*["'][^>]*>[\s\S]*?<\/h2>/gi));
+  const textMatches = Array.from(html.matchAll(/<p\b[^>]*class=["'][^"']*\bcard-text\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi));
+  const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
+
+  const bootstrapScriptIndex = findBootstrapJsScript(html);
+  const section = sectionMatches[0];
+  const sectionIndex = section?.index ?? -1;
+  const sectionBeforeScript = sectionIndex !== -1 && (bootstrapScriptIndex === -1 || sectionIndex < bootstrapScriptIndex);
+  const rowAfterSection = sectionIndex !== -1
+    ? rowMatches.find(match => match.index > sectionIndex)
+    : rowMatches[0];
+  const rowIndex = rowAfterSection?.index ?? -1;
+  const columnAfterRow = rowIndex !== -1
+    ? columnMatches.find(match => match.index > rowIndex)
+    : columnMatches[0];
+  const columnIndex = columnAfterRow?.index ?? -1;
+  const cardAfterColumn = columnIndex !== -1
+    ? cardMatches.find(match => match.index > columnIndex)
+    : cardMatches[0];
+  const cardIndex = cardAfterColumn?.index ?? -1;
+  const bodyAfterCard = cardIndex !== -1
+    ? bodyMatches.find(match => match.index > cardIndex)
+    : bodyMatches[0];
+  const bodyIndex = bodyAfterCard?.index ?? -1;
+  const titleAfterBody = bodyIndex !== -1
+    ? titleMatches.find(match => match.index > bodyIndex)
+    : titleMatches[0];
+  const titleIndex = titleAfterBody?.index ?? -1;
+  const textsAfterTitle = titleIndex !== -1
+    ? textMatches.filter(match => match.index > titleIndex)
+    : textMatches;
+  const closesAfterBody = bodyIndex !== -1
+    ? closeMatches.filter(match => match.index > bodyIndex)
+    : [];
+
+  return {
+    sectionFound: sectionMatches.length > 0,
+    sectionCorrect: Boolean(section && sectionBeforeScript),
+    rowFound: rowMatches.length > 0,
+    rowCorrect: Boolean(sectionBeforeScript && rowAfterSection),
+    columnFound: columnMatches.length > 0,
+    columnCorrect: Boolean(sectionBeforeScript && columnAfterRow),
+    cardFound: cardMatches.length > 0,
+    cardCorrect: Boolean(sectionBeforeScript && cardAfterColumn),
+    bodyFound: bodyMatches.length > 0,
+    bodyCorrect: Boolean(sectionBeforeScript && bodyAfterCard),
+    titleFound: titleMatches.length > 0,
+    titleCorrect: Boolean(sectionBeforeScript && titleAfterBody),
+    paragraphCount: textsAfterTitle.length,
+    closeFound: closesAfterBody.length > 0,
+    closeCorrect: Boolean(sectionBeforeScript && bodyAfterCard && textsAfterTitle.length >= 2 && closesAfterBody.length >= 5)
+  };
+}
+
 function updateContainerLessonStatus(status = null) {
   const currentStatus = status || getContainerSetupStatus(htmlEditor?.getValue?.() || '');
   const openState = currentStatus.openCorrect ? 'success' : currentStatus.openFound ? 'error' : 'pending';
@@ -3067,6 +3203,98 @@ function updateCardsLessonStatus(status = null) {
   );
 }
 
+function updateParagraphsLessonStatus(status = null) {
+  const currentStatus = status || getParagraphsLessonStatus(htmlEditor?.getValue?.() || '');
+  const sectionState = currentStatus.sectionCorrect ? 'success' : currentStatus.sectionFound ? 'error' : 'pending';
+  const rowState = currentStatus.rowCorrect ? 'success' : currentStatus.rowFound ? 'error' : 'pending';
+  const columnState = currentStatus.columnCorrect ? 'success' : currentStatus.columnFound ? 'error' : 'pending';
+  const cardState = currentStatus.cardCorrect ? 'success' : currentStatus.cardFound ? 'error' : 'pending';
+  const bodyState = currentStatus.bodyCorrect ? 'success' : currentStatus.bodyFound ? 'error' : 'pending';
+  const titleState = currentStatus.titleCorrect ? 'success' : currentStatus.titleFound ? 'error' : 'pending';
+  const paragraphsState = currentStatus.paragraphCount >= 2 ? 'success' : currentStatus.paragraphCount > 0 ? 'error' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="section"]'),
+    sectionState,
+    sectionState === 'success'
+      ? 'Biography section is above the Bootstrap script'
+      : sectionState === 'error'
+        ? 'Biography section should include container mt-5, id about, and be above the Bootstrap script'
+        : 'Biography section not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="row"]'),
+    rowState,
+    rowState === 'success'
+      ? 'Biography row is below the biography section line'
+      : rowState === 'error'
+        ? 'Biography row should go below the about section line'
+        : 'Biography row not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="column"]'),
+    columnState,
+    columnState === 'success'
+      ? 'Centered biography column is below the row'
+      : columnState === 'error'
+        ? 'Centered biography column should go below the row'
+        : 'Centered biography column not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="card"]'),
+    cardState,
+    cardState === 'success'
+      ? 'Biography card is inside the centered column'
+      : cardState === 'error'
+        ? 'Biography card should go inside the centered column'
+        : 'Biography card not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="body"]'),
+    bodyState,
+    bodyState === 'success'
+      ? 'Biography card body is inside the card'
+      : bodyState === 'error'
+        ? 'Biography card body should go inside the card'
+        : 'Biography card body not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="title"]'),
+    titleState,
+    titleState === 'success'
+      ? 'Biography title is inside the card body'
+      : titleState === 'error'
+        ? 'Biography title should go inside the card body'
+        : 'Biography title not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="paragraphs"]'),
+    paragraphsState,
+    paragraphsState === 'success'
+      ? 'Two biography paragraphs are added'
+      : paragraphsState === 'error'
+        ? 'Add two card-text paragraphs'
+        : 'Biography paragraphs not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-paragraph-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Biography closing tags are present'
+      : closeState === 'error'
+        ? 'Check the biography closing tags'
+        : 'Biography closing tags not done yet'
+  );
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, '&amp;')
@@ -3087,6 +3315,7 @@ function updatePreview() {
     updateHeadingLessonStatus(getHeadingLessonStatus(''));
     updateLayoutBasicsStatus(getLayoutBasicsStatus(''));
     updateCardsLessonStatus(getCardsLessonStatus(''));
+    updateParagraphsLessonStatus(getParagraphsLessonStatus(''));
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--setup';
     errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
@@ -3101,6 +3330,7 @@ function updatePreview() {
     updateHeadingLessonStatus();
     updateLayoutBasicsStatus();
     updateCardsLessonStatus();
+    updateParagraphsLessonStatus();
 
     if (errors.length > 0) {
       errorDiv.style.display = 'block';
