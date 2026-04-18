@@ -372,7 +372,8 @@ const lessons = {
         <div><strong>bg-primary</strong><span>Adds a Bootstrap background color.</span></div>
         <div><strong>text-white</strong><span>Makes text white.</span></div>
         <div><strong>text-center</strong><span>Centers the text.</span></div>
-        <div><strong>py-5</strong><span>Makes the hero taller. You can try <code>py-3</code>, <code>py-4</code>, or <code>py-5</code>.</span></div>
+        <div><strong>py-5</strong><span>Adds space above and below the hero text.</span></div>
+        <div><strong>min-height</strong><span>Sets the actual height of the hero box.</span></div>
       </div>
 
       <section class="student-step">
@@ -408,9 +409,9 @@ const lessons = {
           <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading area should have a colored background.
         </div>
         <div class="next-lesson-note">
-          <strong>Want another color or size?</strong> After this works, you can try another
-          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background color</a>
-          or change <code>py-5</code> to <code>py-3</code> or <code>py-4</code>.
+          <strong>Want another color or height?</strong> After this works, you can try another
+          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background color</a>.
+          To make the hero box taller, add <code>style="min-height: 300px;"</code> inside the hero opening tag. Try <code>200px</code>, <code>300px</code>, or <code>400px</code>.
         </div>
       </section>
 
@@ -434,7 +435,7 @@ const lessons = {
           <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading should look larger.
         </div>
         <div class="next-lesson-note">
-          <strong>Want another size?</strong> Try <code>display-1</code>, <code>display-2</code>, <code>display-4</code>, <code>display-5</code>, or <code>display-6</code> after this works.
+          <strong>Want another heading size?</strong> Try <code>display-1</code>, <code>display-2</code>, <code>display-4</code>, <code>display-5</code>, or <code>display-6</code> after this works.
         </div>
       </section>
 
@@ -463,7 +464,8 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, <code>text-center</code>, and a <code>py-*</code> size class.</li>
+          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, and <code>text-center</code>.</li>
+          <li>You may use <code>style="min-height: 300px;"</code> to change the hero box height.</li>
           <li>Your main heading uses a <code>display-*</code> class.</li>
           <li>Your paragraph uses <code>class="lead"</code>.</li>
           <li>You can change the visible text without breaking the checks.</li>
@@ -2896,7 +2898,7 @@ function tagHasCardVisualStyle(tag) {
 function getHeadingLessonStatus(html) {
   const containerMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
   const heroOpenMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
-    .filter(match => tagHasClasses(match[0], ['text-white', 'text-center']) && tagHasClassPrefix(match[0], 'bg-') && tagHasClassPattern(match[0], /^py-[0-5]$/));
+    .filter(match => tagHasClasses(match[0], ['text-white', 'text-center']) && tagHasClassPrefix(match[0], 'bg-'));
   const headingMatches = Array.from(html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi));
   const paragraphMatches = Array.from(html.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
