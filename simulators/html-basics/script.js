@@ -362,112 +362,108 @@ const lessons = {
   headings: {
     title: 'Headings with Bootstrap',
     content: `
-      <h2>HTML Headings</h2>
-      <p>Headings create hierarchy in your content. HTML provides six levels, from <code>&lt;h1&gt;</code> (most important) to <code>&lt;h6&gt;</code> (least important).</p>
-      
-      <h2>Bootstrap Display Headings</h2>
-      <p>In the Introduction lesson, you added the Bootstrap CDN links. That means you can now use Bootstrap classes like <code>display-3</code>, <code>lead</code>, and <code>text-center</code>.</p>
-      <p>Bootstrap adds special display classes for larger, more prominent headings:</p>
-      
-      <h3>Basic Headings</h3>
-      <div class="code-block">
-        <code>&lt;h1&gt;Main Heading&lt;/h1&gt;
-&lt;h2&gt;Section Heading&lt;/h2&gt;
-&lt;h3&gt;Subsection Heading&lt;/h3&gt;</code>
+      <h2>Words You Need for This Lesson</h2>
+      <div class="vocab-grid">
+        <div><strong>&lt;h1&gt;</strong><span>The main page heading.</span></div>
+        <div><strong>class</strong><span>Adds Bootstrap styles to an HTML tag.</span></div>
+        <div><strong>display-3</strong><span>Makes the main heading bigger.</span></div>
+        <div><strong>lead</strong><span>Makes the paragraph stand out.</span></div>
+        <div><strong>bg-primary</strong><span>Adds a blue Bootstrap background.</span></div>
+        <div><strong>text-white</strong><span>Makes text white.</span></div>
+        <div><strong>text-center</strong><span>Centers the text.</span></div>
+        <div><strong>py-5</strong><span>Adds space above and below.</span></div>
       </div>
-      
-      <h3>Bootstrap Display Classes</h3>
-      <div class="code-block">
-        <code>&lt;h1 class="display-1"&gt;Display 1&lt;/h1&gt;
-&lt;h1 class="display-2"&gt;Display 2&lt;/h1&gt;
-&lt;h1 class="display-3"&gt;Display 3&lt;/h1&gt;
-&lt;h1 class="display-4"&gt;Display 4&lt;/h1&gt;
-&lt;h1 class="display-5"&gt;Display 5&lt;/h1&gt;
-&lt;h1 class="display-6"&gt;Display 6&lt;/h1&gt;</code>
-      </div>
-      
-      <h3>Example</h3>
-      <div class="example-preview">
-        <h1 class="display-1">Display 1</h1>
-        <h2 class="display-4">Display 4</h2>
-        <h2>Regular H2</h2>
-        <h3>Regular H3</h3>
-        <p class="lead">Use <code>lead</code> class for standout paragraphs</p>
-      </div>
-      
-      <h3>Bootstrap Heading Utilities</h3>
-      <div class="code-block">
-        <code>&lt;h1 class="text-center"&gt;Centered Heading&lt;/h1&gt;
-&lt;h2 class="text-muted"&gt;Muted Heading&lt;/h2&gt;
-&lt;h3 class="text-primary"&gt;Primary Color Heading&lt;/h3&gt;</code>
-      </div>
-      
-      <h2>🎯 Add to Your Website: Hero Section</h2>
-      <p><strong>Starting point:</strong> At the end of the Introduction lesson, your <code>&lt;body&gt;</code> had a <code>container</code> with a simple heading and paragraph inside it.</p>
-      <p><strong>What to do:</strong> Keep the <code>container</code>, and replace the simple heading and paragraph inside it with this hero section:</p>
-      <div class="code-block">
-        <code>&lt;div class="container"&gt;
-  &lt;div class="bg-primary text-white text-center py-5"&gt;
-    &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
-    &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-      </div>
-      <p><strong>How your body should look now:</strong></p>
-      <div class="code-block">
-        <code>&lt;body&gt;
-  &lt;div class="container"&gt;
-    &lt;div class="bg-primary text-white text-center py-5"&gt;
-      &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
-      &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;!-- More sections will go here in later lessons --&gt;
-&lt;/body&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Change the heading and description so they introduce you and your website.</p>
-      <p><strong>Why:</strong> The hero section is the first thing visitors see. <code>container</code> keeps the content centered, <code>display-3</code> makes a large heading, <code>lead</code> makes the paragraph stand out, and <code>bg-primary</code> adds a colored background.</p>
-      
-      <h3>📚 New Concepts Explained</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>display-3:</strong> Bootstrap's large display heading (smaller than display-1, larger than regular h1). Options: <code>display-1</code> (largest) through <code>display-6</code> (smallest)</li>
-        <li><strong>lead:</strong> Makes paragraph text larger and more prominent - perfect for introductory text</li>
-        <li><strong>container:</strong> Centers your content and adds space on the left and right edges</li>
-        <li><strong>bg-primary:</strong> Bootstrap's primary color background (usually blue). Other options: <code>bg-success</code> (green), <code>bg-danger</code> (red), <code>bg-warning</code> (yellow), <code>bg-info</code> (light blue), <code>bg-dark</code> (dark), <code>bg-light</code> (light gray)</li>
-        <li><strong>text-white:</strong> White text color (for contrast on dark backgrounds). Other options: <code>text-primary</code>, <code>text-success</code>, <code>text-muted</code> (gray), <code>text-dark</code></li>
-        <li><strong>text-center:</strong> Centers text horizontally. Other options: <code>text-start</code> (left), <code>text-end</code> (right)</li>
-        <li><strong>py-5:</strong> Padding top and bottom (5 units = large spacing). Format: <code>p</code> (all sides), <code>pt</code> (top), <code>pb</code> (bottom), <code>px</code> (left/right), <code>py</code> (top/bottom). Numbers: 0-5 (0=none, 5=largest)</li>
-      </ul>
-      
-      <div class="common-mistakes">
-        <h4>⚠️ Common Mistakes to Avoid</h4>
+
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Add the Hero Box</h3>
+        <p class="step-action"><strong>Do this in two small parts.</strong> Copy only the line shown in each box.</p>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1A</div>
+            <div class="step-status step-status--pending" data-heading-status="hero-open" aria-label="Hero box opening tag not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="container"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1B</div>
+            <div class="step-status step-status--pending" data-heading-status="hero-close" aria-label="Hero box closing tag not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your paragraph line:</strong> it starts with <code>&lt;p</code> and ends with <code>&lt;/p&gt;</code>.</p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;/div&gt;</code>
+          </div>
+        </div>
+
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading area should have a blue background.
+        </div>
+      </section>
+
+      <div class="lesson-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Make the Heading Bigger</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-heading-status="display" aria-label="Display heading not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your heading opening tag:</strong> it starts with <code>&lt;h1</code>.</p>
+          <p><strong>Change only the opening tag to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;h1 class="display-3"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading should look larger.
+        </div>
+      </section>
+
+      <div class="lesson-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Make the Paragraph Stand Out</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-heading-status="lead" aria-label="Lead paragraph not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your paragraph opening tag:</strong> it starts with <code>&lt;p</code>.</p>
+          <p><strong>Change only the opening tag to this:</strong></p>
+          <div class="code-block">
+            <code>&lt;p class="lead"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your paragraph should look bigger than regular paragraph text.
+        </div>
+        <p><strong>Personalize it:</strong> You can change the heading words and paragraph words. The checks should stay green.</p>
+      </section>
+
+      <div class="mini-checklist">
+        <h3>Before You Continue</h3>
         <ul>
-          <li><strong>Using multiple h1 tags on your page:</strong> Your final page should usually have only one main <code>&lt;h1&gt;</code></li>
-          <li><strong>Forgetting the Bootstrap links from the Introduction lesson:</strong> Without them, classes like <code>display-3</code> and <code>bg-primary</code> will not work</li>
-          <li><strong>Forgetting text-white on colored backgrounds:</strong> Dark text on dark backgrounds is hard to read</li>
-          <li><strong>Mixing display classes:</strong> Use <code>display-*</code> on <code>&lt;h1&gt;</code> tags, not on paragraphs</li>
+          <li>Your hero box has <code>bg-primary</code>, <code>text-white</code>, <code>text-center</code>, and <code>py-5</code>.</li>
+          <li>Your main heading uses <code>class="display-3"</code>.</li>
+          <li>Your paragraph uses <code>class="lead"</code>.</li>
+          <li>You can change the visible text without breaking the checks.</li>
         </ul>
       </div>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Change <code>display-3</code> to <code>display-1</code> to make the heading even larger</li>
-        <li>Try different background colors: <code>bg-success</code>, <code>bg-danger</code>, or <code>bg-dark</code></li>
-        <li>Change <code>py-5</code> to <code>py-3</code> to reduce vertical padding</li>
-        <li>Add a second paragraph with the <code>lead</code> class below your first one</li>
-      </ul>
-      
-      <div class="alert alert-success mt-4">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll learn about Bootstrap's grid system - the foundation of responsive layouts!
+
+      <div class="next-lesson-note">
+        <strong>What's Next:</strong> In the next lesson, you will add a section under this hero area.
       </div>
-      
-      <h3>Best Practices</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Use only one <code>&lt;h1&gt;</code> per page</li>
-        <li>Use <code>display-*</code> classes for hero sections</li>
-        <li>Combine HTML headings with Bootstrap utility classes</li>
-        <li>Use <code>lead</code> class for important paragraphs</li>
-      </ul>
     `
   },
   layoutBasics: {
@@ -2279,6 +2275,7 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     updateStarterLessonStatus();
     updateBootstrapLessonStatus();
     updateContainerLessonStatus();
+    updateHeadingLessonStatus();
   }, 10);
 
   return true;
@@ -2695,7 +2692,7 @@ function getContainerSetupStatus(html) {
     ? openMatches.find(match => match.index < headingIndex)
     : null;
   const closeAfterParagraph = paragraphEndIndex !== -1
-    ? closeMatches.find(match => match.index > paragraphEndIndex)
+    ? closeMatches.find(match => match.index >= paragraphEndIndex)
     : null;
 
   const openFound = openMatches.length > 0;
@@ -2708,6 +2705,57 @@ function getContainerSetupStatus(html) {
     closeFound,
     openCorrect,
     closeCorrect
+  };
+}
+
+function tagHasClass(tag, className) {
+  const classMatch = /\bclass\s*=\s*["']([^"']*)["']/i.exec(tag);
+  return Boolean(classMatch && classMatch[1].split(/\s+/).includes(className));
+}
+
+function tagHasClasses(tag, classNames) {
+  return classNames.every(className => tagHasClass(tag, className));
+}
+
+function getHeadingLessonStatus(html) {
+  const containerMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
+  const heroOpenMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
+    .filter(match => tagHasClasses(match[0], ['bg-primary', 'text-white', 'text-center', 'py-5']));
+  const headingMatches = Array.from(html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi));
+  const paragraphMatches = Array.from(html.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi));
+  const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
+
+  const heroOpen = heroOpenMatches[0];
+  const heroOpenIndex = heroOpen?.index ?? -1;
+  const containerBeforeHero = heroOpenIndex !== -1
+    ? containerMatches.find(match => match.index < heroOpenIndex)
+    : null;
+  const headingAfterHero = heroOpenIndex !== -1
+    ? headingMatches.find(match => match.index > heroOpenIndex)
+    : headingMatches[0];
+  const headingIndex = headingAfterHero?.index ?? -1;
+  const paragraphAfterHeading = headingIndex !== -1
+    ? paragraphMatches.find(match => match.index > headingIndex)
+    : paragraphMatches[0];
+  const paragraphEndIndex = paragraphAfterHeading
+    ? paragraphAfterHeading.index + paragraphAfterHeading[0].length
+    : -1;
+  const closesAfterParagraph = paragraphEndIndex !== -1
+    ? closeMatches.filter(match => match.index >= paragraphEndIndex)
+    : [];
+
+  const displayHeading = headingAfterHero && tagHasClass(headingAfterHero[0], 'display-3');
+  const leadParagraph = paragraphAfterHeading && tagHasClass(paragraphAfterHeading[0], 'lead');
+
+  return {
+    heroOpenFound: heroOpenMatches.length > 0,
+    heroOpenCorrect: Boolean(heroOpen && containerBeforeHero),
+    heroCloseFound: closesAfterParagraph.length > 1,
+    heroCloseCorrect: Boolean(heroOpen && closesAfterParagraph.length > 1),
+    displayFound: headingMatches.some(match => tagHasClass(match[0], 'display-3')),
+    displayCorrect: Boolean(displayHeading),
+    leadFound: paragraphMatches.some(match => tagHasClass(match[0], 'lead')),
+    leadCorrect: Boolean(leadParagraph)
   };
 }
 
@@ -2737,6 +2785,54 @@ function updateContainerLessonStatus(status = null) {
   );
 }
 
+function updateHeadingLessonStatus(status = null) {
+  const currentStatus = status || getHeadingLessonStatus(htmlEditor?.getValue?.() || '');
+  const heroOpenState = currentStatus.heroOpenCorrect ? 'success' : currentStatus.heroOpenFound ? 'error' : 'pending';
+  const heroCloseState = currentStatus.heroCloseCorrect ? 'success' : currentStatus.heroCloseFound ? 'error' : 'pending';
+  const displayState = currentStatus.displayCorrect ? 'success' : currentStatus.displayFound ? 'error' : 'pending';
+  const leadState = currentStatus.leadCorrect ? 'success' : currentStatus.leadFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-heading-status="hero-open"]'),
+    heroOpenState,
+    heroOpenState === 'success'
+      ? 'Hero box opening tag is in the correct place'
+      : heroOpenState === 'error'
+        ? 'Hero box opening tag was added, but it should go below the container line'
+        : 'Hero box opening tag not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-heading-status="hero-close"]'),
+    heroCloseState,
+    heroCloseState === 'success'
+      ? 'Hero box closing tag is after the paragraph'
+      : heroCloseState === 'error'
+        ? 'Hero box closing tag is missing or in the wrong place'
+        : 'Hero box closing tag not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-heading-status="display"]'),
+    displayState,
+    displayState === 'success'
+      ? 'Heading uses display-3'
+      : displayState === 'error'
+        ? 'display-3 was added, but it should be on the main heading'
+        : 'Display heading not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-heading-status="lead"]'),
+    leadState,
+    leadState === 'success'
+      ? 'Paragraph uses lead'
+      : leadState === 'error'
+        ? 'lead was added, but it should be on the paragraph'
+        : 'Lead paragraph not done yet'
+  );
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, '&amp;')
@@ -2754,6 +2850,7 @@ function updatePreview() {
     updateStarterLessonStatus(getStarterSetupStatus(''));
     updateBootstrapLessonStatus(getBootstrapSetupStatus(''));
     updateContainerLessonStatus(getContainerSetupStatus(''));
+    updateHeadingLessonStatus(getHeadingLessonStatus(''));
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--setup';
     errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
@@ -2765,6 +2862,7 @@ function updatePreview() {
     updateStarterLessonStatus(starterStatus);
     updateBootstrapLessonStatus(bootstrapStatus);
     updateContainerLessonStatus();
+    updateHeadingLessonStatus();
 
     if (errors.length > 0) {
       errorDiv.style.display = 'block';
