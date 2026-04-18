@@ -755,6 +755,10 @@ kbd {
   text-align: center;
 }
 
+.lesson-section > .step-arrow {
+  margin: 22px 0;
+}
+
 .mini-checklist {
   border: 1px solid rgba(34, 197, 94, 0.35);
   border-radius: 8px;
