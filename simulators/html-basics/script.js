@@ -372,6 +372,7 @@ const lessons = {
         <div><strong>bg-primary</strong><span>Adds a Bootstrap background color.</span></div>
         <div><strong>text-white</strong><span>Makes text white.</span></div>
         <div><strong>text-center</strong><span>Centers the text.</span></div>
+        <div><strong>d-flex</strong><span>Lets Bootstrap center the hero content as a group.</span></div>
         <div><strong>py-5</strong><span>Adds space above and below the hero text.</span></div>
         <div><strong>min-height</strong><span>Sets the actual height of the hero box.</span></div>
       </div>
@@ -412,6 +413,8 @@ const lessons = {
           <strong>Want another color or height?</strong> After this works, you can try another
           <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background color</a>.
           To make the hero box taller, add <code>style="min-height: 300px;"</code> inside the hero opening tag. Try <code>200px</code>, <code>300px</code>, or <code>400px</code>.
+          To center the hero content inside that taller box, add <code>d-flex align-items-center justify-content-center flex-column</code>.
+          <a href="https://getbootstrap.com/docs/5.3/utilities/flex/" target="_blank" rel="noopener">Flex centering</a>.
         </div>
       </section>
 
@@ -464,8 +467,9 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, and <code>text-center</code>.</li>
+          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, and center alignment.</li>
           <li>You may use <code>style="min-height: 300px;"</code> to change the hero box height.</li>
+          <li>You may use <code>d-flex align-items-center justify-content-center flex-column</code> to center the content inside the hero box.</li>
           <li>Your main heading uses a <code>display-*</code> class.</li>
           <li>Your paragraph uses <code>class="lead"</code>.</li>
           <li>You can change the visible text without breaking the checks.</li>
@@ -2895,10 +2899,14 @@ function tagHasCardVisualStyle(tag) {
   return tagHasClass(tag, 'border') || tagHasAnyClassPrefix(tag, ['border-', 'bg-']);
 }
 
+function tagCentersHeroContent(tag) {
+  return tagHasClass(tag, 'text-center') || tagHasClasses(tag, ['d-flex', 'align-items-center', 'justify-content-center', 'flex-column']);
+}
+
 function getHeadingLessonStatus(html) {
   const containerMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
   const heroOpenMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
-    .filter(match => tagHasClasses(match[0], ['text-white', 'text-center']) && tagHasClassPrefix(match[0], 'bg-'));
+    .filter(match => tagHasClass(match[0], 'text-white') && tagCentersHeroContent(match[0]) && tagHasClassPrefix(match[0], 'bg-'));
   const headingMatches = Array.from(html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi));
   const paragraphMatches = Array.from(html.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
