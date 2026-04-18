@@ -1,6 +1,9 @@
 // Tab switching
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
+const prevTabBtn = document.getElementById('prevTabBtn');
+const nextTabBtn = document.getElementById('nextTabBtn');
+let htmlEditor = null;
 
 // Get simulator name from path for localStorage key
 const getSimulatorName = () => {
@@ -12,6 +15,92 @@ const getSimulatorName = () => {
 const SIMULATOR_NAME = getSimulatorName();
 const TAB_STORAGE_KEY = `tabState_${SIMULATOR_NAME}`;
 const LESSON_STORAGE_KEY = `lessonState_${SIMULATOR_NAME}`;
+const SCROLL_STORAGE_PREFIX = `scrollState_${SIMULATOR_NAME}`;
+let isRestoringScroll = false;
+
+function getActiveTabId() {
+  return document.querySelector('.tab-button.tab-active')?.getAttribute('data-tab') || null;
+}
+
+function getTabIds() {
+  return Array.from(tabButtons)
+    .map(button => button.getAttribute('data-tab'))
+    .filter(Boolean);
+}
+
+function updateTabArrowState(tabId = getActiveTabId()) {
+  const tabIds = getTabIds();
+  const activeIndex = tabIds.indexOf(tabId);
+
+  if (prevTabBtn) {
+    prevTabBtn.disabled = activeIndex <= 0;
+  }
+
+  if (nextTabBtn) {
+    nextTabBtn.disabled = activeIndex === -1 || activeIndex >= tabIds.length - 1;
+  }
+}
+
+function refreshHtmlEditor() {
+  if (!htmlEditor || typeof htmlEditor.refresh !== 'function') {
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    htmlEditor.refresh();
+  });
+}
+
+function getScrollStorageKey(tabId) {
+  return `${SCROLL_STORAGE_PREFIX}_${tabId}`;
+}
+
+function saveScrollState(tabId = getActiveTabId()) {
+  if (!tabId || isRestoringScroll) {
+    return;
+  }
+
+  try {
+    localStorage.setItem(getScrollStorageKey(tabId), String(window.scrollY));
+  } catch (e) {
+    console.warn('Failed to save scroll state:', e);
+  }
+}
+
+function restoreScrollState(tabId = getActiveTabId()) {
+  if (!tabId) {
+    return;
+  }
+
+  try {
+    const savedScroll = localStorage.getItem(getScrollStorageKey(tabId));
+    if (savedScroll === null) {
+      return;
+    }
+
+    const targetY = Math.max(0, Number(savedScroll) || 0);
+    isRestoringScroll = true;
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: targetY, behavior: 'auto' });
+      window.setTimeout(() => {
+        isRestoringScroll = false;
+      }, 120);
+    });
+  } catch (e) {
+    isRestoringScroll = false;
+    console.warn('Failed to restore scroll state:', e);
+  }
+}
+
+let scrollSaveTimeout = null;
+window.addEventListener('scroll', () => {
+  window.clearTimeout(scrollSaveTimeout);
+  scrollSaveTimeout = window.setTimeout(() => saveScrollState(), 120);
+}, { passive: true });
+
+window.addEventListener('beforeunload', () => {
+  saveScrollState();
+});
 
 function activateTab(tabId) {
   const tabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
@@ -25,7 +114,39 @@ function activateTab(tabId) {
   tabContents.forEach(content => content.classList.remove('tab-active'));
   tabButton.classList.add('tab-active');
   tabContent.classList.add('tab-active');
+  updateTabArrowState(tabId);
+
+  if (tabId === 'practice') {
+    refreshHtmlEditor();
+  }
+
   return true;
+}
+
+function switchTabByOffset(offset) {
+  const tabIds = getTabIds();
+  const activeIndex = tabIds.indexOf(getActiveTabId());
+
+  if (activeIndex === -1) {
+    return false;
+  }
+
+  const targetIndex = activeIndex + offset;
+  const targetTab = tabIds[targetIndex];
+
+  if (!targetTab) {
+    return false;
+  }
+
+  saveScrollState(tabIds[activeIndex]);
+
+  if (activateTab(targetTab)) {
+    saveTabState(targetTab);
+    restoreScrollState(targetTab);
+    return true;
+  }
+
+  return false;
 }
 
 // Save tab state to localStorage
@@ -70,47 +191,68 @@ function getSavedLessonState() {
 tabButtons.forEach(button => {
   button.addEventListener('click', () => {
     const targetTab = button.getAttribute('data-tab');
+    const currentTab = getActiveTabId();
+
+    saveScrollState(currentTab);
 
     if (activateTab(targetTab)) {
       saveTabState(targetTab);
+      restoreScrollState(targetTab);
     }
   });
 });
 
+prevTabBtn?.addEventListener('click', () => {
+  switchTabByOffset(-1);
+});
+
+nextTabBtn?.addEventListener('click', () => {
+  switchTabByOffset(1);
+});
+
 restoreTabState();
+updateTabArrowState();
 
 // Lesson content
 const lessons = {
   intro: {
     title: 'Introduction to HTML & Bootstrap 5',
     content: `
-      <h2>What is HTML?</h2>
-      <p>HTML (HyperText Markup Language) is the standard language for creating web pages. It uses tags to structure content and tell browsers how to display it.</p>
+      <h2>Start Here: Your First Web Page</h2>
+      <p>In this lesson, you will make the first working version of your personal website. Do one step, check it, then move to the next step.</p>
 
-      <h2>What is Bootstrap 5?</h2>
-      <p>Bootstrap 5 is a CSS framework with ready-made classes and components. It helps you style pages faster and build layouts that adapt well to phones, tablets, and desktops.</p>
+      <div class="intro-summary">
+        <div>
+          <strong>HTML</strong>
+          <span>puts text, headings, and sections on the page.</span>
+        </div>
+        <div>
+          <strong>Bootstrap</strong>
+          <span>adds ready-made styling after you add its two links.</span>
+        </div>
+        <div>
+          <strong>Your goal today</strong>
+          <span>make a starter page with a centered content area.</span>
+        </div>
+      </div>
 
-      <h2>🎯 Your Project: Build Your Personal Website</h2>
-      <p>As you go through these lessons, you'll build a complete website about yourself! Each lesson will add a new piece to your site.</p>
+      <h3>Words You Need for This Lesson</h3>
+      <div class="concept-strip">
+        <div><strong>&lt;head&gt;</strong><span>Page setup visitors do not see.</span></div>
+        <div><strong>&lt;body&gt;</strong><span>The visible page content.</span></div>
+        <div><strong>container</strong><span>A Bootstrap class that centers content.</span></div>
+      </div>
 
-      <h3>📋 What You'll Build</h3>
-      <p>By the end of these lessons, you'll have a complete personal website with:</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>✅ A professional navbar with your name and navigation links</li>
-        <li>✅ A hero section with a large heading and introduction</li>
-        <li>✅ A biography section about yourself</li>
-        <li>✅ A movies section showcasing your favorite film series</li>
-        <li>✅ A music/podcast section with interactive accordions</li>
-        <li>✅ A quick facts section with colorful cards</li>
-        <li>✅ A footer with social media links</li>
-        <li>✅ Beautiful Bootstrap styling throughout</li>
-      </ul>
-      <p><strong>All sections will be responsive</strong> - they'll look great on phones, tablets, and desktops!</p>
-
-      <h3>📋 Step 1: Set Up Your Basic Structure</h3>
-      <p><strong>What to do:</strong> Copy this code into your Practice Builder. This is your starter HTML page.</p>
-      <div class="code-block">
-        <code>&lt;!DOCTYPE html&gt;
+      <div class="student-path">
+        <section class="student-step">
+          <div class="student-step-header">
+            <div class="step-label">Step 1</div>
+            <div class="step-status step-status--pending" data-starter-status="structure" aria-label="Starter file not done yet" title="Not done yet">✓</div>
+          </div>
+          <h3>Make the Starter File</h3>
+          <p class="step-action"><strong>Do this:</strong> Open the Practice Builder and replace the editor text with this code.</p>
+          <div class="code-block">
+            <code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
@@ -122,63 +264,98 @@ const lessons = {
   &lt;p&gt;This is where your content will go!&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Change the <code>&lt;title&gt;</code>, heading, and paragraph so they match your own site.</p>
-      <p><strong>Why:</strong> Every HTML page needs this structure. At this stage, you are just making a plain HTML page with no Bootstrap styling yet.</p>
+          </div>
+          <div class="step-check">
+            <strong>Check it:</strong> Click <strong>Refresh</strong>. You should see a heading that says "Welcome to My Website" and one short paragraph.
+          </div>
+          <p><strong>Personalize it:</strong> Change the page title, heading, and paragraph to match your own website.</p>
+        </section>
 
-      <h3>📋 Step 2: Add Bootstrap 5 CDN Links</h3>
-      <p><strong>What to do:</strong> Keep the code from Step 1 exactly as it is, and add these two Bootstrap lines to that same file.</p>
-      <p><strong>Where to add them:</strong> Put the CSS <code>&lt;link&gt;</code> inside <code>&lt;head&gt;</code>, and put the JavaScript <code>&lt;script&gt;</code> right before the closing <code>&lt;/body&gt;</code> tag.</p>
-      <div class="code-block">
-        <code>&lt;!-- Add this inside &lt;head&gt;, before &lt;/head&gt; --&gt;
-&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+        <div class="step-arrow" aria-hidden="true">↓</div>
 
-&lt;!-- Add this right before &lt;/body&gt; --&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code>
-      </div>
-      <p><strong>How it works:</strong> The first line loads Bootstrap's styles. The second line loads Bootstrap's JavaScript for interactive components like accordions and navbar toggles.</p>
-      <div class="alert alert-warning mt-3">
-        <strong>⚠️ Important:</strong> Without these Bootstrap links, Bootstrap classes won't work! Always include both the CSS and JS links in your HTML.
+        <section class="student-step">
+          <div class="step-label">Step 2</div>
+          <h3>Turn On Bootstrap</h3>
+          <p class="step-action"><strong>Do this in two small parts.</strong> Copy only the line shown in each box.</p>
+
+          <div class="micro-step" data-bootstrap-step="css">
+            <div class="micro-step-header">
+              <div class="micro-step-label">2A</div>
+              <div class="step-status step-status--pending" data-bootstrap-status="css" aria-label="Bootstrap CSS not done yet" title="Not done yet">✓</div>
+            </div>
+            <p><strong>Find this line:</strong> <code>&lt;/head&gt;</code></p>
+            <p><strong>Paste this line above it:</strong></p>
+            <div class="code-block">
+              <code>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;</code>
+            </div>
+          </div>
+
+          <div class="micro-step" data-bootstrap-step="js">
+            <div class="micro-step-header">
+              <div class="micro-step-label">2B</div>
+              <div class="step-status step-status--pending" data-bootstrap-status="js" aria-label="Bootstrap JS not done yet" title="Not done yet">✓</div>
+            </div>
+            <p><strong>Find this line:</strong> <code>&lt;/body&gt;</code></p>
+            <p><strong>Paste this line above it:</strong></p>
+            <div class="code-block">
+              <code>&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code>
+            </div>
+          </div>
+
+          <div class="step-check">
+            <strong>Check it:</strong> Your preview may look almost the same. That is okay. Bootstrap is now ready for the next step.
+          </div>
+        </section>
+
+        <div class="step-arrow" aria-hidden="true">↓</div>
+
+        <section class="student-step">
+          <div class="step-label">Step 3</div>
+          <h3>Put the Page Content in a Container</h3>
+          <p class="step-action"><strong>Do this in two small parts.</strong> Copy only the line shown in each box.</p>
+
+          <div class="micro-step" data-container-step="open">
+            <div class="micro-step-header">
+              <div class="micro-step-label">3A</div>
+              <div class="step-status step-status--pending" data-container-status="open" aria-label="Container opening tag not done yet" title="Not done yet">✓</div>
+            </div>
+            <p><strong>Find this line:</strong> <code>&lt;h1&gt;Welcome to My Website&lt;/h1&gt;</code></p>
+            <p><strong>Paste this line above it:</strong></p>
+            <div class="code-block">
+              <code>&lt;div class="container"&gt;</code>
+            </div>
+          </div>
+
+          <div class="micro-step" data-container-step="close">
+            <div class="micro-step-header">
+              <div class="micro-step-label">3B</div>
+              <div class="step-status step-status--pending" data-container-status="close" aria-label="Container closing tag not done yet" title="Not done yet">✓</div>
+            </div>
+            <p><strong>Find this line:</strong> <code>&lt;p&gt;This is where your content will go!&lt;/p&gt;</code></p>
+            <p><strong>Paste this line below it:</strong></p>
+            <div class="code-block">
+              <code>&lt;/div&gt;</code>
+            </div>
+          </div>
+          <div class="step-check">
+            <strong>Check it:</strong> Click <strong>Refresh</strong>. The content should no longer touch the left edge of the preview.
+          </div>
+          <p><strong>Why:</strong> A Bootstrap <code>container</code> centers your page content and gives it breathing room.</p>
+        </section>
       </div>
 
-      <div class="alert alert-info mt-3">
-        <strong>💡 Tip:</strong> You are adding to your starter file, not replacing it. These two CDN lines are what turn Bootstrap on for your page.
-      </div>
-
-      <h3>📋 Step 3: Put Your Content in a Container</h3>
-      <p><strong>What to do:</strong> Now that Bootstrap is loaded, wrap the content inside your <code>&lt;body&gt;</code> in a <code>container</code>.</p>
-      <div class="code-block">
-        <code>&lt;body&gt;
-  &lt;div class="container"&gt;
-    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
-    &lt;p&gt;This is where your content will go!&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/body&gt;</code>
-      </div>
-      <p><strong>Why:</strong> The <code>container</code> class centers your content and adds spacing on the left and right. You will keep building inside this container in the next lesson.</p>
-      
-      <h3>Key Concepts</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>&lt;head&gt;:</strong> Holds information about the page, like the title and links to stylesheets</li>
-        <li><strong>&lt;body&gt;:</strong> Holds the content visitors actually see on the page</li>
-        <li><strong>CDN link:</strong> Loads a library from the internet instead of storing it in your project files</li>
-        <li><strong>container:</strong> A Bootstrap class that keeps page content centered and readable</li>
-        <li><strong>Bootstrap classes:</strong> Ready-made classes like <code>container</code>, <code>btn</code>, and <code>card</code> that work after Bootstrap is loaded</li>
-      </ul>
-      
-      <div class="common-mistakes">
-        <h4>⚠️ Common Mistakes to Avoid</h4>
+      <div class="mini-checklist">
+        <h3>Before You Continue</h3>
         <ul>
-          <li><strong>Forgetting to close tags:</strong> Every opening tag needs a closing tag (e.g., <code>&lt;div&gt;</code> needs <code>&lt;/div&gt;</code>)</li>
-          <li><strong>Missing Bootstrap links:</strong> Without Bootstrap CDN links, Bootstrap classes won't work</li>
-          <li><strong>Putting content outside the container:</strong> If you want Bootstrap's centered layout, make sure your visible content stays inside <code>&lt;div class="container"&gt;</code></li>
-          <li><strong>Wrong tag order:</strong> Make sure <code>&lt;head&gt;</code> comes before <code>&lt;body&gt;</code></li>
-          <li><strong>Forgetting quotes:</strong> Attribute values need quotes, like <code>rel="stylesheet"</code> or <code>src="..."</code></li>
+          <li>Your file starts with <code>&lt;!DOCTYPE html&gt;</code>.</li>
+          <li>The Bootstrap <code>&lt;link&gt;</code> is inside <code>&lt;head&gt;</code>.</li>
+          <li>The Bootstrap <code>&lt;script&gt;</code> is near the bottom, before <code>&lt;/body&gt;</code>.</li>
+          <li>Your visible heading and paragraph are inside <code>&lt;div class="container"&gt;</code>.</li>
         </ul>
       </div>
-      
+
       <div class="alert alert-success mt-4">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll learn about HTML headings and Bootstrap display classes. You'll create your hero section - the first thing visitors see!
+        <strong>What's Next:</strong> In the next lesson, you will turn this starter content into a hero section: the first big section visitors see.
       </div>
     `
   },
@@ -1287,7 +1464,7 @@ const lessons = {
       </ul>
       
       <div class="alert alert-success mt-4">
-        <strong>🎉 Congratulations!</strong> You've built a complete, professional-looking website! Now go to the <strong>Export Site</strong> tab to download your HTML file. You can open it in any browser or host it online!
+        <strong>🎉 Congratulations!</strong> You've built a complete, professional-looking website! Use the <strong>Export HTML</strong> button in the Simulator to download your file. You can open it in any browser or host it online!
       </div>
       
       <h3>Bootstrap Components You Used</h3>
@@ -1670,7 +1847,7 @@ const lessons = {
       </ul>
       
       <h2>🎉 Congratulations!</h2>
-      <p>You've built a complete, professional-looking website! Now go to the <strong>Export Site</strong> tab to download your HTML file. You can open it in any browser or host it online!</p>
+      <p>You've built a complete, professional-looking website! Use the <strong>Export HTML</strong> button in the Simulator to download your file. You can open it in any browser or host it online!</p>
       
       <div class="alert alert-success mt-4">
         <strong>💡 Pro Tip:</strong> Try modifying colors, adding more sections, or experimenting with different Bootstrap components. The more you practice, the better you'll get!
@@ -1688,16 +1865,16 @@ function addCopyButtons() {
     
     const button = document.createElement('button');
     button.className = 'copy-code-btn';
-    button.textContent = '📋 Copy';
+    button.textContent = 'Copy';
     button.addEventListener('click', () => {
       const code = block.querySelector('code');
       if (code) {
         const text = code.textContent;
         navigator.clipboard.writeText(text).then(() => {
-          button.textContent = '✅ Copied!';
+          button.textContent = 'Copied';
           button.classList.add('copied');
           setTimeout(() => {
-            button.textContent = '📋 Copy';
+            button.textContent = 'Copy';
             button.classList.remove('copied');
           }, 2000);
         });
@@ -2099,6 +2276,9 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     }
     addCopyButtons();
     addSyntaxHighlighting();
+    updateStarterLessonStatus();
+    updateBootstrapLessonStatus();
+    updateContainerLessonStatus();
   }, 10);
 
   return true;
@@ -2147,6 +2327,12 @@ document.addEventListener('keydown', (e) => {
     return;
   }
 
+  if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !isEditableTarget(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    e.preventDefault();
+    switchTabByOffset(e.key === 'ArrowLeft' ? -1 : 1);
+    return;
+  }
+
   if (!isLessonsTabActive() || isEditableTarget(e.target) || e.ctrlKey || e.metaKey || e.altKey) {
     return;
   }
@@ -2179,6 +2365,7 @@ document.addEventListener('keydown', (e) => {
 // Load progress and current lesson on page load
 loadProgress();
 restoreLessonState();
+restoreScrollState();
 
 // IndexedDB setup for saving practice builder progress
 const DB_NAME = 'htmlBasicsDB';
@@ -2258,40 +2445,57 @@ const previewFrame = document.getElementById('previewFrame');
 const refreshBtn = document.getElementById('refreshBtn');
 const clearBtn = document.getElementById('clearBtn');
 
-// Initialize CodeMirror for syntax highlighting
-let htmlEditor;
 if (typeof CodeMirror !== 'undefined') {
-  htmlEditor = CodeMirror.fromTextArea(htmlEditorElement, {
+  const codeMirrorEditor = CodeMirror.fromTextArea(htmlEditorElement, {
     mode: 'htmlmixed',
     theme: 'monokai',
     lineNumbers: true,
     lineWrapping: true,
     indentUnit: 2,
     tabSize: 2,
-    indentWithTabs: false,
-    autoCloseTags: true,
-    matchTags: true,
-    autoCloseBrackets: true,
-    foldGutter: true,
-    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+    indentWithTabs: false
   });
-  
-  // Update preview when editor content changes
-  htmlEditor.on('change', () => {
+  const codeMirrorWrapper = codeMirrorEditor.getWrapperElement();
+  codeMirrorWrapper.setAttribute('data-placeholder', htmlEditorElement.getAttribute('placeholder') || '');
+
+  const updateCodeMirrorPlaceholder = () => {
+    codeMirrorWrapper.classList.toggle('CodeMirror-empty', !codeMirrorEditor.getValue().trim());
+  };
+
+  htmlEditor = {
+    getValue: () => codeMirrorEditor.getValue(),
+    setValue: (val) => {
+      codeMirrorEditor.setValue(val);
+      updateCodeMirrorPlaceholder();
+      refreshHtmlEditor();
+    },
+    focus: () => codeMirrorEditor.focus(),
+    refresh: () => codeMirrorEditor.refresh()
+  };
+
+  codeMirrorEditor.on('change', () => {
+    updateCodeMirrorPlaceholder();
     updatePreview();
     debouncedSave();
   });
+  updateCodeMirrorPlaceholder();
 } else {
-  // Fallback to regular textarea if CodeMirror fails to load
   htmlEditor = {
     getValue: () => htmlEditorElement.value,
-    setValue: (val) => { htmlEditorElement.value = val; },
-    on: () => {}
+    setValue: (val) => {
+      htmlEditorElement.value = val;
+    },
+    focus: () => htmlEditorElement.focus()
   };
+
   htmlEditorElement.addEventListener('input', () => {
     updatePreview();
     debouncedSave();
   });
+}
+
+if (getActiveTabId() === 'practice') {
+  refreshHtmlEditor();
 }
 
 // HTML validation
@@ -2347,26 +2551,222 @@ function validateHTML(html) {
     errors.push('Possible unclosed tags detected. Make sure all tags are properly closed.');
   }
   
-  // Check for Bootstrap
-  if (!html.includes('bootstrap') && !html.includes('Bootstrap')) {
-    errors.push('Bootstrap CDN links not found. Add Bootstrap CSS and JS links.');
+  // Only ask for Bootstrap when the page is using Bootstrap-specific classes.
+  const usesBootstrapClasses = /\bclass\s*=\s*["'][^"']*\b(container|row|col|btn|card|navbar|display-\d|lead|text-|bg-|mt-|mb-|py-|px-)/i.test(html);
+  const hasBootstrap = /bootstrap/i.test(html);
+  if (usesBootstrapClasses && !hasBootstrap) {
+    errors.push('Bootstrap classes found, but Bootstrap links are missing. Add the Bootstrap CSS and JS links.');
   }
   
   return errors;
 }
 
+function getTagIndex(html, tagName, { last = false } = {}) {
+  const method = last ? 'lastIndexOf' : 'indexOf';
+  return html.toLowerCase()[method](`</${tagName}>`);
+}
+
+function findBootstrapCssLink(html) {
+  return html.search(/<link\b[^>]*href=["'][^"']*bootstrap[^"']*\.css[^"']*["'][^>]*>/i);
+}
+
+function findBootstrapJsScript(html) {
+  return html.search(/<script\b[^>]*src=["'][^"']*bootstrap[^"']*\.js[^"']*["'][^>]*>\s*<\/script>/i);
+}
+
+function getBootstrapSetupStatus(html) {
+  const headCloseIndex = getTagIndex(html, 'head');
+  const bodyCloseIndex = getTagIndex(html, 'body', { last: true });
+  const cssIndex = findBootstrapCssLink(html);
+  const jsIndex = findBootstrapJsScript(html);
+
+  const cssFound = cssIndex !== -1;
+  const jsFound = jsIndex !== -1;
+  const cssCorrect = cssFound && headCloseIndex !== -1 && cssIndex < headCloseIndex;
+  const jsCorrect = jsFound && bodyCloseIndex !== -1 && jsIndex < bodyCloseIndex;
+
+  return {
+    cssFound,
+    jsFound,
+    cssCorrect,
+    jsCorrect,
+    ready: cssCorrect && jsCorrect,
+    checks: [
+      cssCorrect
+        ? { type: 'success', text: 'Bootstrap CSS is above </head>.' }
+        : cssFound
+          ? { type: 'error', text: 'Move the Bootstrap CSS line above </head>.' }
+          : { type: 'pending', text: 'Bootstrap CSS is not added yet. Find </head> and paste the CSS line above it.' },
+      jsCorrect
+        ? { type: 'success', text: 'Bootstrap JS is above </body>.' }
+        : jsFound
+          ? { type: 'error', text: 'Move the Bootstrap JS line above </body>.' }
+          : { type: 'pending', text: 'Bootstrap JS is not added yet. Find </body> and paste the JS line above it.' }
+    ]
+  };
+}
+
+function setStepStatus(element, state, label) {
+  if (!element) {
+    return;
+  }
+
+  element.classList.remove('step-status--pending', 'step-status--success', 'step-status--error');
+  element.classList.add(`step-status--${state}`);
+  element.textContent = state === 'error' ? '✕' : '✓';
+  element.setAttribute('aria-label', label);
+  element.setAttribute('title', label);
+}
+
+function getStarterSetupStatus(html) {
+  const hasContent = html.trim().length > 0;
+  const hasDoctype = /<!doctype\s+html>/i.test(html);
+  const hasHtml = /<html\b[^>]*>/i.test(html) && /<\/html>/i.test(html);
+  const hasHead = /<head\b[^>]*>/i.test(html) && /<\/head>/i.test(html);
+  const hasBody = /<body\b[^>]*>/i.test(html) && /<\/body>/i.test(html);
+  const hasTitle = /<title\b[^>]*>[\s\S]*?<\/title>/i.test(html);
+  const hasHeading = /<h1\b[^>]*>[\s\S]*?<\/h1>/i.test(html);
+  const hasParagraph = /<p\b[^>]*>[\s\S]*?<\/p>/i.test(html);
+  const complete = hasDoctype && hasHtml && hasHead && hasBody && hasTitle && hasHeading && hasParagraph;
+
+  return {
+    hasContent,
+    complete
+  };
+}
+
+function updateStarterLessonStatus(status = null) {
+  const currentStatus = status || getStarterSetupStatus(htmlEditor?.getValue?.() || '');
+  const state = currentStatus.complete ? 'success' : currentStatus.hasContent ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-starter-status="structure"]'),
+    state,
+    state === 'success'
+      ? 'Starter file has the required structure'
+      : state === 'error'
+        ? 'Starter file is started, but something is missing'
+        : 'Starter file not done yet'
+  );
+}
+
+function updateBootstrapLessonStatus(status = null) {
+  const currentStatus = status || getBootstrapSetupStatus(htmlEditor?.getValue?.() || '');
+  const cssState = currentStatus.cssCorrect ? 'success' : currentStatus.cssFound ? 'error' : 'pending';
+  const jsState = currentStatus.jsCorrect ? 'success' : currentStatus.jsFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-bootstrap-status="css"]'),
+    cssState,
+    cssState === 'success'
+      ? 'Bootstrap CSS is in the correct place'
+      : cssState === 'error'
+        ? 'Bootstrap CSS was added, but it is in the wrong place'
+        : 'Bootstrap CSS not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-bootstrap-status="js"]'),
+    jsState,
+    jsState === 'success'
+      ? 'Bootstrap JS is in the correct place'
+      : jsState === 'error'
+        ? 'Bootstrap JS was added, but it is in the wrong place'
+        : 'Bootstrap JS not done yet'
+  );
+}
+
+function getContainerSetupStatus(html) {
+  const headingMatch = /<h1\b[^>]*>\s*Welcome to My Website\s*<\/h1>/i.exec(html);
+  const paragraphMatch = /<p\b[^>]*>\s*This is where your content will go!\s*<\/p>/i.exec(html);
+  const openMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
+  const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
+
+  const headingIndex = headingMatch?.index ?? -1;
+  const paragraphEndIndex = paragraphMatch ? paragraphMatch.index + paragraphMatch[0].length : -1;
+  const openBeforeHeading = headingIndex !== -1
+    ? openMatches.find(match => match.index < headingIndex)
+    : null;
+  const closeAfterParagraph = paragraphEndIndex !== -1
+    ? closeMatches.find(match => match.index > paragraphEndIndex)
+    : null;
+
+  const openFound = openMatches.length > 0;
+  const closeFound = closeMatches.length > 0;
+  const openCorrect = Boolean(openBeforeHeading);
+  const closeCorrect = Boolean(openBeforeHeading && closeAfterParagraph);
+
+  return {
+    openFound,
+    closeFound,
+    openCorrect,
+    closeCorrect
+  };
+}
+
+function updateContainerLessonStatus(status = null) {
+  const currentStatus = status || getContainerSetupStatus(htmlEditor?.getValue?.() || '');
+  const openState = currentStatus.openCorrect ? 'success' : currentStatus.openFound ? 'error' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-container-status="open"]'),
+    openState,
+    openState === 'success'
+      ? 'Container opening tag is in the correct place'
+      : openState === 'error'
+        ? 'Container opening tag was added, but it is in the wrong place'
+        : 'Container opening tag not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-container-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Container closing tag is in the correct place'
+      : closeState === 'error'
+        ? 'Container closing tag was added, but it is in the wrong place'
+        : 'Container closing tag not done yet'
+  );
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function updatePreview() {
   const htmlContent = htmlEditor.getValue();
   const errorDiv = document.getElementById('previewError');
-  
-  // Validate HTML
-  const errors = validateHTML(htmlContent);
-  
-  if (errors.length > 0) {
+
+  if (!htmlContent.trim()) {
+    updateStarterLessonStatus(getStarterSetupStatus(''));
+    updateBootstrapLessonStatus(getBootstrapSetupStatus(''));
+    updateContainerLessonStatus(getContainerSetupStatus(''));
     errorDiv.style.display = 'block';
-    errorDiv.innerHTML = `<strong>⚠️ Issues found:</strong><ul style="margin: 8px 0 0 20px; font-size: 0.9em;">${errors.map(e => `<li>${e}</li>`).join('')}</ul>`;
+    errorDiv.className = 'preview-error preview-error--setup';
+    errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
   } else {
-    errorDiv.style.display = 'none';
+    // Validate HTML
+    const errors = validateHTML(htmlContent);
+    const starterStatus = getStarterSetupStatus(htmlContent);
+    const bootstrapStatus = getBootstrapSetupStatus(htmlContent);
+    updateStarterLessonStatus(starterStatus);
+    updateBootstrapLessonStatus(bootstrapStatus);
+    updateContainerLessonStatus();
+
+    if (errors.length > 0) {
+      errorDiv.style.display = 'block';
+      errorDiv.className = 'preview-error preview-error--issue';
+      errorDiv.innerHTML = `<strong>Issues found:</strong><ul>${errors.map(e => `<li>${escapeHtml(e)}</li>`).join('')}</ul>`;
+    } else {
+      errorDiv.style.display = 'none';
+      errorDiv.className = 'preview-error';
+    }
   }
   
   try {
@@ -2377,10 +2777,12 @@ function updatePreview() {
     // Handle iframe errors
     previewFrame.onerror = () => {
       errorDiv.style.display = 'block';
+      errorDiv.className = 'preview-error preview-error--issue';
       errorDiv.textContent = 'Error loading preview. Check your HTML syntax.';
     };
   } catch (error) {
     errorDiv.style.display = 'block';
+    errorDiv.className = 'preview-error preview-error--issue';
     errorDiv.textContent = `Error: ${error.message}`;
   }
 }
@@ -2393,9 +2795,6 @@ function debouncedSave() {
     saveContent(htmlEditor.getValue());
   }, 1000); // Save 1 second after user stops typing
 }
-
-// CodeMirror handles Tab/Shift+Tab indentation automatically, so we don't need custom handlers
-// The 'change' event is already set up above for CodeMirror
 
 refreshBtn.addEventListener('click', () => {
   updatePreview();
@@ -2410,37 +2809,20 @@ if (toggleViewBtn && practiceContainer) {
   toggleViewBtn.addEventListener('click', () => {
     isFullPreview = !isFullPreview;
     practiceContainer.classList.toggle('full-preview', isFullPreview);
-    toggleViewBtn.textContent = isFullPreview ? '✏️ Editor' : '🔍 Full Page';
+    toggleViewBtn.textContent = isFullPreview ? 'Editor' : 'Full Page';
     toggleViewBtn.title = isFullPreview ? 'Show editor and preview' : 'Show full-page preview only';
     
     // Refresh preview when toggling to ensure it's up to date
     if (isFullPreview) {
       updatePreview();
+    } else {
+      refreshHtmlEditor();
     }
   });
 }
 
-const defaultContent = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Page</title>
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-  <div class="container mt-5">
-    <h1 class="display-4">Hello World!</h1>
-    <p class="lead">Start building with Bootstrap 5 classes...</p>
-    <button class="btn btn-primary">Click Me</button>
-  </div>
-  <!-- Bootstrap 5 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>`;
-
 let notificationStack = null;
+let html2canvasLoadPromise = null;
 
 function getNotificationStack() {
   if (!notificationStack) {
@@ -2500,11 +2882,41 @@ function showNotification(title, message, variant = 'info', duration = 3200) {
   timeoutId = window.setTimeout(dismissNotification, duration);
 }
 
+function loadHtml2Canvas() {
+  if (typeof html2canvas !== 'undefined') {
+    return Promise.resolve(html2canvas);
+  }
+
+  if (html2canvasLoadPromise) {
+    return html2canvasLoadPromise;
+  }
+
+  html2canvasLoadPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.async = true;
+    script.onload = () => {
+      if (typeof html2canvas === 'undefined') {
+        reject(new Error('Image export library did not finish loading.'));
+        return;
+      }
+
+      resolve(html2canvas);
+    };
+    script.onerror = () => reject(new Error('Image export library could not be loaded. Check the internet connection and try again.'));
+    document.head.appendChild(script);
+  });
+
+  return html2canvasLoadPromise;
+}
+
 clearBtn.addEventListener('click', () => {
-  if (confirm('Clear all content?')) {
-    htmlEditor.setValue(defaultContent);
+  if (confirm('Clear all code from the editor?')) {
+    htmlEditor.setValue('');
     updatePreview();
     clearSavedContent();
+    refreshHtmlEditor();
+    htmlEditor.focus();
   }
 });
 
@@ -2516,9 +2928,11 @@ async function loadSavedContent() {
     updatePreview();
     showNotification('Restored!', 'Your previous work has been loaded.');
   } else {
-    htmlEditor.setValue(defaultContent);
+    htmlEditor.setValue('');
   }
   updatePreview();
+  refreshHtmlEditor();
+  restoreScrollState();
 }
 
 // Load saved content when page loads
@@ -2527,30 +2941,20 @@ loadSavedContent();
 // Export functionality
 const exportBtn = document.getElementById('exportBtn');
 const exportImageBtn = document.getElementById('exportImageBtn');
-const siteTitleInput = document.getElementById('siteTitle');
-const exportHtml = document.getElementById('exportHtml');
 
-// Auto-sync Practice Builder to Export tab
-const exportTabButton = document.querySelector('[data-tab="export"]');
-if (exportTabButton) {
-  exportTabButton.addEventListener('click', () => {
-    if (htmlEditor.getValue().trim()) {
-      exportHtml.value = htmlEditor.getValue();
-      showNotification(
-        'Content synced!',
-        'Your Practice Builder content has been copied to the export field.',
-        'success'
-      );
-    }
-  });
+function getExportTitle() {
+  const htmlContent = htmlEditor.getValue();
+  const titleMatch = htmlContent.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  const title = titleMatch?.[1]?.replace(/\s+/g, ' ').trim();
+  return title || 'My HTML Site';
 }
 
 exportBtn.addEventListener('click', () => {
-  const title = siteTitleInput.value || 'My HTML Site';
-  let htmlContent = exportHtml.value.trim();
+  const title = getExportTitle();
+  let htmlContent = htmlEditor.getValue().trim();
   
   if (!htmlContent) {
-    alert('Please enter HTML content to export.');
+    alert('Please add HTML code in the editor before exporting.');
     return;
   }
   
@@ -2584,19 +2988,15 @@ ${htmlContent}
 // Export as image
 if (exportImageBtn) {
   exportImageBtn.addEventListener('click', async () => {
-    // Check if html2canvas is loaded
-    if (typeof html2canvas === 'undefined') {
-      alert('Image export library not loaded. Please refresh the page and try again.');
-      return;
-    }
-    
-    const title = siteTitleInput.value || 'My HTML Site';
+    const title = getExportTitle();
+    const originalText = exportImageBtn.textContent;
     
     try {
       // Show loading state
       exportImageBtn.disabled = true;
-      const originalText = exportImageBtn.textContent;
-      exportImageBtn.textContent = '⏳ Generating...';
+      exportImageBtn.textContent = 'Preparing image...';
+      const capturePage = await loadHtml2Canvas();
+      exportImageBtn.textContent = 'Generating...';
       
       // Get HTML content from editor
       const htmlContent = htmlEditor.getValue();
@@ -2640,7 +3040,7 @@ if (exportImageBtn) {
         const iframeBody = iframeDoc.body || iframeDoc.documentElement;
         
         if (iframeBody) {
-          canvas = await html2canvas(iframeBody, {
+          canvas = await capturePage(iframeBody, {
             backgroundColor: '#ffffff',
             scale: 1.5,
             useCORS: true,
@@ -2661,7 +3061,7 @@ if (exportImageBtn) {
         // Wait for images to load
         await new Promise(resolve => setTimeout(resolve, 500));
         
-        canvas = await html2canvas(tempContainer, {
+        canvas = await capturePage(tempContainer, {
           backgroundColor: '#ffffff',
           scale: 1.5,
           useCORS: true,
@@ -2707,7 +3107,7 @@ if (exportImageBtn) {
       console.error('Error exporting image:', error);
       alert('Failed to export image: ' + error.message + '\n\nMake sure your HTML is valid and try again.');
       exportImageBtn.disabled = false;
-      exportImageBtn.textContent = '📸 Download as Image';
+      exportImageBtn.textContent = originalText;
     }
   });
 }
