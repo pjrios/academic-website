@@ -360,18 +360,19 @@ const lessons = {
     `
   },
   headings: {
-    title: 'Headings with Bootstrap',
+    title: 'Hero and Headings',
     content: `
       <h2>Words You Need for This Lesson</h2>
       <div class="concept-strip">
+        <div><strong>hero</strong><span>The big top section visitors see first.</span></div>
         <div><strong>&lt;h1&gt;</strong><span>The main page heading.</span></div>
         <div><strong>class</strong><span>Adds Bootstrap styles to an HTML tag.</span></div>
-        <div><strong>display-3</strong><span>Makes the main heading bigger.</span></div>
+        <div><strong>display-3</strong><span>Makes the main heading bigger. You can try <code>display-1</code> to <code>display-6</code>.</span></div>
         <div><strong>lead</strong><span>Makes the paragraph stand out.</span></div>
         <div><strong>bg-primary</strong><span>Adds a Bootstrap background color.</span></div>
         <div><strong>text-white</strong><span>Makes text white.</span></div>
         <div><strong>text-center</strong><span>Centers the text.</span></div>
-        <div><strong>py-5</strong><span>Adds space above and below.</span></div>
+        <div><strong>py-5</strong><span>Makes the hero taller. You can try <code>py-3</code>, <code>py-4</code>, or <code>py-5</code>.</span></div>
       </div>
 
       <section class="student-step">
@@ -407,8 +408,9 @@ const lessons = {
           <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading area should have a colored background.
         </div>
         <div class="next-lesson-note">
-          <strong>Want another color?</strong> After this works, you can try another Bootstrap background class:
-          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background colors</a>.
+          <strong>Want another color or size?</strong> After this works, you can try another
+          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background color</a>
+          or change <code>py-5</code> to <code>py-3</code> or <code>py-4</code>.
         </div>
       </section>
 
@@ -430,6 +432,9 @@ const lessons = {
         </div>
         <div class="step-check">
           <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading should look larger.
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want another size?</strong> Try <code>display-1</code>, <code>display-2</code>, <code>display-4</code>, <code>display-5</code>, or <code>display-6</code> after this works.
         </div>
       </section>
 
@@ -458,8 +463,8 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, <code>text-center</code>, and <code>py-5</code>.</li>
-          <li>Your main heading uses <code>class="display-3"</code>.</li>
+          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, <code>text-center</code>, and a <code>py-*</code> size class.</li>
+          <li>Your main heading uses a <code>display-*</code> class.</li>
           <li>Your paragraph uses <code>class="lead"</code>.</li>
           <li>You can change the visible text without breaking the checks.</li>
         </ul>
@@ -518,7 +523,7 @@ const lessons = {
             <code>&lt;h2 class="text-center mb-4"&gt;A Few Things About Me&lt;/h2&gt;</code>
           </div>
         </div>
-        <p><strong>Personalize it:</strong> You may change the words between <code>&lt;h2&gt;</code> and <code>&lt;/h2&gt;</code>.</p>
+        <p><strong>Personalize it:</strong> You may change the words, alignment, or spacing later. The check only needs the heading in the right place.</p>
       </section>
 
       <div class="step-arrow" aria-hidden="true">↓</div>
@@ -615,8 +620,8 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your new section starts with <code>&lt;div class="container mt-5"&gt;</code>.</li>
-          <li>Your section heading uses <code>text-center</code> and <code>mb-4</code>.</li>
+          <li>Your new section starts with <code>container</code> and an <code>mt-*</code> spacing class.</li>
+          <li>Your section heading is below the new section line.</li>
           <li>Your row uses <code>class="row"</code>.</li>
           <li>You have three <code>col-md-4</code> columns.</li>
           <li>You can change the visible text without breaking the checks.</li>
@@ -639,9 +644,9 @@ const lessons = {
         <div><strong>card-title</strong><span>Styles a card heading.</span></div>
         <div><strong>card-text</strong><span>Styles a card paragraph.</span></div>
         <div><strong>mb-4</strong><span>Adds space below each column.</span></div>
-        <div><strong>border-primary</strong><span>Adds a blue border.</span></div>
-        <div><strong>border-success</strong><span>Adds a green border.</span></div>
-        <div><strong>bg-light</strong><span>Adds a light background.</span></div>
+        <div><strong>border-primary</strong><span>Adds a Bootstrap border color.</span></div>
+        <div><strong>border-success</strong><span>Adds another Bootstrap border color.</span></div>
+        <div><strong>bg-light</strong><span>Adds a Bootstrap background color.</span></div>
       </div>
 
       <section class="student-step">
@@ -659,7 +664,7 @@ const lessons = {
           </div>
         </div>
         <div class="step-check">
-          <strong>Check it:</strong> You should have three columns with <code>col-md-4 mb-4</code>.
+          <strong>Check it:</strong> You should have three columns with <code>col-md-4</code> and an <code>mb-*</code> spacing class.
         </div>
       </section>
 
@@ -796,7 +801,7 @@ const lessons = {
           </div>
         </div>
         <div class="step-check">
-          <strong>Check it:</strong> Click <strong>Refresh</strong>. The first card should have a blue border, the second a green border, and the third a light background.
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Each card should have a border color or background color.
         </div>
         <div class="next-lesson-note">
           <strong>Want more colors?</strong> Try other Bootstrap border or background classes after this works:
@@ -809,12 +814,12 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your three columns use <code>col-md-4 mb-4</code>.</li>
+          <li>Your three columns use <code>col-md-4</code> and an <code>mb-*</code> spacing class.</li>
           <li>Each column has a <code>card h-100</code>.</li>
           <li>Each card has a <code>card-body</code>.</li>
           <li>Each card heading uses <code>card-title</code>.</li>
           <li>Each card paragraph uses <code>card-text</code>.</li>
-          <li>Your cards use <code>border-primary</code>, <code>border-success</code>, and <code>bg-light</code>.</li>
+          <li>Each card has a <code>border-*</code> color or a <code>bg-*</code> background color.</li>
           <li>You can change the visible text without breaking the checks.</li>
         </ul>
       </div>
@@ -2875,10 +2880,23 @@ function tagHasClassPrefix(tag, prefix) {
   return Boolean(classMatch && classMatch[1].split(/\s+/).some(className => className.startsWith(prefix)));
 }
 
+function tagHasAnyClassPrefix(tag, prefixes) {
+  return prefixes.some(prefix => tagHasClassPrefix(tag, prefix));
+}
+
+function tagHasClassPattern(tag, pattern) {
+  const classMatch = /\bclass\s*=\s*["']([^"']*)["']/i.exec(tag);
+  return Boolean(classMatch && classMatch[1].split(/\s+/).some(className => pattern.test(className)));
+}
+
+function tagHasCardVisualStyle(tag) {
+  return tagHasClass(tag, 'border') || tagHasAnyClassPrefix(tag, ['border-', 'bg-']);
+}
+
 function getHeadingLessonStatus(html) {
   const containerMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
   const heroOpenMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
-    .filter(match => tagHasClasses(match[0], ['text-white', 'text-center', 'py-5']) && tagHasClassPrefix(match[0], 'bg-'));
+    .filter(match => tagHasClasses(match[0], ['text-white', 'text-center']) && tagHasClassPrefix(match[0], 'bg-') && tagHasClassPattern(match[0], /^py-[0-5]$/));
   const headingMatches = Array.from(html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi));
   const paragraphMatches = Array.from(html.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
@@ -2902,7 +2920,7 @@ function getHeadingLessonStatus(html) {
     ? closeMatches.filter(match => match.index >= paragraphEndIndex)
     : [];
 
-  const displayHeading = headingAfterHero && tagHasClass(headingAfterHero[0], 'display-3');
+  const displayHeading = headingAfterHero && tagHasClassPattern(headingAfterHero[0], /^display-[1-6]$/);
   const leadParagraph = paragraphAfterHeading && tagHasClass(paragraphAfterHeading[0], 'lead');
 
   return {
@@ -2910,7 +2928,7 @@ function getHeadingLessonStatus(html) {
     heroOpenCorrect: Boolean(heroOpen && containerBeforeHero),
     heroCloseFound: closesAfterParagraph.length > 1,
     heroCloseCorrect: Boolean(heroOpen && closesAfterParagraph.length > 1),
-    displayFound: headingMatches.some(match => tagHasClass(match[0], 'display-3')),
+    displayFound: headingMatches.some(match => tagHasClassPattern(match[0], /^display-[1-6]$/)),
     displayCorrect: Boolean(displayHeading),
     leadFound: paragraphMatches.some(match => tagHasClass(match[0], 'lead')),
     leadCorrect: Boolean(leadParagraph)
@@ -2919,7 +2937,7 @@ function getHeadingLessonStatus(html) {
 
 function getLayoutBasicsStatus(html) {
   const sectionMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
-    .filter(match => tagHasClasses(match[0], ['container', 'mt-5']));
+    .filter(match => tagHasClass(match[0], 'container') && tagHasClassPattern(match[0], /^mt-[0-5]$/));
   const headingMatches = Array.from(html.matchAll(/<h2\b[^>]*>[\s\S]*?<\/h2>/gi));
   const rowMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\brow\b[^"']*["'][^>]*>/gi));
   const columnMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-4\b[^"']*["'][^>]*>/gi));
@@ -2947,8 +2965,8 @@ function getLayoutBasicsStatus(html) {
   return {
     sectionFound: sectionMatches.length > 0,
     sectionCorrect: Boolean(section && sectionBeforeScript),
-    headingFound: headingMatches.some(match => tagHasClasses(match[0], ['text-center', 'mb-4'])),
-    headingCorrect: Boolean(sectionBeforeScript && headingAfterSection && tagHasClasses(headingAfterSection[0], ['text-center', 'mb-4'])),
+    headingFound: headingMatches.length > 0,
+    headingCorrect: Boolean(sectionBeforeScript && headingAfterSection),
     rowFound: rowMatches.length > 0,
     rowCorrect: Boolean(sectionBeforeScript && rowAfterHeading),
     columnCount: columnsAfterRow.length,
@@ -2965,11 +2983,9 @@ function getCardsLessonStatus(html) {
   const textMatches = Array.from(html.matchAll(/<p\b[^>]*class=["'][^"']*\bcard-text\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
 
-  const columnsWithSpacing = columnMatches.filter(match => tagHasClasses(match[0], ['col-md-4', 'mb-4']));
+  const columnsWithSpacing = columnMatches.filter(match => tagHasClass(match[0], 'col-md-4') && tagHasClassPattern(match[0], /^mb-[0-5]$/));
   const equalHeightCards = cardMatches.filter(match => tagHasClasses(match[0], ['card', 'h-100']));
-  const hasPrimaryBorder = equalHeightCards.some(match => tagHasClass(match[0], 'border-primary'));
-  const hasSuccessBorder = equalHeightCards.some(match => tagHasClass(match[0], 'border-success'));
-  const hasLightBackground = equalHeightCards.some(match => tagHasClass(match[0], 'bg-light'));
+  const styledCards = equalHeightCards.filter(match => tagHasCardVisualStyle(match[0]));
   const firstCardIndex = equalHeightCards[0]?.index ?? -1;
   const closesAfterFirstCard = firstCardIndex !== -1
     ? closeMatches.filter(match => match.index > firstCardIndex)
@@ -2983,9 +2999,10 @@ function getCardsLessonStatus(html) {
     bodyCloseFound: closesAfterFirstCard.length >= 10,
     titleCount: titleMatches.length,
     textCount: textMatches.length,
-    hasPrimaryBorder,
-    hasSuccessBorder,
-    hasLightBackground
+    firstCardStyled: Boolean(equalHeightCards[0] && tagHasCardVisualStyle(equalHeightCards[0][0])),
+    secondCardStyled: Boolean(equalHeightCards[1] && tagHasCardVisualStyle(equalHeightCards[1][0])),
+    thirdCardStyled: Boolean(equalHeightCards[2] && tagHasCardVisualStyle(equalHeightCards[2][0])),
+    styledCardCount: styledCards.length
   };
 }
 
@@ -3108,9 +3125,9 @@ function updateHeadingLessonStatus(status = null) {
     document.querySelector('[data-heading-status="display"]'),
     displayState,
     displayState === 'success'
-      ? 'Heading uses display-3'
+      ? 'Heading uses a display size class'
       : displayState === 'error'
-        ? 'display-3 was added, but it should be on the main heading'
+        ? 'A display size class was added, but it should be on the main heading'
         : 'Display heading not done yet'
   );
 
@@ -3203,17 +3220,17 @@ function updateCardsLessonStatus(status = null) {
   const bodyClosesState = currentStatus.bodyCloseFound ? 'success' : currentStatus.bodyCount > 0 ? 'error' : 'pending';
   const titlesState = currentStatus.titleCount >= 3 ? 'success' : currentStatus.titleCount > 0 ? 'error' : 'pending';
   const textsState = currentStatus.textCount >= 3 ? 'success' : currentStatus.textCount > 0 ? 'error' : 'pending';
-  const primaryState = currentStatus.hasPrimaryBorder ? 'success' : currentStatus.cardCount >= 3 ? 'error' : 'pending';
-  const successState = currentStatus.hasSuccessBorder ? 'success' : currentStatus.cardCount >= 3 ? 'error' : 'pending';
-  const lightState = currentStatus.hasLightBackground ? 'success' : currentStatus.cardCount >= 3 ? 'error' : 'pending';
+  const firstStyleState = currentStatus.firstCardStyled ? 'success' : currentStatus.cardCount >= 1 ? 'error' : 'pending';
+  const secondStyleState = currentStatus.secondCardStyled ? 'success' : currentStatus.cardCount >= 2 ? 'error' : 'pending';
+  const thirdStyleState = currentStatus.thirdCardStyled ? 'success' : currentStatus.cardCount >= 3 ? 'error' : 'pending';
 
   setStepStatus(
     document.querySelector('[data-card-status="columns"]'),
     columnsState,
     columnsState === 'success'
-      ? 'All three columns have mb-4'
+      ? 'All three columns have bottom spacing'
       : columnsState === 'error'
-        ? 'Add mb-4 to all three columns'
+        ? 'Add an mb-* spacing class to all three columns'
         : 'Column spacing not done yet'
   );
 
@@ -3279,31 +3296,31 @@ function updateCardsLessonStatus(status = null) {
 
   setStepStatus(
     document.querySelector('[data-card-status="style-one"]'),
-    primaryState,
-    primaryState === 'success'
-      ? 'Blue border style is added'
-      : primaryState === 'error'
-        ? 'Add border-primary to one card'
+    firstStyleState,
+    firstStyleState === 'success'
+      ? 'First card has a visual style'
+      : firstStyleState === 'error'
+        ? 'Add a border-* or bg-* class to the first card'
         : 'First card style not done yet'
   );
 
   setStepStatus(
     document.querySelector('[data-card-status="style-two"]'),
-    successState,
-    successState === 'success'
-      ? 'Green border style is added'
-      : successState === 'error'
-        ? 'Add border-success to one card'
+    secondStyleState,
+    secondStyleState === 'success'
+      ? 'Second card has a visual style'
+      : secondStyleState === 'error'
+        ? 'Add a border-* or bg-* class to the second card'
         : 'Second card style not done yet'
   );
 
   setStepStatus(
     document.querySelector('[data-card-status="style-three"]'),
-    lightState,
-    lightState === 'success'
-      ? 'Light background style is added'
-      : lightState === 'error'
-        ? 'Add bg-light to one card'
+    thirdStyleState,
+    thirdStyleState === 'success'
+      ? 'Third card has a visual style'
+      : thirdStyleState === 'error'
+        ? 'Add a border-* or bg-* class to the third card'
         : 'Third card style not done yet'
   );
 }
