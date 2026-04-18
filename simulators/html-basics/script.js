@@ -368,7 +368,7 @@ const lessons = {
         <div><strong>class</strong><span>Adds Bootstrap styles to an HTML tag.</span></div>
         <div><strong>display-3</strong><span>Makes the main heading bigger.</span></div>
         <div><strong>lead</strong><span>Makes the paragraph stand out.</span></div>
-        <div><strong>bg-primary</strong><span>Adds a blue Bootstrap background.</span></div>
+        <div><strong>bg-primary</strong><span>Adds a Bootstrap background color.</span></div>
         <div><strong>text-white</strong><span>Makes text white.</span></div>
         <div><strong>text-center</strong><span>Centers the text.</span></div>
         <div><strong>py-5</strong><span>Adds space above and below.</span></div>
@@ -404,7 +404,11 @@ const lessons = {
         </div>
 
         <div class="step-check">
-          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading area should have a blue background.
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your heading area should have a colored background.
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want another color?</strong> After this works, you can try another Bootstrap background class:
+          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">background colors</a>.
         </div>
       </section>
 
@@ -454,7 +458,7 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your hero box has <code>bg-primary</code>, <code>text-white</code>, <code>text-center</code>, and <code>py-5</code>.</li>
+          <li>Your hero box has a <code>bg-*</code> color class, <code>text-white</code>, <code>text-center</code>, and <code>py-5</code>.</li>
           <li>Your main heading uses <code>class="display-3"</code>.</li>
           <li>Your paragraph uses <code>class="lead"</code>.</li>
           <li>You can change the visible text without breaking the checks.</li>
@@ -2866,10 +2870,15 @@ function tagHasClasses(tag, classNames) {
   return classNames.every(className => tagHasClass(tag, className));
 }
 
+function tagHasClassPrefix(tag, prefix) {
+  const classMatch = /\bclass\s*=\s*["']([^"']*)["']/i.exec(tag);
+  return Boolean(classMatch && classMatch[1].split(/\s+/).some(className => className.startsWith(prefix)));
+}
+
 function getHeadingLessonStatus(html) {
   const containerMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcontainer\b[^"']*["'][^>]*>/gi));
   const heroOpenMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*["'][^>]*>/gi))
-    .filter(match => tagHasClasses(match[0], ['bg-primary', 'text-white', 'text-center', 'py-5']));
+    .filter(match => tagHasClasses(match[0], ['text-white', 'text-center', 'py-5']) && tagHasClassPrefix(match[0], 'bg-'));
   const headingMatches = Array.from(html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi));
   const paragraphMatches = Array.from(html.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi));
   const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
