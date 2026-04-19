@@ -30,6 +30,13 @@ body {
   padding: calc(var(--nav-offset) + var(--nav-height) + 16px) 16px 16px;
 }
 
+body.full-preview-active {
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
 .app-shell {
   width: 100%;
   max-width: none;
@@ -1056,10 +1063,31 @@ kbd {
 
 .practice-container.full-preview {
   grid-template-columns: 1fr;
+  gap: 0;
+  height: calc(100vh - var(--nav-offset) - var(--nav-height) - 16px);
+  min-height: 0;
 }
 
 .practice-container.full-preview .practice-editor {
   display: none;
+}
+
+.practice-container.full-preview .practice-preview {
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  min-height: 0;
+}
+
+.practice-container.full-preview .preview-header {
+  flex: 0 0 auto;
+}
+
+.practice-container.full-preview .preview-frame {
+  min-height: 0;
+  height: 100%;
+  border-radius: 0;
 }
 
 .practice-editor,

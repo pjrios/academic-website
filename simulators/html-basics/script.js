@@ -117,7 +117,10 @@ function activateTab(tabId) {
   updateTabArrowState(tabId);
 
   if (tabId === 'practice') {
+    document.body.classList.toggle('full-preview-active', Boolean(document.querySelector('.practice-container')?.classList.contains('full-preview')));
     refreshHtmlEditor();
+  } else {
+    document.body.classList.remove('full-preview-active');
   }
 
   return true;
@@ -4741,6 +4744,7 @@ if (toggleViewBtn && practiceContainer) {
   toggleViewBtn.addEventListener('click', () => {
     isFullPreview = !isFullPreview;
     practiceContainer.classList.toggle('full-preview', isFullPreview);
+    document.body.classList.toggle('full-preview-active', isFullPreview);
     toggleViewBtn.textContent = isFullPreview ? 'Editor' : 'Full Page';
     toggleViewBtn.title = isFullPreview ? 'Show editor and preview' : 'Show full-page preview only';
     
