@@ -108,8 +108,13 @@
         <div class="practice-editor">
           <div class="editor-header">
             <h2>HTML Editor</h2>
-            <button id="clearBtn" class="btn-ghost btn-small">Clear</button>
+            <div class="editor-actions">
+              <button id="assetUploadBtn" class="btn-ghost btn-small" type="button">Upload Image</button>
+              <button id="clearBtn" class="btn-ghost btn-small">Clear</button>
+            </div>
           </div>
+          <input id="assetUploadInput" type="file" accept="image/*" multiple hidden>
+          <div id="assetShelf" class="asset-shelf" aria-live="polite"></div>
           <textarea id="htmlEditor" class="html-editor" placeholder="Paste the code from Step 1 here."></textarea>
         </div>
 

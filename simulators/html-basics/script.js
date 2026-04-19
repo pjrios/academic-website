@@ -374,6 +374,7 @@ const lessons = {
         <div><strong>text-center</strong><span>Centers the text.</span></div>
         <div><strong>d-flex</strong><span>Lets Bootstrap center the hero content as a group.</span></div>
         <div><strong>py-5</strong><span>Adds space above and below the hero text.</span></div>
+        <div><strong>mt-5</strong><span>Adds space above the hero. You can try <code>mt-1</code> to <code>mt-5</code>.</span></div>
         <div><strong>min-height</strong><span>Sets the actual height of the hero box.</span></div>
       </div>
 
@@ -390,7 +391,7 @@ const lessons = {
           <p><strong>Find this line:</strong> <code>&lt;div class="container"&gt;</code></p>
           <p><strong>Paste this line below it:</strong></p>
           <div class="code-block">
-            <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"&gt;</code>
+            <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"&gt;</code>
           </div>
         </div>
 
@@ -425,14 +426,14 @@ const lessons = {
             <div class="micro-step-label">2</div>
             <div class="step-status step-status--pending" data-heading-status="height" aria-label="Hero height not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"&gt;</code>.</p>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"&gt;</code>.</p>
           <p><strong>Add this before the closing <code>&gt;</code>:</strong></p>
           <div class="code-block">
             <code>style="min-height: 300px;"</code>
           </div>
           <p><strong>It should look like this:</strong></p>
           <div class="code-block">
-            <code>&lt;div class="bg-primary text-white text-center py-5 mb-5" style="min-height: 300px;"&gt;</code>
+            <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5" style="min-height: 300px;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
@@ -453,14 +454,14 @@ const lessons = {
             <div class="micro-step-label">3</div>
             <div class="step-status step-status--pending" data-heading-status="center" aria-label="Hero content centering not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"</code>.</p>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"</code>.</p>
           <p><strong>Add these classes inside the quotes:</strong></p>
           <div class="code-block">
             <code>d-flex align-items-center justify-content-center flex-column</code>
           </div>
           <p><strong>It should look like this:</strong></p>
           <div class="code-block">
-            <code>&lt;div class="bg-primary text-white text-center py-5 mb-5 d-flex align-items-center justify-content-center flex-column" style="min-height: 300px;"&gt;</code>
+            <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5 d-flex align-items-center justify-content-center flex-column" style="min-height: 300px;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
@@ -1212,100 +1213,137 @@ const lessons = {
   layoutMusic: {
     title: 'Advanced Layout: Music Section',
     content: `
-      <h2>Interactive Components: Accordions</h2>
-      <p>Accordions are collapsible panels that let you organize lots of information in a compact space. They're perfect for lists, FAQs, or detailed content.</p>
-      
-      <h3>How Accordions Work</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Click a header to expand/collapse content</li>
-        <li>Multiple items can be open at once (or only one, depending on setup)</li>
-        <li>Uses Bootstrap's JavaScript for smooth animations</li>
-        <li>Great for organizing related information</li>
-      </ul>
-      
-      <h2>🎯 Add to Your Website: Music/Podcast Section</h2>
-      <p><strong>Starting point:</strong> Your page already has a navbar, hero section, interests cards, biography, image, footer, and a Movies section.</p>
-      <p><strong>📍 Placement:</strong> Add this section after the Movies section, but before your footer so it becomes part of the main page content. <strong>Customize it with your favorite music or podcast.</strong></p>
-      <div class="code-block">
-        <code>&lt;!-- Music section: light background, 2-column layout --&gt;
-&lt;div class="container bg-light py-5 my-5" id="music"&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- Left column: 4/12 width (33%) with centered image --&gt;
-    &lt;div class="col-lg-4 text-center mb-4"&gt;
-      &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover"&gt;
-      &lt;h3&gt;Artist/Podcast Name&lt;/h3&gt;
-      &lt;p class="text-muted"&gt;Genre or Category&lt;/p&gt;
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>id="music"</strong><span>Lets the navbar jump to this section.</span></div>
+        <div><strong>col-lg-4</strong><span>A smaller left column.</span></div>
+        <div><strong>col-lg-8</strong><span>A wider right column.</span></div>
+        <div><strong>accordion</strong><span>A section that opens and closes.</span></div>
+        <div><strong>rounded-circle</strong><span>Makes the image circular.</span></div>
+      </div>
+
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Start the Music Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-music-status="section" aria-label="Music section not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your footer opening tag:</strong> it starts with <code>&lt;footer</code>.</p>
+          <p><strong>Paste this above it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="container bg-light py-5 my-5" id="music"&gt;
+  &lt;div class="row"&gt;</code>
+          </div>
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want another background?</strong> Try a different
+          <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank" rel="noopener">Bootstrap background color</a>.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add the Image Column</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-music-status="image" aria-label="Music image column not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="row"&gt;</code></p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-lg-4 text-center mb-4"&gt;
+  &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover"&gt;
+  &lt;h3&gt;Artist or Podcast Name&lt;/h3&gt;
+  &lt;p&gt;Genre or Category&lt;/p&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add the Text Column</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-music-status="text" aria-label="Music text column not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the image column closing tag.</strong></p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-lg-8"&gt;
+  &lt;h2&gt;My Favorite Music or Podcast&lt;/h2&gt;
+  &lt;p class="lead"&gt;Write what makes it special to you.&lt;/p&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Add the Accordion</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
+            <div class="step-status step-status--pending" data-music-status="accordion" aria-label="Music accordion not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your music paragraph:</strong> it starts with <code>&lt;p class="lead"&gt;</code>.</p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="accordion" id="musicAccordion"&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;h2 class="accordion-header"&gt;
+      &lt;button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"&gt;
+        Favorite Songs or Episodes
+      &lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div id="collapseOne" class="accordion-collapse collapse show"&gt;
+      &lt;div class="accordion-body"&gt;Add three favorites here.&lt;/div&gt;
     &lt;/div&gt;
-    &lt;!-- Right column: 8/12 width (67%) with accordion --&gt;
-    &lt;div class="col-lg-8"&gt;
-      &lt;h2&gt;My Favorite Music/Podcast&lt;/h2&gt;
-      &lt;p class="lead"&gt;
-        Write about your favorite artist, band, or podcast here. 
-        What makes them special? When did you discover them?
-      &lt;/p&gt;
-      &lt;!-- Bootstrap accordion component --&gt;
-      &lt;div class="accordion" id="musicAccordion"&gt;
-        &lt;div class="accordion-item"&gt;
-          &lt;h2 class="accordion-header"&gt;
-            &lt;button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"&gt;
-              Favorite Songs/Episodes
-            &lt;/button&gt;
-          &lt;/h2&gt;
-          &lt;div id="collapseOne" class="accordion-collapse collapse show"&gt;
-            &lt;div class="accordion-body"&gt;
-              &lt;ul class="list-group"&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 1 - Why you like it&lt;/li&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 2 - Why you like it&lt;/li&gt;
-                &lt;li class="list-group-item"&gt;Song/Episode 3 - Why you like it&lt;/li&gt;
-              &lt;/ul&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="accordion-item"&gt;
-          &lt;h2 class="accordion-header"&gt;
-            &lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"&gt;
-              What I Love About It
-            &lt;/button&gt;
-          &lt;/h2&gt;
-          &lt;div id="collapseTwo" class="accordion-collapse collapse"&gt;
-            &lt;div class="accordion-body"&gt;
-              Write more details about what draws you to this music or podcast. 
-              The lyrics? The production? The hosts? The topics?
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;h2 class="accordion-header"&gt;
+      &lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"&gt;Why I Like It&lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div id="collapseTwo" class="accordion-collapse collapse"&gt;
+      &lt;div class="accordion-body"&gt;Write one more detail here.&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Replace the sample text with your favorite artist, band, or podcast. You can keep the sample image for now or replace it with your own file later, and update the list with real songs or episodes.</p>
-      <p><strong>Why:</strong> This section introduces a new interactive Bootstrap component while still building your same page. <code>bg-light</code> helps it stand out from the sections around it, <code>rounded-circle</code> makes the image circular, and <code>id="music"</code> lets the navbar "Music" link jump here.</p>
-      
-      <h3>📚 New Component: Accordion</h3>
-      <p>Accordions are collapsible content panels. They use Bootstrap's JavaScript to expand/collapse. Key parts:</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>accordion:</strong> Container for all accordion items</li>
-        <li><strong>accordion-item:</strong> Each collapsible section</li>
-        <li><strong>accordion-button:</strong> The clickable header</li>
-        <li><strong>data-bs-toggle="collapse":</strong> Bootstrap JavaScript attribute</li>
-        <li><strong>collapse show:</strong> Makes first item expanded by default</li>
-      </ul>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Add a third accordion item by copying an <code>accordion-item</code> block</li>
-        <li>Change the background from <code>bg-light</code> to <code>bg-primary text-white</code> for a different look</li>
-        <li>Try changing <code>col-lg-4</code> and <code>col-lg-8</code> to <code>col-md-6</code> for equal columns</li>
-      </ul>
+          </div>
+        </div>
+      </section>
 
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now include a Music section before the footer, and the "Music" link in the navbar should jump to it.
-      </div>
-      
-      <div class="alert alert-success mt-4">
-        <strong>📖 What's Next:</strong> In the final lesson, you'll add a quick facts section to showcase more about yourself!
-      </div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 5</div>
+        <h3>Close the Music Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5</div>
+            <div class="step-status step-status--pending" data-music-status="close" aria-label="Music closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the accordion closing tag:</strong> <code>&lt;/div&gt;</code> from Step 4.</p>
+          <p><strong>Paste these lines below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your Music section should appear before the footer.
+        </div>
+      </section>
     `
   },
   images: {
@@ -1431,348 +1469,361 @@ const lessons = {
   links: {
     title: 'Links & Buttons with Bootstrap',
     content: `
-      <h2>Creating Links</h2>
-      <p>Your page already has a navbar, hero section, interests cards, biography, a biography image, and a navbar brand image. In this lesson, you'll use links and button-styled links to finish the main page structure with a footer.</p>
-      <p>The <code>&lt;a&gt;</code> (anchor) tag creates hyperlinks. Bootstrap provides button classes that work with links.</p>
-      
-      <h3>Basic Link</h3>
-      <div class="code-block">
-        <code>&lt;a href="https://example.com"&gt;Click here&lt;/a&gt;</code>
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>&lt;a&gt;</strong><span>Makes a link.</span></div>
+        <div><strong>href</strong><span>Where the link goes.</span></div>
+        <div><strong>mailto:</strong><span>Starts an email link.</span></div>
+        <div><strong>btn</strong><span>Makes a link look like a button.</span></div>
+        <div><strong>&lt;footer&gt;</strong><span>The bottom area of the page.</span></div>
       </div>
-      
-      <h3>Bootstrap Buttons (using links)</h3>
-      <div class="code-block">
-        <code>&lt;!-- Button styles --&gt;
-&lt;a href="#" class="btn btn-primary"&gt;Primary Button&lt;/a&gt;
-&lt;a href="#" class="btn btn-secondary"&gt;Secondary Button&lt;/a&gt;
-&lt;a href="#" class="btn btn-success"&gt;Success Button&lt;/a&gt;
-&lt;a href="#" class="btn btn-danger"&gt;Danger Button&lt;/a&gt;
-&lt;a href="#" class="btn btn-outline-primary"&gt;Outline Button&lt;/a&gt;
-&lt;a href="#" class="btn btn-lg"&gt;Large Button&lt;/a&gt;
-&lt;a href="#" class="btn btn-sm"&gt;Small Button&lt;/a&gt;</code>
-      </div>
-      
-      <h3>Example</h3>
-      <div class="example-preview">
-        <a href="#" class="btn btn-primary me-2">Primary</a>
-        <a href="#" class="btn btn-secondary me-2">Secondary</a>
-        <a href="#" class="btn btn-success me-2">Success</a>
-        <a href="#" class="btn btn-danger me-2">Danger</a>
-        <a href="#" class="btn btn-outline-primary me-2">Outline</a>
-        <a href="#" class="btn btn-lg btn-primary me-2">Large</a>
-        <a href="#" class="btn btn-sm btn-secondary">Small</a>
-      </div>
-      
-      <h2>🎯 Add to Your Website: Footer with Social Links</h2>
-      <p><strong>Starting point:</strong> Your page already has the main content sections. Now you are adding the final structural piece at the bottom.</p>
-      <p><strong>📍 Placement:</strong> Add this footer near the bottom of your page, above the Bootstrap <code>&lt;script&gt;</code> line:</p>
-      <div class="code-block">
-        <code>&lt;footer class="bg-dark text-white py-4 mt-5"&gt;
+
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Start the Footer</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-links-status="footer" aria-label="Footer start not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the Bootstrap script line:</strong> it starts with <code>&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap</code>.</p>
+          <p><strong>Paste these lines above it:</strong></p>
+          <div class="code-block">
+            <code>&lt;footer class="bg-dark text-white py-4 mt-5"&gt;
   &lt;div class="container"&gt;
-    &lt;div class="row"&gt;
-      &lt;div class="col-md-6"&gt;
-        &lt;h5&gt;Your Name&lt;/h5&gt;
-        &lt;p class="text-muted"&gt;Personal Website Project&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class="col-md-6 text-md-end"&gt;
-        &lt;h5&gt;Connect With Me&lt;/h5&gt;
-        &lt;a href="mailto:your.email@example.com" class="btn btn-outline-light btn-sm me-2"&gt;Email&lt;/a&gt;
-        &lt;a href="https://linkedin.com" class="btn btn-outline-light btn-sm me-2" target="_blank"&gt;LinkedIn&lt;/a&gt;
-        &lt;a href="https://github.com" class="btn btn-outline-light btn-sm" target="_blank"&gt;GitHub&lt;/a&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+    &lt;div class="row"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add Your Info</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-links-status="info" aria-label="Footer info not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="row"&gt;</code></p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-6"&gt;
+  &lt;h5&gt;Your Name&lt;/h5&gt;
+  &lt;p&gt;Personal Website Project&lt;/p&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        <p><strong>Personalize it:</strong> Change <code>Your Name</code> and the paragraph words.</p>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add Button Links</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-links-status="buttons" aria-label="Footer buttons not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your first footer column:</strong> it ends with <code>&lt;/div&gt;</code>.</p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-6 text-md-end"&gt;
+  &lt;h5&gt;Connect With Me&lt;/h5&gt;
+  &lt;a href="mailto:your.email@example.com" class="btn btn-outline-light btn-sm me-2"&gt;Email&lt;/a&gt;
+  &lt;a href="https://github.com" class="btn btn-outline-light btn-sm" target="_blank"&gt;GitHub&lt;/a&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want another button color?</strong> Try <code>btn-primary</code>, <code>btn-success</code>, or
+          <a href="https://getbootstrap.com/docs/5.3/components/buttons/" target="_blank" rel="noopener">more Bootstrap buttons</a>.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Close the Footer</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
+            <div class="step-status step-status--pending" data-links-status="close" aria-label="Footer closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the last footer link line:</strong> it ends with <code>GitHub&lt;/a&gt;</code>.</p>
+          <p><strong>Paste this below the column closing tag:</strong></p>
+          <div class="code-block">
+            <code>    &lt;/div&gt;
     &lt;hr class="my-3"&gt;
-    &lt;p class="text-center text-muted mb-0"&gt;&copy; 2024 Your Name. All rights reserved.&lt;/p&gt;
+    &lt;p class="text-center mb-0"&gt;© 2024 Your Name&lt;/p&gt;
   &lt;/div&gt;
 &lt;/footer&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Add your name, update the email and social media links, and change the copyright year.</p>
-      <p><strong>Why:</strong> The footer provides contact info and gives your site a professional finish. <code>text-md-end</code> aligns content right on larger screens. <code>target="_blank"</code> opens links in new tabs.</p>
-      
-      <h3>Link Attributes</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>href:</strong> The URL or path (required)</li>
-        <li><strong>class="btn":</strong> Makes link look like a button</li>
-        <li><strong>class="btn-primary":</strong> Primary button style</li>
-        <li><strong>target="_blank":</strong> Opens in new tab (use for external links)</li>
-        <li><strong>mailto:</strong> Special link type that opens email client (e.g., <code>href="mailto:email@example.com"</code>)</li>
-      </ul>
-      
-      <h3>📚 Understanding Email Links (mailto:)</h3>
-      <p>Email links use the <code>mailto:</code> protocol to open the user's default email client:</p>
-      <div class="code-block">
-        <code>&lt;!-- Basic email link --&gt;
-&lt;a href="mailto:your.email@example.com"&gt;Send Email&lt;/a&gt;
-
-&lt;!-- Email link with subject --&gt;
-&lt;a href="mailto:your.email@example.com?subject=Hello"&gt;Email with Subject&lt;/a&gt;
-
-&lt;!-- Email link with subject and body --&gt;
-&lt;a href="mailto:your.email@example.com?subject=Hello&body=Hi there!"&gt;Email with Subject and Body&lt;/a&gt;</code>
-      </div>
-      <p><strong>How it works:</strong> When clicked, <code>mailto:</code> links open the user's default email application (Gmail, Outlook, Mail, etc.) with a new message addressed to the specified email.</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>Basic:</strong> <code>mailto:email@example.com</code> - Opens email with recipient filled in</li>
-        <li><strong>With subject:</strong> <code>mailto:email@example.com?subject=Your Subject</code> - Adds subject line</li>
-        <li><strong>With body:</strong> <code>mailto:email@example.com?subject=Subject&body=Message</code> - Adds subject and message body</li>
-        <li><strong>Multiple recipients:</strong> <code>mailto:email1@example.com,email2@example.com</code> - Separate with commas</li>
-      </ul>
-      <p><strong>Note:</strong> Spaces in subject/body should be replaced with <code>%20</code> or use <code>encodeURIComponent()</code> in JavaScript. For simple cases, you can just use spaces and the browser will handle it.</p>
-      
-      <h3>📚 Understanding Footer Structure</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>bg-dark:</strong> Dark background color</li>
-        <li><strong>text-white:</strong> White text (for contrast)</li>
-        <li><strong>py-4:</strong> Padding top and bottom</li>
-        <li><strong>text-md-end:</strong> Right-align text on medium+ screens</li>
-        <li><strong>target="_blank":</strong> Opens external links in a new tab (keeps users on your site)</li>
-        <li><strong>mailto:</strong> Email link protocol - opens user's email client</li>
-        <li><strong>btn-outline-light:</strong> Button with light border, transparent background</li>
-      </ul>
-      
-      <div class="common-mistakes">
-        <h4>⚠️ Common Mistakes to Avoid</h4>
-        <ul>
-          <li><strong>Forgetting target="_blank":</strong> External links should open in new tabs to keep users on your site</li>
-          <li><strong>Wrong mailto format:</strong> Use <code>mailto:email@example.com</code> not <code>mailto://email@example.com</code></li>
-          <li><strong>Missing href:</strong> Links without <code>href</code> won't work - use <code>href="#"</code> for placeholders</li>
-          <li><strong>Button without link:</strong> If using <code>class="btn"</code> on a link, make sure it has an <code>href</code> attribute</li>
-          <li><strong>Broken email links:</strong> Make sure there are no spaces in email addresses in <code>mailto:</code> links</li>
-        </ul>
-      </div>
-      
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now include the full main structure: navbar, hero, interests cards, biography, image, and footer. Test the footer links and make sure your contact details are correct.
-      </div>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Change button styles: try <code>btn-primary</code> instead of <code>btn-outline-light</code></li>
-        <li>Add more social links (Twitter, Instagram, etc.) by copying a button and changing the URL</li>
-        <li>Experiment with footer layout: try <code>text-center</code> on both columns for centered content</li>
-      </ul>
-      
-      <div class="alert alert-success mt-3">
-        <strong>📖 What's Next:</strong> In the next lessons, you'll add exciting content sections: movies, music, and quick facts. This will make your website complete!
-      </div>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your footer should be at the bottom of the page.
+        </div>
+      </section>
     `
   },
   layoutMovies: {
     title: 'Advanced Layout: Movies Section',
     content: `
-      <h2>Building Complex Layouts</h2>
-      <p>Your page already has the main site structure in place. In this lesson, you'll add a new content section that uses cards, images, list groups, and quotes together.</p>
-      <p>Now that you understand grids and cards, let's build a more complex section combining multiple components.</p>
-      
-      <h3>What You'll Learn</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Using cards with images (<code>card-img-top</code>)</li>
-        <li>Creating 2-column layouts with equal-height cards (<code>h-100</code>)</li>
-        <li>Using list groups inside cards (<code>list-group-flush</code>)</li>
-        <li>Styling quotes with blockquotes</li>
-      </ul>
-      
-      <h2>🎯 Add to Your Website: Movies Section</h2>
-      <p><strong>Starting point:</strong> Your page already has a navbar, hero section, interests cards, biography, image, and footer.</p>
-      <p><strong>📍 Placement:</strong> Add this movies section after your biography section and before the footer. <strong>Replace it with your favorite movie series.</strong></p>
-      <div class="code-block">
-        <code>&lt;div class="container my-5" id="movies"&gt;
-  &lt;h2 class="text-center mb-4"&gt;My Favorite Movie Series&lt;/h2&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-md-6 mb-4"&gt;
-      &lt;div class="card h-100"&gt;
-        &lt;img src="assets/cat-example-main.jpg" class="card-img-top" alt="Movie poster or image related to the movie series"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;Movie Series Name&lt;/h5&gt;
-          &lt;p class="card-text"&gt;
-            Write why you love this movie series. What makes it special? 
-            Which is your favorite film in the series?
-          &lt;/p&gt;
-          &lt;ul class="list-group list-group-flush"&gt;
-            &lt;li class="list-group-item"&gt;&lt;strong&gt;Genre:&lt;/strong&gt; Action, Adventure&lt;/li&gt;
-            &lt;li class="list-group-item"&gt;&lt;strong&gt;My Rating:&lt;/strong&gt; ⭐⭐⭐⭐⭐&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-4"&gt;
-      &lt;div class="card h-100"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h5 class="card-title"&gt;Why I Love It&lt;/h5&gt;
-          &lt;p class="card-text"&gt;
-            Add more details about what draws you to this series. 
-            Favorite characters? Memorable scenes? 
-            What themes resonate with you?
-          &lt;/p&gt;
-          &lt;blockquote class="blockquote"&gt;
-            &lt;p class="mb-0"&gt;"Add a favorite quote from the movie here!"&lt;/p&gt;
-            &lt;footer class="blockquote-footer"&gt;Character Name&lt;/footer&gt;
-          &lt;/blockquote&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>id="movies"</strong><span>Lets the navbar jump to this section.</span></div>
+        <div><strong>col-md-6</strong><span>Makes two columns on wider screens.</span></div>
+        <div><strong>card-img-top</strong><span>Puts an image at the top of a card.</span></div>
+        <div><strong>list-group</strong><span>Makes a clean list.</span></div>
+        <div><strong>blockquote</strong><span>Styles a quote.</span></div>
+      </div>
+
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Start the Movies Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-movie-status="section" aria-label="Movies section not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your footer opening tag:</strong> it starts with <code>&lt;footer</code>.</p>
+          <p><strong>Paste this above it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="container my-5" id="movies"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add the Heading and Row</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-movie-status="heading" aria-label="Movies heading and row not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="container my-5" id="movies"&gt;</code></p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;h2 class="text-center mb-4"&gt;My Favorite Movie Series&lt;/h2&gt;
+  &lt;div class="row"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add the Movie Card</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-movie-status="first-card" aria-label="Movie card not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="row"&gt;</code></p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-6 mb-4"&gt;
+  &lt;div class="card h-100"&gt;
+    &lt;img src="assets/cat-example-main.jpg" class="card-img-top" alt="Movie poster"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h5 class="card-title"&gt;Movie Series Name&lt;/h5&gt;
+      &lt;p class="card-text"&gt;Write why you love this movie series.&lt;/p&gt;
+      &lt;ul class="list-group list-group-flush"&gt;
+        &lt;li class="list-group-item"&gt;&lt;strong&gt;Genre:&lt;/strong&gt; Adventure&lt;/li&gt;
+        &lt;li class="list-group-item"&gt;&lt;strong&gt;My Rating:&lt;/strong&gt; 5 stars&lt;/li&gt;
+      &lt;/ul&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Change the movie name, replace the sample image if you want, write your own thoughts, and add a real quote.</p>
-      <p><strong>Why:</strong> Using <code>col-md-6</code> creates two equal columns (50% each). <code>h-100</code> makes cards the same height. <code>list-group</code> creates clean lists. <code>id="movies"</code> lets the navbar "Movies" link jump to this section.</p>
-      
-      <h3>📚 New Components Used</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>list-group:</strong> Creates styled lists. <code>list-group-flush</code> removes borders.</li>
-        <li><strong>blockquote:</strong> Styles quoted text. <code>blockquote-footer</code> adds attribution.</li>
-        <li><strong>card-img-top:</strong> Places image at top of card.</li>
-      </ul>
-      
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> Your page should now have a Movies section before the footer, and the "Movies" link in the navbar should jump to it.
-      </div>
+          </div>
+        </div>
+      </section>
 
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Add a third card by changing <code>col-md-6</code> to <code>col-md-4</code> (creates 3 equal columns)</li>
-        <li>Try different card styles: add <code>border-primary</code> or <code>bg-light</code> to cards</li>
-        <li>Add more list items to the <code>list-group</code> (e.g., "Release Year", "Director")</li>
-      </ul>
-      
-      <div class="alert alert-success mt-4">
-        <strong>📖 What's Next:</strong> In the next lesson, you'll build a music or podcast section with interactive accordions.
-      </div>
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Add the Quote Card</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
+            <div class="step-status step-status--pending" data-movie-status="second-card" aria-label="Quote card not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the first column closing tag:</strong> it is right after the first card.</p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-6 mb-4"&gt;
+  &lt;div class="card h-100"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h5 class="card-title"&gt;Why I Love It&lt;/h5&gt;
+      &lt;p class="card-text"&gt;Write more about your favorite characters or scenes.&lt;/p&gt;
+      &lt;blockquote class="blockquote"&gt;
+        &lt;p class="mb-0"&gt;"Add a favorite quote here!"&lt;/p&gt;
+        &lt;footer class="blockquote-footer"&gt;Character Name&lt;/footer&gt;
+      &lt;/blockquote&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 5</div>
+        <h3>Close the Movies Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">5</div>
+            <div class="step-status step-status--pending" data-movie-status="close" aria-label="Movies closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the quote card closing tag:</strong> it is the last <code>&lt;/div&gt;</code> from Step 4.</p>
+          <p><strong>Paste these lines below it:</strong></p>
+          <div class="code-block">
+            <code>  &lt;/div&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your Movies section should appear before the footer.
+        </div>
+      </section>
     `
   },
   layoutQuickFacts: {
     title: 'Advanced Layout: Quick Facts',
     content: `
-      <h2>Multi-Column Card Layouts</h2>
-      <p>By this point, your page already has several sections and a footer. This final lesson adds one more compact section of personal details before the footer.</p>
-      <p>Sometimes you want to display multiple items in a row. Using <code>col-md-3</code> creates 4 equal columns (3+3+3+3=12).</p>
-      
-      <h3>Key Concepts</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>col-md-3:</strong> 4 equal columns (25% each on medium+ screens)</li>
-        <li><strong>border-*:</strong> Colored borders for visual distinction</li>
-        <li><strong>h-100:</strong> Makes all cards equal height in a row</li>
-        <li><strong>text-center:</strong> Centers content within cards</li>
-      </ul>
-      
-      <h2>🎯 Add to Your Website: Quick Facts Section</h2>
-      <p><strong>Starting point:</strong> Your page already has the Movies and Music sections, plus a footer at the bottom.</p>
-      <p><strong>📍 Placement:</strong> Add this section before your footer (before the <code>&lt;footer&gt;</code> tag) to showcase more about yourself.</p>
-      <div class="code-block">
-        <code>&lt;!-- Quick facts: 4-column grid layout --&gt;
-&lt;div class="container my-5"&gt;
-  &lt;h2 class="text-center mb-4"&gt;Quick Facts About Me&lt;/h2&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- Each column is 3/12 width (25%) = 4 columns total --&gt;
-    &lt;div class="col-md-3 text-center mb-3"&gt;
-      &lt;div class="card border-primary h-100"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h3 class="text-primary"&gt;🎓&lt;/h3&gt;
-          &lt;h5&gt;Education&lt;/h5&gt;
-          &lt;p class="text-muted"&gt;Your school/major&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+      <h2>Words You Need for This Lesson</h2>
+      <div class="concept-strip">
+        <div><strong>id="quickfacts"</strong><span>Names this section.</span></div>
+        <div><strong>col-md-3</strong><span>Makes four equal columns.</span></div>
+        <div><strong>border-*</strong><span>Adds a colored border.</span></div>
+        <div><strong>h-100</strong><span>Makes cards the same height.</span></div>
+        <div><strong>text-center</strong><span>Centers each fact.</span></div>
+      </div>
+
+      <section class="student-step">
+        <div class="step-label">Step 1</div>
+        <h3>Start the Quick Facts Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">1</div>
+            <div class="step-status step-status--pending" data-facts-status="section" aria-label="Quick facts section not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your footer opening tag:</strong> it starts with <code>&lt;footer</code>.</p>
+          <p><strong>Paste this above it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="container my-5" id="quickfacts"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 2</div>
+        <h3>Add the Heading and Row</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-facts-status="heading" aria-label="Quick facts heading not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="container my-5" id="quickfacts"&gt;</code></p>
+          <p><strong>Paste this below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;h2 class="text-center mb-4"&gt;Quick Facts About Me&lt;/h2&gt;
+  &lt;div class="row"&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Add Four Fact Cards</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3</div>
+            <div class="step-status step-status--pending" data-facts-status="cards" aria-label="Quick facts cards not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="row"&gt;</code></p>
+          <p><strong>Paste these four columns below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;div class="col-md-3 text-center mb-3"&gt;
+  &lt;div class="card border-primary h-100"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h3 class="text-primary"&gt;School&lt;/h3&gt;
+      &lt;p&gt;Write one fact.&lt;/p&gt;
     &lt;/div&gt;
-    &lt;div class="col-md-3 text-center mb-3"&gt;
-      &lt;div class="card border-success h-100"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h3 class="text-success"&gt;🎯&lt;/h3&gt;
-          &lt;h5&gt;Goals&lt;/h5&gt;
-          &lt;p class="text-muted"&gt;Your aspirations&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-md-3 text-center mb-3"&gt;
+  &lt;div class="card border-success h-100"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h3 class="text-success"&gt;Goal&lt;/h3&gt;
+      &lt;p&gt;Write one goal.&lt;/p&gt;
     &lt;/div&gt;
-    &lt;div class="col-md-3 text-center mb-3"&gt;
-      &lt;div class="card border-warning h-100"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h3 class="text-warning"&gt;💻&lt;/h3&gt;
-          &lt;h5&gt;Skills&lt;/h5&gt;
-          &lt;p class="text-muted"&gt;Your talents&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-md-3 text-center mb-3"&gt;
+  &lt;div class="card border-warning h-100"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h3 class="text-warning"&gt;Skill&lt;/h3&gt;
+      &lt;p&gt;Write one skill.&lt;/p&gt;
     &lt;/div&gt;
-    &lt;div class="col-md-3 text-center mb-3"&gt;
-      &lt;div class="card border-info h-100"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;h3 class="text-info"&gt;🌟&lt;/h3&gt;
-          &lt;h5&gt;Fun Fact&lt;/h5&gt;
-          &lt;p class="text-muted"&gt;Something interesting!&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-md-3 text-center mb-3"&gt;
+  &lt;div class="card border-info h-100"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h3 class="text-info"&gt;Fun Fact&lt;/h3&gt;
+      &lt;p&gt;Write one fun fact.&lt;/p&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code>
-      </div>
-      <p><strong>What to modify:</strong> Fill in your education, goals, skills, and a fun fact about yourself!</p>
-      <p><strong>Why:</strong> This creates visual interest with colored borders. <code>col-md-3</code> makes 4 equal columns on medium+ screens (3+3+3+3=12). <code>h-100</code> makes all cards the same height. <code>border-primary</code>, <code>border-success</code>, etc. add colored borders.</p>
-      
-      <h3>📚 Understanding Border Colors</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>border-primary:</strong> Blue border (Bootstrap's primary color)</li>
-        <li><strong>border-success:</strong> Green border</li>
-        <li><strong>border-warning:</strong> Yellow/orange border</li>
-        <li><strong>border-info:</strong> Light blue border</li>
-      </ul>
-      
-      <h3>🎯 Try It Yourself</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>Change to 3 columns by using <code>col-md-4</code> instead of <code>col-md-3</code></li>
-        <li>Add a 5th card by creating another <code>col-md-3</code> div (they'll wrap to a new row)</li>
-        <li>Try different emojis or icons for each card</li>
-        <li>Experiment with card backgrounds: add <code>bg-light</code> or <code>bg-primary text-white</code></li>
-      </ul>
-      
-      <div class="alert alert-info mt-4">
-        <strong>✅ Progress Checkpoint:</strong> You have now added all major sections. Test your navbar links so "About," "Movies," and "Music" jump to the right places, and make sure your footer still appears last.
-      </div>
-      
-      <h2>✅ Final Checklist</h2>
-      <p>Before you export, make sure you've:</p>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>✅ Set up basic HTML structure (Introduction lesson)</li>
-        <li>✅ Added hero section with headings (Headings lesson)</li>
-        <li>✅ Learned grid basics (Layout Basics lesson)</li>
-        <li>✅ Learned cards and components (Cards lesson)</li>
-        <li>✅ Added biography section with <code>id="about"</code> (Paragraphs lesson)</li>
-        <li>✅ Added navbar at the top with working links (Navbar lesson)</li>
-        <li>✅ Added images to the biography section and navbar brand area (Images lesson)</li>
-        <li>✅ Added footer with social links (Links lesson)</li>
-        <li>✅ Added movies section with <code>id="movies"</code> (Movies lesson)</li>
-        <li>✅ Added music/podcast section with <code>id="music"</code> (Music lesson)</li>
-        <li>✅ Added quick facts section (Quick Facts lesson)</li>
-        <li>✅ Replaced all placeholder text with your own content!</li>
-        <li>✅ Tested all navbar links (they should jump to sections)</li>
-        <li>✅ Checked that everything looks good in the preview!</li>
-        <li>✅ Updated social media links in footer (or removed unused ones)</li>
-      </ul>
-      
-      <h3>🔧 Troubleshooting Tips</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li><strong>Navbar links not working:</strong> Make sure each section has the correct <code>id</code> attribute (about, movies, music)</li>
-        <li><strong>Cards not aligned:</strong> Check that you're using <code>row</code> to wrap columns</li>
-        <li><strong>Images not showing:</strong> Make sure image URLs are correct, or use placeholder images</li>
-        <li><strong>Accordion not expanding:</strong> Bootstrap JS should be auto-loaded, but check browser console for errors</li>
-        <li><strong>Layout looks broken on mobile:</strong> This is normal - Bootstrap's grid is responsive and will stack on small screens</li>
-      </ul>
-      
+          </div>
+        </div>
+        <div class="next-lesson-note">
+          <strong>Want different border colors?</strong> Try <code>border-danger</code>, <code>border-dark</code>, or
+          <a href="https://getbootstrap.com/docs/5.3/utilities/borders/#color" target="_blank" rel="noopener">more Bootstrap border colors</a>.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Close the Quick Facts Section</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
+            <div class="step-status step-status--pending" data-facts-status="close" aria-label="Quick facts closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find the last fact card closing tag.</strong></p>
+          <p><strong>Paste these lines below it:</strong></p>
+          <div class="code-block">
+            <code>  &lt;/div&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. Your Quick Facts section should appear before the footer.
+        </div>
+      </section>
+
       <div class="alert alert-success mt-4">
-        <strong>🎉 Congratulations!</strong> You've built a complete, professional-looking website! Use the <strong>Export HTML</strong> button in the Simulator to download your file. You can open it in any browser or host it online!
+        <strong>Final check:</strong> Visit the Simulator, refresh the preview, then use <strong>Export HTML</strong> or <strong>Export Image</strong>.
       </div>
-      
-      <h3>Bootstrap Components You Used</h3>
-      <ul style="line-height: 1.8; color: var(--text-muted); margin-left: 20px;">
-        <li>✅ Navbar (responsive navigation)</li>
-        <li>✅ Cards (multiple styles)</li>
-        <li>✅ Grid system (rows and columns)</li>
-        <li>✅ Buttons (outline styles)</li>
-        <li>✅ Lists (list-group)</li>
-        <li>✅ Accordions (collapsible content)</li>
-        <li>✅ Blockquotes</li>
-        <li>✅ Images (rounded, circular, responsive)</li>
-        <li>✅ Text utilities (colors, alignment)</li>
-        <li>✅ Background utilities</li>
-        <li>✅ Spacing utilities</li>
-      </ul>
     `
   },
   project: {
@@ -1832,7 +1883,7 @@ const lessons = {
       <h2>📋 Step 4: Create the Hero Section</h2>
       <p><strong>What to do:</strong> Replace the simple heading and paragraph inside your container with a hero section that introduces your website.</p>
       <div class="code-block">
-        <code>&lt;div class="bg-primary text-white text-center py-5 mb-5"&gt;
+        <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"&gt;
   &lt;div class="container"&gt;
     &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
     &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
@@ -2474,35 +2525,114 @@ function initializeAvatarBuilder() {
 }
 
 // Progress tracking
-const progressSections = {
-  structure: ['intro'],
-  hero: ['headings'],
-  biography: ['paragraphs'],
-  navbar: ['navbar'],
-  footer: ['links'],
-  movies: ['layoutMovies'],
-  music: ['layoutMusic'],
-  quickfacts: ['layoutQuickFacts']
+const progressSections = [
+  'structure',
+  'hero',
+  'biography',
+  'navbar',
+  'footer',
+  'movies',
+  'music',
+  'quickfacts'
+];
+
+function lessonStatusComplete(status, keys) {
+  return keys.every(key => Boolean(status[key]));
+}
+
+function isSectionComplete(section, html) {
+  switch (section) {
+    case 'structure': {
+      const starter = getStarterSetupStatus(html);
+      const bootstrap = getBootstrapSetupStatus(html);
+      const container = getContainerSetupStatus(html);
+      return starter.complete && bootstrap.ready && container.openCorrect && container.closeCorrect;
+    }
+    case 'hero':
+      return lessonStatusComplete(getHeadingLessonStatus(html), [
+        'heroOpenCorrect',
+        'heroCloseCorrect',
+        'heightCorrect',
+        'centerCorrect',
+        'displayCorrect',
+        'leadCorrect'
+      ]);
+    case 'biography':
+      return lessonStatusComplete(getParagraphsLessonStatus(html), [
+        'sectionCorrect',
+        'rowCorrect',
+        'columnCorrect',
+        'cardCorrect',
+        'bodyCorrect',
+        'titleCorrect',
+        'closeCorrect'
+      ]) && getParagraphsLessonStatus(html).paragraphCount >= 2;
+    case 'navbar':
+      return lessonStatusComplete(getNavbarLessonStatus(html), [
+        'startCorrect',
+        'brandCorrect',
+        'togglerCorrect',
+        'collapseCorrect',
+        'linksCorrect',
+        'closeCorrect'
+      ]);
+    case 'footer':
+      return lessonStatusComplete(getLinksLessonStatus(html), [
+        'footerCorrect',
+        'infoCorrect',
+        'buttonsCorrect',
+        'closeCorrect'
+      ]);
+    case 'movies':
+      return lessonStatusComplete(getMoviesLessonStatus(html), [
+        'sectionCorrect',
+        'headingCorrect',
+        'firstCardCorrect',
+        'secondCardCorrect',
+        'closeCorrect'
+      ]);
+    case 'music':
+      return lessonStatusComplete(getMusicLessonStatus(html), [
+        'sectionCorrect',
+        'imageCorrect',
+        'textCorrect',
+        'accordionCorrect',
+        'closeCorrect'
+      ]);
+    case 'quickfacts':
+      return lessonStatusComplete(getQuickFactsLessonStatus(html), [
+        'sectionCorrect',
+        'headingCorrect',
+        'cardsCorrect',
+        'closeCorrect'
+      ]);
+    default:
+      return false;
+  }
 };
 
-function updateProgress(lessonId) {
-  Object.keys(progressSections).forEach(section => {
-    if (progressSections[section].includes(lessonId)) {
-      const checkbox = document.querySelector(`input[data-section="${section}"]`);
-      if (checkbox) {
-        checkbox.checked = true;
-        // Save to localStorage
-        localStorage.setItem(`progress_${section}`, 'true');
-      }
+function updateProgressFromHtml(html = htmlEditor?.getValue?.() || '') {
+  progressSections.forEach(section => {
+    const checkbox = document.querySelector(`input[data-section="${section}"]`);
+    if (!checkbox) {
+      return;
     }
+
+    const complete = isSectionComplete(section, html);
+    checkbox.checked = complete;
+    localStorage.setItem(`progress_${section}`, complete ? 'true' : 'false');
   });
 }
 
+function updateProgress() {
+  updateProgressFromHtml();
+}
+
 function loadProgress() {
-  Object.keys(progressSections).forEach(section => {
+  progressSections.forEach(section => {
     const checkbox = document.querySelector(`input[data-section="${section}"]`);
-    if (checkbox && localStorage.getItem(`progress_${section}`) === 'true') {
-      checkbox.checked = true;
+    if (checkbox) {
+      checkbox.checked = localStorage.getItem(`progress_${section}`) === 'true';
     }
   });
 }
@@ -2600,8 +2730,6 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     saveLessonState(lessonId);
   }
 
-  updateProgress(lessonId);
-
   lessonDisplay.innerHTML = `
     <div class="lesson-section">
       ${lesson.content}
@@ -2628,6 +2756,11 @@ function renderLesson(lessonId, { persist = true, focusNav = false } = {}) {
     updateParagraphsLessonStatus();
     updateNavbarLessonStatus();
     updateImagesLessonStatus();
+    updateLinksLessonStatus();
+    updateMoviesLessonStatus();
+    updateMusicLessonStatus();
+    updateQuickFactsLessonStatus();
+    updateProgressFromHtml();
   }, 10);
 
   return true;
@@ -2805,6 +2938,135 @@ const htmlEditorElement = document.getElementById('htmlEditor');
 const previewFrame = document.getElementById('previewFrame');
 const refreshBtn = document.getElementById('refreshBtn');
 const clearBtn = document.getElementById('clearBtn');
+const assetUploadBtn = document.getElementById('assetUploadBtn');
+const assetUploadInput = document.getElementById('assetUploadInput');
+const assetShelf = document.getElementById('assetShelf');
+const ASSET_STORAGE_KEY = `${SIMULATOR_NAME}_assets`;
+let simulatedAssets = [];
+
+function sanitizeAssetName(name) {
+  const fallback = 'uploaded-image';
+  const safeName = (name || fallback)
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-zA-Z0-9._-]/g, '')
+    .replace(/^-+|-+$/g, '');
+
+  return safeName || fallback;
+}
+
+function getUniqueAssetPath(name) {
+  const safeName = sanitizeAssetName(name);
+  const dotIndex = safeName.lastIndexOf('.');
+  const base = dotIndex > 0 ? safeName.slice(0, dotIndex) : safeName;
+  const extension = dotIndex > 0 ? safeName.slice(dotIndex) : '';
+  let candidate = `assets/${safeName}`;
+  let count = 2;
+
+  while (simulatedAssets.some(asset => asset.path === candidate)) {
+    candidate = `assets/${base}-${count}${extension}`;
+    count += 1;
+  }
+
+  return candidate;
+}
+
+function saveSimulatedAssets() {
+  try {
+    localStorage.setItem(ASSET_STORAGE_KEY, JSON.stringify(simulatedAssets));
+  } catch (error) {
+    console.warn('Could not save uploaded assets:', error);
+    showNotification('Image saved for this session', 'The browser storage is full, so it may not stay after refresh.', 'warning');
+  }
+}
+
+function loadSimulatedAssets() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(ASSET_STORAGE_KEY) || '[]');
+    simulatedAssets = Array.isArray(saved)
+      ? saved.filter(asset => asset && asset.path && asset.dataUrl)
+      : [];
+  } catch (error) {
+    simulatedAssets = [];
+  }
+}
+
+function renderAssetShelf() {
+  if (!assetShelf) {
+    return;
+  }
+
+  assetShelf.classList.toggle('asset-shelf--visible', simulatedAssets.length > 0);
+  assetShelf.innerHTML = simulatedAssets.length
+    ? '<strong>assets/</strong>'
+    : '';
+
+  simulatedAssets.forEach(asset => {
+    const button = document.createElement('button');
+    button.className = 'asset-pill';
+    button.type = 'button';
+    button.textContent = asset.path;
+    button.title = 'Copy image path';
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(asset.path);
+        showNotification('Image path copied', asset.path, 'success');
+      } catch (error) {
+        showNotification('Image path', asset.path, 'info');
+      }
+    });
+    assetShelf.appendChild(button);
+  });
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+function resolveSimulatedAssets(html) {
+  if (!simulatedAssets.length) {
+    return html;
+  }
+
+  const assetMap = new Map(simulatedAssets.map(asset => [asset.path, asset.dataUrl]));
+  return html.replace(/\bsrc=(["'])(assets\/[^"']+)\1/gi, (match, quote, path) => {
+    const dataUrl = assetMap.get(path);
+    return dataUrl ? `src=${quote}${dataUrl}${quote}` : match;
+  });
+}
+
+async function handleAssetUpload(files) {
+  const imageFiles = Array.from(files || []).filter(file => file.type.startsWith('image/'));
+
+  if (!imageFiles.length) {
+    showNotification('No image selected', 'Choose a JPG, PNG, GIF, SVG, or WebP file.', 'warning');
+    return;
+  }
+
+  for (const file of imageFiles) {
+    const path = getUniqueAssetPath(file.name);
+    const dataUrl = await readFileAsDataUrl(file);
+    simulatedAssets.push({
+      path,
+      dataUrl,
+      type: file.type,
+      name: file.name
+    });
+  }
+
+  saveSimulatedAssets();
+  renderAssetShelf();
+  updatePreview();
+  showNotification('Image uploaded', `Use ${simulatedAssets[simulatedAssets.length - 1].path} in an img src.`, 'success');
+}
+
+loadSimulatedAssets();
+renderAssetShelf();
 
 if (typeof CodeMirror !== 'undefined') {
   const codeMirrorEditor = CodeMirror.fromTextArea(htmlEditorElement, {
@@ -3145,7 +3407,7 @@ function getHeadingLessonStatus(html) {
 
   return {
     heroOpenFound: heroOpenMatches.length > 0,
-    heroOpenCorrect: Boolean(heroOpen && containerBeforeHero),
+    heroOpenCorrect: Boolean(heroOpen && containerBeforeHero && tagHasClassPattern(heroOpen[0], /^mt-[0-5]$/)),
     heroCloseFound: closesAfterParagraph.length > 1,
     heroCloseCorrect: Boolean(heroOpen && closesAfterParagraph.length > 1),
     heightFound: Array.from(html.matchAll(/<div\b[^>]*style=["'][^"']*min-height\s*:[^"']*["'][^>]*>/gi)).length > 0,
@@ -3375,6 +3637,123 @@ function getImageLessonStatus(html) {
   };
 }
 
+function getSectionBlock(html, id) {
+  const sectionMatch = new RegExp(`<div\\b[^>]*(?:class=["'][^"']*\\bcontainer\\b[^"']*["'][^>]*id=["']${id}["']|id=["']${id}["'][^>]*class=["'][^"']*\\bcontainer\\b[^"']*["'])[^>]*>`, 'i').exec(html);
+  if (!sectionMatch) {
+    return { match: null, block: '', index: -1 };
+  }
+
+  const startIndex = sectionMatch.index;
+  const footerIndex = html.slice(startIndex).search(/<footer\b(?![^>]*\bblockquote-footer\b)/i);
+  const scriptIndex = html.slice(startIndex).search(/<script\b[^>]*src=["'][^"']*bootstrap[^"']*\.js[^"']*["'][^>]*>/i);
+  const nextSectionIndex = html.slice(startIndex + sectionMatch[0].length).search(/<div\b[^>]*id=["'](?:movies|music|quickfacts)["']/i);
+  const endCandidates = [footerIndex, scriptIndex]
+    .concat(nextSectionIndex === -1 ? [] : [sectionMatch[0].length + nextSectionIndex])
+    .filter(index => index > 0);
+  const endIndex = endCandidates.length ? startIndex + Math.min(...endCandidates) : html.length;
+
+  return {
+    match: sectionMatch,
+    block: html.slice(startIndex, endIndex),
+    index: startIndex
+  };
+}
+
+function getLinksLessonStatus(html) {
+  const footerMatches = Array.from(html.matchAll(/<footer\b(?![^>]*\bblockquote-footer\b)[^>]*>/gi));
+  const bootstrapScriptIndex = findBootstrapJsScript(html);
+  const footer = footerMatches[0];
+  const footerIndex = footer?.index ?? -1;
+  const footerBlock = footerIndex !== -1
+    ? html.slice(footerIndex, bootstrapScriptIndex !== -1 && bootstrapScriptIndex > footerIndex ? bootstrapScriptIndex : html.length)
+    : '';
+  const footerHasLayout = footer && tagHasClassPrefix(footer[0], 'bg-') && tagHasTextColorClass(footer[0]) && tagHasClassPattern(footer[0], /^py-[0-5]$/);
+  const infoColumn = /<div\b[^>]*class=["'][^"']*\bcol-md-6\b[^"']*["'][^>]*>[\s\S]*?<h5\b[^>]*>[\s\S]*?<\/h5>[\s\S]*?<p\b[^>]*>[\s\S]*?<\/p>/i.test(footerBlock);
+  const mailtoLink = /<a\b[^>]*href=["']mailto:[^"']+["'][^>]*class=["'][^"']*\bbtn\b[^"']*["'][^>]*>/i.test(footerBlock);
+  const buttonLinks = Array.from(footerBlock.matchAll(/<a\b[^>]*class=["'][^"']*\bbtn\b[^"']*["'][^>]*>/gi));
+  const footerCloseIndex = footerIndex !== -1 ? html.slice(footerIndex).search(/<\/footer>/i) : -1;
+
+  return {
+    footerFound: footerMatches.length > 0,
+    footerCorrect: Boolean(footerHasLayout && (bootstrapScriptIndex === -1 || footerIndex < bootstrapScriptIndex)),
+    infoFound: /<h5\b/i.test(footerBlock) || /<p\b/i.test(footerBlock),
+    infoCorrect: Boolean(infoColumn),
+    buttonsFound: buttonLinks.length > 0 || /mailto:/i.test(footerBlock),
+    buttonsCorrect: Boolean(mailtoLink && buttonLinks.length >= 2),
+    closeFound: footerCloseIndex !== -1,
+    closeCorrect: Boolean(footer && footerCloseIndex !== -1)
+  };
+}
+
+function getMoviesLessonStatus(html) {
+  const { match, block, index } = getSectionBlock(html, 'movies');
+  const footerIndex = html.search(/<footer\b(?![^>]*\bblockquote-footer\b)/i);
+  const headingFound = /<h2\b[^>]*>[\s\S]*?<\/h2>/i.test(block);
+  const rowFound = /<div\b[^>]*class=["'][^"']*\brow\b[^"']*["'][^>]*>/i.test(block);
+  const firstCardCorrect = /<img\b[^>]*class=["'][^"']*\bcard-img-top\b[^"']*["'][^>]*>/i.test(block) &&
+    /<ul\b[^>]*class=["'][^"']*\blist-group\b[^"']*["'][^>]*>/i.test(block);
+  const secondCardCorrect = /<blockquote\b[^>]*class=["'][^"']*\bblockquote\b[^"']*["'][^>]*>[\s\S]*?<\/blockquote>/i.test(block);
+  const colCount = Array.from(block.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-6\b[^"']*["'][^>]*>/gi)).length;
+
+  return {
+    sectionFound: Boolean(match),
+    sectionCorrect: Boolean(match && tagHasClass(match[0], 'container') && tagHasClassPattern(match[0], /^my-[0-5]$/) && (footerIndex === -1 || index < footerIndex)),
+    headingFound,
+    headingCorrect: Boolean(match && headingFound && rowFound),
+    firstCardFound: /card-img-top|list-group/i.test(block),
+    firstCardCorrect,
+    secondCardFound: /blockquote/i.test(block),
+    secondCardCorrect,
+    closeFound: colCount > 0,
+    closeCorrect: Boolean(match && colCount >= 2 && firstCardCorrect && secondCardCorrect)
+  };
+}
+
+function getMusicLessonStatus(html) {
+  const { match, block, index } = getSectionBlock(html, 'music');
+  const footerIndex = html.search(/<footer\b(?![^>]*\bblockquote-footer\b)/i);
+  const imageCorrect = /<div\b[^>]*class=["'][^"']*\bcol-lg-4\b[^"']*["'][^>]*>[\s\S]*?<img\b[^>]*class=["'][^"']*\bimg-fluid\b[^"']*\brounded-circle\b[^"']*["'][^>]*>/i.test(block);
+  const textCorrect = /<div\b[^>]*class=["'][^"']*\bcol-lg-8\b[^"']*["'][^>]*>[\s\S]*?<h2\b[^>]*>[\s\S]*?<\/h2>[\s\S]*?<p\b[^>]*class=["'][^"']*\blead\b[^"']*["'][^>]*>/i.test(block);
+  const accordionItems = Array.from(block.matchAll(/<div\b[^>]*class=["'][^"']*\baccordion-item\b[^"']*["'][^>]*>/gi));
+  const accordionCorrect = /<div\b[^>]*class=["'][^"']*\baccordion\b[^"']*["'][^>]*id=["']musicAccordion["'][^>]*>/i.test(block) &&
+    accordionItems.length >= 2 &&
+    /data-bs-toggle=["']collapse["']/i.test(block);
+
+  return {
+    sectionFound: Boolean(match),
+    sectionCorrect: Boolean(match && tagHasClass(match[0], 'container') && tagHasClassPrefix(match[0], 'bg-') && (footerIndex === -1 || index < footerIndex)),
+    imageFound: /<img\b/i.test(block),
+    imageCorrect,
+    textFound: /<h2\b/i.test(block) || /class=["'][^"']*\blead\b/i.test(block),
+    textCorrect,
+    accordionFound: /accordion/i.test(block),
+    accordionCorrect,
+    closeFound: Boolean(match && /<\/div>\s*$/i.test(block.trim())),
+    closeCorrect: Boolean(match && imageCorrect && textCorrect && accordionCorrect)
+  };
+}
+
+function getQuickFactsLessonStatus(html) {
+  const { match, block, index } = getSectionBlock(html, 'quickfacts');
+  const footerIndex = html.search(/<footer\b(?![^>]*\bblockquote-footer\b)/i);
+  const headingFound = /<h2\b[^>]*>[\s\S]*?<\/h2>/i.test(block);
+  const rowFound = /<div\b[^>]*class=["'][^"']*\brow\b[^"']*["'][^>]*>/i.test(block);
+  const factColumns = Array.from(block.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-3\b[^"']*\btext-center\b[^"']*["'][^>]*>/gi));
+  const factCards = Array.from(block.matchAll(/<div\b[^>]*class=["'][^"']*\bcard\b[^"']*\bh-100\b[^"']*["'][^>]*>/gi));
+  const styledCards = factCards.filter(card => tagHasCardVisualStyle(card[0]));
+
+  return {
+    sectionFound: Boolean(match),
+    sectionCorrect: Boolean(match && tagHasClass(match[0], 'container') && (footerIndex === -1 || index < footerIndex)),
+    headingFound,
+    headingCorrect: Boolean(match && headingFound && rowFound),
+    cardsFound: factCards.length > 0,
+    cardsCorrect: Boolean(factColumns.length >= 4 && factCards.length >= 4 && styledCards.length >= 4),
+    closeFound: factCards.length > 0,
+    closeCorrect: Boolean(match && factColumns.length >= 4 && factCards.length >= 4)
+  };
+}
+
 function updateContainerLessonStatus(status = null) {
   const currentStatus = status || getContainerSetupStatus(htmlEditor?.getValue?.() || '');
   const openState = currentStatus.openCorrect ? 'success' : currentStatus.openFound ? 'error' : 'pending';
@@ -3416,7 +3795,7 @@ function updateHeadingLessonStatus(status = null) {
     heroOpenState === 'success'
       ? 'Hero box opening tag is in the correct place'
       : heroOpenState === 'error'
-        ? 'Hero box opening tag was added, but it should go below the container line'
+        ? 'Hero box opening tag should go below the container line and include mt-* spacing'
         : 'Hero box opening tag not done yet'
   );
 
@@ -3864,6 +4243,220 @@ function updateImagesLessonStatus(status = null) {
   );
 }
 
+function updateLinksLessonStatus(status = null) {
+  const currentStatus = status || getLinksLessonStatus(htmlEditor?.getValue?.() || '');
+  const footerState = currentStatus.footerCorrect ? 'success' : currentStatus.footerFound ? 'error' : 'pending';
+  const infoState = currentStatus.infoCorrect ? 'success' : currentStatus.infoFound ? 'error' : 'pending';
+  const buttonsState = currentStatus.buttonsCorrect ? 'success' : currentStatus.buttonsFound ? 'error' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-links-status="footer"]'),
+    footerState,
+    footerState === 'success'
+      ? 'Footer starts above the Bootstrap script'
+      : footerState === 'error'
+        ? 'Footer should be above the Bootstrap script and include background, text, and spacing classes'
+        : 'Footer start not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-links-status="info"]'),
+    infoState,
+    infoState === 'success'
+      ? 'Footer information column is added'
+      : infoState === 'error'
+        ? 'Add a footer column with a heading and paragraph'
+        : 'Footer info not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-links-status="buttons"]'),
+    buttonsState,
+    buttonsState === 'success'
+      ? 'Footer button links are added'
+      : buttonsState === 'error'
+        ? 'Add at least two btn links, including one mailto link'
+        : 'Footer buttons not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-links-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Footer closing tag is present'
+      : closeState === 'error'
+        ? 'Check the footer closing tags'
+        : 'Footer closing tags not done yet'
+  );
+}
+
+function updateMoviesLessonStatus(status = null) {
+  const currentStatus = status || getMoviesLessonStatus(htmlEditor?.getValue?.() || '');
+  const sectionState = currentStatus.sectionCorrect ? 'success' : currentStatus.sectionFound ? 'error' : 'pending';
+  const headingState = currentStatus.headingCorrect ? 'success' : currentStatus.headingFound ? 'error' : 'pending';
+  const firstCardState = currentStatus.firstCardCorrect ? 'success' : currentStatus.firstCardFound ? 'error' : 'pending';
+  const secondCardState = currentStatus.secondCardCorrect ? 'success' : currentStatus.secondCardFound ? 'error' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-movie-status="section"]'),
+    sectionState,
+    sectionState === 'success'
+      ? 'Movies section starts before the footer'
+      : sectionState === 'error'
+        ? 'Movies section should use container my-* and id="movies" before the footer'
+        : 'Movies section not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-movie-status="heading"]'),
+    headingState,
+    headingState === 'success'
+      ? 'Movies heading and row are added'
+      : headingState === 'error'
+        ? 'Add an h2 and row inside the Movies section'
+        : 'Movies heading and row not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-movie-status="first-card"]'),
+    firstCardState,
+    firstCardState === 'success'
+      ? 'Movie card has an image and list'
+      : firstCardState === 'error'
+        ? 'The first card should include card-img-top and list-group'
+        : 'Movie card not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-movie-status="second-card"]'),
+    secondCardState,
+    secondCardState === 'success'
+      ? 'Quote card has a blockquote'
+      : secondCardState === 'error'
+        ? 'The second card should include a blockquote'
+        : 'Quote card not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-movie-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Movies section has both columns and closing tags'
+      : closeState === 'error'
+        ? 'Check the Movies section closing tags'
+        : 'Movies closing tags not done yet'
+  );
+}
+
+function updateMusicLessonStatus(status = null) {
+  const currentStatus = status || getMusicLessonStatus(htmlEditor?.getValue?.() || '');
+  const sectionState = currentStatus.sectionCorrect ? 'success' : currentStatus.sectionFound ? 'error' : 'pending';
+  const imageState = currentStatus.imageCorrect ? 'success' : currentStatus.imageFound ? 'error' : 'pending';
+  const textState = currentStatus.textCorrect ? 'success' : currentStatus.textFound ? 'error' : 'pending';
+  const accordionState = currentStatus.accordionCorrect ? 'success' : currentStatus.accordionFound ? 'error' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-music-status="section"]'),
+    sectionState,
+    sectionState === 'success'
+      ? 'Music section starts before the footer'
+      : sectionState === 'error'
+        ? 'Music section should use container, a bg-* class, and id="music" before the footer'
+        : 'Music section not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-music-status="image"]'),
+    imageState,
+    imageState === 'success'
+      ? 'Music image column is added'
+      : imageState === 'error'
+        ? 'Add the col-lg-4 image column with img-fluid and rounded-circle'
+        : 'Music image column not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-music-status="text"]'),
+    textState,
+    textState === 'success'
+      ? 'Music text column is added'
+      : textState === 'error'
+        ? 'Add the col-lg-8 text column with h2 and lead paragraph'
+        : 'Music text column not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-music-status="accordion"]'),
+    accordionState,
+    accordionState === 'success'
+      ? 'Music accordion has two items'
+      : accordionState === 'error'
+        ? 'Add an accordion with id musicAccordion and two accordion items'
+        : 'Music accordion not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-music-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Music section closing tags are present'
+      : closeState === 'error'
+        ? 'Check the Music section closing tags'
+        : 'Music closing tags not done yet'
+  );
+}
+
+function updateQuickFactsLessonStatus(status = null) {
+  const currentStatus = status || getQuickFactsLessonStatus(htmlEditor?.getValue?.() || '');
+  const sectionState = currentStatus.sectionCorrect ? 'success' : currentStatus.sectionFound ? 'error' : 'pending';
+  const headingState = currentStatus.headingCorrect ? 'success' : currentStatus.headingFound ? 'error' : 'pending';
+  const cardsState = currentStatus.cardsCorrect ? 'success' : currentStatus.cardsFound ? 'error' : 'pending';
+  const closeState = currentStatus.closeCorrect ? 'success' : currentStatus.closeFound ? 'error' : 'pending';
+
+  setStepStatus(
+    document.querySelector('[data-facts-status="section"]'),
+    sectionState,
+    sectionState === 'success'
+      ? 'Quick Facts section starts before the footer'
+      : sectionState === 'error'
+        ? 'Quick Facts section should use container and id="quickfacts" before the footer'
+        : 'Quick Facts section not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-facts-status="heading"]'),
+    headingState,
+    headingState === 'success'
+      ? 'Quick Facts heading and row are added'
+      : headingState === 'error'
+        ? 'Add an h2 and row inside the Quick Facts section'
+        : 'Quick Facts heading not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-facts-status="cards"]'),
+    cardsState,
+    cardsState === 'success'
+      ? 'Four Quick Facts cards are added'
+      : cardsState === 'error'
+        ? 'Add four col-md-3 cards with border-* styling and h-100'
+        : 'Quick Facts cards not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-facts-status="close"]'),
+    closeState,
+    closeState === 'success'
+      ? 'Quick Facts closing tags are present'
+      : closeState === 'error'
+        ? 'Check the Quick Facts section closing tags'
+        : 'Quick Facts closing tags not done yet'
+  );
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, '&amp;')
@@ -3887,6 +4480,11 @@ function updatePreview() {
     updateParagraphsLessonStatus(getParagraphsLessonStatus(''));
     updateNavbarLessonStatus(getNavbarLessonStatus(''));
     updateImagesLessonStatus(getImageLessonStatus(''));
+    updateLinksLessonStatus(getLinksLessonStatus(''));
+    updateMoviesLessonStatus(getMoviesLessonStatus(''));
+    updateMusicLessonStatus(getMusicLessonStatus(''));
+    updateQuickFactsLessonStatus(getQuickFactsLessonStatus(''));
+    updateProgressFromHtml('');
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--setup';
     errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
@@ -3904,6 +4502,11 @@ function updatePreview() {
     updateParagraphsLessonStatus();
     updateNavbarLessonStatus();
     updateImagesLessonStatus();
+    updateLinksLessonStatus();
+    updateMoviesLessonStatus();
+    updateMusicLessonStatus();
+    updateQuickFactsLessonStatus();
+    updateProgressFromHtml(htmlContent);
 
     if (errors.length > 0) {
       errorDiv.style.display = 'block';
@@ -3916,7 +4519,7 @@ function updatePreview() {
   }
   
   try {
-    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const blob = new Blob([resolveSimulatedAssets(htmlContent)], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     previewFrame.src = url;
     
@@ -4056,6 +4659,20 @@ function loadHtml2Canvas() {
   return html2canvasLoadPromise;
 }
 
+assetUploadBtn?.addEventListener('click', () => {
+  assetUploadInput?.click();
+});
+
+assetUploadInput?.addEventListener('change', async (event) => {
+  try {
+    await handleAssetUpload(event.target.files);
+  } catch (error) {
+    showNotification('Image upload failed', error.message || 'Try another image file.', 'warning');
+  } finally {
+    event.target.value = '';
+  }
+});
+
 clearBtn.addEventListener('click', () => {
   if (confirm('Clear all code from the editor?')) {
     htmlEditor.setValue('');
@@ -4146,6 +4763,7 @@ if (exportImageBtn) {
       
       // Get HTML content from editor
       const htmlContent = htmlEditor.getValue();
+      const renderHtmlContent = resolveSimulatedAssets(htmlContent);
       
       if (!htmlContent.trim()) {
         throw new Error('No HTML content to export. Please add some content in the editor.');
@@ -4168,7 +4786,7 @@ if (exportImageBtn) {
       tempIframe.style.left = '-9999px';
       tempIframe.style.width = '1200px';
       tempIframe.style.border = 'none';
-      tempIframe.srcdoc = htmlContent;
+      tempIframe.srcdoc = renderHtmlContent;
       
       document.body.appendChild(tempIframe);
       
@@ -4201,7 +4819,7 @@ if (exportImageBtn) {
       } catch (iframeError) {
         // Fallback: render HTML directly in a div
         console.log('Iframe capture failed, using fallback method:', iframeError);
-        tempContainer.innerHTML = htmlContent;
+        tempContainer.innerHTML = renderHtmlContent;
         document.body.appendChild(tempContainer);
         
         // Wait for images to load

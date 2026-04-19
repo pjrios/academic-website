@@ -1057,6 +1057,45 @@ kbd {
   color: var(--accent);
 }
 
+.editor-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.asset-shelf {
+  display: none;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.asset-shelf.asset-shelf--visible {
+  display: flex;
+}
+
+.asset-pill {
+  border: 1px solid var(--border-subtle);
+  background: rgba(15, 23, 42, 0.86);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.asset-pill:hover,
+.asset-pill:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .html-editor {
   flex: 1;
   background: rgba(15, 23, 42, 0.8);
