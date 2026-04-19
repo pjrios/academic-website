@@ -4749,12 +4749,24 @@ refreshBtn.addEventListener('click', () => {
 const toggleViewBtn = document.getElementById('toggleViewBtn');
 const practiceContainer = document.querySelector('.practice-container');
 let isFullPreview = false;
+let fullPreviewTransitionTimeout = null;
+
+function runFullPreviewTransition(isEntering) {
+  window.clearTimeout(fullPreviewTransitionTimeout);
+  document.body.classList.remove('full-preview-entering', 'full-preview-exiting');
+  document.body.classList.add('full-preview-transition', isEntering ? 'full-preview-entering' : 'full-preview-exiting');
+
+  fullPreviewTransitionTimeout = window.setTimeout(() => {
+    document.body.classList.remove('full-preview-transition', 'full-preview-entering', 'full-preview-exiting');
+  }, 280);
+}
 
 if (toggleViewBtn && practiceContainer) {
   toggleViewBtn.addEventListener('click', () => {
     isFullPreview = !isFullPreview;
     practiceContainer.classList.toggle('full-preview', isFullPreview);
     document.body.classList.toggle('full-preview-active', isFullPreview);
+    runFullPreviewTransition(isFullPreview);
     toggleViewBtn.textContent = isFullPreview ? 'Editor' : 'Full Page';
     toggleViewBtn.title = isFullPreview ? 'Show editor and preview' : 'Show full-page preview only';
     
