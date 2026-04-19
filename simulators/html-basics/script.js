@@ -1256,7 +1256,7 @@ const lessons = {
           <p><strong>Paste this below it:</strong></p>
           <div class="code-block">
             <code>&lt;div class="col-lg-4 text-center mb-4"&gt;
-  &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover"&gt;
+  &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover" style="width: 220px; height: 220px; object-fit: cover;"&gt;
   &lt;h3&gt;Artist or Podcast Name&lt;/h3&gt;
   &lt;p&gt;Genre or Category&lt;/p&gt;
 &lt;/div&gt;</code>
@@ -1332,7 +1332,7 @@ const lessons = {
             <div class="step-status step-status--pending" data-music-status="close" aria-label="Music closing tags not done yet" title="Not done yet">✓</div>
           </div>
           <p><strong>Find the accordion closing tag:</strong> <code>&lt;/div&gt;</code> from Step 4.</p>
-          <p><strong>Paste these lines below it:</strong></p>
+          <p><strong>Paste these three lines below it:</strong></p>
           <div class="code-block">
             <code>&lt;/div&gt;
   &lt;/div&gt;
@@ -1498,7 +1498,7 @@ const lessons = {
           <p><strong>Find your navbar brand line:</strong> it starts with <code>&lt;a class="navbar-brand"</code>.</p>
           <p><strong>Replace the brand text with this image:</strong></p>
           <div class="code-block">
-            <code>&lt;img src="assets/cat-example-main.jpg" alt="My site logo" height="40" class="rounded-circle"&gt;</code>
+            <code>&lt;img src="assets/cat-example-main.jpg" alt="My site logo" width="40" height="40" class="rounded-circle" style="object-fit: cover;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
@@ -2072,7 +2072,7 @@ const lessons = {
 &lt;/div&gt;
 
 &lt;a class="navbar-brand" href="#"&gt;
-  &lt;img src="assets/cat-example-main.jpg" alt="My site logo" height="40" class="rounded-circle"&gt;
+  &lt;img src="assets/cat-example-main.jpg" alt="My site logo" width="40" height="40" class="rounded-circle" style="object-fit: cover;"&gt;
 &lt;/a&gt;</code>
       </div>
       <p><strong>Why:</strong> Images make the page feel more personal, and they also give the navbar a clear visual brand. <code>img-fluid</code> keeps the biography image responsive, while <code>rounded-circle</code> creates a clean logo style in the navbar.</p>
@@ -2148,7 +2148,7 @@ const lessons = {
         <code>&lt;div class="container bg-light py-5 my-5" id="music"&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-lg-4 text-center mb-4"&gt;
-      &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover"&gt;
+      &lt;img src="assets/cat-example-main.jpg" class="img-fluid rounded-circle mb-3" alt="Album art or podcast cover" style="width: 220px; height: 220px; object-fit: cover;"&gt;
       &lt;h3&gt;Artist/Podcast Name&lt;/h3&gt;
       &lt;p class="text-muted"&gt;Genre or Category&lt;/p&gt;
     &lt;/div&gt;
@@ -2428,7 +2428,7 @@ function updateAvatarBuilderPreview(mount) {
 
   if (navSnippet) {
     navSnippet.textContent = `<a class="navbar-brand" href="#">
-  <img src="${avatarUrl}" alt="My site logo" height="40" class="rounded-circle">
+  <img src="${avatarUrl}" alt="My site logo" width="40" height="40" class="rounded-circle" style="object-fit: cover;">
 </a>`;
   }
 }
@@ -3402,6 +3402,11 @@ function tagHasStyleProperty(tag, propertyName) {
   return Boolean(styleMatch && propertyPattern.test(styleMatch[1]));
 }
 
+function tagHasAttribute(tag, attributeName) {
+  const attributePattern = new RegExp(`\\b${attributeName}\\s*=`, 'i');
+  return attributePattern.test(tag);
+}
+
 function tagHasHeroFlexCentering(tag) {
   return tagHasClasses(tag, ['d-flex', 'align-items-center', 'justify-content-center', 'flex-column']);
 }
@@ -3782,24 +3787,37 @@ function getMoviesLessonStatus(html) {
 function getMusicLessonStatus(html) {
   const { match, block, index } = getSectionBlock(html, 'music');
   const footerIndex = html.search(/<footer\b(?![^>]*\bblockquote-footer\b)/i);
-  const imageCorrect = /<div\b[^>]*class=["'][^"']*\bcol-lg-4\b[^"']*["'][^>]*>[\s\S]*?<img\b[^>]*class=["'][^"']*\bimg-fluid\b[^"']*\brounded-circle\b[^"']*["'][^>]*>/i.test(block);
+  const musicImageMatch = /<div\b[^>]*class=["'][^"']*\bcol-lg-4\b[^"']*["'][^>]*>[\s\S]*?(<img\b[^>]*>)/i.exec(block);
+  const musicImageTag = musicImageMatch?.[1] || '';
+  const imageHasSquareCrop = (tagHasStyleProperty(musicImageTag, 'width') || tagHasAttribute(musicImageTag, 'width')) &&
+    (tagHasStyleProperty(musicImageTag, 'height') || tagHasAttribute(musicImageTag, 'height')) &&
+    (tagHasStyleProperty(musicImageTag, 'object-fit') || tagHasClass(musicImageTag, 'object-fit-cover'));
+  const imageCorrect = Boolean(
+    musicImageTag &&
+    tagHasClass(musicImageTag, 'img-fluid') &&
+    tagHasClass(musicImageTag, 'rounded-circle') &&
+    imageHasSquareCrop
+  );
   const textCorrect = /<div\b[^>]*class=["'][^"']*\bcol-lg-8\b[^"']*["'][^>]*>[\s\S]*?<h2\b[^>]*>[\s\S]*?<\/h2>[\s\S]*?<p\b[^>]*class=["'][^"']*\blead\b[^"']*["'][^>]*>/i.test(block);
   const accordionItems = Array.from(block.matchAll(/<div\b[^>]*class=["'][^"']*\baccordion-item\b[^"']*["'][^>]*>/gi));
   const accordionCorrect = /<div\b[^>]*class=["'][^"']*\baccordion\b[^"']*["'][^>]*id=["']musicAccordion["'][^>]*>/i.test(block) &&
     accordionItems.length >= 2 &&
     /data-bs-toggle=["']collapse["']/i.test(block);
+  const musicDivOpenCount = (block.match(/<div\b/gi) || []).length;
+  const musicDivCloseCount = (block.match(/<\/div>/gi) || []).length;
+  const musicDivsBalanced = musicDivOpenCount > 0 && musicDivOpenCount === musicDivCloseCount;
 
   return {
     sectionFound: Boolean(match),
     sectionCorrect: Boolean(match && tagHasClass(match[0], 'container') && tagHasClassPrefix(match[0], 'bg-') && (footerIndex === -1 || index < footerIndex)),
-    imageFound: /<img\b/i.test(block),
+    imageFound: Boolean(musicImageTag),
     imageCorrect,
     textFound: /<h2\b/i.test(block) || /class=["'][^"']*\blead\b/i.test(block),
     textCorrect,
     accordionFound: /accordion/i.test(block),
     accordionCorrect,
-    closeFound: Boolean(match && /<\/div>\s*$/i.test(block.trim())),
-    closeCorrect: Boolean(match && imageCorrect && textCorrect && accordionCorrect)
+    closeFound: musicDivCloseCount > 0,
+    closeCorrect: Boolean(match && imageCorrect && textCorrect && accordionCorrect && musicDivsBalanced)
   };
 }
 
@@ -4477,7 +4495,7 @@ function updateMusicLessonStatus(status = null) {
     imageState === 'success'
       ? 'Music image column is added'
       : imageState === 'error'
-        ? 'Add the col-lg-4 image column with img-fluid and rounded-circle'
+        ? 'Add the col-lg-4 image column with img-fluid, rounded-circle, matching width/height, and object-fit: cover'
         : 'Music image column not done yet'
   );
 
@@ -4507,7 +4525,7 @@ function updateMusicLessonStatus(status = null) {
     closeState === 'success'
       ? 'Music section closing tags are present'
       : closeState === 'error'
-        ? 'Check the Music section closing tags'
+        ? 'Close the col-lg-8, row, and music container before the footer'
         : 'Music closing tags not done yet'
   );
 }
