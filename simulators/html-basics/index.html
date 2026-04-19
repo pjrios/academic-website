@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="vendor/codemirror/codemirror.min.css" />
   <link rel="stylesheet" href="vendor/codemirror/theme/monokai.min.css" />
+  <link rel="stylesheet" href="vendor/codemirror/addon/fold/foldgutter.min.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -110,6 +111,7 @@
             <h2>HTML Editor</h2>
             <div class="editor-actions">
               <button id="assetUploadBtn" class="btn-ghost btn-small" type="button">Upload Image</button>
+              <button id="formatCodeBtn" class="btn-ghost btn-small" type="button">Format Code</button>
               <button id="clearBtn" class="btn-ghost btn-small">Clear</button>
             </div>
           </div>
@@ -142,10 +144,16 @@
   </div>
 
   <script src="vendor/codemirror/codemirror.min.js"></script>
+  <script src="vendor/codemirror/addon/fold/foldcode.min.js"></script>
+  <script src="vendor/codemirror/addon/fold/foldgutter.min.js"></script>
+  <script src="vendor/codemirror/addon/fold/xml-fold.min.js"></script>
   <script src="vendor/codemirror/mode/xml/xml.min.js"></script>
   <script src="vendor/codemirror/mode/javascript/javascript.min.js"></script>
   <script src="vendor/codemirror/mode/css/css.min.js"></script>
   <script src="vendor/codemirror/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="vendor/js-beautify/beautify.min.js"></script>
+  <script src="vendor/js-beautify/beautify-css.min.js"></script>
+  <script src="vendor/js-beautify/beautify-html.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

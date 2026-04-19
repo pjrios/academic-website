@@ -2979,6 +2979,7 @@ const htmlEditorElement = document.getElementById('htmlEditor');
 const previewFrame = document.getElementById('previewFrame');
 const refreshBtn = document.getElementById('refreshBtn');
 const clearBtn = document.getElementById('clearBtn');
+const formatCodeBtn = document.getElementById('formatCodeBtn');
 const assetUploadBtn = document.getElementById('assetUploadBtn');
 const assetUploadInput = document.getElementById('assetUploadInput');
 const assetShelf = document.getElementById('assetShelf');
@@ -3169,6 +3170,7 @@ loadSimulatedAssets();
 renderAssetShelf();
 
 if (typeof CodeMirror !== 'undefined') {
+  const foldGutterAvailable = Boolean(CodeMirror.fold && CodeMirror.fold.auto);
   const codeMirrorEditor = CodeMirror.fromTextArea(htmlEditorElement, {
     mode: 'htmlmixed',
     theme: 'monokai',
@@ -3176,7 +3178,11 @@ if (typeof CodeMirror !== 'undefined') {
     lineWrapping: true,
     indentUnit: 2,
     tabSize: 2,
-    indentWithTabs: false
+    indentWithTabs: false,
+    foldGutter: foldGutterAvailable,
+    gutters: foldGutterAvailable
+      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      : ['CodeMirror-linenumbers']
   });
   const codeMirrorWrapper = codeMirrorEditor.getWrapperElement();
   codeMirrorWrapper.setAttribute('data-placeholder', htmlEditorElement.getAttribute('placeholder') || '');
@@ -4850,6 +4856,23 @@ function loadHtml2Canvas() {
   return html2canvasLoadPromise;
 }
 
+function formatHtmlContent(content) {
+  if (typeof html_beautify !== 'function') {
+    throw new Error('The local HTML formatter did not load.');
+  }
+
+  return html_beautify(content, {
+    indent_size: 2,
+    indent_char: ' ',
+    indent_with_tabs: false,
+    wrap_line_length: 0,
+    preserve_newlines: true,
+    max_preserve_newlines: 1,
+    end_with_newline: true,
+    extra_liners: []
+  });
+}
+
 assetUploadBtn?.addEventListener('click', () => {
   assetUploadInput?.click();
 });
@@ -4861,6 +4884,35 @@ assetUploadInput?.addEventListener('change', async (event) => {
     showNotification('Image upload failed', error.message || 'Try another image file.', 'warning');
   } finally {
     event.target.value = '';
+  }
+});
+
+formatCodeBtn?.addEventListener('click', async () => {
+  const currentContent = htmlEditor.getValue();
+
+  if (!currentContent.trim()) {
+    showNotification('Nothing to format', 'Add or paste HTML code first.', 'info');
+    htmlEditor.focus();
+    return;
+  }
+
+  try {
+    const formattedContent = formatHtmlContent(currentContent);
+
+    htmlEditor.setValue(formattedContent);
+    updatePreview();
+    window.clearTimeout(saveTimeout);
+    await saveContent(formattedContent);
+    refreshHtmlEditor();
+    htmlEditor.focus();
+
+    showNotification(
+      'Code formatted',
+      formattedContent === currentContent ? 'The code was already neatly aligned.' : 'Indentation and tag spacing are cleaned up.',
+      'success'
+    );
+  } catch (error) {
+    showNotification('Format failed', error.message || 'Check the HTML and try again.', 'warning');
   }
 });
 

@@ -1205,6 +1205,28 @@ kbd {
   color: var(--text-muted);
 }
 
+.practice-editor .CodeMirror-foldgutter {
+  width: 18px;
+}
+
+.practice-editor .CodeMirror-foldgutter-open,
+.practice-editor .CodeMirror-foldgutter-folded {
+  color: var(--accent);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.practice-editor .CodeMirror-foldmarker {
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 6px;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0 5px;
+  text-shadow: none;
+}
+
 .practice-editor .CodeMirror-cursor {
   border-left-color: var(--accent);
 }
