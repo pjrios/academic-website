@@ -1169,10 +1169,11 @@ const lessons = {
             <code>&lt;li class="nav-item"&gt;&lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
 &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
 &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#movies"&gt;Movies&lt;/a&gt;&lt;/li&gt;
-&lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#music"&gt;Music&lt;/a&gt;&lt;/li&gt;</code>
+&lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#music"&gt;Music&lt;/a&gt;&lt;/li&gt;
+&lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#quickfacts"&gt;Quick Facts&lt;/a&gt;&lt;/li&gt;</code>
           </div>
         </div>
-        <p><strong>Note:</strong> The About link works now. Movies and Music will work after those sections are added.</p>
+        <p><strong>Note:</strong> The About link works now. Movies, Music, and Quick Facts will work after those sections are added.</p>
       </section>
 
       <div class="step-arrow" aria-hidden="true">↓</div>
@@ -1185,7 +1186,7 @@ const lessons = {
             <div class="micro-step-label">6</div>
             <div class="step-status step-status--pending" data-navbar-status="close" aria-label="Navbar closing tags not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find the last link line:</strong> it says <code>Music&lt;/a&gt;&lt;/li&gt;</code>.</p>
+          <p><strong>Find the last link line:</strong> it says <code>Quick Facts&lt;/a&gt;&lt;/li&gt;</code>.</p>
           <p><strong>Paste these closing tags below it:</strong></p>
           <div class="code-block">
             <code>&lt;/ul&gt;
@@ -2057,6 +2058,9 @@ const lessons = {
         &lt;/li&gt;
         &lt;li class="nav-item"&gt;
           &lt;a class="nav-link" href="#music"&gt;Music&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#quickfacts"&gt;Quick Facts&lt;/a&gt;
         &lt;/li&gt;
       &lt;/ul&gt;
     &lt;/div&gt;
@@ -3682,7 +3686,7 @@ function getNavbarLessonStatus(html) {
   const linkHrefs = linkMatches
     .filter(match => listIndex === -1 || match.index > listIndex)
     .map(match => match[1]);
-  const hasRequiredLinks = ['#', '#about', '#movies', '#music'].every(href => linkHrefs.includes(href));
+  const hasRequiredLinks = ['#', '#about', '#movies', '#music', '#quickfacts'].every(href => linkHrefs.includes(href));
 
   return {
     startFound: navMatches.length > 0,
@@ -4333,7 +4337,7 @@ function updateNavbarLessonStatus(status = null) {
     linksState === 'success'
       ? 'Navbar links are added'
       : linksState === 'error'
-        ? 'Add Home, About, Movies, and Music links inside the navbar list'
+        ? 'Add Home, About, Movies, Music, and Quick Facts links inside the navbar list'
         : 'Navbar links not done yet'
   );
 
