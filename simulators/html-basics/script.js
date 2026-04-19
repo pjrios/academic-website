@@ -1356,6 +1356,8 @@ const lessons = {
         <div><strong>img-fluid</strong><span>Makes the image fit its container.</span></div>
         <div><strong>rounded</strong><span>Adds rounded corners.</span></div>
         <div><strong>rounded-circle</strong><span>Makes a small logo image circular.</span></div>
+        <div><strong>col-md-4</strong><span>Makes the image column.</span></div>
+        <div><strong>col-md-8</strong><span>Makes the text column.</span></div>
       </div>
 
       <section class="student-step">
@@ -1371,20 +1373,18 @@ const lessons = {
 
       <section class="student-step">
         <div class="step-label">Step 1</div>
-        <h3>Add an Image to the Biography Card</h3>
+        <h3>Start Two Columns in the Biography Card</h3>
         <div class="micro-step">
           <div class="micro-step-header">
             <div class="micro-step-label">1</div>
-            <div class="step-status step-status--pending" data-image-status="bio-image" aria-label="Biography image not done yet" title="Not done yet">✓</div>
+            <div class="step-status step-status--pending" data-image-status="bio-layout" aria-label="Biography two-column layout not done yet" title="Not done yet">✓</div>
           </div>
           <p><strong>Find this line inside your biography card:</strong> <code>&lt;div class="card-body"&gt;</code></p>
-          <p><strong>Paste this line below it:</strong></p>
+          <p><strong>Paste these lines below it:</strong></p>
           <div class="code-block">
-            <code>&lt;img src="assets/cat-example-main.jpg" alt="A profile image that represents me" class="img-fluid rounded mb-3" style="max-width: 220px;"&gt;</code>
+            <code>&lt;div class="row align-items-center"&gt;
+  &lt;div class="col-md-4 text-center"&gt;</code>
           </div>
-        </div>
-        <div class="step-check">
-          <strong>Check it:</strong> Click <strong>Refresh</strong>. The image should appear above your biography heading.
         </div>
       </section>
 
@@ -1392,10 +1392,63 @@ const lessons = {
 
       <section class="student-step">
         <div class="step-label">Step 2</div>
-        <h3>Check the Image Description</h3>
+        <h3>Add an Image to the Left Column</h3>
         <div class="micro-step">
           <div class="micro-step-header">
             <div class="micro-step-label">2</div>
+            <div class="step-status step-status--pending" data-image-status="bio-image" aria-label="Biography image not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find this line:</strong> <code>&lt;div class="col-md-4 text-center"&gt;</code></p>
+          <p><strong>Paste this line below it:</strong></p>
+          <div class="code-block">
+            <code>&lt;img src="assets/cat-example-main.jpg" alt="A profile image that represents me" class="img-fluid rounded mb-3" style="max-width: 220px;"&gt;</code>
+          </div>
+        </div>
+        <div class="step-check">
+          <strong>Check it:</strong> Click <strong>Refresh</strong>. The image should appear on the left side of your biography card on wide screens.
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 3</div>
+        <h3>Put the Text in the Right Column</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3A</div>
+            <div class="step-status step-status--pending" data-image-status="bio-text-column" aria-label="Biography text column not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your image line:</strong> it starts with <code>&lt;img</code>.</p>
+          <p><strong>Paste these lines below it:</strong></p>
+          <div class="code-block">
+            <code>  &lt;/div&gt;
+  &lt;div class="col-md-8"&gt;</code>
+          </div>
+        </div>
+
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">3B</div>
+            <div class="step-status step-status--pending" data-image-status="bio-row-close" aria-label="Biography row closing tags not done yet" title="Not done yet">✓</div>
+          </div>
+          <p><strong>Find your second biography paragraph:</strong> it starts with <code>&lt;p class="card-text"&gt;</code>.</p>
+          <p><strong>Paste these lines below it:</strong></p>
+          <div class="code-block">
+            <code>  &lt;/div&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="student-step">
+        <div class="step-label">Step 4</div>
+        <h3>Check the Image Description</h3>
+        <div class="micro-step">
+          <div class="micro-step-header">
+            <div class="micro-step-label">4</div>
             <div class="step-status step-status--pending" data-image-status="bio-alt" aria-label="Biography image description not done yet" title="Not done yet">✓</div>
           </div>
           <p><strong>Find your biography image line:</strong> it starts with <code>&lt;img</code>.</p>
@@ -1410,11 +1463,11 @@ const lessons = {
       <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
-        <div class="step-label">Step 3</div>
+        <div class="step-label">Step 5</div>
         <h3>Keep the Biography Image Responsive</h3>
         <div class="micro-step">
           <div class="micro-step-header">
-            <div class="micro-step-label">3</div>
+            <div class="micro-step-label">5</div>
             <div class="step-status step-status--pending" data-image-status="bio-style" aria-label="Biography image style not done yet" title="Not done yet">✓</div>
           </div>
           <p><strong>Find your biography image line.</strong></p>
@@ -1435,11 +1488,11 @@ const lessons = {
       <div class="step-arrow" aria-hidden="true">↓</div>
 
       <section class="student-step">
-        <div class="step-label">Step 4</div>
+        <div class="step-label">Step 6</div>
         <h3>Add an Image to the Navbar Brand</h3>
         <div class="micro-step">
           <div class="micro-step-header">
-            <div class="micro-step-label">4</div>
+            <div class="micro-step-label">6</div>
             <div class="step-status step-status--pending" data-image-status="nav-image" aria-label="Navbar image not done yet" title="Not done yet">✓</div>
           </div>
           <p><strong>Find your navbar brand line:</strong> it starts with <code>&lt;a class="navbar-brand"</code>.</p>
@@ -1456,7 +1509,8 @@ const lessons = {
       <div class="mini-checklist">
         <h3>Before You Continue</h3>
         <ul>
-          <li>Your biography card has an <code>&lt;img&gt;</code> above the biography heading.</li>
+          <li>Your biography card has an image column and a text column.</li>
+          <li>Your biography card uses <code>row</code>, <code>col-md-4</code>, and <code>col-md-8</code>.</li>
           <li>The biography image has <code>src</code>, <code>alt</code>, and <code>img-fluid</code>.</li>
           <li>The biography image has spacing such as <code>mb-3</code>.</li>
           <li>Your navbar brand has a small image.</li>
@@ -3580,8 +3634,13 @@ function getImageLessonStatus(html) {
   const aboutSectionMatch = /<div\b[^>]*(?:class=["'][^"']*\bcontainer\b[^"']*["'][^>]*id=["']about["']|id=["']about["'][^>]*class=["'][^"']*\bcontainer\b[^"']*["'])[^>]*>/i.exec(html);
   const cardBodyMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcard-body\b[^"']*["'][^>]*>/gi));
   const titleMatches = Array.from(html.matchAll(/<h2\b[^>]*class=["'][^"']*\bcard-title\b[^"']*["'][^>]*>[\s\S]*?<\/h2>/gi));
+  const textMatches = Array.from(html.matchAll(/<p\b[^>]*class=["'][^"']*\bcard-text\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi));
   const imageMatches = Array.from(html.matchAll(/<img\b[^>]*>/gi));
   const brandMatches = Array.from(html.matchAll(/<a\b[^>]*class=["'][^"']*\bnavbar-brand\b[^"']*["'][^>]*>[\s\S]*?<\/a>/gi));
+  const rowMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\brow\b[^"']*["'][^>]*>/gi));
+  const imageColumnMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-4\b[^"']*["'][^>]*>/gi));
+  const textColumnMatches = Array.from(html.matchAll(/<div\b[^>]*class=["'][^"']*\bcol-md-8\b[^"']*["'][^>]*>/gi));
+  const closeMatches = Array.from(html.matchAll(/<\/div>/gi));
 
   const aboutIndex = aboutSectionMatch?.index ?? -1;
   const bodyAfterAbout = aboutIndex !== -1
@@ -3595,6 +3654,25 @@ function getImageLessonStatus(html) {
   const bioImage = bodyIndex !== -1
     ? imageMatches.find(match => match.index > bodyIndex && (titleIndex === -1 || match.index < titleIndex))
     : imageMatches.find(match => tagHasClass(match[0], 'img-fluid'));
+  const rowAfterBody = bodyIndex !== -1
+    ? rowMatches.find(match => match.index > bodyIndex)
+    : rowMatches[0];
+  const rowIndex = rowAfterBody?.index ?? -1;
+  const imageColumn = rowIndex !== -1
+    ? imageColumnMatches.find(match => match.index > rowIndex && tagHasClass(match[0], 'text-center'))
+    : imageColumnMatches.find(match => tagHasClass(match[0], 'text-center'));
+  const imageColumnIndex = imageColumn?.index ?? -1;
+  const textColumn = bioImage
+    ? textColumnMatches.find(match => match.index > bioImage.index && (titleIndex === -1 || match.index < titleIndex))
+    : textColumnMatches[0];
+  const textColumnIndex = textColumn?.index ?? -1;
+  const textParagraphsAfterTitle = titleIndex !== -1
+    ? textMatches.filter(match => match.index > titleIndex)
+    : textMatches;
+  const lastBiographyParagraph = textParagraphsAfterTitle[textParagraphsAfterTitle.length - 1];
+  const closesAfterLastParagraph = lastBiographyParagraph
+    ? closeMatches.filter(match => match.index > lastBiographyParagraph.index + lastBiographyParagraph[0].length)
+    : [];
   const bioImageAnyPosition = bodyIndex !== -1
     ? imageMatches.find(match => match.index > bodyIndex && tagHasClass(match[0], 'img-fluid')) ||
       imageMatches.find(match => match.index > bodyIndex)
@@ -3613,7 +3691,13 @@ function getImageLessonStatus(html) {
 
   return {
     bioImageFound: imageMatches.some(match => tagHasClass(match[0], 'img-fluid')),
-    bioImageCorrect: Boolean(bioImage && bodyAfterAbout),
+    bioLayoutFound: Boolean(rowAfterBody || imageColumn || textColumn),
+    bioLayoutCorrect: Boolean(rowAfterBody && imageColumn && bodyAfterAbout && rowIndex > bodyIndex && imageColumnIndex > rowIndex),
+    bioImageCorrect: Boolean(bioImage && imageColumn && bioImage.index > imageColumnIndex),
+    bioTextColumnFound: Boolean(textColumn),
+    bioTextColumnCorrect: Boolean(textColumn && bioImage && titleAfterBody && textColumnIndex > bioImage.index && textColumnIndex < titleIndex),
+    bioRowCloseFound: closesAfterLastParagraph.length > 0,
+    bioRowCloseCorrect: Boolean(textColumn && textParagraphsAfterTitle.length >= 2 && closesAfterLastParagraph.length >= 7),
     bioAltFound: imageMatches.some(match => /\balt\s*=\s*["'][^"']+["']/i.test(match[0])),
     bioAltCorrect: Boolean(bioImageAnyPosition && hasAlt),
     bioStyleFound: imageMatches.some(match => tagHasClass(match[0], 'img-fluid') || tagHasClass(match[0], 'rounded') || tagHasClass(match[0], 'rounded-circle') || tagHasClass(match[0], 'img-thumbnail')),
@@ -4183,19 +4267,52 @@ function updateNavbarLessonStatus(status = null) {
 
 function updateImagesLessonStatus(status = null) {
   const currentStatus = status || getImageLessonStatus(htmlEditor?.getValue?.() || '');
+  const bioLayoutState = currentStatus.bioLayoutCorrect ? 'success' : currentStatus.bioLayoutFound ? 'error' : 'pending';
   const bioImageState = currentStatus.bioImageCorrect ? 'success' : currentStatus.bioImageFound ? 'error' : 'pending';
+  const bioTextColumnState = currentStatus.bioTextColumnCorrect ? 'success' : currentStatus.bioTextColumnFound ? 'error' : 'pending';
+  const bioRowCloseState = currentStatus.bioRowCloseCorrect ? 'success' : currentStatus.bioRowCloseFound ? 'error' : 'pending';
   const bioAltState = currentStatus.bioAltCorrect ? 'success' : currentStatus.bioAltFound ? 'error' : 'pending';
   const bioStyleState = currentStatus.bioStyleCorrect ? 'success' : currentStatus.bioStyleFound ? 'error' : 'pending';
   const navImageState = currentStatus.navImageCorrect ? 'success' : currentStatus.navImageFound ? 'error' : 'pending';
 
   setStepStatus(
+    document.querySelector('[data-image-status="bio-layout"]'),
+    bioLayoutState,
+    bioLayoutState === 'success'
+      ? 'Biography two-column row and image column are added'
+      : bioLayoutState === 'error'
+        ? 'Add row align-items-center and col-md-4 text-center inside the biography card body'
+        : 'Biography two-column layout not done yet'
+  );
+
+  setStepStatus(
     document.querySelector('[data-image-status="bio-image"]'),
     bioImageState,
     bioImageState === 'success'
-      ? 'Biography image is above the biography heading'
+      ? 'Biography image is in the left column'
       : bioImageState === 'error'
-        ? 'Biography image was added, but it should go inside the biography card body above the heading'
+        ? 'Biography image should go inside the col-md-4 text-center column'
         : 'Biography image not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-image-status="bio-text-column"]'),
+    bioTextColumnState,
+    bioTextColumnState === 'success'
+      ? 'Biography text column starts before the heading'
+      : bioTextColumnState === 'error'
+        ? 'Add the col-md-8 text column below the image and before the About Me heading'
+        : 'Biography text column not done yet'
+  );
+
+  setStepStatus(
+    document.querySelector('[data-image-status="bio-row-close"]'),
+    bioRowCloseState,
+    bioRowCloseState === 'success'
+      ? 'Biography two-column row is closed after the paragraphs'
+      : bioRowCloseState === 'error'
+        ? 'Add the closing tags for the text column and row after the biography paragraphs'
+        : 'Biography row closing tags not done yet'
   );
 
   setStepStatus(
