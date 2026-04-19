@@ -3071,6 +3071,68 @@ function resolveSimulatedAssets(html) {
   });
 }
 
+function isSvgDataUrl(dataUrl) {
+  return /^data:image\/svg\+xml/i.test(dataUrl || '');
+}
+
+function rasterizeSvgDataUrl(dataUrl) {
+  return new Promise((resolve) => {
+    const image = new Image();
+    image.onload = () => {
+      const width = image.naturalWidth || image.width || 512;
+      const height = image.naturalHeight || image.height || 512;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      canvas.width = width;
+      canvas.height = height;
+
+      if (!context) {
+        resolve(dataUrl);
+        return;
+      }
+
+      context.drawImage(image, 0, 0, width, height);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    image.onerror = () => resolve(dataUrl);
+    image.src = dataUrl;
+  });
+}
+
+async function resolveSimulatedAssetsForImageExport(html) {
+  const assetEntries = await Promise.all(simulatedAssets.map(async (asset) => {
+    const dataUrl = isSvgDataUrl(asset.dataUrl)
+      ? await rasterizeSvgDataUrl(asset.dataUrl)
+      : asset.dataUrl;
+
+    return [asset.path, dataUrl];
+  }));
+  const assetMap = new Map(assetEntries);
+
+  return html.replace(/\bsrc=(["'])(assets\/[^"']+)\1/gi, (match, quote, path) => {
+    const dataUrl = assetMap.get(path);
+    const resolvedPath = dataUrl || new URL(path, window.location.href).href;
+    return `src=${quote}${resolvedPath}${quote}`;
+  });
+}
+
+async function waitForRenderedImages(root) {
+  const images = Array.from(root.querySelectorAll('img'));
+
+  await Promise.all(images.map(image => {
+    if (image.complete && image.naturalWidth > 0) {
+      return Promise.resolve();
+    }
+
+    return new Promise(resolve => {
+      image.addEventListener('load', resolve, { once: true });
+      image.addEventListener('error', resolve, { once: true });
+      setTimeout(resolve, 1500);
+    });
+  }));
+}
+
 async function handleAssetUpload(files) {
   const imageFiles = Array.from(files || []).filter(file => file.type.startsWith('image/'));
 
@@ -4884,11 +4946,12 @@ if (exportImageBtn) {
       
       // Get HTML content from editor
       const htmlContent = htmlEditor.getValue();
-      const renderHtmlContent = resolveSimulatedAssets(htmlContent);
       
       if (!htmlContent.trim()) {
         throw new Error('No HTML content to export. Please add some content in the editor.');
       }
+
+      const renderHtmlContent = await resolveSimulatedAssetsForImageExport(htmlContent);
       
       // Create a temporary container with the HTML content
       // This approach is more reliable than trying to capture the iframe
@@ -4925,6 +4988,11 @@ if (exportImageBtn) {
         const iframeBody = iframeDoc.body || iframeDoc.documentElement;
         
         if (iframeBody) {
+          await waitForRenderedImages(iframeDoc);
+          if (iframeDoc.fonts?.ready) {
+            await iframeDoc.fonts.ready.catch(() => {});
+          }
+
           canvas = await capturePage(iframeBody, {
             backgroundColor: '#ffffff',
             scale: 1.5,
@@ -4943,8 +5011,7 @@ if (exportImageBtn) {
         tempContainer.innerHTML = renderHtmlContent;
         document.body.appendChild(tempContainer);
         
-        // Wait for images to load
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await waitForRenderedImages(tempContainer);
         
         canvas = await capturePage(tempContainer, {
           backgroundColor: '#ffffff',
