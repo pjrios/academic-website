@@ -373,8 +373,7 @@ const lessons = {
         <div><strong>text-white</strong><span>Makes text white.</span></div>
         <div><strong>text-center</strong><span>Centers the text.</span></div>
         <div><strong>d-flex</strong><span>Lets Bootstrap center the hero content as a group.</span></div>
-        <div><strong>py-5</strong><span>Adds space above and below the hero text.</span></div>
-        <div><strong>mt-5</strong><span>Adds space above the hero. You can try <code>mt-1</code> to <code>mt-5</code>.</span></div>
+        <div><strong>m-3</strong><span>Adds space around the hero. You can try <code>m-1</code> to <code>m-5</code>.</span></div>
         <div><strong>min-height</strong><span>Sets the actual height of the hero box.</span></div>
       </div>
 
@@ -391,7 +390,7 @@ const lessons = {
           <p><strong>Find this line:</strong> <code>&lt;div class="container"&gt;</code></p>
           <p><strong>Paste this line below it:</strong></p>
           <div class="code-block">
-            <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"&gt;</code>
+            <code>&lt;div class="bg-primary text-white text-center m-3"&gt;</code>
           </div>
         </div>
 
@@ -426,14 +425,14 @@ const lessons = {
             <div class="micro-step-label">2</div>
             <div class="step-status step-status--pending" data-heading-status="height" aria-label="Hero height not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"&gt;</code>.</p>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center m-3"&gt;</code>.</p>
           <p><strong>Add this before the closing <code>&gt;</code>:</strong></p>
           <div class="code-block">
             <code>style="min-height: 300px;"</code>
           </div>
           <p><strong>It should look like this:</strong></p>
           <div class="code-block">
-            <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5" style="min-height: 300px;"&gt;</code>
+            <code>&lt;div class="bg-primary text-white text-center m-3" style="min-height: 300px;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
@@ -454,14 +453,14 @@ const lessons = {
             <div class="micro-step-label">3</div>
             <div class="step-status step-status--pending" data-heading-status="center" aria-label="Hero content centering not done yet" title="Not done yet">✓</div>
           </div>
-          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"</code>.</p>
+          <p><strong>Find your hero opening tag:</strong> it starts with <code>&lt;div class="bg-primary text-white text-center m-3"</code>.</p>
           <p><strong>Add these classes inside the quotes:</strong></p>
           <div class="code-block">
             <code>d-flex align-items-center justify-content-center flex-column</code>
           </div>
           <p><strong>It should look like this:</strong></p>
           <div class="code-block">
-            <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5 d-flex align-items-center justify-content-center flex-column" style="min-height: 300px;"&gt;</code>
+            <code>&lt;div class="bg-primary text-white text-center m-3 d-flex align-items-center justify-content-center flex-column" style="min-height: 300px;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
@@ -1883,7 +1882,7 @@ const lessons = {
       <h2>📋 Step 4: Create the Hero Section</h2>
       <p><strong>What to do:</strong> Replace the simple heading and paragraph inside your container with a hero section that introduces your website.</p>
       <div class="code-block">
-        <code>&lt;div class="bg-primary text-white text-center py-5 mt-5 mb-5"&gt;
+        <code>&lt;div class="bg-primary text-white text-center m-3"&gt;
   &lt;div class="container"&gt;
     &lt;h1 class="display-3"&gt;Welcome to My Website&lt;/h1&gt;
     &lt;p class="lead"&gt;Learn about me, my interests, and what I love!&lt;/p&gt;
@@ -3407,7 +3406,7 @@ function getHeadingLessonStatus(html) {
 
   return {
     heroOpenFound: heroOpenMatches.length > 0,
-    heroOpenCorrect: Boolean(heroOpen && containerBeforeHero && tagHasClassPattern(heroOpen[0], /^mt-[0-5]$/)),
+    heroOpenCorrect: Boolean(heroOpen && containerBeforeHero && tagHasClassPattern(heroOpen[0], /^m[xysebt]?-[0-5]$/)),
     heroCloseFound: closesAfterParagraph.length > 1,
     heroCloseCorrect: Boolean(heroOpen && closesAfterParagraph.length > 1),
     heightFound: Array.from(html.matchAll(/<div\b[^>]*style=["'][^"']*min-height\s*:[^"']*["'][^>]*>/gi)).length > 0,
@@ -3795,7 +3794,7 @@ function updateHeadingLessonStatus(status = null) {
     heroOpenState === 'success'
       ? 'Hero box opening tag is in the correct place'
       : heroOpenState === 'error'
-        ? 'Hero box opening tag should go below the container line and include mt-* spacing'
+        ? 'Hero box opening tag should go below the container line and include m-* spacing'
         : 'Hero box opening tag not done yet'
   );
 
