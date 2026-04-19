@@ -985,6 +985,37 @@ kbd {
   font-weight: 600;
 }
 
+.avatar-builder__field input.input-field[type="color"] {
+  width: 100%;
+  min-height: 46px;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(15, 23, 42, 0.92);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.avatar-builder__field input.input-field[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.avatar-builder__field input.input-field[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: 6px;
+}
+
+.avatar-builder__field input.input-field[type="color"]::-moz-color-swatch {
+  border: 0;
+  border-radius: 6px;
+}
+
+.avatar-builder__field input.input-field[type="color"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.16);
+}
+
 .avatar-builder__field select.input-field {
   min-height: 46px;
   padding: 0 42px 0 14px;
@@ -1012,11 +1043,6 @@ kbd {
   flex-wrap: wrap;
   gap: 12px;
   margin: 18px 0;
-}
-
-.avatar-builder__color {
-  min-height: 48px;
-  padding: 6px;
 }
 
 /* Practice Builder Tab */

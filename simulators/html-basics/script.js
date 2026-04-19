@@ -1380,7 +1380,7 @@ const lessons = {
           <p><strong>Find this line inside your biography card:</strong> <code>&lt;div class="card-body"&gt;</code></p>
           <p><strong>Paste this line below it:</strong></p>
           <div class="code-block">
-            <code>&lt;img src="assets/cat-example-main.jpg" alt="A profile image that represents me" class="img-fluid rounded mb-3"&gt;</code>
+            <code>&lt;img src="assets/cat-example-main.jpg" alt="A profile image that represents me" class="img-fluid rounded mb-3" style="max-width: 220px;"&gt;</code>
           </div>
         </div>
         <div class="step-check">
@@ -1421,6 +1421,10 @@ const lessons = {
           <p><strong>Make sure the class includes:</strong></p>
           <div class="code-block">
             <code>img-fluid rounded mb-3</code>
+          </div>
+          <p><strong>Make sure the image line also includes:</strong></p>
+          <div class="code-block">
+            <code>style="max-width: 220px;"</code>
           </div>
         </div>
         <div class="next-lesson-note">
@@ -3594,20 +3598,29 @@ function getImageLessonStatus(html) {
   const bioImage = bodyIndex !== -1
     ? imageMatches.find(match => match.index > bodyIndex && (titleIndex === -1 || match.index < titleIndex))
     : imageMatches.find(match => tagHasClass(match[0], 'img-fluid'));
+  const bioImageAnyPosition = bodyIndex !== -1
+    ? imageMatches.find(match => match.index > bodyIndex && tagHasClass(match[0], 'img-fluid')) ||
+      imageMatches.find(match => match.index > bodyIndex)
+    : imageMatches.find(match => tagHasClass(match[0], 'img-fluid'));
   const brandWithImage = brandMatches.find(match => /<img\b/i.test(match[0]));
-  const hasAlt = bioImage ? /\balt\s*=\s*["'][^"']+["']/i.test(bioImage[0]) : false;
-  const hasResponsiveStyle = bioImage
-    ? tagHasClass(bioImage[0], 'img-fluid') && (tagHasClass(bioImage[0], 'rounded') || tagHasClass(bioImage[0], 'rounded-circle') || tagHasClass(bioImage[0], 'img-thumbnail'))
+  const hasAlt = bioImageAnyPosition ? /\balt\s*=\s*["'][^"']+["']/i.test(bioImageAnyPosition[0]) : false;
+  const hasResponsiveStyle = bioImageAnyPosition
+    ? tagHasClass(bioImageAnyPosition[0], 'img-fluid') && (tagHasClass(bioImageAnyPosition[0], 'rounded') || tagHasClass(bioImageAnyPosition[0], 'rounded-circle') || tagHasClass(bioImageAnyPosition[0], 'img-thumbnail'))
     : false;
-  const hasSpacing = bioImage ? tagHasClassPattern(bioImage[0], /^m[btsexy]?-[0-5]$/) : false;
+  const hasSpacing = bioImageAnyPosition ? tagHasClassPattern(bioImageAnyPosition[0], /^m[btsexy]?-[0-5]$/) : false;
+  const hasSizeLimit = bioImageAnyPosition
+    ? tagHasStyleProperty(bioImageAnyPosition[0], 'max-width') ||
+      tagHasStyleProperty(bioImageAnyPosition[0], 'width') ||
+      /\bwidth\s*=\s*["'][^"']+["']/i.test(bioImageAnyPosition[0])
+    : false;
 
   return {
     bioImageFound: imageMatches.some(match => tagHasClass(match[0], 'img-fluid')),
     bioImageCorrect: Boolean(bioImage && bodyAfterAbout),
     bioAltFound: imageMatches.some(match => /\balt\s*=\s*["'][^"']+["']/i.test(match[0])),
-    bioAltCorrect: Boolean(bioImage && hasAlt),
+    bioAltCorrect: Boolean(bioImageAnyPosition && hasAlt),
     bioStyleFound: imageMatches.some(match => tagHasClass(match[0], 'img-fluid') || tagHasClass(match[0], 'rounded') || tagHasClass(match[0], 'rounded-circle') || tagHasClass(match[0], 'img-thumbnail')),
-    bioStyleCorrect: Boolean(bioImage && hasResponsiveStyle && hasSpacing),
+    bioStyleCorrect: Boolean(bioImageAnyPosition && hasResponsiveStyle && hasSpacing && hasSizeLimit),
     navImageFound: Boolean(brandWithImage || imageMatches.some(match => tagHasClass(match[0], 'rounded-circle'))),
     navImageCorrect: Boolean(brandWithImage && /<img\b[^>]*\balt\s*=\s*["'][^"']+["'][^>]*>/i.test(brandWithImage[0]))
   };
@@ -4204,7 +4217,7 @@ function updateImagesLessonStatus(status = null) {
     bioStyleState === 'success'
       ? 'Biography image has responsive styling and spacing'
       : bioStyleState === 'error'
-        ? 'Add img-fluid, a rounded style, and spacing like mb-3 to the biography image'
+        ? 'Add img-fluid, a rounded style, spacing like mb-3, and a max-width style to the biography image'
         : 'Biography image style not done yet'
   );
 
