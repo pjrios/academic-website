@@ -1883,7 +1883,7 @@ const lessons = {
       </section>
 
       <div class="alert alert-success mt-4">
-        <strong>Final check:</strong> Visit the Simulator, refresh the preview, then use <strong>Export HTML</strong> or <strong>Export Image</strong>.
+        <strong>Final check:</strong> Visit the Simulator, refresh the preview, then use <strong>Export Project</strong>.
       </div>
     `
   },
@@ -2254,7 +2254,7 @@ const lessons = {
       </ul>
       
       <h2>🎉 Congratulations!</h2>
-      <p>You've built a complete, professional-looking website! Use the <strong>Export HTML</strong> button in the Simulator to download your file. You can open it in any browser or host it online!</p>
+      <p>You've built a complete, professional-looking website! Use the <strong>Export Project</strong> button in the Simulator to download your zip file.</p>
       
       <div class="alert alert-success mt-4">
         <strong>💡 Pro Tip:</strong> Try modifying colors, adding more sections, or experimenting with different Bootstrap components. The more you practice, the better you'll get!
@@ -2983,8 +2983,79 @@ const formatCodeBtn = document.getElementById('formatCodeBtn');
 const assetUploadBtn = document.getElementById('assetUploadBtn');
 const assetUploadInput = document.getElementById('assetUploadInput');
 const assetShelf = document.getElementById('assetShelf');
+const previewToggleBtn = document.getElementById('previewToggleBtn');
+const exportDialog = document.getElementById('exportDialog');
+const exportForm = document.getElementById('exportForm');
+const exportFirstName = document.getElementById('exportFirstName');
+const exportLastName = document.getElementById('exportLastName');
+const exportGrade = document.getElementById('exportGrade');
+const exportDate = document.getElementById('exportDate');
+const exportAssignment = document.getElementById('exportAssignment');
+const exportFilenamePreview = document.getElementById('exportFilenamePreview');
+const exportCancelBtn = document.getElementById('exportCancelBtn');
+const exportCancelIconBtn = document.getElementById('exportCancelIconBtn');
+const exportSubmitBtn = document.getElementById('exportSubmitBtn');
 const ASSET_STORAGE_KEY = `${SIMULATOR_NAME}_assets`;
 let simulatedAssets = [];
+let currentPreviewUrl = null;
+
+function setActionButtonLabel(button, label) {
+  if (!button) return;
+
+  const labelElement = button.querySelector('.action-button__label');
+  if (labelElement) {
+    labelElement.textContent = label;
+  } else {
+    button.textContent = label;
+  }
+}
+
+function getActionButtonLabel(button) {
+  return button?.querySelector('.action-button__label')?.textContent || button?.textContent || '';
+}
+
+function closeActionMenus(exceptMenu = null) {
+  document.querySelectorAll('[data-action-menu].is-open').forEach((menu) => {
+    if (menu === exceptMenu) return;
+
+    menu.classList.remove('is-open');
+    menu.querySelector('[data-action-menu-trigger]')?.setAttribute('aria-expanded', 'false');
+  });
+}
+
+document.querySelectorAll('[data-action-menu-trigger]').forEach((trigger) => {
+  trigger.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const menu = trigger.closest('[data-action-menu]');
+    if (!menu) return;
+
+    const isOpen = menu.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', String(isOpen));
+    closeActionMenus(isOpen ? menu : null);
+
+    if (isOpen) {
+      menu.querySelector('[data-action-menu-list] button')?.focus({ preventScroll: true });
+    }
+  });
+});
+
+document.querySelectorAll('[data-action-menu-list] button').forEach((button) => {
+  button.addEventListener('click', () => {
+    closeActionMenus();
+  });
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('[data-action-menu]')) {
+    closeActionMenus();
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closeActionMenus();
+  }
+});
 
 function sanitizeAssetName(name) {
   const fallback = 'uploaded-image';
@@ -3139,6 +3210,63 @@ async function waitForRenderedImages(root) {
       setTimeout(resolve, 1500);
     });
   }));
+}
+
+function getRenderedDocumentHeight(doc) {
+  const body = doc.body;
+  const html = doc.documentElement;
+
+  if (!body) {
+    return Math.max(html?.scrollHeight || 0, 1);
+  }
+
+  const bodyStyles = doc.defaultView?.getComputedStyle(body);
+  const bodyPaddingTop = parseFloat(bodyStyles?.paddingTop || '0') || 0;
+  const bodyPaddingBottom = parseFloat(bodyStyles?.paddingBottom || '0') || 0;
+  let contentBottom = bodyPaddingTop + bodyPaddingBottom;
+
+  Array.from(body.children).forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    const elementStyles = doc.defaultView?.getComputedStyle(element);
+    const marginBottom = parseFloat(elementStyles?.marginBottom || '0') || 0;
+
+    contentBottom = Math.max(contentBottom, rect.bottom + marginBottom + bodyPaddingBottom);
+  });
+
+  if (body.children.length) {
+    return Math.max(Math.ceil(contentBottom), 1);
+  }
+
+  return Math.max(body.scrollHeight || body.offsetHeight || html?.scrollHeight || 1, 1);
+}
+
+function getRenderedDocumentWidth(doc) {
+  const body = doc.body;
+  const html = doc.documentElement;
+
+  return Math.max(
+    body?.scrollWidth || 0,
+    body?.offsetWidth || 0,
+    html?.scrollWidth || 0,
+    html?.offsetWidth || 0,
+    1
+  );
+}
+
+async function resizePreviewFrameToContent() {
+  if (!previewFrame?.contentDocument) {
+    return;
+  }
+
+  const iframeDoc = previewFrame.contentDocument;
+  previewFrame.style.height = '1px';
+  await waitForRenderedImages(iframeDoc);
+  if (iframeDoc.fonts?.ready) {
+    await iframeDoc.fonts.ready.catch(() => {});
+  }
+
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  previewFrame.style.height = `${Math.ceil(getRenderedDocumentHeight(iframeDoc))}px`;
 }
 
 async function handleAssetUpload(files) {
@@ -4681,9 +4809,8 @@ function updatePreview() {
     updateMusicLessonStatus(getMusicLessonStatus(''));
     updateQuickFactsLessonStatus(getQuickFactsLessonStatus(''));
     updateProgressFromHtml('');
-    errorDiv.style.display = 'block';
-    errorDiv.className = 'preview-error preview-error--setup';
-    errorDiv.innerHTML = '<strong>Editor is empty.</strong><ul><li>Go to Lessons and copy Step 1 when you are ready to start.</li></ul>';
+    errorDiv.style.display = 'none';
+    errorDiv.innerHTML = '';
   } else {
     // Validate HTML
     const errors = validateHTML(htmlContent);
@@ -4715,9 +4842,17 @@ function updatePreview() {
   }
   
   try {
+    if (currentPreviewUrl) {
+      URL.revokeObjectURL(currentPreviewUrl);
+      currentPreviewUrl = null;
+    }
+
     const blob = new Blob([resolveSimulatedAssets(htmlContent)], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
-    previewFrame.src = url;
+    currentPreviewUrl = url;
+    previewFrame.onload = () => {
+      resizePreviewFrameToContent().catch(() => {});
+    };
     
     // Handle iframe errors
     previewFrame.onerror = () => {
@@ -4725,6 +4860,7 @@ function updatePreview() {
       errorDiv.className = 'preview-error preview-error--issue';
       errorDiv.textContent = 'Error loading preview. Check your HTML syntax.';
     };
+    previewFrame.src = url;
   } catch (error) {
     errorDiv.style.display = 'block';
     errorDiv.className = 'preview-error preview-error--issue';
@@ -4761,14 +4897,64 @@ function runFullPreviewTransition(isEntering) {
   }, 280);
 }
 
+function setPreviewToggleButtonState(isHidden) {
+  if (!previewToggleBtn) return;
+
+  const label = isHidden ? 'Show Preview' : 'Hide Preview';
+  const iconPath = previewToggleBtn.querySelector('[data-preview-toggle-icon]');
+
+  setActionButtonLabel(previewToggleBtn, label);
+  previewToggleBtn.title = label;
+  previewToggleBtn.setAttribute('aria-label', label);
+
+  if (iconPath) {
+    iconPath.setAttribute(
+      'd',
+      isHidden
+        ? 'M4 5h16v14H4zM13 5v14'
+        : 'M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 4.2A10.6 10.6 0 0 1 12 4c5 0 8.5 4.1 10 8a14.4 14.4 0 0 1-3.2 4.7M6.5 6.5A14.2 14.2 0 0 0 2 12c1.5 3.9 5 8 10 8a10.8 10.8 0 0 0 4.1-.8'
+    );
+  }
+}
+
+function setPreviewHidden(isHidden) {
+  if (!practiceContainer) return;
+
+  practiceContainer.classList.toggle('preview-hidden', isHidden);
+  setPreviewToggleButtonState(isHidden);
+
+  if (isHidden) {
+    refreshHtmlEditor();
+    htmlEditor.focus();
+  } else {
+    updatePreview();
+    refreshHtmlEditor();
+  }
+}
+
+previewToggleBtn?.addEventListener('click', () => {
+  const shouldHide = !practiceContainer?.classList.contains('preview-hidden');
+
+  if (isFullPreview) {
+    isFullPreview = false;
+    practiceContainer?.classList.remove('full-preview');
+    document.body.classList.remove('full-preview-active');
+    setActionButtonLabel(toggleViewBtn, 'Full Page');
+  }
+
+  setPreviewHidden(shouldHide);
+});
+
 if (toggleViewBtn && practiceContainer) {
   toggleViewBtn.addEventListener('click', () => {
     isFullPreview = !isFullPreview;
+    setPreviewHidden(false);
     practiceContainer.classList.toggle('full-preview', isFullPreview);
     document.body.classList.toggle('full-preview-active', isFullPreview);
     runFullPreviewTransition(isFullPreview);
-    toggleViewBtn.textContent = isFullPreview ? 'Editor' : 'Full Page';
+    setActionButtonLabel(toggleViewBtn, isFullPreview ? 'Editor' : 'Full Page');
     toggleViewBtn.title = isFullPreview ? 'Show editor and preview' : 'Show full-page preview only';
+    toggleViewBtn.setAttribute('aria-label', isFullPreview ? 'Show editor and preview' : 'Show full-page preview only');
     
     // Refresh preview when toggling to ensure it's up to date
     if (isFullPreview) {
@@ -4958,7 +5144,6 @@ loadSavedContent();
 
 // Export functionality
 const exportBtn = document.getElementById('exportBtn');
-const exportImageBtn = document.getElementById('exportImageBtn');
 
 function getExportTitle() {
   const htmlContent = htmlEditor.getValue();
@@ -4967,15 +5152,10 @@ function getExportTitle() {
   return title || 'My HTML Site';
 }
 
-exportBtn.addEventListener('click', () => {
+function getCompleteHtmlContent() {
   const title = getExportTitle();
   let htmlContent = htmlEditor.getValue().trim();
-  
-  if (!htmlContent) {
-    alert('Please add HTML code in the editor before exporting.');
-    return;
-  }
-  
+
   // Ensure it's a complete HTML document
   if (!htmlContent.includes('<!DOCTYPE') && !htmlContent.includes('<html')) {
     htmlContent = `<!DOCTYPE html>
@@ -4990,148 +5170,383 @@ ${htmlContent}
 </body>
 </html>`;
   }
-  
-  // Create and download file
-  const blob = new Blob([htmlContent], { type: 'text/html' });
+
+  return htmlContent;
+}
+
+function sanitizeFilenamePart(value, fallback) {
+  const cleanValue = (value || fallback)
+    .trim()
+    .replace(/&/g, 'and')
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+
+  return cleanValue || fallback;
+}
+
+function getExportBaseName() {
+  const assignment = sanitizeFilenamePart(exportAssignment?.value, 'HTML_Part_1');
+  const firstName = sanitizeFilenamePart(exportFirstName?.value, 'First');
+  const lastName = sanitizeFilenamePart(exportLastName?.value, 'Last');
+  const grade = sanitizeFilenamePart(exportGrade?.value, 'Grade');
+
+  return `${assignment}_${firstName}_${lastName}_${grade}`;
+}
+
+function updateExportFilenamePreview() {
+  if (!exportFilenamePreview) return;
+
+  exportFilenamePreview.textContent = `Files will use: ${getExportBaseName()}.html and ${getExportBaseName()}.png`;
+}
+
+function getTodayInputValue() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
+function openExportDialog() {
+  if (!htmlEditor.getValue().trim()) {
+    alert('Please add HTML code in the editor before exporting.');
+    return;
+  }
+
+  if (!exportDialog || !exportForm) return;
+
+  if (exportDate && !exportDate.value) {
+    exportDate.value = getTodayInputValue();
+  }
+
+  updateExportFilenamePreview();
+  exportDialog.hidden = false;
+  exportFirstName?.focus();
+}
+
+function closeExportDialog() {
+  if (exportDialog) {
+    exportDialog.hidden = true;
+  }
+}
+
+function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `${title.replace(/\s+/g, '-').toLowerCase()}.html`;
+  a.download = filename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-});
+}
 
-// Export as image
-if (exportImageBtn) {
-  exportImageBtn.addEventListener('click', async () => {
-    const title = getExportTitle();
-    const originalText = exportImageBtn.textContent;
-    
-    try {
-      // Show loading state
-      exportImageBtn.disabled = true;
-      exportImageBtn.textContent = 'Preparing image...';
-      const capturePage = await loadHtml2Canvas();
-      exportImageBtn.textContent = 'Generating...';
-      
-      // Get HTML content from editor
-      const htmlContent = htmlEditor.getValue();
-      
-      if (!htmlContent.trim()) {
-        throw new Error('No HTML content to export. Please add some content in the editor.');
+function canvasToBlob(canvas) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        resolve(blob);
+      } else {
+        reject(new Error('Failed to create image blob'));
       }
-
-      const renderHtmlContent = await resolveSimulatedAssetsForImageExport(htmlContent);
-      
-      // Create a temporary container with the HTML content
-      // This approach is more reliable than trying to capture the iframe
-      const tempContainer = document.createElement('div');
-      tempContainer.style.position = 'absolute';
-      tempContainer.style.left = '-9999px';
-      tempContainer.style.top = '0';
-      tempContainer.style.width = '1200px';
-      tempContainer.style.backgroundColor = '#ffffff';
-      tempContainer.style.padding = '20px';
-      tempContainer.style.overflow = 'visible';
-      
-      // Create a temporary iframe to render the HTML properly
-      const tempIframe = document.createElement('iframe');
-      tempIframe.style.position = 'absolute';
-      tempIframe.style.left = '-9999px';
-      tempIframe.style.width = '1200px';
-      tempIframe.style.border = 'none';
-      tempIframe.srcdoc = renderHtmlContent;
-      
-      document.body.appendChild(tempIframe);
-      
-      // Wait for iframe to load
-      await new Promise((resolve, reject) => {
-        tempIframe.onload = resolve;
-        tempIframe.onerror = reject;
-        setTimeout(resolve, 1000); // Fallback timeout
-      });
-      
-      // Try to capture the iframe content
-      let canvas;
-      try {
-        const iframeDoc = tempIframe.contentDocument || tempIframe.contentWindow.document;
-        const iframeBody = iframeDoc.body || iframeDoc.documentElement;
-        
-        if (iframeBody) {
-          await waitForRenderedImages(iframeDoc);
-          if (iframeDoc.fonts?.ready) {
-            await iframeDoc.fonts.ready.catch(() => {});
-          }
-
-          canvas = await capturePage(iframeBody, {
-            backgroundColor: '#ffffff',
-            scale: 1.5,
-            useCORS: true,
-            logging: false,
-            allowTaint: true,
-            width: Math.max(iframeBody.scrollWidth, iframeBody.offsetWidth, 1200),
-            height: Math.max(iframeBody.scrollHeight, iframeBody.offsetHeight, 800)
-          });
-        } else {
-          throw new Error('Could not access iframe content');
-        }
-      } catch (iframeError) {
-        // Fallback: render HTML directly in a div
-        console.log('Iframe capture failed, using fallback method:', iframeError);
-        tempContainer.innerHTML = renderHtmlContent;
-        document.body.appendChild(tempContainer);
-        
-        await waitForRenderedImages(tempContainer);
-        
-        canvas = await capturePage(tempContainer, {
-          backgroundColor: '#ffffff',
-          scale: 1.5,
-          useCORS: true,
-          logging: false,
-          allowTaint: true,
-          width: Math.max(tempContainer.scrollWidth, 1200),
-          height: Math.max(tempContainer.scrollHeight, 800)
-        });
-        
-        document.body.removeChild(tempContainer);
-      }
-      
-      // Clean up
-      if (tempIframe.parentNode) {
-        document.body.removeChild(tempIframe);
-      }
-      
-      if (!canvas) {
-        throw new Error('Failed to generate canvas');
-      }
-      
-      // Convert canvas to blob and download
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${title.replace(/\s+/g, '-').toLowerCase()}.png`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-          
-          // Reset button
-          exportImageBtn.disabled = false;
-          exportImageBtn.textContent = originalText;
-        } else {
-          throw new Error('Failed to create image blob');
-        }
-      }, 'image/png', 0.95);
-      
-    } catch (error) {
-      console.error('Error exporting image:', error);
-      alert('Failed to export image: ' + error.message + '\n\nMake sure your HTML is valid and try again.');
-      exportImageBtn.disabled = false;
-      exportImageBtn.textContent = originalText;
-    }
+    }, 'image/png', 0.95);
   });
 }
+
+async function createRenderedPageImageBlob(htmlContent) {
+  const capturePage = await loadHtml2Canvas();
+  const renderHtmlContent = await resolveSimulatedAssetsForImageExport(htmlContent);
+  const tempIframe = document.createElement('iframe');
+
+  tempIframe.style.position = 'absolute';
+  tempIframe.style.left = '-9999px';
+  tempIframe.style.top = '0';
+  tempIframe.style.width = '1200px';
+  tempIframe.style.height = '1px';
+  tempIframe.style.border = 'none';
+  tempIframe.srcdoc = renderHtmlContent;
+  document.body.appendChild(tempIframe);
+
+  try {
+    await new Promise((resolve, reject) => {
+      tempIframe.onload = resolve;
+      tempIframe.onerror = reject;
+      setTimeout(resolve, 1200);
+    });
+
+    const iframeDoc = tempIframe.contentDocument || tempIframe.contentWindow.document;
+    const iframeBody = iframeDoc.body || iframeDoc.documentElement;
+
+    if (!iframeBody) {
+      throw new Error('Could not access page content for image export.');
+    }
+
+    await waitForRenderedImages(iframeDoc);
+    if (iframeDoc.fonts?.ready) {
+      await iframeDoc.fonts.ready.catch(() => {});
+    }
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+    const width = Math.max(getRenderedDocumentWidth(iframeDoc), 1200);
+    const height = getRenderedDocumentHeight(iframeDoc);
+    tempIframe.style.height = `${height}px`;
+
+    const canvas = await capturePage(iframeBody, {
+      backgroundColor: '#ffffff',
+      scale: 1.5,
+      useCORS: true,
+      logging: false,
+      allowTaint: true,
+      width,
+      height
+    });
+
+    return canvasToBlob(canvas);
+  } finally {
+    tempIframe.remove();
+  }
+}
+
+function makeCrc32Table() {
+  const table = new Uint32Array(256);
+
+  for (let i = 0; i < 256; i += 1) {
+    let crc = i;
+    for (let bit = 0; bit < 8; bit += 1) {
+      crc = (crc & 1) ? (0xedb88320 ^ (crc >>> 1)) : (crc >>> 1);
+    }
+    table[i] = crc >>> 0;
+  }
+
+  return table;
+}
+
+const crc32Table = makeCrc32Table();
+
+function crc32(bytes) {
+  let crc = 0xffffffff;
+  for (let i = 0; i < bytes.length; i += 1) {
+    crc = crc32Table[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+  }
+
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function dateToDosTime(date) {
+  return ((date.getHours() & 0x1f) << 11) | ((date.getMinutes() & 0x3f) << 5) | ((Math.floor(date.getSeconds() / 2)) & 0x1f);
+}
+
+function dateToDosDate(date) {
+  return (((date.getFullYear() - 1980) & 0x7f) << 9) | (((date.getMonth() + 1) & 0x0f) << 5) | (date.getDate() & 0x1f);
+}
+
+function writeUint16(buffer, offset, value) {
+  buffer[offset] = value & 0xff;
+  buffer[offset + 1] = (value >>> 8) & 0xff;
+}
+
+function writeUint32(buffer, offset, value) {
+  buffer[offset] = value & 0xff;
+  buffer[offset + 1] = (value >>> 8) & 0xff;
+  buffer[offset + 2] = (value >>> 16) & 0xff;
+  buffer[offset + 3] = (value >>> 24) & 0xff;
+}
+
+function concatUint8Arrays(parts) {
+  const totalLength = parts.reduce((sum, part) => sum + part.length, 0);
+  const output = new Uint8Array(totalLength);
+  let offset = 0;
+
+  parts.forEach((part) => {
+    output.set(part, offset);
+    offset += part.length;
+  });
+
+  return output;
+}
+
+function createZipBlob(files) {
+  const encoder = new TextEncoder();
+  const now = new Date();
+  const fileParts = [];
+  const centralParts = [];
+  let offset = 0;
+
+  files.forEach((file) => {
+    const nameBytes = encoder.encode(file.name);
+    const data = file.data instanceof Uint8Array ? file.data : encoder.encode(String(file.data));
+    const checksum = crc32(data);
+    const localHeader = new Uint8Array(30 + nameBytes.length);
+    const centralHeader = new Uint8Array(46 + nameBytes.length);
+
+    writeUint32(localHeader, 0, 0x04034b50);
+    writeUint16(localHeader, 4, 20);
+    writeUint16(localHeader, 10, dateToDosTime(now));
+    writeUint16(localHeader, 12, dateToDosDate(now));
+    writeUint32(localHeader, 14, checksum);
+    writeUint32(localHeader, 18, data.length);
+    writeUint32(localHeader, 22, data.length);
+    writeUint16(localHeader, 26, nameBytes.length);
+    localHeader.set(nameBytes, 30);
+
+    writeUint32(centralHeader, 0, 0x02014b50);
+    writeUint16(centralHeader, 4, 20);
+    writeUint16(centralHeader, 6, 20);
+    writeUint16(centralHeader, 12, dateToDosTime(now));
+    writeUint16(centralHeader, 14, dateToDosDate(now));
+    writeUint32(centralHeader, 16, checksum);
+    writeUint32(centralHeader, 20, data.length);
+    writeUint32(centralHeader, 24, data.length);
+    writeUint16(centralHeader, 28, nameBytes.length);
+    writeUint32(centralHeader, 42, offset);
+    centralHeader.set(nameBytes, 46);
+
+    fileParts.push(localHeader, data);
+    centralParts.push(centralHeader);
+    offset += localHeader.length + data.length;
+  });
+
+  const centralDirectory = concatUint8Arrays(centralParts);
+  const endRecord = new Uint8Array(22);
+  writeUint32(endRecord, 0, 0x06054b50);
+  writeUint16(endRecord, 8, files.length);
+  writeUint16(endRecord, 10, files.length);
+  writeUint32(endRecord, 12, centralDirectory.length);
+  writeUint32(endRecord, 16, offset);
+
+  return new Blob([...fileParts, centralDirectory, endRecord], { type: 'application/zip' });
+}
+
+function dataUrlToUint8Array(dataUrl) {
+  const match = String(dataUrl).match(/^data:([^;,]+)?(;base64)?,(.*)$/);
+  if (!match) {
+    return new Uint8Array();
+  }
+
+  const isBase64 = Boolean(match[2]);
+  const data = match[3] || '';
+  const binary = isBase64 ? atob(data) : decodeURIComponent(data);
+  const bytes = new Uint8Array(binary.length);
+
+  for (let i = 0; i < binary.length; i += 1) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+
+  return bytes;
+}
+
+function getSubmissionInfo(baseName) {
+  return [
+    `Assignment: ${exportAssignment?.value || ''}`,
+    `First name: ${exportFirstName?.value || ''}`,
+    `Last name: ${exportLastName?.value || ''}`,
+    `Grade: ${exportGrade?.value || ''}`,
+    `Date: ${exportDate?.value || ''}`,
+    `Files: ${baseName}.html, ${baseName}.png`,
+    ''
+  ].join('\n');
+}
+
+function collectReferencedAssetPaths(htmlContent) {
+  const paths = new Set();
+  htmlContent.replace(/\bsrc=(["'])(assets\/[^"']+)\1/gi, (match, quote, path) => {
+    paths.add(path);
+    return match;
+  });
+
+  return Array.from(paths);
+}
+
+async function fetchAssetBytes(path) {
+  const response = await fetch(new URL(path, window.location.href));
+  if (!response.ok) {
+    throw new Error(`Could not include ${path}`);
+  }
+
+  return new Uint8Array(await response.arrayBuffer());
+}
+
+async function exportProjectZip() {
+  const baseName = getExportBaseName();
+  const htmlContent = getCompleteHtmlContent();
+  const imageBlob = await createRenderedPageImageBlob(htmlContent);
+  const simulatedAssetMap = new Map(simulatedAssets.map(asset => [asset.path, asset]));
+  const missingAssets = [];
+  const files = [
+    { name: `${baseName}.html`, data: htmlContent },
+    { name: `${baseName}.png`, data: new Uint8Array(await imageBlob.arrayBuffer()) },
+    { name: 'submission_info.txt', data: getSubmissionInfo(baseName) }
+  ];
+
+  const assetPaths = new Set(collectReferencedAssetPaths(htmlContent));
+  simulatedAssets.forEach(asset => assetPaths.add(asset.path));
+
+  await Promise.all(Array.from(assetPaths).map(async (path) => {
+    const simulatedAsset = simulatedAssetMap.get(path);
+    if (simulatedAsset) {
+      files.push({
+        name: simulatedAsset.path,
+        data: dataUrlToUint8Array(simulatedAsset.dataUrl)
+      });
+      return;
+    }
+
+    try {
+      files.push({
+        name: path,
+        data: await fetchAssetBytes(path)
+      });
+    } catch (error) {
+      missingAssets.push(path);
+    }
+  }));
+
+  if (missingAssets.length) {
+    files.push({
+      name: 'missing_assets.txt',
+      data: `These asset files were referenced but could not be included automatically:\n${missingAssets.join('\n')}\n`
+    });
+  }
+
+  downloadBlob(createZipBlob(files), `${baseName}.zip`);
+}
+
+exportBtn?.addEventListener('click', openExportDialog);
+
+[exportFirstName, exportLastName, exportGrade, exportAssignment].forEach((input) => {
+  input?.addEventListener('input', updateExportFilenamePreview);
+});
+
+exportCancelBtn?.addEventListener('click', closeExportDialog);
+exportCancelIconBtn?.addEventListener('click', closeExportDialog);
+exportDialog?.addEventListener('click', (event) => {
+  if (event.target === exportDialog) {
+    closeExportDialog();
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && exportDialog && !exportDialog.hidden) {
+    closeExportDialog();
+  }
+});
+
+exportForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const originalText = getActionButtonLabel(exportSubmitBtn);
+  try {
+    exportSubmitBtn.disabled = true;
+    setActionButtonLabel(exportSubmitBtn, 'Preparing...');
+    await exportProjectZip();
+    closeExportDialog();
+    showNotification('Export ready', 'Your HTML, page image, and assets were saved in one zip file.', 'success');
+  } catch (error) {
+    console.error('Error exporting project:', error);
+    alert('Failed to export project: ' + error.message + '\n\nMake sure your HTML is valid and try again.');
+  } finally {
+    exportSubmitBtn.disabled = false;
+    setActionButtonLabel(exportSubmitBtn, originalText);
+  }
+});

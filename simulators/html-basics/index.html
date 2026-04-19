@@ -110,9 +110,40 @@
           <div class="editor-header">
             <h2>HTML Editor</h2>
             <div class="editor-actions">
-              <button id="assetUploadBtn" class="btn-ghost btn-small" type="button">Upload Image</button>
-              <button id="formatCodeBtn" class="btn-ghost btn-small" type="button">Format Code</button>
-              <button id="clearBtn" class="btn-ghost btn-small">Clear</button>
+              <button id="formatCodeBtn" class="btn-ghost btn-small action-button action-button--primary-mobile" type="button">
+                <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 7h10M4 12h16M4 17h10" />
+                </svg>
+                <span class="action-button__label">Format Code</span>
+              </button>
+              <button id="previewToggleBtn" class="btn-primary btn-small action-button preview-toggle-button" type="button" aria-label="Hide preview" title="Hide preview">
+                <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path data-preview-toggle-icon d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 4.2A10.6 10.6 0 0 1 12 4c5 0 8.5 4.1 10 8a14.4 14.4 0 0 1-3.2 4.7M6.5 6.5A14.2 14.2 0 0 0 2 12c1.5 3.9 5 8 10 8a10.8 10.8 0 0 0 4.1-.8" />
+                </svg>
+                <span class="action-button__label">Hide Preview</span>
+              </button>
+              <div class="action-menu" data-action-menu>
+                <button class="btn-ghost btn-small action-menu__trigger" type="button" aria-label="More editor actions" aria-expanded="false" data-action-menu-trigger>
+                  <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 7h.01M12 12h.01M12 17h.01" />
+                  </svg>
+                  <span class="action-button__label">More</span>
+                </button>
+                <div class="action-menu__list" data-action-menu-list>
+                  <button id="assetUploadBtn" class="btn-ghost btn-small action-button" type="button">
+                    <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 16V4m0 0 4 4m-4-4-4 4M5 20h14" />
+                    </svg>
+                    <span class="action-button__label">Upload Image</span>
+                  </button>
+                  <button id="clearBtn" class="btn-ghost btn-small action-button action-button--icon-desktop action-button--danger" type="button" aria-label="Clear editor" title="Clear editor">
+                    <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M5 7h14M10 11v6M14 11v6M9 7V5h6v2M7 7l1 13h8l1-13" />
+                    </svg>
+                    <span class="action-button__label">Clear</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <input id="assetUploadInput" type="file" accept="image/*" multiple hidden>
@@ -124,10 +155,34 @@
           <div class="preview-header">
             <h2>Live Preview</h2>
             <div class="preview-controls">
-              <button id="toggleViewBtn" class="btn-ghost btn-small" title="Toggle full-page preview">Full Page</button>
-              <button id="refreshBtn" class="btn-primary btn-small">Refresh</button>
-              <button id="exportBtn" class="btn-primary btn-small">Export HTML</button>
-              <button id="exportImageBtn" class="btn-primary btn-small">Export Image</button>
+              <button id="refreshBtn" class="btn-primary btn-small action-button action-button--icon-only" type="button" aria-label="Refresh preview" title="Refresh preview">
+                <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v6h-6" />
+                </svg>
+                <span class="action-button__label">Refresh</span>
+              </button>
+              <div class="action-menu" data-action-menu>
+                <button class="btn-ghost btn-small action-menu__trigger" type="button" aria-label="More preview actions" aria-expanded="false" data-action-menu-trigger>
+                  <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 7h.01M12 12h.01M12 17h.01" />
+                  </svg>
+                  <span class="action-button__label">More</span>
+                </button>
+                <div class="action-menu__list" data-action-menu-list>
+                  <button id="toggleViewBtn" class="btn-ghost btn-small action-button" type="button" title="Toggle full-page preview">
+                    <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" />
+                    </svg>
+                    <span class="action-button__label">Full Page</span>
+                  </button>
+                  <button id="exportBtn" class="btn-primary btn-small action-button action-button--steady-wide" type="button">
+                    <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 3v10m0 0 4-4m-4 4-4-4M5 17v2h14v-2M7 5h3M14 5h3" />
+                    </svg>
+                    <span class="action-button__label">Export Project</span>
+                  </button>
+                </div>
+              </div>
               <div id="previewError" class="preview-error" style="display: none;"></div>
             </div>
           </div>
@@ -141,6 +196,51 @@
         </div>
       </div>
     </section>
+  </div>
+
+  <div id="exportDialog" class="modal-backdrop" hidden>
+    <form id="exportForm" class="modal-card" aria-labelledby="exportDialogTitle">
+      <div class="modal-header">
+        <div>
+          <p class="modal-kicker">Export project</p>
+          <h2 id="exportDialogTitle">Student submission details</h2>
+        </div>
+        <button id="exportCancelIconBtn" class="modal-close" type="button" aria-label="Close export form">×</button>
+      </div>
+      <p class="modal-copy">The simulator will download one zip with the HTML file, a page image, and any uploaded assets.</p>
+      <div class="modal-grid">
+        <label>
+          First name
+          <input id="exportFirstName" name="firstName" type="text" autocomplete="given-name" required>
+        </label>
+        <label>
+          Last name
+          <input id="exportLastName" name="lastName" type="text" autocomplete="family-name" required>
+        </label>
+        <label>
+          Grade
+          <input id="exportGrade" name="grade" type="text" placeholder="8th A" required>
+        </label>
+        <label>
+          Date
+          <input id="exportDate" name="date" type="date" required>
+        </label>
+        <label class="modal-grid__wide">
+          Assignment name
+          <input id="exportAssignment" name="assignment" type="text" value="HTML Part 1" required>
+        </label>
+      </div>
+      <p id="exportFilenamePreview" class="filename-preview">Files will use: HTML_Part_1_First_Last_Grade</p>
+      <div class="modal-actions">
+        <button id="exportCancelBtn" class="btn-ghost btn-small" type="button">Cancel</button>
+        <button id="exportSubmitBtn" class="btn-primary btn-small action-button action-button--steady-wide" type="submit">
+          <svg class="action-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v10m0 0 4-4m-4 4-4-4M5 17v2h14v-2" />
+          </svg>
+          <span class="action-button__label">Download Zip</span>
+        </button>
+      </div>
+    </form>
   </div>
 
   <script src="vendor/codemirror/codemirror.min.js"></script>
