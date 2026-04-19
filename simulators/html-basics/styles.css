@@ -32,9 +32,14 @@ body {
 
 body.full-preview-active {
   overflow: hidden;
+  padding-top: 0;
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 0;
+}
+
+body.full-preview-active .main-tabs {
+  display: none;
 }
 
 .app-shell {
@@ -1064,7 +1069,7 @@ kbd {
 .practice-container.full-preview {
   grid-template-columns: 1fr;
   gap: 0;
-  height: calc(100vh - var(--nav-offset) - var(--nav-height) - 16px);
+  height: 100vh;
   min-height: 0;
 }
 
