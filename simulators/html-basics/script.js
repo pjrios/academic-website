@@ -2318,15 +2318,21 @@ function buildAvatarUrl(state) {
   params.set('clothing', state.clothing);
   params.set('hairColor', state.hairColor.replace('#', ''));
   params.set('skinColor', state.skinColor.replace('#', ''));
-  params.set('clothingColor', state.clothingColor.replace('#', ''));
+  params.set('clothesColor', state.clothingColor.replace('#', ''));
   params.set('backgroundColor', state.backgroundColor.replace('#', ''));
 
   if (state.accessories) {
     params.set('accessories', state.accessories);
+    params.set('accessoriesProbability', '100');
+  } else {
+    params.set('accessoriesProbability', '0');
   }
 
   if (state.facialHair) {
     params.set('facialHair', state.facialHair);
+    params.set('facialHairProbability', '100');
+  } else {
+    params.set('facialHairProbability', '0');
   }
 
   return url.toString();
