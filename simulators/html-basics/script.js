@@ -3009,14 +3009,11 @@ function readFileAsDataUrl(file) {
 }
 
 function resolveSimulatedAssets(html) {
-  if (!simulatedAssets.length) {
-    return html;
-  }
-
   const assetMap = new Map(simulatedAssets.map(asset => [asset.path, asset.dataUrl]));
   return html.replace(/\bsrc=(["'])(assets\/[^"']+)\1/gi, (match, quote, path) => {
     const dataUrl = assetMap.get(path);
-    return dataUrl ? `src=${quote}${dataUrl}${quote}` : match;
+    const resolvedPath = dataUrl || new URL(path, window.location.href).href;
+    return `src=${quote}${resolvedPath}${quote}`;
   });
 }
 
