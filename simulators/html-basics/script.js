@@ -3175,7 +3175,7 @@ if (typeof CodeMirror !== 'undefined') {
     mode: 'htmlmixed',
     theme: 'monokai',
     lineNumbers: true,
-    lineWrapping: true,
+    lineWrapping: false,
     indentUnit: 2,
     tabSize: 2,
     indentWithTabs: false,
