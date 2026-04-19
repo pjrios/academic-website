@@ -1363,7 +1363,7 @@ const lessons = {
         <h3>Make an Avatar Image</h3>
         <p>Use this builder if you want a simple character image. You can also use the sample cat image in the steps below.</p>
         <p><strong>Sample image path:</strong> <code>assets/cat-example-main.jpg</code></p>
-        <p><strong>Avatar builder:</strong> Use <strong>Copy Biography Snippet</strong> or <strong>Copy Navbar Snippet</strong> if you want the builder to create the image code for you.</p>
+        <p><strong>Avatar builder:</strong> Make your avatar, download the SVG, then upload it in the Simulator.</p>
       </section>
       <div id="avatarBuilderMount"></div>
 
@@ -2470,31 +2470,10 @@ function initializeAvatarBuilder() {
         </div>
 
         <div class="avatar-builder__actions">
-          <button type="button" class="btn-primary btn-small" data-avatar-action="copy-url">Copy Avatar URL</button>
-          <button type="button" class="btn-ghost btn-small" data-avatar-action="copy-bio">Copy Biography Snippet</button>
-          <button type="button" class="btn-ghost btn-small" data-avatar-action="copy-nav">Copy Navbar Snippet</button>
-          <button type="button" class="btn-ghost btn-small" data-avatar-action="download-svg">Download SVG</button>
+          <button type="button" class="btn-primary btn-small" data-avatar-action="download-svg">Download SVG</button>
         </div>
 
-        <label class="avatar-builder__field avatar-builder__field--wide">
-          <span>Live Avatar URL</span>
-          <input class="input-field avatar-builder__url-output" type="text" readonly data-avatar-output="url">
-        </label>
-      </div>
-
-      <div class="avatar-builder__snippet-grid">
-        <div>
-          <h4>Biography Snippet</h4>
-          <div class="code-block">
-            <code data-avatar-output="bioSnippet"></code>
-          </div>
-        </div>
-        <div>
-          <h4>Navbar Snippet</h4>
-          <div class="code-block">
-            <code data-avatar-output="navSnippet"></code>
-          </div>
-        </div>
+        <input type="hidden" data-avatar-output="url">
       </div>
     </div>
   `;
@@ -2511,17 +2490,9 @@ function initializeAvatarBuilder() {
     }
 
     const url = mount.querySelector('[data-avatar-output="url"]')?.value || '';
-    const bioSnippet = mount.querySelector('[data-avatar-output="bioSnippet"]')?.textContent || '';
-    const navSnippet = mount.querySelector('[data-avatar-output="navSnippet"]')?.textContent || '';
     const seed = mount.querySelector('[name="seed"]')?.value.trim() || defaultAvatarBuilderState.seed;
 
-    if (action === 'copy-url') {
-      await copyAvatarBuilderOutput(url, 'Avatar URL copied', 'Paste it into an image src attribute anywhere in your project.');
-    } else if (action === 'copy-bio') {
-      await copyAvatarBuilderOutput(bioSnippet, 'Biography snippet copied', 'Paste it into your biography card above the About Me heading.');
-    } else if (action === 'copy-nav') {
-      await copyAvatarBuilderOutput(navSnippet, 'Navbar snippet copied', 'Replace your navbar-brand line with this snippet to use the avatar as your site logo.');
-    } else if (action === 'download-svg') {
+    if (action === 'download-svg') {
       await downloadAvatarSvg(url, `${seed.replace(/\s+/g, '-').toLowerCase() || 'student-avatar'}.svg`);
     }
   });

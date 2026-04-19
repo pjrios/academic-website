@@ -892,11 +892,10 @@ kbd {
 }
 
 .avatar-builder__preview-panel,
-.avatar-builder__controls-panel,
-.avatar-builder__snippet-grid > div {
+.avatar-builder__controls-panel {
   background: rgba(15, 23, 42, 0.58);
   border: 1px solid var(--border-subtle);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 18px;
 }
 
@@ -912,8 +911,7 @@ kbd {
   gap: 12px;
 }
 
-.avatar-builder__preview-label,
-.avatar-builder__snippet-grid h4 {
+.avatar-builder__preview-label {
   margin: 0;
   color: var(--accent);
   font-weight: 700;
@@ -966,8 +964,7 @@ kbd {
   background: #dbeafe;
 }
 
-.avatar-builder__controls-grid,
-.avatar-builder__snippet-grid {
+.avatar-builder__controls-grid {
   display: grid;
   gap: 16px;
 }
@@ -988,6 +985,24 @@ kbd {
   font-weight: 600;
 }
 
+.avatar-builder__field select.input-field {
+  min-height: 46px;
+  padding: 0 42px 0 14px;
+  border-radius: 8px;
+  color: var(--text);
+  background:
+    linear-gradient(45deg, transparent 50%, var(--accent) 50%) calc(100% - 19px) 19px / 7px 7px no-repeat,
+    linear-gradient(135deg, var(--accent) 50%, transparent 50%) calc(100% - 14px) 19px / 7px 7px no-repeat,
+    rgba(15, 23, 42, 0.92);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.avatar-builder__field select.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.16);
+}
+
 .avatar-builder__field--wide {
   grid-column: 1 / -1;
 }
@@ -999,21 +1014,9 @@ kbd {
   margin: 18px 0;
 }
 
-.avatar-builder__url-output {
-  font-size: 0.85rem;
-}
-
 .avatar-builder__color {
   min-height: 48px;
   padding: 6px;
-}
-
-.avatar-builder__snippet-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.avatar-builder__snippet-grid .code-block {
-  margin-bottom: 0;
 }
 
 /* Practice Builder Tab */
@@ -1266,8 +1269,7 @@ kbd {
     grid-template-columns: 200px 1fr;
   }
 
-  .avatar-builder__preview-panel,
-  .avatar-builder__snippet-grid {
+  .avatar-builder__preview-panel {
     grid-template-columns: 1fr;
   }
 
