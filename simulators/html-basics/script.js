@@ -1722,8 +1722,8 @@ const lessons = {
     &lt;div class="card-body"&gt;
       &lt;h5 class="card-title"&gt;Why I Love It&lt;/h5&gt;
       &lt;p class="card-text"&gt;Write more about your favorite characters or scenes.&lt;/p&gt;
-      &lt;blockquote class="blockquote"&gt;
-        &lt;p class="mb-0"&gt;"Add a favorite quote here!"&lt;/p&gt;
+      &lt;blockquote class="blockquote mt-3"&gt;
+        &lt;p class="mb-2"&gt;"Add a favorite quote here!"&lt;/p&gt;
         &lt;footer class="blockquote-footer"&gt;Character Name&lt;/footer&gt;
       &lt;/blockquote&gt;
     &lt;/div&gt;
@@ -2130,8 +2130,8 @@ const lessons = {
             Add more details about what draws you to this series, including favorite
             characters, scenes, or themes.
           &lt;/p&gt;
-          &lt;blockquote class="blockquote"&gt;
-            &lt;p class="mb-0"&gt;"Add a favorite quote from the movie here!"&lt;/p&gt;
+          &lt;blockquote class="blockquote mt-3"&gt;
+            &lt;p class="mb-2"&gt;"Add a favorite quote from the movie here!"&lt;/p&gt;
             &lt;footer class="blockquote-footer"&gt;Character Name&lt;/footer&gt;
           &lt;/blockquote&gt;
         &lt;/div&gt;
