@@ -17,6 +17,7 @@
       <div class="tab-list" role="tablist" aria-label="HTML Basics areas">
         <button class="tab-button tab-active" data-tab="lessons" role="tab">Lessons</button>
         <button class="tab-button" data-tab="practice" role="tab">Simulator</button>
+        <button class="tab-button" data-tab="tutorials" role="tab">Tutorials</button>
       </div>
       <button class="tab-arrow" id="nextTabBtn" type="button" aria-label="Go to next area">→</button>
     </div>
@@ -193,6 +194,34 @@
             The content is user-generated HTML in a controlled environment, so this is acceptable.
           -->
           <iframe id="previewFrame" class="preview-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Tutorials -->
+    <section id="tutorialsTab" class="tab-content">
+      <div class="tutorials-container">
+        <section class="tutorials-intro">
+          <p class="tutorials-kicker">Video Help</p>
+          <h2>Watch, pause, then build</h2>
+          <p>Use these videos when you need to see a step before trying it in the Simulator.</p>
+        </section>
+
+        <div class="tutorial-video">
+          <div class="tutorial-video__frame">
+            <iframe
+              src="https://www.youtube.com/embed/37YEhd9JH-8?si=b5ZWcTMk95BkSY6k"
+              title="HTML Basics tutorial video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="tutorial-video__details">
+            <h3>Starter HTML Practice</h3>
+            <p>Keep the Simulator open in another tab area, then come back here when you need a visual reminder.</p>
+          </div>
         </div>
       </div>
     </section>
