@@ -165,9 +165,30 @@ body.full-preview-transition::before {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
   padding: 20px;
-  height: fit-content;
+  max-height: calc(100vh - var(--nav-offset) - var(--nav-height) - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   position: sticky;
   top: calc(var(--nav-offset) + var(--nav-height) + 16px);
+}
+
+.lesson-sidebar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.lesson-sidebar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.45);
+  border-radius: 999px;
+}
+
+.lesson-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+  border: 2px solid rgba(15, 23, 42, 0.45);
+  border-radius: 999px;
+}
+
+.lesson-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.65);
 }
 
 .lesson-sidebar h3 {
@@ -1746,6 +1767,8 @@ body.full-preview-exiting .practice-preview {
 
   .lesson-sidebar {
     position: static;
+    max-height: none;
+    overflow: visible;
   }
 
   .lesson-next {
